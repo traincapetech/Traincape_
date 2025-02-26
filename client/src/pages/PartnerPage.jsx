@@ -2,7 +2,7 @@ import React from "react";
 import { FaDownload, FaHandshake, FaUsers, FaBriefcase, FaLightbulb, FaRocket, FaCode, FaMobileAlt } from "react-icons/fa";
 import partnerImage from "../assets/Partner-Image.jpg"; // Replace with your image path
 import pdfFile from "../assets/spme-partner.pdf"; // Replace with your PDF path
-import '../css/Footer.module.css'; // Import your CSS file
+
 
 const PartnerPage = () => {
     const partners = [
@@ -36,9 +36,9 @@ const PartnerPage = () => {
                             />
                         </div>
                         <div className="order-1 md:order-2">
-                            <h2 className="text-3xl font-semibold text-blue-900 mb-4">Why Partner with SPME?</h2>
+                            <h2 className="text-3xl font-semibold text-blue-900 mb-4">Why Partner with Traincape Technology?</h2>
                             <p className="text-gray-700 leading-relaxed mb-6">
-                                SPME empowers businesses with cutting-edge cybersecurity solutions *and* comprehensive technology services, including web and mobile development. Partner with us to offer your clients a complete suite of solutions, from robust security to innovative digital experiences.
+                            Traincape Technology empowers businesses with cutting-edge cybersecurity solutions <b>and</b> comprehensive technology services, including web and mobile development. Partner with us to offer your clients a complete suite of solutions, from robust security to innovative digital experiences.
                             </p>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="flex items-start">
