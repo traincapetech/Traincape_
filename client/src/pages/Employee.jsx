@@ -8,7 +8,7 @@ import madan from "../assets/madan.jpeg";
 import rajeshImage from "../assets/rajesh.png";
 import prachiyeImage from "../assets/ParichaySir.jpeg";
 import shivamImage from "../assets/shivam.jpeg";
-import anadImage from "../assets/Aanand.jpeg";
+import EshitaImage from "../assets/Eshita.jpeg";
 import sauravImage from "../assets/Saurav.jpeg";
 
 const Employee = () => {
@@ -36,10 +36,10 @@ const Employee = () => {
       linkdin: "https://www.linkedin.com/in/rajesh-bhusal-32592023a",
     },
     {
-      name: "Anand Shukla",
+      name: "Eshita Tadiyal",
       title: "Lead Generation EXECUTIVE",
-      image: anadImage,
-      linkdin: "https://www.linkedin.com/in/aanand-shukla-19867818b/",
+      image: EshitaImage,
+      linkdin: "https://www.linkedin.com/in/eshita-tadiyal-51369a24b/",
     },
     {
       name: "Saurav Kumar",

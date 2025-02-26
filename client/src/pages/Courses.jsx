@@ -3,8 +3,11 @@ import { useNavigate } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import AutoPlay from "../pages/AutoPlay";
-import Logo1 from "../assets/ciscologo-courses.webp";
 import Slider from "react-slick";
+import CourseDetails from "../components/CoursesDetails";
+
+// Import Logos
+import Logo1 from "../assets/ciscologo-courses.webp";
 import Logo2 from "../assets/tallylogo-courses.jpg";
 import Logo3 from "../assets/pmilogo-courses.png";
 import Logo4 from "../assets/ibmlogo-courses.png";
@@ -18,7 +21,6 @@ import Logo11 from "../assets/esblogo-courses.jpg";
 import Logo12 from "../assets/adobenewlogo2.png";
 import Logo13 from "../assets/autodesklogo.png";
 import Logo14 from "../assets/microsoftlogo-courses.png";
-import CourseDetails from "../components/CoursesDetails";
 
 const Courses = () => {
   const navigate = useNavigate();
@@ -26,12 +28,6 @@ const Courses = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  const handleAlert = () => {
-    alert(
-      "Thank you for visiting! We're sorry, but at this time we are unable to add the selected course. However, please be assured that we will add it as soon as possible. We appreciate your understanding and look forward to serving you in the future."
-    );
-  };
 
   const settings = {
     dots: false,
@@ -104,39 +100,6 @@ const Courses = () => {
       <div className="flex flex-wrap justify-center gap-8 px-4">
         <CourseDetails />
       </div>
-
-      {/* Uncomment and adjust the following section if needed */}
-      {/* <div className="flex flex-wrap justify-between gap-8 px-4">
-        <div className="w-full sm:w-1/2 lg:w-1/3 bg-white rounded-lg shadow-lg overflow-hidden hover:transform hover:scale-105 transition-transform duration-300">
-          <div className="w-full h-60 overflow-hidden">
-            <img src={comptia} alt="CompTIA Certification" className="w-full h-full object-cover" />
-          </div>
-          <div className="text-center p-4">
-            <h1 className="text-xl font-semibold">CompTIA</h1>
-            <button
-              className="mt-3 bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition"
-              onClick={() => navigate("/CompTIA-single-page")}
-            >
-              Know More
-            </button>
-          </div>
-        </div>
-
-        <div className="w-full sm:w-1/2 lg:w-1/3 bg-white rounded-lg shadow-lg overflow-hidden hover:transform hover:scale-105 transition-transform duration-300">
-          <div className="w-full h-60 overflow-hidden">
-            <img src={pecb} alt="PECB Certification" className="w-full h-full object-cover" />
-          </div>
-          <div className="text-center p-4">
-            <h1 className="text-xl font-semibold">PECB</h1>
-            <button
-              className="mt-3 bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition"
-              onClick={() => navigate("/PECB")}
-            >
-              Know More
-            </button>
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 };
