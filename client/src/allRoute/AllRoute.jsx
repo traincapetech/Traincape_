@@ -174,6 +174,11 @@ import CCTdatacenter from "../pages/CiscoCourse/CCTdatacenter";
 import CCTroutingSwitching from "../pages/CiscoCourse/CCTroutingSwitching";
 import CCTtechnicaian from "../pages/CiscoCourse/CCTtechnicaian";
 import CCIEinfastructure from "../pages/CiscoCourse/CCIEinfasturcture";
+import IBMCourses from "../components/IBMCourses";
+import IBM from "../pages/IBM";
+import META from "../pages/META";
+import MetaCourses from "../components/MetaCourses";
+import PartnerPage from "../pages/PartnerPage";
 
 const AllRoute = () => {
   const token = localStorage.getItem("token");
@@ -302,6 +307,11 @@ const AllRoute = () => {
       <Route path="/CCTroutingSwitching" element={<CCTroutingSwitching/>} />
       <Route path="/CCTtechnician" element={<CCTtechnicaian/>} />
       <Route path="/CcstSupportTechnician" element={<CcstSupportTechnician/>} />
+      <Route path="/IBMcourses" element={<IBMCourses/>} />
+      <Route path="/IBM" element={<IBM/>} />
+      <Route path="/META" element={<META/>} />
+      <Route path="/MetaCourses" element={<MetaCourses/>} />
+      <Route path="/PartnerPage" element={<PartnerPage/>}/>
     </Routes>
   );
 };

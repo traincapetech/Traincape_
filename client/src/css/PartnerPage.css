@@ -1,0 +1,37 @@
+/* PartnerPage.css */
+.partner-card {
+    perspective: 1000px;
+    transition: transform 0.5s ease, box-shadow 0.5s ease; /* Smooth transitions for all properties */
+}
+
+.partner-card:hover {
+    transform: rotateY(15deg) translateZ(10px); /* More pronounced 3D effect */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.4); /* Larger shadow */
+}
+
+.partner-card p {
+    transition: transform 0.3s ease;
+}
+
+.partner-card:hover p {
+    transform: translateZ(20px); /* Text moves more forward */
+}
+
+.partner-card {
+    background: linear-gradient(to bottom right, #ffffff, #f0f0f0); /* Subtle gradient */
+}
+
+/* Optional: Add a border */
+.partner-card {
+    border: 1px solid #ddd;
+}
+
+/* Optional: Make the cards slightly rounded */
+.partner-card {
+    border-radius: 8px;
+}
+
+.partner-card:hover {
+    transform: rotateX(-5deg) rotateY(15deg) translateZ(10px); /* Tilt and rotate */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); /* Adjust shadow */
+}
