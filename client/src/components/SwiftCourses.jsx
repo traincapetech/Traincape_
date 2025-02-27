@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import {Link} from 'react-router-dom';
 
-const MetaCourses = ({image,title, description, price,url}) => {
+const SwiftCourses = ({image,title, description, price,url}) => {
     useEffect(() => {
         window.scrollTo(0,0);
 
@@ -14,7 +14,7 @@ const MetaCourses = ({image,title, description, price,url}) => {
         
               {/* Image */}
               <Link to={url}>
-              <img className="w-20 h-20 md:w-28 md:h-28 mb-4 object-cover" src={image} />
+              <img className="w-20 h-20 md:w-[16rem] md:h-[10rem] mb-4 object-cover" src={image} />
               </Link>
 
               {/*Description */}
@@ -25,4 +25,4 @@ const MetaCourses = ({image,title, description, price,url}) => {
         </div>
     );
 };
-export default MetaCourses;
+export default SwiftCourses;

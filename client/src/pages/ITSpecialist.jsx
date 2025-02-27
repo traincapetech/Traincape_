@@ -1,52 +1,56 @@
 import React, { useEffect } from "react";
 import banner from "../assets/ibmbanner.jpg";
-import banner2 from "../assets/metalogo2.png";
-import Card1 from "../assets/METAcard1.png";
-import MetaCourses from "../components/MetaCourses"
+import banner2 from "../assets/itbanner.jpg";
+import Card1 from "../assets/itcour1.png";
+import Card2 from "../assets/itcour2.png";
+import Card3 from "../assets/itcour3.png";
+import Card4 from "../assets/itcour4.png";
+import Card5 from "../assets/itcour5.png";
+import ITCourses from "../components/ITCourses";
 
-const META = () => {
+const ITSpeacialist = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const metacourses = [
+  const ITcourses = [
     {
       image: Card1,
       title: "CERTIFICATION COURSE",
-      description: "Meta Certified Digital Marketing Associate E-Learning Course",
-      price: "₹1699",
+      description: "HTML5 Application Development LearnKey",
+      price: "₹1149",
       url: "/IBMcourses",
     },
-    //UNWANTED CARDS
-    // {
-    //   image: c,
-    //   title: "CERTIFICATION COURSE",
-    //   description: "IBM Software Foundation Course C Certification Course",
-    //   price: "₹3000",
-    //   url: "/IBMcourses",
-    // },
-    // {
-    //   image: foundationc,
-    //   title: "CERTIFICATION COURSE",
-    //   description: "IBM Software Foundation Course C++ Certification Course",
-    //   price: "₹3000",
-    //   url: "/IBMcourses",
-    // },
-    // {
-    //   image: rdbms,
-    //   title: "CERTIFICATION COURSE",
-    //   description: "IBM RDBMS - Database Fundamentals Certification Course",
-    //   price: "₹3000",
-    //   url: "/IBMcourses",
-    // },
-    // {
-    //   image: sql,
-    //   title: "CERTIFICATION COURSE",
-    //   description: "IBM SQL and Relational Database 101 Certification Course",
-    //   price: "₹3000",
-    //   url: "/IBMcourses",
-    // },
-    // {
+   
+    {
+      image: Card2,
+      title: "CERTIFICATION COURSE",
+      description: "IT Specialist – HTML and CSS LearnKey",
+      price: "₹1149",
+      url: "/IBMcourses",
+    },
+    {
+      image: Card3,
+      title: "CERTIFICATION COURSE",
+      description: "IT Specialist – Device Configuration and Management LearnKey",
+      price: "₹1149",
+      url: "/IBMcourses",
+    },
+    {
+      image: Card4,
+      title: "CERTIFICATION COURSE",
+      description: "IT Specialist – Databases LearnKey",
+      price: "₹1149",
+      url: "/IBMcourses",
+    },
+    {
+      image: Card5,
+      title: "CERTIFICATION COURSE",
+      description: "IT Specialist – Cybersecurity LearnKey",
+      price: "₹1149",
+      url: "/IBMcourses",
+    },
+    //{
     //   image: tensorlow,
     //   title: "CERTIFICATION COURSE",
     //   description: "IBM Deep Learning with TensorFlow Certification Course",
@@ -167,24 +171,18 @@ const META = () => {
       >
         <div className="flex flex-col lg:flex-row items-center justify-between p-5">
           <div className="lg:w-2/3 w-full">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-serif">
-            Meta Digital Marketing Certification
+            <h1 className="text-3xl md:text-4xl lg:text-4xl font-bold font-serif">
+            Information Technology Specialist
             </h1>
-            <h5 className="text-sm md:text-lg lg:text-xl mt-4">
-              The Meta Certified Digital Marketing Associate Certification Exam is for entry-level marketing professionals, advertising and marketing students, interns, etc.
-              <br />
-              The exam targets secondary and immediate post-secondary students, including career professionals looking to expand their skillset or switch roles or jobs.
-              <br />
-              <br />
-              Learners who earn the Meta Certified Digital Marketing Associate Certification understand the value that
-              <br />
-              advertising on Meta technologies can deliver for businesses, small and large, by helping them reach new and existing customers.
-              <br />
-              <br />
+            <h5 className="text-sm md:text-xl lg:text-xl mt-4">
+            Etrainindia provides a full pathway solution that educators can use to prepare students for the Adobe Certified Professional certification.
+            <br />
+            From tailored learning materials and practice tests to Adobe endorsed certification exams, Etrainindia provides assistance every step of the way.              <br />
+              
              
             </h5>
           </div>
-          <div className="hidden lg:block  mt-5 ">
+          <div className="hidden lg:block  mt-5 p-5">
             <img
               className="w-[28rem] h-64 transition-transform duration-300 ease-in-out hover:scale-110"
               src={banner2}
@@ -195,8 +193,8 @@ const META = () => {
       </div>
       <div className="bg-teal-50 py-10 px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center mx-auto">
-          {metacourses.map((course, index) => (
-            <MetaCourses
+          {ITcourses.map((course, index) => (
+            <ITCourses
               key={index}
               title={course.title}
               image={course.image}
@@ -212,4 +210,4 @@ const META = () => {
   );
 };
 
-export default META;
+export default ITSpeacialist;
