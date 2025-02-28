@@ -27,21 +27,25 @@ const Cards = [
     image: Logo6,
     title: "Digital Marketing Certification",
     description: "Safeguard your digital assets in today's challenging landscape.",
+    url:"/META"
   },
   {
     image: Logo3,
     title: "PMI Project Management",
     description: "We offer specialized cybersecurity services that ensure the protection of IT infrastructures and solutions.",
+    url:"/PMI"
   },
   {
     image: Logo9,
     title: "Information Technology Specialist",
     description: "Empowering organizations to safeguard their digital assets in today's challenging landscape.",
+    url:"/ITSpeacialist"
   },
   {
     image: Logo10,
     title: "App Development with Swift",
     description: "We offer specialized cybersecurity services that ensure the protection of IT infrastructures and solutions.",
+    url:"/SwiftDevelopment"
   },
   {
     image: Logo2,

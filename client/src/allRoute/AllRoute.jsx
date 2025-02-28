@@ -179,6 +179,12 @@ import IBM from "../pages/IBM";
 import META from "../pages/META";
 import MetaCourses from "../components/MetaCourses";
 import PartnerPage from "../pages/PartnerPage";
+import PMICourses from "../components/PMICourses";
+import ITCourses from "../components/ITCourses";
+import ITSpeacialist from "../pages/ITSpecialist";
+import SwiftCourses from "../components/SwiftCourses";
+import SwiftDevelopment from "../pages/SwiftDevelopment";
+import PMI from "../pages/PMI";
 
 const AllRoute = () => {
   const token = localStorage.getItem("token");
@@ -312,6 +318,12 @@ const AllRoute = () => {
       <Route path="/META" element={<META/>} />
       <Route path="/MetaCourses" element={<MetaCourses/>} />
       <Route path="/PartnerPage" element={<PartnerPage/>}/>
+      <Route path="/PMI" element={<PMI/>}/>
+      <Route path="/PMICourses" element={<PMICourses/>}/>
+      <Route path="/ITCourses" element={<ITCourses/>}/>
+      <Route path="/ITSpeacialist" element={<ITSpeacialist/>}/>
+      <Route path="/SwiftCourses" element={<SwiftCourses/>}/>
+      <Route path="/SwiftDevelopment" element={<SwiftDevelopment/>}/>
     </Routes>
   );
 };

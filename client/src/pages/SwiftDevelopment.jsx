@@ -1,0 +1,75 @@
+import React, { useEffect } from "react";
+import banner from "../assets/ibmbanner.jpg";
+import banner2 from "../assets/applelogo.png";
+import Card1 from "../assets/applecard1.jpg";
+import SwiftCourses from "../components/SwiftCourses";
+
+const SwiftDevelopment = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const AppDevlomentcourses = [
+    {
+      image: Card1,
+      title: "CERTIFICATION COURSE",
+      description: "App Development with Swift – Certified User E-Book",
+      price: "₹1149",
+      url: "/IBMcourses",
+    },
+   
+  ];
+
+  return (
+    <>
+      <div
+        className="bg-gray-100 w-full relative contrast-75 h-[55vh] content-center text-justify"
+        style={{
+          backgroundImage: `url(${banner})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="flex flex-col lg:flex-row items-center justify-between p-5">
+          <div className="lg:w-2/3 w-full">
+            <h1 className="text-3xl md:text-4xl lg:text-4xl font-bold font-serif">
+              Apple Certifications
+            </h1>
+            <h5 className="text-sm md:text-lg lg:text-xl mt-4">
+            Swift is a robust and intuitive programming language created by Apple. It’s easy to learn, simple to use, and super powerful — which makes it a great language for first time coders and full time developers.        
+            <br />
+            App Development with Swift certifications recognize students for their knowledge of Swift, Xcode, and app development tools.              <br />
+              <br />
+              Students are expected to have completed at least 150 hours of instructional time before taking the certification exam.
+              
+              Students who pass the certification exam will earn a digital badge they can share in a resume, portfolio, email, or in online professional networks.
+            </h5>
+          </div>
+          <div className="hidden lg:block mt-5 p-5">
+            <img
+              className="w-[22rem] h-64 transition-transform duration-300 ease-in-out hover:scale-110"
+              src={banner2}
+              alt="IBM Banner"
+            />
+          </div>
+        </div>
+      </div>
+      <div className="bg-teal-50 py-10 px-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center mx-auto">
+          {AppDevlomentcourses.map((course, index) => (
+            <SwiftCourses
+              key={index}
+              title={course.title}
+              image={course.image}
+              price={course.price}
+              description={course.description}
+              url={course.url}
+            />
+          ))}
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default SwiftDevelopment;

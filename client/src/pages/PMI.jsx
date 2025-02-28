@@ -1,20 +1,20 @@
 import React, { useEffect } from "react";
 import banner from "../assets/ibmbanner.jpg";
-import banner2 from "../assets/metalogo2.png";
-import Card1 from "../assets/METAcard1.png";
-import MetaCourses from "../components/MetaCourses"
+import banner2 from "../assets/PMI.jpg";
+import Card1 from "../assets/pmicard1.jpg";
+import PMICourses from "../components/PMICourses";
 
-const META = () => {
+const PMI = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const metacourses = [
+  const pmicourses = [
     {
       image: Card1,
       title: "CERTIFICATION COURSE",
-      description: "Meta Certified Digital Marketing Associate E-Learning Course",
-      price: "₹1699",
+      description: "PMI Project Management- Ready™ Courseware",
+      price: "₹1149",
       url: "/IBMcourses",
     },
     //UNWANTED CARDS
@@ -168,25 +168,21 @@ const META = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between p-5">
           <div className="lg:w-2/3 w-full">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-serif">
-            Meta Digital Marketing Certification
+            PMI Project Management
             </h1>
             <h5 className="text-sm md:text-lg lg:text-xl mt-4">
-              The Meta Certified Digital Marketing Associate Certification Exam is for entry-level marketing professionals, advertising and marketing students, interns, etc.
-              <br />
-              The exam targets secondary and immediate post-secondary students, including career professionals looking to expand their skillset or switch roles or jobs.
-              <br />
-              <br />
-              Learners who earn the Meta Certified Digital Marketing Associate Certification understand the value that
-              <br />
-              advertising on Meta technologies can deliver for businesses, small and large, by helping them reach new and existing customers.
-              <br />
-              <br />
+            The PMI Project Management Ready® certification is designed to test and validate foundational concepts and knowledge in project management.
+            <br />
+            This is an entry-level certification that does not require any prior work experience in project management and              <br />
+              
+              can help candidates take their first step towards preparing to become a Certified Associate in Project Management (CAPM)®.
+              
              
             </h5>
           </div>
           <div className="hidden lg:block  mt-5 ">
             <img
-              className="w-[28rem] h-64 transition-transform duration-300 ease-in-out hover:scale-110"
+              className="w-[28rem] h-64 transition-transform duration-300 ease-in-out hover:scale-110 rounded-md"
               src={banner2}
               alt="IBM Banner"
             />
@@ -195,8 +191,8 @@ const META = () => {
       </div>
       <div className="bg-teal-50 py-10 px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center mx-auto">
-          {metacourses.map((course, index) => (
-            <MetaCourses
+          {pmicourses.map((course, index) => (
+            <PMICourses
               key={index}
               title={course.title}
               image={course.image}
@@ -212,4 +208,4 @@ const META = () => {
   );
 };
 
-export default META;
+export default PMI;

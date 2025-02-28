@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import {Link} from 'react-router-dom';
 
-const MetaCourses = ({image,title, description, price,url}) => {
+const ITCourses = ({image,title, description, price,url}) => {
     useEffect(() => {
         window.scrollTo(0,0);
 
@@ -25,4 +25,4 @@ const MetaCourses = ({image,title, description, price,url}) => {
         </div>
     );
 };
-export default MetaCourses;
+export default ITCourses;

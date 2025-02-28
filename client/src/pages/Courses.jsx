@@ -73,13 +73,13 @@ const Courses = () => {
 
   return (
     <div className="bg-gray-50">
-      <div className="relative mb-12">
-        <div className="w-full h-80 overflow-hidden">
+      <div className="relative ">
+        <div className="w-full h-[27rem]  overflow-hidden">
           <AutoPlay />
         </div>
       </div>
 
-      <div className="bg-gray-200 p-5">
+      <div className="bg-gray-200 p-5 m-5">
         <p className="text-center font-bold uppercase text-4xl p-4">
           Get Certified by World's Leading IT Companies
         </p>
