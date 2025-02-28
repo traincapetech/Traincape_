@@ -478,7 +478,7 @@
 
 // export default Navbar;
 
-//Update code by Ritik Singh
+// Update code by Ritik Singh
 // import React, { useState, useEffect, useRef } from "react";
 // import { Link, useNavigate, useLocation } from "react-router-dom";
 // import { GiHamburgerMenu } from "react-icons/gi";
