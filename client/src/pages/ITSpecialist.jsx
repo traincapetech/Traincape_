@@ -210,8 +210,5 @@ const ITSpeacialist = () => {
   );
 };
 
-<<<<<<< HEAD
+
 export default ITSpeacialist;
-=======
-export default ITSpeacialist;
->>>>>>> 693c3a3df723f4b822ffc5b7eb23b26f54367774

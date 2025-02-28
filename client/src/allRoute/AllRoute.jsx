@@ -179,21 +179,13 @@ import IBM from "../pages/IBM";
 import META from "../pages/META";
 import MetaCourses from "../components/MetaCourses";
 import PartnerPage from "../pages/PartnerPage";
-<<<<<<< HEAD
 import PMI from "../pages/PMI";
 import PMICourses from "../components/PMICourses";
 import ITSpeacialist from "../pages/ITSpecialist";
 import ITCourses from "../components/ITCourses";
 import SwiftCourses from "../components/SwiftCourses";
 import SwiftDevelopment from "../pages/SwiftDevelopment";
-=======
-import PMICourses from "../components/PMICourses";
-import ITCourses from "../components/ITCourses";
-import ITSpeacialist from "../pages/ITSpecialist";
-import SwiftCourses from "../components/SwiftCourses";
-import SwiftDevelopment from "../pages/SwiftDevelopment";
-import PMI from "../pages/PMI";
->>>>>>> 693c3a3df723f4b822ffc5b7eb23b26f54367774
+
 
 const AllRoute = () => {
   const token = localStorage.getItem("token");
