@@ -1,0 +1,96 @@
+import React, { useEffect } from "react";
+import banner from "../../assets/ibmbanner.jpg";
+import banner2 from "../../assets/autodeskbanner.webp";
+import Card1 from "../../assets/autodesk1.webp";
+import Card2 from "../../assets/autodesk2.webp";
+import Card3 from "../../assets/autodesk3.webp";
+import Card4 from "../../assets/autodesk4.webp";
+import MicrosoftOffCourses from "../../components/MicrosoftOffCourses";
+
+const Autodesk = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const autodeskcourses = [
+    {
+      image: Card1,
+      description: "Microsoft Office Specialist – Excel Expert Certification",
+      price: "₹1149",
+      url: "/IBMcourses",
+    },
+    {
+      image: Card2,
+      description: "Microsoft Office Specialist – Word Expert Certification",
+      price: "₹1149",
+      url: "/IBMcourses",
+    },
+    {
+      image: Card3,
+      description:
+        "Microsoft Office Specialist – PowerPoint Associate Certification ",
+      price: "₹1149",
+      url: "/IBMcourses",
+    },
+    {
+      image: Card4,
+      description:
+        "Microsoft Office Specialist – Excel Associate Certification",
+      price: "₹1149",
+      url: "/IBMcourses",
+    },
+  ];
+
+  return (
+    <>
+      <div
+        className="bg-gray-100 w-full relative contrast-75 h-[65vh] content-center text-justify"
+        style={{
+          backgroundImage: `url(${banner})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="flex flex-col lg:flex-row items-center justify-between p-5">
+          <div className="lg:w-2/3 w-full ">
+            <h1 className="text-2xl  md:text-3xl lg:text-4xl font-bold font-serif ">
+              Autodesk Certified User (ACU)
+            </h1>
+            <h5 className="text-sm md:text-lg lg:text-base xl:text-xl mt-4">
+              Career and technical education programs across India equip
+              students with marketable 2D and 3D design skills by teaching them
+              to use state of the art Autodesk® design software.
+              <br />    <br />
+              Autodesk Certified User certification confirms students have the
+              skills necessary to continue their design careers whether they
+              attend college, enter the workforce or work toward additional
+              levels of industry certification after graduation.{" "}
+            </h5>
+          </div>
+          <div className="hidden lg:block xl:block  mt-5 p-5">
+            <img
+              className="w-[28rem] h-64 transition-transform duration-300 ease-in-out hover:scale-110"
+              src={banner2}
+              alt="IBM Banner"
+            />
+          </div>
+        </div>
+      </div>
+      <div className="bg-teal-50 py-10 px-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center mx-auto">
+          {autodeskcourses.map((course, index) => (
+            <MicrosoftOffCourses
+              key={index}
+              image={course.image}
+              price={course.price}
+              description={course.description}
+              url={course.url}
+            />
+          ))}
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Autodesk;

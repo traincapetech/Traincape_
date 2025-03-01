@@ -51,36 +51,44 @@ const Cards = [
     image: Logo2,
     title: "Tally Certifications",
     description: "We offer specialized cybersecurity services that ensure the protection of IT infrastructures and solutions.",
+    url:"/Tally"
   },
   {
     image: Logo5,
     title: "Microsoft Office Specialist",
     description: "We offer specialized cybersecurity services that ensure the protection of IT infrastructures and solutions.",
+    url:"/Microsoftoffice"
   },
   {
     image: Logo13,
     title: "Autodesk Certified User",
     description: "We offer specialized cybersecurity services that ensure the protection of IT infrastructures and solutions.",
+    url:"/Autodesk"
   },
   {
     image: Logo7,
     title: "Microsoft Certified Fundamentals",
     description: "We offer specialized cybersecurity services that ensure the protection of IT infrastructures and solutions.",
+    url:"/MicrosoftCertified"
+
   },
   {
     image: Logo12,
     title: "Adobe Certified Professional",
     description: "We offer specialized cybersecurity services that ensure the protection of IT infrastructures and solutions.",
+    url:"/Adobe"
   },
   {
     image: Logo8,
     title: "Unity Certified User",
     description: "We offer specialized cybersecurity services that ensure the protection of IT infrastructures and solutions.",
+    url:"/unity" ,
   },
-  {
+    {
     image: Logo1,
     title: "Cisco Certified",
     description: "We offer specialized cybersecurity services that ensure the protection of IT infrastructures and solutions.",
+    url:"/ciscocard"
   },
 ];
 

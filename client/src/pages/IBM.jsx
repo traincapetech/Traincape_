@@ -184,11 +184,11 @@ const IBM = () => {
         }}
       >
         <div className="flex flex-col lg:flex-row items-center justify-between p-5">
-          <div className="lg:w-2/3 w-full">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-serif">
+          <div className="lg:w-2/3 w-full ">
+            <h1 className="text-2xl  md:text-4xl lg:text-4xl font-bold font-serif ">
               IBM Certification Courses
             </h1>
-            <h5 className="text-sm md:text-lg lg:text-xl mt-4">
+            <h5 className="text-xs md:text-xl lg:text-base xl:text-xl mt-4">
               IBM Certification Courses helps learners gain skills in the latest
               emerging technologies
               <br />
@@ -203,14 +203,10 @@ const IBM = () => {
               organizations need.
               <br />
               <br />
-              This is a certification program offered by IBM along with
-              e-courseware which includes videos,
-              <br />
-              hands-on labs, and reading material for better preparation.
-              <br />
+              
             </h5>
           </div>
-          <div className="hidden lg:block  mt-5 ">
+          <div className="hidden lg:block p-10  mt-5 ">
             <img
               className="w-[28rem] h-auto transition-transform duration-300 ease-in-out hover:scale-110"
               src={banner2}

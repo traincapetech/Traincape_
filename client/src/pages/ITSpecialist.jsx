@@ -50,119 +50,13 @@ const ITSpeacialist = () => {
       price: "₹1149",
       url: "/IBMcourses",
     },
-    //{
-    //   image: tensorlow,
-    //   title: "CERTIFICATION COURSE",
-    //   description: "IBM Deep Learning with TensorFlow Certification Course",
-    //   price: "₹3000",
-    //   url: "/IBMcourses",
-    // },
-    // {
-    //   image: datasci,
-    //   title: "CERTIFICATION COURSE",
-    //   description: "IBM Data Science Methodology Certification Course",
-    //   price: "₹3000",
-    //   url: "/IBMcourses",
-    // },
-    // {
-    //   image: pydatasci,
-    //   title: "CERTIFICATION COURSE",
-    //   description: "IBM Python for Data Science Certification Course",
-    //   price: "₹3000",
-    //   url: "/IBMcourses",
-    // },
-    // {
-    //   image: Api,
-    //   title: "CERTIFICATION COURSE",
-    //   description: "IBM Rest API Certification Course",
-    //   price: "₹3000",
-    //   url: "/IBMcourses",
-    // },
-    // {
-    //   image: scala101,
-    //   title: "CERTIFICATION COURSE",
-    //   description: "IBM Scala 101 Certification Course",
-    //   price: "₹3000",
-    //   url: "/IBMcourses",
-    // },
-    // {
-    //   image: aglie,
-    //   title: "CERTIFICATION COURSE",
-    //   description: "IBM Agile Methodologies Certification Course",
-    //   price: "₹3000",
-    //   url: "/IBMcourses",
-    // },
-    // {
-    //   image: devops,
-    //   title: "CERTIFICATION COURSE",
-    //   description: "IBM DevOps Fundamentals Certification Course",
-    //   price: "₹3000",
-    //   url: "/IBMcourses",
-    // },
-    // {
-    //   image: pydataanalis,
-    //   title: "CERTIFICATION COURSE",
-    //   description: "IBM Data Analysis with Python Certification Course",
-    //   price: "₹3000",
-    //   url: "/IBMcourses",
-    // },
-    // {
-    //   image: cloudfunda,
-    //   title: "CERTIFICATION COURSE",
-    //   description: "IBM Cloud Fundamental Certification Course",
-    //   price: "₹3000",
-    //   url: "/IBMcourses",
-    // },
-    // {
-    //   image: container,
-    //   title: "CERTIFICATION COURSE",
-    //   description:
-    //     "IBM Introduction to Containers, Kubernetes and OpenShift V2 Certification Course",
-    //   price: "₹3000",
-    //   url: "/IBMcourses",
-    // },
-    // {
-    //   image: bigdata,
-    //   title: "CERTIFICATION COURSE",
-    //   description:
-    //     "IBM Introduction to Big Data, Hadoop and the Ecosystems Certification Course",
-    //   price: "₹3000",
-    //   url: "/IBMcourses",
-    // },
-    // {
-    //   image: nodejs,
-    //   title: "CERTIFICATION COURSE",
-    //   description: "IBM Node JS Certification Course",
-    //   price: "₹3000",
-    //   url: "/IBMcourses",
-    // },
-    // {
-    //   image: mangodb,
-    //   title: "CERTIFICATION COURSE",
-    //   description: "IBM NoSQL – MongoDB Certification Course",
-    //   price: "₹3000",
-    //   url: "/IBMcourses",
-    // },
-    // {
-    //   image: Machine,
-    //   title: "CERTIFICATION COURSE",
-    //   description: "IBM Machine Learning with Python Certification Course",
-    //   price: "₹3000",
-    //   url: "/IBMcourses",
-    // },
-    // {
-    //   image: js,
-    //   title: "CERTIFICATION COURSE",
-    //   description: "IBM JavaScript Certification Course",
-    //   price: "₹3000",
-    //   url: "/IBMcourses",
-    // },
+  
   ];
 
   return (
     <>
       <div
-        className="bg-gray-100 w-full relative contrast-75 h-[55vh] content-center text-justify"
+        className="bg-gray-100 w-full relative contrast-75 h-[60vh] content-center text-justify"
         style={{
           backgroundImage: `url(${banner})`,
           backgroundSize: "cover",

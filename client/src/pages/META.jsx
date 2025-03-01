@@ -158,7 +158,7 @@ const META = () => {
   return (
     <>
       <div
-        className="bg-gray-100 w-full relative contrast-75 h-[55vh] content-center text-justify"
+        className="bg-gray-100 w-full relative contrast-75 h-[55vh] lg:h-[79vh] content-center text-justify"
         style={{
           backgroundImage: `url(${banner})`,
           backgroundSize: "cover",
@@ -167,10 +167,10 @@ const META = () => {
       >
         <div className="flex flex-col lg:flex-row items-center justify-between p-5">
           <div className="lg:w-2/3 w-full">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-serif">
+            <h1 className="text-2xl md:text-4xl lg:text-4xl font-bold font-serif">
             Meta Digital Marketing Certification
             </h1>
-            <h5 className="text-sm md:text-lg lg:text-xl mt-4">
+            <h5 className="text-xs md:text-lg lg:text-xl mt-4">
               The Meta Certified Digital Marketing Associate Certification Exam is for entry-level marketing professionals, advertising and marketing students, interns, etc.
               <br />
               The exam targets secondary and immediate post-secondary students, including career professionals looking to expand their skillset or switch roles or jobs.
@@ -184,7 +184,7 @@ const META = () => {
              
             </h5>
           </div>
-          <div className="hidden lg:block  mt-5 ">
+          <div className="hidden lg:block p-10  mt-5 ">
             <img
               className="w-[28rem] h-64 transition-transform duration-300 ease-in-out hover:scale-110"
               src={banner2}

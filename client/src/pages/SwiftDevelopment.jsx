@@ -23,7 +23,7 @@ const SwiftDevelopment = () => {
   return (
     <>
       <div
-        className="bg-gray-100 w-full relative contrast-75 h-[55vh] content-center text-justify"
+        className="bg-gray-100 w-full relative contrast-75 h-[65vh] md:h-[75vh] content-center text-justify"
         style={{
           backgroundImage: `url(${banner})`,
           backgroundSize: "cover",
@@ -67,7 +67,10 @@ const SwiftDevelopment = () => {
             />
           ))}
         </div>
+        <br />
+      <br />  <br />  <br />  <br />  <br />
       </div>
+      
     </>
   );
 };
