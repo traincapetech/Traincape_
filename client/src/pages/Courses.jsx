@@ -5,6 +5,12 @@ import "slick-carousel/slick/slick-theme.css";
 import AutoPlay from "../pages/AutoPlay";
 import Slider from "react-slick";
 import CourseDetails from "../components/CoursesDetails";
+import banner from "../assets/banner.jpeg";
+import review1 from "../assets/review2.jpeg";
+import review2 from "../assets/review3.jpeg";
+import review3 from "../assets/review4.jpeg";
+import review4 from "../assets/review5.jpeg";
+import gif from "../assets/student-mgmt.gif";
 
 // Import Logos
 import Logo1 from "../assets/ciscologo-courses.webp";
@@ -21,6 +27,7 @@ import Logo11 from "../assets/esblogo-courses.jpg";
 import Logo12 from "../assets/adobenewlogo2.png";
 import Logo13 from "../assets/autodesklogo.png";
 import Logo14 from "../assets/microsoftlogo-courses.png";
+import { FaStar } from "react-icons/fa";
 
 const Courses = () => {
   const navigate = useNavigate();
@@ -73,32 +80,94 @@ const Courses = () => {
 
   return (
     <div className="bg-gray-50">
-      <div className="relative ">
-        <div className="w-full h-[27rem]  overflow-hidden">
+      {/* Banner Section */}
+      <div className="relative h-[22rem] mb-12">
+        <div className="w-full h-[24rem] overflow-hidden">
           <AutoPlay />
         </div>
       </div>
 
+      {/* Logos Section */}
       <div className="bg-gray-200 p-5 m-5">
         <p className="text-center font-bold uppercase text-4xl p-4">
           Get Certified by World's Leading IT Companies
         </p>
         <Slider {...settings} className="w-full">
-          {[Logo1, Logo2, Logo3, Logo4, Logo5, Logo6, Logo7, Logo8, Logo9, Logo10, Logo11, Logo12, Logo13, Logo14].map((logo, index) => (
-            <div key={index} className="flex justify-center p-3">
-              <img src={logo} alt={`Logo ${index + 1}`} className="max-h-20 object-contain" />
-            </div>
-          ))}
+          {[Logo1, Logo2, Logo3, Logo4, Logo5, Logo6, Logo7, Logo8, Logo9, Logo10, Logo11, Logo12, Logo13, Logo14].map(
+            (logo, index) => (
+              <div key={index} className="flex justify-center p-3">
+                <img src={logo} alt={`Logo ${index + 1}`} className="max-h-20 object-contain" />
+              </div>
+            )
+          )}
         </Slider>
       </div>
 
-      <div className="text-center py-5">
-        <h1 className="text-2xl font-bold">Explore Our Courses</h1>
-      </div>
-
-      {/* Responsive Course Details Section */}
+      {/* Course Details Section */}
       <div className="flex flex-wrap justify-center gap-8 px-4">
         <CourseDetails />
+      </div>
+
+      {/* Learner Outcomes Section */}
+      <div className="flex flex-col md:flex-row bg-gray-50 my-36 p-2 md:pl-4">
+        <img
+          src={banner}
+          className="rounded bg-gray-50 w-full md:w-[32rem] md:h-[20rem] object-cover"
+          alt="Banner"
+        />
+        <div className="flex flex-col text-center text-2xl mx-8  mt-4 md:mt-0">
+          <h2 className="mt-7 text-3xl md:text-4xl font-bold text-cyan-500">
+            Learner outcomes on Traincape Technology
+          </h2>
+          <h3 className="text-base md:text-lg mt-4">
+            87% of people certifying for professional development report career benefits, including outcomes like getting a promotion, becoming better at their current job, and finding a new job.
+          </h3>
+        </div>
+      </div>
+
+      {/* Testimonials Section */}
+      <div className="bg-gray-200 h-auto py-10">
+        <p className="flex text-3xl font-bold pt-10 font-serif justify-center">
+          ------ Testimonial ------
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 px-5 mt-10">
+          {[{ name: "Asim Farooq", review: "This is a great company. Everyone is very experienced and knowledgeable. I would recommend everyone to partner and work with them. Highly recommend checking them out!", image: review1 }, 
+          { name: "Manish kumar", review: "I'm so happy to find this training center. They provide outstanding training, support, coaching, and tutoring for all IT related courses. Always available for any questions regarding exam prep and certification.", image: review2 }, 
+          { name: "John Doe", review: "The team was awesome to work with, provided great expertise and communication to help me successfully complete my goal. I highly recommend them and will do more business in the future.", image: review3 },
+          { name: "Jane Smith", review: "This company is fantastic! The training is top-notch and helped me land a new job. I couldn't have asked for a better experience. Will definitely return for more courses!", image: review4 }].map((testimonial, index) => (
+            <div key={index} className="bg-white rounded-md h-auto w-full max-w-xs m-2 mt-10 relative">
+              <div className="bg-red-400 rounded-full w-[6rem] sm:w-[7rem] mx-auto mt-10 h-[6rem] sm:h-[7rem] absolute top-0 left-0 right-0">
+                <img src={testimonial.image} className="w-full h-full object-cover rounded-full" alt={`review${index + 1}`} />
+              </div>
+              <h2 className="text-center text-xl sm:text-xl font-bold pt-[10rem]">{testimonial.name}</h2>
+              <div className="flex justify-center pt-3">
+                {[...Array(5)].map((_, i) => (
+                  <FaStar key={i} size={30} style={{ color: "gold" }} />
+                ))}
+              </div>
+              <p className="p-4 mt-4 text-justify text-sm sm:text-base">{testimonial.review}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Final Call-to-Action Section */}
+      <div className="relative bg-gray-50 h-auto flex flex-col-reverse sm:flex-row items-center justify-center p-4 sm:p-8 overflow-hidden">
+        <div className="mx-auto text-center sm:text-left relative sm:w-1/2">
+          <h1 className="sm:text-xl md:text-3xl font-bold text-gray-800 mb-4 px-4">
+            Take the next step toward your personal and professional{" "}
+            <br className="hidden md:block" />
+            goals with Traincape Technology.
+          </h1>
+          <h2 className="text-sm sm:text-base md:text-lg text-gray-600 mb-8 px-4">
+            Join now to receive personalized recommendations from the full Traincape Technology catalog.
+          </h2>
+        </div>
+        <img
+          src={gif}
+          className="rounded-md sm:w-1/2 md:w-10/12 lg:w-8/12 opacity-70 shadow-lg shadow-blue-300 object-cover sm:h-[15rem] md:h-[20rem]"
+          alt="Traincape Technology"
+        />
       </div>
     </div>
   );

@@ -158,7 +158,7 @@ const PMI = () => {
   return (
     <>
       <div
-        className="bg-gray-100 w-full relative contrast-75 h-[55vh] content-center text-justify"
+        className="bg-gray-100 w-full relative contrast-75 h-[55vh] lg:h-[80vh] content-center text-justify"
         style={{
           backgroundImage: `url(${banner})`,
           backgroundSize: "cover",
@@ -167,7 +167,7 @@ const PMI = () => {
       >
         <div className="flex flex-col lg:flex-row items-center justify-between p-5">
           <div className="lg:w-2/3 w-full">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-serif">
+            <h1 className="text-2xl md:text-4xl lg:text-4xl font-bold font-serif">
             PMI Project Management
             </h1>
             <h5 className="text-sm md:text-lg lg:text-xl mt-4">
@@ -180,7 +180,7 @@ const PMI = () => {
              
             </h5>
           </div>
-          <div className="hidden lg:block  mt-5 ">
+          <div className="hidden lg:block p-10 mt-5 ">
             <img
               className="w-[28rem] h-64 transition-transform duration-300 ease-in-out hover:scale-110 rounded-md"
               src={banner2}
@@ -207,5 +207,7 @@ const PMI = () => {
     </>
   );
 };
+
+
 
 export default PMI;

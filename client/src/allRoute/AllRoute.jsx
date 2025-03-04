@@ -185,6 +185,20 @@ import ITSpeacialist from "../pages/ITSpecialist";
 import SwiftCourses from "../components/SwiftCourses";
 import SwiftDevelopment from "../pages/SwiftDevelopment";
 import PMI from "../pages/PMI";
+import Tally from "../pages/PopularCertificationCoureses/Tally";
+import TallyCourses from "../components/TallyCourses";
+import MicrosoftOffice from "../pages/PopularCertificationCoureses/MicrosoftOffice";
+import MicrosoftOffCourses from "../components/MicrosoftOffCourses";
+import Autodesk from "../pages/PopularCertificationCoureses/Autodesk";
+import AutoDeskCourses from "../components/AutoDeskCourses";
+import MicrosoftCertified from "../pages/PopularCertificationCoureses/MicrosoftCertified";
+import MicrosoftCertifiedC from "../components/MicrosoftCertifiedC";
+import Adobe from "../pages/PopularCertificationCoureses/Adobe";
+import AdobeCourses from "../components/AdobeCourses";
+import Unity from "../pages/PopularCertificationCoureses/Unity";
+import UnityCourses from "../components/UnityCourses";
+import CiscoCard from "../pages/PopularCertificationCoureses/CiscoCard";
+import Ciscocoursescard from "../components/Ciscocoursescard";
 
 const AllRoute = () => {
   const token = localStorage.getItem("token");
@@ -324,6 +338,20 @@ const AllRoute = () => {
       <Route path="/ITSpeacialist" element={<ITSpeacialist/>}/>
       <Route path="/SwiftCourses" element={<SwiftCourses/>}/>
       <Route path="/SwiftDevelopment" element={<SwiftDevelopment/>}/>
+      <Route path="/Tally" element={<Tally/>}/>
+      <Route path="/TallyCourses" element={<TallyCourses/>}/>
+      <Route path="/Microsoftoffice" element={<MicrosoftOffice/>}/>
+      <Route path="/MicrosoftCourses" element={<MicrosoftOffCourses/>}/>
+      <Route path="/Autodesk" element={<Autodesk/>}/>
+      <Route path="/AutoDeskCourses" element={<AutoDeskCourses/>}/>
+      <Route path="/MicrosoftCertified" element={<MicrosoftCertified/>}/>
+      <Route path="/MicrosoftCertifiedcourses" element={<MicrosoftCertifiedC/>}/>
+      <Route path="/Adobe" element={<Adobe/>}/>
+      <Route path="/AdobeCourses" element={<AdobeCourses/>}/>
+      <Route path="/unity" element={<Unity/>}/>
+      <Route path="/unitycourses" element={<UnityCourses/>}/>
+      <Route path="/ciscocard" element={<CiscoCard/>}/>
+      <Route path="/ciscocoursescard" element={<Ciscocoursescard/>}/>
     </Routes>
   );
 };
