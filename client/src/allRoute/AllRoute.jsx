@@ -199,6 +199,8 @@ import Unity from "../pages/PopularCertificationCoureses/Unity";
 import UnityCourses from "../components/UnityCourses";
 import CiscoCard from "../pages/PopularCertificationCoureses/CiscoCard";
 import Ciscocoursescard from "../components/Ciscocoursescard";
+import Webdevelopementhtml from "../components/IBMSubCourses/Webdevelopementhtml";
+import WebdevelopementC from "../components/IBMSubCourses/WebdevelopementC";
 
 
 const AllRoute = () => {
@@ -353,6 +355,8 @@ const AllRoute = () => {
       <Route path="/unitycourses" element={<UnityCourses/>}/>
       <Route path="/ciscocard" element={<CiscoCard/>}/>
       <Route path="/ciscocoursescard" element={<Ciscocoursescard/>}/>
+      <Route path="/htmlcourse" element={<Webdevelopementhtml/>}/>
+      <Route path="/C-course" element={<WebdevelopementC/>}/>
     </Routes>
   );
 };

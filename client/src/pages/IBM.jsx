@@ -34,14 +34,14 @@ const IBM = () => {
       title: "CERTIFICATION COURSE",
       description: "IBM Web Development using HTML Certification Course",
       price: "₹3000",
-      url: "/IBMcourses",
+      url: "/htmlcourse",
     },
     {
       image: c,
       title: "CERTIFICATION COURSE",
       description: "IBM Software Foundation Course C Certification Course",
       price: "₹3000",
-      url: "/IBMcourses",
+      url: "/C-course",
     },
     {
       image: foundationc,
