@@ -6,10 +6,10 @@ import AutoPlay from "../pages/AutoPlay";
 import Slider from "react-slick";
 import CourseDetails from "../components/CoursesDetails";
 import banner from "../assets/banner.jpeg";
-import review1 from "../assets/review2.png";
-import review2 from "../assets/review3.png";
-import review3 from "../assets/review4.png";
-import review4 from "../assets/review5.png";
+import review1 from "../assets/review2.jpeg";
+import review2 from "../assets/review3.jpeg";
+import review3 from "../assets/review4.jpeg";
+import review4 from "../assets/review5.jpeg";
 import gif from "../assets/student-mgmt.gif";
 
 // Import Logos

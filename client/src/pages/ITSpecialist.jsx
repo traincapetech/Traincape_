@@ -105,4 +105,8 @@ const ITSpeacialist = () => {
 };
 
 
+<<<<<<< HEAD
 export default ITSpeacialist;
+=======
+export default ITSpeacialist;
+>>>>>>> origin/main

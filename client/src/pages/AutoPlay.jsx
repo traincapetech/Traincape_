@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
-import Img1 from "../assets/AboutUsCourse.webp";
-import Img2 from "../assets/img2Course.webp";
-import Img3 from "../assets/img3Course.webp";
-import Img4 from "../assets/img4Course.webp";
-import Img5 from "../assets/img5Course.webp";
+import Img1 from "../assets/B1.png";
+import Img2 from "../assets/B2.png";
+import Img3 from "../assets/B3.png";
+import Img4 from "../assets/B4.png";
+import Img5 from "../assets/B5.png";
 import Img6 from "../assets/img6Course.webp";
 import Phoneimg1 from "../assets/CISCO1.jpg";
 import Phoneimg2 from "../assets/AWS1.jpg";
@@ -64,9 +64,9 @@ function AutoPlay() {
                 <div className="flex justify-center items-center p-1 pr-4 pl-4 pt-3 min-h-[400px]">
                     <img src={getImage(Img5, Phoneimg5)} alt="Course Image 4" className="w-full h-auto object-contain max-w-full max-h-full" />
                 </div>
-                <div className="flex justify-center items-center p-1 pr-4 pl-4 pt-3 min-h-[400px]">
+                {/* <div className="flex justify-center items-center p-1 pr-4 pl-4 pt-3 min-h-[400px]">
                     <img src={getImage(Img6, Phoneimg6)} alt="Course Image 5" className="w-full h-auto object-contain max-w-full max-h-full" />
-                </div>
+                </div> */}
             </Slider>
         </div>
     );
