@@ -133,6 +133,7 @@ import Logo2 from "../assets/ThreatMatrix.png";
 import Logo3 from "../assets/Digitalearn.webp";
 import Logo4 from "../assets/Gruslabs.svg";
 import Logo5 from "../assets/MSA.png";
+import Logo6 from "../assets/spectre.webp"
 
 // Import Product Logos (Replace with actual product logos)
 import Product1 from "../assets/hexnode.svg";
@@ -152,6 +153,7 @@ const partners = [
   { logo: Logo3, url: "https://digitalearnsolution.com/" },
   { logo: Logo4, url: "https://www.gruslabs.com/" },
   { logo: Logo5, url: "https://msasoftware.in/" },
+  { logo: Logo6, url: "https://spectreme.ai/" },
 ];
 
 const products = [

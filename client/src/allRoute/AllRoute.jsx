@@ -199,6 +199,26 @@ import Unity from "../pages/PopularCertificationCoureses/Unity";
 import UnityCourses from "../components/UnityCourses";
 import CiscoCard from "../pages/PopularCertificationCoureses/CiscoCard";
 import Ciscocoursescard from "../components/Ciscocoursescard";
+import Webdevelopementhtml from "../components/IMBSubCourses/Webdevelopementhtml";
+import WebdevelopementC from "../components/IMBSubCourses/WebdevelopementC";
+import IBMSoftwareFoundation from "../components/IMBSubCourses/IBMSoftwareFoundation";
+import IBMRDBMS from "../components/IMBSubCourses/IBMRDBMS";
+import IBMSQL from "../components/IMBSubCourses/IBMSQL";
+import IBMDeepLearning from "../components/IMBSubCourses/IBMDeepLearning";
+import IBMMethodology from "../components/IMBSubCourses/IBMMethodology";
+import IBMPython from "../components/IMBSubCourses/IBMPython";
+import IBMRestAPI from "../components/IMBSubCourses/IBMRestAPI";
+import IBMScala from "../components/IMBSubCourses/IBMScala";
+import IBMAgileMethodologies from "../components/IMBSubCourses/IBMAgileMethodologies";
+import IBMDevopsFundamentals from "../components/IMBSubCourses/IBMDevopsFundamentals";
+import IBMDataAnalysis from "../components/IMBSubCourses/IBMDataAnalysis";
+import IBMCloudFundamental from "../components/IMBSubCourses/IBMCloudFundamental";
+import IBMKubernetes from "../components/IMBSubCourses/IBMKubernetes";
+import IBMBigData from "../components/IMBSubCourses/IBMBigData";
+import IBMNodeJs from "../components/IMBSubCourses/IBMNodeJs";
+import IBMNoSQL from "../components/IMBSubCourses/IBMNoSQL";
+import IBMMachineLearning from "../components/IMBSubCourses/IBMMachineLearning";
+import IBMJavaScript from "../components/IMBSubCourses/IBMJavaScript";
 
 const AllRoute = () => {
   const token = localStorage.getItem("token");
@@ -352,6 +372,27 @@ const AllRoute = () => {
       <Route path="/unitycourses" element={<UnityCourses/>}/>
       <Route path="/ciscocard" element={<CiscoCard/>}/>
       <Route path="/ciscocoursescard" element={<Ciscocoursescard/>}/>
+      <Route path="/htmlcourse" element={<Webdevelopementhtml/>}/>
+      <Route path="/C-course" element={<WebdevelopementC/>}/>
+      <Route path="/IBMSoftwareFoundation" element={<IBMSoftwareFoundation/>}/>
+      <Route path="/IBMSQL" element={<IBMSQL/>}/>
+      <Route path="/IBMRDBMS" element={<IBMRDBMS/>}/>
+      <Route path="/IBMDeepLearning" element={<IBMDeepLearning/>}/>
+      <Route path="/IBMMethodology" element={<IBMMethodology/>}/>
+      <Route path="/IBMPython" element={<IBMPython/>}/>
+      <Route path="/IBMRestAPI" element={<IBMRestAPI/>}/>
+      <Route path="/IBMScala" element={<IBMScala/>}/>
+      <Route path="/IBMAgileMethodologies" element={<IBMAgileMethodologies/>}/>
+      <Route path="/IBMDevopsFundamentals" element={<IBMDevopsFundamentals/>}/>      
+      <Route path="/IBMDataAnalysis" element={<IBMDataAnalysis/>}/>      
+      <Route path="/IBMCloudFundamental" element={<IBMCloudFundamental/>}/>      
+      <Route path="/IBMKubernetes" element={<IBMKubernetes/>}/>      
+      <Route path="/IBMBigData" element={<IBMBigData/>}/>     
+      <Route path="/IBMNodeJs" element={<IBMNodeJs/>}/>    
+      <Route path="/IBMNoSQL" element={<IBMNoSQL/>}/>    
+      <Route path="/IBMMachineLearning" element={<IBMMachineLearning/>}/>    
+      <Route path="/IBMJavaScript" element={<IBMJavaScript/>}/>    
+
     </Routes>
   );
 };
