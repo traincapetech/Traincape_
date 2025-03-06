@@ -185,10 +185,7 @@ import ITSpeacialist from "../pages/ITSpecialist";
 import ITCourses from "../components/ITCourses";
 import SwiftCourses from "../components/SwiftCourses";
 import SwiftDevelopment from "../pages/SwiftDevelopment";
-<<<<<<< HEAD
-=======
 import PMI from "../pages/PMI";
->>>>>>> origin/main
 import Tally from "../pages/PopularCertificationCoureses/Tally";
 import TallyCourses from "../components/TallyCourses";
 import MicrosoftOffice from "../pages/PopularCertificationCoureses/MicrosoftOffice";
@@ -203,11 +200,6 @@ import Unity from "../pages/PopularCertificationCoureses/Unity";
 import UnityCourses from "../components/UnityCourses";
 import CiscoCard from "../pages/PopularCertificationCoureses/CiscoCard";
 import Ciscocoursescard from "../components/Ciscocoursescard";
-<<<<<<< HEAD
-import Webdevelopementhtml from "../components/IBMSubCourses/Webdevelopementhtml";
-import WebdevelopementC from "../components/IBMSubCourses/WebdevelopementC";
-
-=======
 import Webdevelopementhtml from "../components/IMBSubCourses/Webdevelopementhtml";
 import WebdevelopementC from "../components/IMBSubCourses/WebdevelopementC";
 import IBMSoftwareFoundation from "../components/IMBSubCourses/IBMSoftwareFoundation";
@@ -228,7 +220,6 @@ import IBMNodeJs from "../components/IMBSubCourses/IBMNodeJs";
 import IBMNoSQL from "../components/IMBSubCourses/IBMNoSQL";
 import IBMMachineLearning from "../components/IMBSubCourses/IBMMachineLearning";
 import IBMJavaScript from "../components/IMBSubCourses/IBMJavaScript";
->>>>>>> origin/main
 
 const AllRoute = () => {
   const token = localStorage.getItem("token");
@@ -384,8 +375,6 @@ const AllRoute = () => {
       <Route path="/ciscocoursescard" element={<Ciscocoursescard/>}/>
       <Route path="/htmlcourse" element={<Webdevelopementhtml/>}/>
       <Route path="/C-course" element={<WebdevelopementC/>}/>
-<<<<<<< HEAD
-=======
       <Route path="/IBMSoftwareFoundation" element={<IBMSoftwareFoundation/>}/>
       <Route path="/IBMSQL" element={<IBMSQL/>}/>
       <Route path="/IBMRDBMS" element={<IBMRDBMS/>}/>
@@ -405,7 +394,6 @@ const AllRoute = () => {
       <Route path="/IBMMachineLearning" element={<IBMMachineLearning/>}/>    
       <Route path="/IBMJavaScript" element={<IBMJavaScript/>}/>    
 
->>>>>>> origin/main
     </Routes>
   );
 };
