@@ -81,8 +81,8 @@ const Courses = () => {
   return (
     <div className="bg-gray-50">
       {/* Banner Section */}
-      <div className="relative h-[22rem] mb-12">
-        <div className="w-full h-[24rem] overflow-hidden">
+      <div className="relative md:h-[11rem] lg:h-[20rem] mb-12">
+        <div className="w-full md:h-[11rem] lg:h-[25rem] overflow-hidden">
           <AutoPlay />
         </div>
       </div>
