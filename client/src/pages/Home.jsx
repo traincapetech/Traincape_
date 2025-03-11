@@ -586,7 +586,7 @@
 
 // export default Home;
 
-//Tripti code//
+//Updated By Sumit Jain //
 
 import React from "react";
 import style from "../css/Home.module.css";
@@ -599,44 +599,120 @@ import card5 from "../assets/card5.jpeg";
 import card6 from "../assets/card6.jpeg";
 import { FaSquareWhatsapp } from "react-icons/fa6";
 import Typewriter from "typewriter-effect";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Rotation from "../components/Rotation";
 import HomeBanner from "../components/HomeBanner";
 import banner from "../assets/banner.json";
 import HomeSlider from "../components/HomeSlider";
-import Herobg from '../assets/herobg.jpg'
 
+// logo images
 
-// import banner from '../homebackround.jpg';
+import Logo1 from "../assets/ciscologo-courses.webp";
+import Logo2 from "../assets/tallylogo-courses.jpg";
+import Logo3 from "../assets/pmilogo-courses.png";
+import Logo4 from "../assets/ibmlogo-courses.png";
+import Logo5 from "../assets/quickbookslogo-courses.png";
+import Logo6 from "../assets/metalogocourses.png";
+import Logo7 from "../assets/dlilogo-courses.jpg";
+import Logo8 from "../assets/unitylogo-courses.png";
+import Logo9 from "../assets/csblogo-courses.png";
+import Logo10 from "../assets/adwslogo-courses.jpg";
+import Logo11 from "../assets/esblogo-courses.jpg";
+import Logo12 from "../assets/adobenewlogo2.png";
+import Logo13 from "../assets/autodesklogo.png";
+import Logo14 from "../assets/microsoftlogo-courses.png";
+import Slider from "react-slick";
 
 const Home = () => {
   const bannerText = {
-    title: "Expert IT Solutions & Management",
-    description:" Elevate your business with premium IT support and management services tailored to optimize your technology landscape. Our dedicated team of professionals ensures seamless, efficient, and innovative solutions to meet your unique IT needs.",
+    title: "Want a Suggestion?",
+    type1: "Cloud Computing",
+    type2: " Cyber Security",
+    type3: "Project Management",
+    type4: "Development",
     ctaText: "Get Started",
     ctaLink: "/get-started", // Link to the page you want to navigate to
+  };
+  const settings = {
+    dots: false,
+    infinite: true,
+    slidesToShow: 6,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 3000,
+    cssEase: "linear",
+    rtl: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   const navigate = useNavigate();
   return (
     <div>
-      {/* <div className={style.topbanner}>
-        <div className={style.banner}></div>
-        <div className={style.bannertext}>
-          <h1 className="text-stroke">Expert IT Solutions & Management</h1>
-          <h3>
-            Elevate your business with premium IT support and management
-            services tailored to optimize your technology landscape. Our
-            dedicated team of professionals ensures seamless, efficient, and
-            innovative solutions to meet your unique IT needs.
-          </h3>
-        </div>
-      </div> */}
-      <div className="pt-28 bg-[#152B54] md:pt-0 lg:pt-0" 
-       style={{ backgroundImage: `url(${Herobg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-      >
-        
+      <div>
+        {/* style={{ backgroundImage: `url(${Herobg})`, backgroundSize: 'cover', backgroundPosition: 'center' }} */}
         <HomeBanner text={bannerText} animationData={banner} />
+      </div>
+      {/* Logos Section */}
+      <div className="bg-gray-200 p-5 m-5">
+        <p className="text-center font-bold uppercase text-4xl p-4">
+          Get Certified by World's Leading IT Companies
+        </p>
+        <Slider {...settings} className="w-full">
+          {[
+            Logo1,
+            Logo2,
+            Logo3,
+            Logo4,
+            Logo5,
+            Logo6,
+            Logo7,
+            Logo8,
+            Logo9,
+            Logo10,
+            Logo11,
+            Logo12,
+            Logo13,
+            Logo14,
+          ].map((logo, index) => (
+            <div key={index} className="flex justify-center p-3">
+              <img
+                src={logo}
+                alt={`Logo ${index + 1}`}
+                className="max-h-20 object-contain"
+              />
+            </div>
+          ))}
+        </Slider>
       </div>
 
       <div className="">
@@ -707,6 +783,11 @@ const Home = () => {
             excellence, we ensure your technology works flawlessly so you can
             focus on what truly matters—growing your business.
           </div>
+          <NavLink to="/about-us">
+      <button className="bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition duration-300">
+        About Us
+      </button>
+    </NavLink>
           <div className={style.aboutimg}>
             <img src={team} alt="" />
           </div>
@@ -825,16 +906,10 @@ const Home = () => {
             e-tailers. Intrinsicly enhance 24/7 users and supply process
           </p>
           <div className={style.call}>
-            
-              
-              <Link
-                
-                to="https://wa.me/+916280281505"
-                target="_blank"
-              >
-            <FaSquareWhatsapp className={style.whatappicon} />
-              </Link>
-            
+            <Link to="https://wa.me/+916280281505" target="_blank">
+              <FaSquareWhatsapp className={style.whatappicon} />
+            </Link>
+
             <div>
               <p>24 HOURS SERVICE AVAILABLE</p>
               <h4
