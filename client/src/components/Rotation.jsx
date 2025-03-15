@@ -176,7 +176,7 @@ const Rotation = () => {
   };
 
   return (
-    <div className="flex flex-col relative items-center justify-evenly h-[75vh] bg-gray-900">
+    <div className="flex flex-col relative items-center justify-evenly h-[75vh] bg-gray-800">
       {/* <h1 className="text-white">Our Services</h1> */}
       <div
         className="relative w-[210px] h-[158px] perspective"

@@ -185,7 +185,6 @@ import ITSpeacialist from "../pages/ITSpecialist";
 import ITCourses from "../components/ITCourses";
 import SwiftCourses from "../components/SwiftCourses";
 import SwiftDevelopment from "../pages/SwiftDevelopment";
-import PMI from "../pages/PMI";
 import Tally from "../pages/PopularCertificationCoureses/Tally";
 import TallyCourses from "../components/TallyCourses";
 import MicrosoftOffice from "../pages/PopularCertificationCoureses/MicrosoftOffice";
@@ -220,6 +219,7 @@ import IBMNodeJs from "../components/IMBSubCourses/IBMNodeJs";
 import IBMNoSQL from "../components/IMBSubCourses/IBMNoSQL";
 import IBMMachineLearning from "../components/IMBSubCourses/IBMMachineLearning";
 import IBMJavaScript from "../components/IMBSubCourses/IBMJavaScript";
+import Cart from "../pages/Cart";
 
 const AllRoute = () => {
   const token = localStorage.getItem("token");
@@ -393,6 +393,7 @@ const AllRoute = () => {
       <Route path="/IBMNoSQL" element={<IBMNoSQL/>}/>    
       <Route path="/IBMMachineLearning" element={<IBMMachineLearning/>}/>    
       <Route path="/IBMJavaScript" element={<IBMJavaScript/>}/>    
+      <Route path="/Cart" element={<Cart/>}/>    
 
     </Routes>
   );

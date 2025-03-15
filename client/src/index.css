@@ -7,6 +7,10 @@ body {
   overflow-x: hidden;
   margin: 0px;
   padding: 0px;
+
+}
+.rapid7-logo {
+  filter: invert(100%) brightness(0);
 }
 
 code {
