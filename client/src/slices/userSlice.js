@@ -258,6 +258,7 @@
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { FaCreativeCommonsPd } from "react-icons/fa6";
 
 // Define initial state
 const initialState = {
@@ -281,6 +282,56 @@ export const loginUser = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || { msg: "Login failed" });
+    }
+  }
+);
+
+// Async thunk for user send otp
+export const sendOTPToEmail = createAsyncThunk(
+  "user/sendOTPToEmail",
+  async ({ email }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `http://localhost:8080/users/sendOTPToEmail`,
+        { email }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || { msg: "OTP Failed to be Sent" });
+    }
+  }
+);
+
+// Async thunk for user send otp
+export const verifyOtp = createAsyncThunk(
+  "user/verifyOtp",
+  async ({ otp,email }, { rejectWithValue }) => {
+    try {
+      console.log("Otp being sent to slice is",otp)
+      const response = await axios.post(
+        `http://localhost:8080/users/verifyOtp`,
+        { otp,email }
+      );
+      console.log("THE RESPOSE IS---->",response)
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || { msg: "OTP Failed to be Verified" });
+    }
+  }
+);
+
+export const reset_password = createAsyncThunk(
+  "user/reset_password",
+  async ({ otp,email, newPassword }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `http://localhost:8080/users/reset_password`,
+        { otp,email,newPassword }
+      );
+      console.log("THE RESPOSE IS---->",response)
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || { msg: "New Passsword Failed to be Changed" });
     }
   }
 );

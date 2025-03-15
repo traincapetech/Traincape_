@@ -219,6 +219,7 @@ import IBMNodeJs from "../components/IMBSubCourses/IBMNodeJs";
 import IBMNoSQL from "../components/IMBSubCourses/IBMNoSQL";
 import IBMMachineLearning from "../components/IMBSubCourses/IBMMachineLearning";
 import IBMJavaScript from "../components/IMBSubCourses/IBMJavaScript";
+import ForgotPassword from "../pages/ForgotPassword";
 
 const AllRoute = () => {
   const token = localStorage.getItem("token");
@@ -231,6 +232,8 @@ const AllRoute = () => {
 
       <Route path="/login" element={ <Login /> } />
       <Route path="/signup" element={<Signup /> } />
+      <Route path="/forgot-password" element={<ForgotPassword /> } />
+
 
       <Route path="/about-us" element={<AboutUS />} />
       <Route path="/contact-us" element={<ContactUs />} />

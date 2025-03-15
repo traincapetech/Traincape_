@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {  FaRegEyeSlash, FaEye } from "react-icons/fa6";
+import { FaRegEyeSlash, FaEye } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // import axios from "axios";
@@ -220,13 +220,13 @@ const Login = () => {
       <div className="absolute inset-0 flex justify-center items-center">
         <div className="grid-cols-1 md:flex m-auto p-4 ">
           <div className="bg-[#152B54] w-fit md:w-[30%]  ml-auto">
-          <div className="relative">
-            <img
-              src={logo}
-              alt="Traincape Technology"
-              className="w-[90px] h-[90px] md:w-[130px] md:h-[130px] absolute top-0"
-            />
-          </div>
+            <div className="relative">
+              <img
+                src={logo}
+                alt="Traincape Technology"
+                className="w-[90px] h-[90px] md:w-[130px] md:h-[130px] absolute top-0"
+              />
+            </div>
             <Lottie
               animationData={signup}
               loop={true}
@@ -293,9 +293,9 @@ const Login = () => {
                     Remember me
                   </label>
                 </div>
-                {/* <a href="#" className="text-sm text-[#152B54] hover:underline">
+                <p onClick={()=>{navigate("/forgot-password")}} className="hover:cursor-pointer text-sm text-[#152B54] hover:underline">
                   Forgot password?
-                </a> */}
+                </p>
               </div>
 
               <button

@@ -27,9 +27,9 @@
 // const userSchema = mongoose.Schema(
 //   {
 //     username: { type: String, required: true }, // It's better to define required for username as well
-//     email: { 
-//       type: String, 
-//       unique: true, 
+//     email: {
+//       type: String,
+//       unique: true,
 //       required: true, // Corrected from 'require' to 'required'
 //       lowercase: true, // Optionally enforce lowercase for consistency
 //     },
@@ -79,6 +79,14 @@ const userSchema = mongoose.Schema(
     linkedIn: { type: String }, // Added linkedIn field
     interest: { type: String, required: true }, // Added interest field
     testHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: "Result" }],
+    verifyOtp: {type: String,default: "",},
+    verifyOtpExpireAt: {type: Number,default: 0,}, 
+    resetOtp: {type: String,default: ''
+  },
+  resetOtpExpireAt: {
+      type: Number,
+      default: 0
+  },
   },
   {
     versionKey: false, // Disable __v field

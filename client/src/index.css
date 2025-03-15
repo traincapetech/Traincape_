@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 body {
   /* border: 3px dashed black; */
 
@@ -12,4 +13,8 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.rapid7-logo {
+  filter: invert(100%) brightness(0);
 }

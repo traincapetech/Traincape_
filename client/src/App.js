@@ -25,6 +25,7 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import { setUserFromLocalStorage } from "./slices/userSlice"; // Import the action
 import WebsiteCounter from "./components/WebsiteCounter";
+import FooterPractise from "./components/FooterPractise";
 function App() {
   const dispatch = useDispatch();
   const location = useLocation(); // Get the current location
@@ -39,6 +40,7 @@ function App() {
       {location.pathname !== '/test' && <Navbar />}
       <AllRoute />
       {location.pathname !== '/test' && <Footer />}
+      {/* {location.pathname !== '/test' && <FooterPractise />} */}
       <WebsiteCounter />
     </div>
   );
