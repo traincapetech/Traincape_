@@ -180,7 +180,6 @@ userRouter.post("/register", async (req, res) => {
 userRouter.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
-    const user = await UserModel.findOne({ email });
     if (!user) {
       return res.status(400).send({ msg: "Wrong Credentials" });
     }
@@ -207,7 +206,6 @@ userRouter.post("/login", async (req, res) => {
   }
 });
 
-
 userRouter.post("/sendOTPToEmail", async (req, res) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -218,13 +216,17 @@ userRouter.post("/sendOTPToEmail", async (req, res) => {
   });
   const { email } = req.body;
   try {
+    const users = await UserModel.find();
+    console.log("the data present in the databasee is---->");
+    console.log(users);
     const user = await UserModel.findOne({ email });
+    console.log(email);
     if (!user) {
       return res
         .status(400)
         .send({ msg: "Email Id does not exist in the database" });
     }
-    console.log(email)
+    console.log(email);
     const otp = String(Math.floor(100000 + Math.random() * 900000));
     user.verifyOtp = otp;
     user.verifyOtpExpireAt = Date.now() + 24 * 60 * 60 * 1000;

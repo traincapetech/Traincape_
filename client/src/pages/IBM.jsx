@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+// import { useCart } from "../components/c"; // Import the useCart hook
 import banner from "../assets/ibmbanner.jpg";
 import banner2 from "../assets/ibmbanner2.jpg";
 import IBMCourses from "../components/IBMCourses";
@@ -27,6 +28,7 @@ const IBM = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  // const { addToCart } = useCart(); // Use the addToCart function from context
 
   const ibmcourses = [
     {
@@ -194,16 +196,6 @@ const IBM = () => {
               <br />
               including AI/ML, Analytics, Blockchain, Cloud, Cybersecurity, Data
               Science, and more.
-              <br />
-              <br />
-              The IBM Certification Courses have created revolutionary
-              transformation in higher education,
-              <br />
-              rapidly building industry-ready software competencies that
-              organizations need.
-              <br />
-              <br />
-              
             </h5>
           </div>
           <div className="hidden lg:block p-10  mt-5 ">
@@ -218,14 +210,21 @@ const IBM = () => {
       <div className="bg-teal-50 py-10 px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center mx-auto">
           {ibmcourses.map((course, index) => (
-            <IBMCourses
-              key={index}
-              title={course.title}
-              image={course.image}
-              price={course.price}
-              description={course.description}
-              url={course.url}
-            />
+            <div key={index} className="course-card">
+              <IBMCourses
+                title={course.title}
+                image={course.image}
+                price={course.price}
+                description={course.description}
+                url={course.url}
+              />
+              {/* <button
+                onClick={() => addToCart(course)} // Call addToCart with course data
+                className="bg-blue-500 text-white px-4 py-2 mt-2 rounded"
+              >
+                Add to Cart
+              </button> */}
+            </div>
           ))}
         </div>
       </div>
