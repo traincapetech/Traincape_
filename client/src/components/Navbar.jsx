@@ -882,7 +882,6 @@
 
 // export default Navbar;
 
-
 //Updated code by Sumit Jain
 import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -953,8 +952,11 @@ const Navbar = () => {
             <Link to="/" className={`${isActive("/")} text-xl`}>
               Home
             </Link>
-            <Link to="/about-us" className={`${isActive("/about-us")} text-xl`}>
-              About
+            <Link
+              to="/Courses-details"
+              className={`${isActive("/Courses-details")} text-xl`}
+            >
+              Courses
             </Link>
             <Link
               to="/our-services"
@@ -968,11 +970,11 @@ const Navbar = () => {
             >
               Reviews
             </Link>
-            <Link
-              to="/Courses-details"
-              className={`${isActive("/Courses-details")} text-xl`}
-            >
-              Courses
+            <Link to="/about-us" className={`${isActive("/about-us")} text-xl`}>
+              About
+            </Link>
+            <Link to="/training" className={`${isActive("/training")} text-xl`}>
+              Training
             </Link>
             <Link
               to="/contact-us"
@@ -980,12 +982,9 @@ const Navbar = () => {
             >
               Contact
             </Link>
-            <Link to="/training" className={`${isActive("/training")} text-xl`}>
-              Training
-            </Link>
-            <Link to="/PartnerPage" className={`${isActive("/PartnerPage")} text-xl`}>
+            {/* <Link to="/PartnerPage" className={`${isActive("/PartnerPage")} text-xl`}>
               Partners
-            </Link>
+            </Link> */}
           </div>
 
           {/* Pay Now Button and Login/Logout Buttons on the Right */}
@@ -1077,12 +1076,13 @@ const Navbar = () => {
             Home
           </Link>
           <Link
-            to="/about-us"
-            className={`${isActive("/about-us")} text-lg`}
+            to="/Courses-details"
+            className={`${isActive("/Courses-details")} text-lg`}
             onClick={() => setMenuOpen(false)}
           >
-            About
+            Courses
           </Link>
+
           <Link
             to="/our-services"
             className={`${isActive("/our-services")} text-lg`}
@@ -1098,18 +1098,11 @@ const Navbar = () => {
             Reviews
           </Link>
           <Link
-            to="/Courses-details"
-            className={`${isActive("/Courses-details")} text-lg`}
+            to="/about-us"
+            className={`${isActive("/about-us")} text-lg`}
             onClick={() => setMenuOpen(false)}
           >
-            Courses
-          </Link>
-          <Link
-            to="/contact-us"
-            className={`${isActive("/contact-us")} text-lg`}
-            onClick={() => setMenuOpen(false)}
-          >
-            Contact
+            About
           </Link>
 
           <Link
@@ -1119,9 +1112,16 @@ const Navbar = () => {
           >
             Training
           </Link>
-          <Link to="/PartnerPage" className={`${isActive("/PartnerPage")} text-xl`}>
+          <Link
+            to="/contact-us"
+            className={`${isActive("/contact-us")} text-lg`}
+            onClick={() => setMenuOpen(false)}
+          >
+            Contact
+          </Link>
+          {/* <Link to="/PartnerPage" className={`${isActive("/PartnerPage")} text-xl`}>
               Partners
-            </Link>
+            </Link> */}
 
           {/* Pay Now Button */}
           <div className="relative">
@@ -1183,9 +1183,13 @@ const Navbar = () => {
           <Link to="/" className={`${isActive("/")} text-xl`}>
             Home
           </Link>
-          <Link to="/about-us" className={`${isActive("/about-us")} text-xl`}>
-            About
+          <Link
+            to="/Courses-details"
+            className={`${isActive("/Courses-details")} text-xl`}
+          >
+            Courses
           </Link>
+
           <Link
             to="/our-services"
             className={`${isActive("/our-services")} text-xl`}
@@ -1198,11 +1202,12 @@ const Navbar = () => {
           >
             Reviews
           </Link>
-          <Link
-            to="/Courses-details"
-            className={`${isActive("/Courses-details")} text-xl`}
-          >
-            Courses
+          <Link to="/about-us" className={`${isActive("/about-us")} text-xl`}>
+            About
+          </Link>
+
+          <Link to="/training" className={`${isActive("/training")} text-xl`}>
+            Training
           </Link>
           <Link
             to="/contact-us"
@@ -1210,12 +1215,9 @@ const Navbar = () => {
           >
             Contact
           </Link>
-          <Link to="/training" className={`${isActive("/training")} text-xl`}>
-            Training
-          </Link>
-          <Link to="/PartnerPage" className={`${isActive("/PartnerPage")} text-xl`}>
+          {/* <Link to="/PartnerPage" className={`${isActive("/PartnerPage")} text-xl`}>
               Partners
-            </Link>
+            </Link> */}
         </div>
 
         {/* Pay Now Button and Login/Logout Buttons on the Right */}
