@@ -589,6 +589,9 @@
 //Updated By Sumit Jain //
 
 import React from "react";
+import CountUp from "react-countup";
+import { useInView } from "react-intersection-observer";
+
 import style from "../css/Home.module.css";
 import team from "../assets/team.jpeg";
 import card1 from "../assets/card1.jpeg";
@@ -685,7 +688,10 @@ const Home = () => {
     { logo: Logo5, url: "https://msasoftware.in/" },
     { logo: Logo6, url: "https://spectreme.ai/" },
   ];
-
+  const { ref, inView } = useInView({
+    triggerOnce: true, // Ensures it animates only once
+    threshold: 0.3, // Start animation when 30% of the div is in view
+  });
   return (
     <div>
       <div>
@@ -895,15 +901,30 @@ const Home = () => {
           <span className="text-7xl font-serif">W</span>hy Students Are Choosing
           Traincape Technology
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div
+          ref={ref}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10"
+        >
           {[
-            { count: "1,00,000+", label: "Sales" },
-            { count: "5,00+", label: "Certification Courses" },
-            { count: "8K+", label: "Users" },
-            { count: "30,000,000+", label: "Hours" },
+            { count: 100000, label: "Sales" },
+            { count: 500, label: "Certification Courses" },
+            { count: 8000, label: "Users" },
+            { count: 300000, label: "Hours" },
           ].map((item, index) => (
             <div key={index} className="text-center">
-              <span className="text-4xl font-semibold">{item.count}</span>
+              <span className="text-4xl font-semibold">
+                {inView ? (
+                  <CountUp
+                    start={0}
+                    end={item.count}
+                    duration={2} // Animation duration in seconds
+                    separator={","}
+                  />
+                ) : (
+                  "0"
+                )}
+                +
+              </span>
               <p className="text-base text-blue-500">{item.label}</p>
             </div>
           ))}
