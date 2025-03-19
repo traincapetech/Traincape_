@@ -1,30 +1,30 @@
 import React from "react";
-import { useCart } from "../components/CartContext";
+import { useCartContext } from "../components/CartContext";
+import CartItem from "../components/CartItem";
 
 const Cart = () => {
-  const { cart } = useCart(); // Get cart items from context
+  const { cart } = useCartContext();
+  console.log("🚀 ~ file: Cart.js ~ line 6 ~ Cart ~ cart", cart);
 
   return (
-    <div className="py-10 px-6 bg-gray-100">
-      <h2 className="text-2xl font-bold mb-4">Your Cart</h2>
-      <div>
-        {cart.length === 0 ? (
-          <p>Your cart is empty</p>
-        ) : (
-          <ul>
-            {cart.map((course, index) => (
-              <li key={index} className="border-b py-4">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg">{course.title}</h3>
-                  <p className="text-xl">{course.price}</p>
-                </div>
-                <p>{course.description}</p>
-              </li>
-            ))}
-          </ul>
-        )}
+    <section className="py-10 px-24 bg-gray-200 min-h-screen">
+      <div className=" mx-auto bg-blue-100 shadow-lg rounded-lg p-10">
+        <div className="pl-10 text-xl grid grid-cols-5 justify-center font-bold  pb-3">
+          <p>Item</p>
+          <p className="hidden md:block">Price</p>
+          <p>Quantity</p>
+          <p className="hidden md:block">Subtotal</p>
+          <p>Remove</p>
+        </div>
+        <hr className="my-4" />
+
+        <div className="flex flex-col gap-6">
+          {cart.map((curElem) => (
+            <CartItem key={curElem.id} {...curElem} />
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
