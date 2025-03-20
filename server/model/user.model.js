@@ -79,6 +79,14 @@ const userSchema = mongoose.Schema(
     linkedIn: { type: String }, // Added linkedIn field
     interest: { type: String, required: true }, // Added interest field
     testHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: "Result" }],
+    verifyOtp: {type: String,default: "",},
+    verifyOtpExpireAt: {type: Number,default: 0,}, 
+    resetOtp: {type: String,default: ''
+  },
+  resetOtpExpireAt: {
+      type: Number,
+      default: 0
+  },
   },
   {
     versionKey: false, // Disable __v field
