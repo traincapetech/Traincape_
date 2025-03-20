@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaRegEyeSlash, FaEye } from "react-icons/fa6";
+import { FaRegEyeSlash, FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // import axios from "axios";
@@ -210,7 +210,6 @@ const Login = () => {
     //   </div>
     //   {/* <SolarSystem /> */}
     // </div>
-
     <div
       className="w-full md:h-[85vh] h-[120vh] bg-cover bg-center relative"
       style={{ backgroundImage: `url(${banner})` }}

@@ -216,24 +216,19 @@ userRouter.post("/sendOTPToEmail", async (req, res) => {
   });
   const { email } = req.body;
   try {
-    const users = await UserModel.find();
-    console.log("the data present in the databasee is---->");
-    console.log(users);
     const user = await UserModel.findOne({ email });
-    console.log(email);
     if (!user) {
       return res
         .status(400)
         .send({ msg: "Email Id does not exist in the database" });
     }
-    console.log(email);
     const otp = String(Math.floor(100000 + Math.random() * 900000));
     user.verifyOtp = otp;
     user.verifyOtpExpireAt = Date.now() + 24 * 60 * 60 * 1000;
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: "ishaanj2612@gmail.com",
-      // to: email,
+      // to: "ishaanj2612@gmail.com",
+      to: email,
       subject: "Password Reset OTP",
       html: `
       <!-- Updated HTML template with image -->
@@ -259,7 +254,6 @@ userRouter.post("/sendOTPToEmail", async (req, res) => {
       res.json({ message: "OTP sent to email" });
     });
     await user.save();
-    console.log(user);
     res.json({ success: true, message: "OTP sent successfully" });
   } catch (error) {
     console.error(error);
@@ -297,7 +291,6 @@ userRouter.post("/reset_password", async (req, res) => {
     if (!user) {
       return res.status(400).send({ msg: "Wrong Credentials" });
     }
-    console.log("newPassword", newPassword);
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     user.password = hashedPassword;
     user.resetOtp = "";

@@ -1,116 +1,241 @@
-import React, { useEffect } from "react";
-import banner from "../assets/banner.jpeg";
-import Owner from "../assets/ParichaySir.jpeg";
-import image1 from "../assets/Traincape Technology Deck_page-0002.jpg";
-import image3 from "../assets/Traincape Technology Deck_page-0003.jpg";
-import image6 from "../assets/Traincape Technology Deck_page-0008.jpg";
+import React, { useState, useEffect } from "react";
+import image1 from "../assets/about-gallery/Traincape Technology Deck_page-0002.jpg";
+import image2 from "../assets/about-gallery/Traincape Technology Deck_page-0003.jpg";
+import image3 from "../assets/about-gallery/Traincape Technology Deck_page-0004.jpg";
+import image4 from "../assets/about-gallery/Traincape Technology Deck_page-0005.jpg";
+import image5 from "../assets/about-gallery/Traincape Technology Deck_page-0006.jpg";
+import image6 from "../assets/about-gallery/Traincape Technology Deck_page-0007.jpg";
+import image7 from "../assets/about-gallery/Traincape Technology Deck_page-0008.jpg";
+import image8 from "../assets/about-gallery/Traincape Technology Deck_page-0009.jpg";
+import image9 from "../assets/about-gallery/Traincape Technology Deck_page-0010.jpg";
+import image10 from "../assets/about-gallery/Traincape Technology Deck_page-0011.jpg";
+import image11 from "../assets/about-gallery/Traincape Technology Deck_page-0012.jpg";
+
 import vision from "../assets/vision.jpeg";
 import values from "../assets/values.jpeg";
 import mission from "../assets/mission.jpeg";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
+import Owner from "../assets/ParichaySir.jpeg";
+import bannerImage from "../assets/banner.jpeg";
+import { motion } from "framer-motion";
 
 const AboutPage = () => {
+  // State for the carousel
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Images for carousel
+  const carouselImages = [
+    image1,
+    image2,
+    image3,
+    image4,
+    image5,
+    image6,
+    image7,
+    image8,
+    image9,
+    image10,
+    image11,
+  ];
+
+  // Images for the row
+  const rowImages = [
+    {
+      image: vision,
+      title: "Vision",
+      description:
+        "At Traincape Technology, our vision is to be a global leader in IT training and solutions, empowering individuals and businesses to achieve excellence through innovation, expertise, and cutting-edge technology.",
+    },
+    {
+      image: mission,
+      title: "Mission",
+      description:
+        "  As an authorized partner of CompTIA and PECB, our mission is to deliver industry-leading training programs that empower professionals with globally recognized certifications.",
+    },
+    {
+      image: values,
+      title: "Values",
+      description:
+        "  We uphold innovation, integrity, customer-centricity, and a steadfast commitment to delivering quality in every service we provide.",
+    },
+  ];
+
+  // Auto-advance carousel
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) =>
+        prev === carouselImages.length - 1 ? 0 : prev + 1
+      );
+    }, 3000);
+
+    return () => clearInterval(interval);
   }, []);
 
+  // Carousel navigation
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) =>
+      prev === carouselImages.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) =>
+      prev === 0 ? carouselImages.length - 1 : prev - 1
+    );
+  };
+
   return (
-    <div className="w-full">
+    <div className="min-h-screen bg-gray-100">
       {/* Banner Section */}
-      <img
-        src={banner}
-        className="w-full h-[42vh] md:h-[110vh]"
-        alt="Traincape Banner"
-      />
+      <div
+        className="w-full h-[100vh] bg-cover bg-center bg-no-repeat relative"
+        style={{
+          backgroundImage: `url(${bannerImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        {/* Lighter overlay for better contrast */}
+        <div className="absolute inset-0 bg-black opacity-30"></div>
 
-      {/* Chairman Section */}
-      <div className="bg-[#33395C] text-white text-center py-8">
-        <h4 className="text-yellow-400 text-2xl font-semibold">Our Chairman</h4>
-        <h1 className="text-4xl font-bold">Mr. Parichay Singh Rana</h1>
-        <div className="flex flex-col md:flex-row items-center p-10 gap-6">
-          <img
-            src={Owner}
-            alt="Parichay Singh Rana"
-            className="w-[400px] h-[430px] rounded-2xl border-4 border-white hover:shadow-lg"
-          />
-          <div className="max-w-lg">
-            <h3 className="text-lg md:text-xl font-medium">
-              Founded in 2021 by{" "}
-              <span className="text-orange-500 font-bold">
-                Parichay Singh Rana
-              </span>
-              , Traincape Technology emerged with a vision to redefine how
-              businesses harness technology. Our mission is to provide bespoke,
-              reliable, and forward-thinking tech solutions, empowering
-              businesses to unlock their true potential.
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-transparent"></div>
+
+        {/* Animated Text */}
+        <motion.div
+          initial={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 0, y: 50 }}
+          exit={{ opacity: 0, y: -50 }}
+          transition={{ duration: 1, ease: "easeInOut", delay: 5 }}
+          className="z-10 flex flex-col items-center justify-center h-full px-4 text-center"
+        >
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-lg">
+            About Us
+          </h1>
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white mt-4 max-w-2xl drop-shadow-lg">
+            Learn more about our story
+          </p>
+        </motion.div>
+      </div>
+
+      {/* Owner Section */}
+      <div className="max-w-6xl mx-auto p-6 my-12">
+        <div className="flex flex-row items-center gap-6 md:gap-12">
+          <div className="md:w-[20%] sm:w-[30%] w-[40%]">
+            <img
+              src={Owner}
+              alt="Owner"
+              className="rounded-lg shadow-lg w-full"
+            />
+          </div>
+          <div className="w-full md:w-2/3 text-left">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-2 sm:mb-4">
+              Mr. Parichay Singh Rana
+            </h2>
+            <h3 className="text-lg sm:text-xl text-blue-600 mb-2 sm:mb-4">
+              Our Chairman
             </h3>
+            <p className="text-xs sm:text-base text-gray-600 mb-2 sm:mb-4">
+              Founded in 2021 by{" "}
+              <span className="text-blue-500">Parichay Singh Rana</span>,
+              Traincape Technology emerged with a vision to redefine how
+              businesses harness the power of technology. Built on a foundation
+              of expertise and innovation, our mission is to provide bespoke,
+              reliable, and forward-thinking tech solutions.
+            </p>
+            <p className="text-xs sm:text-base text-gray-600">
+              We believe in empowering businesses to unlock their true potential
+              by delivering tools and strategies that drive success. At
+              Traincape, we don't just adapt to technological advancements; we
+              anticipate them, ensuring our clients stay ahead in an
+              ever-evolving digital landscape.
+            </p>
           </div>
         </div>
       </div>
 
       {/* Carousel Section */}
-      {/* Carousel Section */}
-      <div className="text-center py-10 flex justify-center">
-        <div className="relative w-4/5 max-w-2xl overflow-hidden rounded-lg">
-          <div className="flex transition-transform duration-500 ease-in-out">
-            <img
-              src={image1}
-              className="w-full flex-shrink-0"
-              alt="Technology Insights"
-            />
-            <img
-              src={image6}
-              className="w-full flex-shrink-0"
-              alt="Innovative Solutions"
-            />
-            <img
-              src={image3}
-              className="w-full flex-shrink-0"
-              alt="Cutting-edge Training"
-            />
+      <div className="max-w-6xl mx-auto p-6">
+        <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+          Our Gallery
+        </h2>
+        <div className="relative h-64 sm:h-80 md:h-96 mb-10">
+          <div className="overflow-hidden rounded-lg shadow-lg h-full relative">
+            {carouselImages.map((img, index) => (
+              <div
+                key={index}
+                className={`transition-opacity duration-500 absolute w-full h-full ${
+                  index === currentSlide
+                    ? "opacity-100"
+                    : "opacity-0 pointer-events-none"
+                }`}
+              >
+                <img
+                  src={img}
+                  alt={`Slide ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
           </div>
-          <div className="absolute top-1/2 w-full flex justify-between transform -translate-y-1/2">
-            <button className="bg-black bg-opacity-50 text-white px-4 py-2 rounded-md hover:bg-opacity-80">
-              ❮
-            </button>
-            <button className="bg-black bg-opacity-50 text-white px-4 py-2 rounded-md hover:bg-opacity-80">
-              ❯
-            </button>
+          {/* Carousel Controls */}
+          <button
+            onClick={prevSlide}
+            className="absolute top-1/2 left-2 sm:left-4 -translate-y-1/2 bg-white p-2 rounded-full shadow-md text-gray-800 hover:bg-gray-100"
+          >
+            ←
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute top-1/2 right-2 sm:right-4 -translate-y-1/2 bg-white p-2 rounded-full shadow-md text-gray-800 hover:bg-gray-100"
+          >
+            →
+          </button>
+          {/* Dots */}
+          <div className="flex justify-center mt-4">
+            {carouselImages.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`w-3 h-3 mx-1 rounded-full ${
+                  index === currentSlide ? "bg-blue-600" : "bg-gray-300"
+                }`}
+              />
+            ))}
           </div>
         </div>
       </div>
-      {/* Vision & Mission Section */}
-      <div className="text-center py-10 bg-gray-100">
-        <h1 className="text-3xl font-bold mb-6">Our Vision & Mission</h1>
-        <div className="flex flex-col md:flex-row justify-center gap-8 px-10">
-          <div className="flex flex-col items-center max-w-sm">
-            <img src={vision} alt="Vision" className="w-40 h-40" />
-            <h3 className="text-2xl font-semibold mt-4">Vision</h3>
-            <p className="text-gray-700 text-center">
-              At Traincape Technology, our vision is to be a global leader in IT
-              training and solutions, empowering individuals and businesses
-              through innovation and expertise.
-            </p>
-          </div>
-          <div className="flex flex-col items-center max-w-sm">
-            <img src={mission} alt="Mission" className="w-40 h-40" />
-            <h3 className="text-2xl font-semibold mt-4">Mission</h3>
-            <p className="text-gray-700 text-center">
-              As an authorized partner of CompTIA and PECB, our mission is to
-              deliver industry-leading training programs that empower
-              professionals with globally recognized certifications.
-            </p>
-          </div>
-          <div className="flex flex-col items-center max-w-sm">
-            <img src={values} alt="Values" className="w-40 h-40" />
-            <h3 className="text-2xl font-semibold mt-4">Values</h3>
-            <p className="text-gray-700 text-center">
-              We uphold innovation, integrity, customer-centricity, and a
-              steadfast commitment to delivering quality in every service we
-              provide.
-            </p>
-          </div>
+
+      {/* Three Images Row */}
+      <div className="max-w-6xl mx-auto p-6">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 text-center">
+          Our Vision & Mission
+        </h2>
+        <div className="grid grid-cols-3 gap-2 sm:gap-6">
+          {rowImages.map((img, index) => (
+            <div
+              key={index}
+              className="w-full overflow-hidden rounded-lg shadow-lg bg-white"
+            >
+              <img
+                src={img.image}
+                alt={img.title}
+                className="w-full h-auto max-h-64 object-cover hover:scale-105 transition-transform duration-300"
+              />
+              <div className="p-4 text-center">
+                <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-800">
+                  {img.title}
+                </h3>
+                <p className="text-xs sm:text-base text-gray-600">
+                  {img.description}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

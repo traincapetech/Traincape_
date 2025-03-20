@@ -2,16 +2,16 @@ import React from "react";
 import { Fade } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import T1 from "../../assets/Traincape-info.jpg";
-import T2 from "../../assets/Traincape Technology Deck_page-0002.jpg";
-import T3 from "../../assets/Traincape Technology Deck_page-0003.jpg";
-import T4 from "../../assets/Traincape Technology Deck_page-0004.jpg";
-import T5 from "../../assets/Traincape Technology Deck_page-0005.jpg";
-import T6 from "../../assets/Traincape Technology Deck_page-0007.jpg";
-import T7 from "../../assets/Traincape Technology Deck_page-0008.jpg";
-import T8 from "../../assets/Traincape Technology Deck_page-0009.jpg";
-import T9 from "../../assets/Traincape Technology Deck_page-0010.jpg";
-import T10 from "../../assets/Traincape Technology Deck_page-0011.jpg";
-import T11 from "../../assets/Traincape Technology Deck_page-0012.jpg";
+import T2 from "../../assets/about-gallery/Traincape Technology Deck_page-0002.jpg";
+import T3 from "../../assets/about-gallery/Traincape Technology Deck_page-0003.jpg";
+import T4 from "../../assets/about-gallery/Traincape Technology Deck_page-0004.jpg";
+import T5 from "../../assets/about-gallery/Traincape Technology Deck_page-0005.jpg";
+import T6 from "../../assets/about-gallery/Traincape Technology Deck_page-0007.jpg";
+import T7 from "../../assets/about-gallery/Traincape Technology Deck_page-0008.jpg";
+import T8 from "../../assets/about-gallery/Traincape Technology Deck_page-0009.jpg";
+import T9 from "../../assets/about-gallery/Traincape Technology Deck_page-0010.jpg";
+import T10 from "../../assets/about-gallery/Traincape Technology Deck_page-0011.jpg";
+import T11 from "../../assets/about-gallery/Traincape Technology Deck_page-0012.jpg";
 
 const imageStyle = {
   maxWidth: "100%",

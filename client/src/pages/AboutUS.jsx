@@ -1,6 +1,5 @@
 //About.jsx
 
-
 // import React, { useEffect } from "react";
 // // import aboutus from "../css/AboutUS.module.css";
 // import aboutus from "../css/AboutUS.module.css";
@@ -185,19 +184,19 @@
 
 // export default AboutUS;
 
-import React, { useEffect } from 'react'
-import banner from '../assets/banner.jpeg';
-import style from '../css/AboutUS.module.css';
-import Owner from '../assets/ParichaySir.jpeg'
-import image1 from '../assets/Traincape Technology Deck_page-0002.jpg';
+import React, { useEffect } from "react";
+import banner from "../assets/banner.jpeg";
+import style from "../css/AboutUS.module.css";
+import Owner from "../assets/ParichaySir.jpeg";
+import image1 from "../assets/about-gallery/Traincape Technology Deck_page-0002.jpg";
 // import image2 from '../assets/Traincape Technology Deck_page-0012.jpg';
-import image3 from '../assets/Traincape Technology Deck_page-0003.jpg';
+import image3 from "../assets/about-gallery/Traincape Technology Deck_page-0003.jpg";
 // import image4 from '../assets/Traincape Technology Deck_page-0004.jpg';
 // import image5 from '../assets/Traincape Technology Deck_page-0005.jpg';
-import image6 from '../assets/Traincape Technology Deck_page-0008.jpg';
-import vision from '../assets/vision.jpeg';
-import values from '../assets/values.jpeg';
-import mission from '../assets/mission.jpeg';
+import image6 from "../assets/about-gallery/Traincape Technology Deck_page-0008.jpg";
+import vision from "../assets/vision.jpeg";
+import values from "../assets/values.jpeg";
+import mission from "../assets/mission.jpeg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 // import Slider from "react-slick";
@@ -205,11 +204,15 @@ import "slick-carousel/slick/slick-theme.css";
 const AboutUS = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-}, []);
+  }, []);
   return (
     <div>
-
-      <img src={banner} useMap="#image-map" className={style.bannerimg} alt='banner' />
+      <img
+        src={banner}
+        useMap="#image-map"
+        className={style.bannerimg}
+        alt="banner"
+      />
 
       {/* <map name="image-map">
         <area target="_self" alt="Training" title="" href="/CompTIA-single-page" coords="790,90,628,124" shape="rect" />
@@ -239,41 +242,74 @@ const AboutUS = () => {
         <h4>Our Chairman</h4>
         <h1> Mr. Parichay Singh Rana</h1>
 
-
         <div className={style.owner}>
-
           <div className={style.ownerdiv}>
-            <img src={Owner} alt="owner of traincape" className={style.ownerimg} />
+            <img
+              src={Owner}
+              alt="owner of traincape"
+              className={style.ownerimg}
+            />
           </div>
           <div className={style.ownerinfo}>
-            <h3>Founded in 2021 by <span>Parichay Singh Rana</span> , Traincape Technology emerged with a vision to redefine how businesses harness the power of technology. Built on a foundation of expertise and innovation, our mission is to provide bespoke, reliable, and forward-thinking tech solutions. We believe in empowering businesses to unlock their true potential by delivering tools and strategies that drive success. At Traincape, we don’t just adapt to technological advancements; we anticipate them, ensuring our clients stay ahead in an ever-evolving digital landscape</h3>
+            <h3>
+              Founded in 2021 by <span>Parichay Singh Rana</span> , Traincape
+              Technology emerged with a vision to redefine how businesses
+              harness the power of technology. Built on a foundation of
+              expertise and innovation, our mission is to provide bespoke,
+              reliable, and forward-thinking tech solutions. We believe in
+              empowering businesses to unlock their true potential by delivering
+              tools and strategies that drive success. At Traincape, we don’t
+              just adapt to technological advancements; we anticipate them,
+              ensuring our clients stay ahead in an ever-evolving digital
+              landscape
+            </h3>
           </div>
         </div>
       </div>
 
       <div className={style.carouselcontainer}>
         <h1>Why We Are Best</h1>
-          <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
-        <div className="carousel-inner">
-          <div className="carousel-item active" data-bs-interval="10000">
-            <img src={image1} className="d-block w-100" alt="..."/>
+        <div
+          id="carouselExampleInterval"
+          className="carousel slide"
+          data-bs-ride="carousel"
+        >
+          <div className="carousel-inner">
+            <div className="carousel-item active" data-bs-interval="10000">
+              <img src={image1} className="d-block w-100" alt="..." />
+            </div>
+            <div className="carousel-item" data-bs-interval="2000">
+              <img src={image6} className="d-block w-100" alt="..." />
+            </div>
+            <div className="carousel-item">
+              <img src={image3} className="d-block w-100" alt="..." />
+            </div>
           </div>
-          <div className="carousel-item" data-bs-interval="2000">
-            <img src={image6} className="d-block w-100" alt="..."/>
-          </div>
-          <div className="carousel-item">
-            <img src={image3} className="d-block w-100" alt="..."/>
-          </div>
+          <button
+            className="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleInterval"
+            data-bs-slide="prev"
+          >
+            <span
+              className="carousel-control-prev-icon"
+              aria-hidden="true"
+            ></span>
+            <span className="visually-hidden">Previous</span>
+          </button>
+          <button
+            className="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleInterval"
+            data-bs-slide="next"
+          >
+            <span
+              className="carousel-control-next-icon"
+              aria-hidden="true"
+            ></span>
+            <span className="visually-hidden">Next</span>
+          </button>
         </div>
-        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Previous</span>
-        </button>
-        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Next</span>
-        </button>
-      </div>
       </div>
       <div className={style.visionmission}>
         <h1>Our Vision & Mission</h1>
@@ -281,21 +317,34 @@ const AboutUS = () => {
           <div className={style.vision}>
             <img src={vision} alt="" />
             <h3>Vision</h3>
-            <p>At Traincape Technology, our vision is to be a global leader in IT training and solutions, empowering individuals and businesses to achieve excellence through innovation, expertise, and cutting-edge technology. </p>
+            <p>
+              At Traincape Technology, our vision is to be a global leader in IT
+              training and solutions, empowering individuals and businesses to
+              achieve excellence through innovation, expertise, and cutting-edge
+              technology.{" "}
+            </p>
           </div>
           <div className={style.mission}>
             <img src={mission} alt="" />
             <h3>Mission</h3>
-            <p>As an authorized partner of CompTIA and PECB, our mission is to deliver industry-leading training programs that empower professionals with globally recognized certifications. </p>
+            <p>
+              As an authorized partner of CompTIA and PECB, our mission is to
+              deliver industry-leading training programs that empower
+              professionals with globally recognized certifications.{" "}
+            </p>
           </div>
           <div className={style.values}>
             <img src={values} alt="" />
             <h3>Values</h3>
-            <p>We uphold innovation, integrity, customer-centricity, and a steadfast commitment to delivering quality in every service we provide.</p>
+            <p>
+              We uphold innovation, integrity, customer-centricity, and a
+              steadfast commitment to delivering quality in every service we
+              provide.
+            </p>
           </div>
         </div>
       </div>
-    </div >
-  )
-}
-export default AboutUS
+    </div>
+  );
+};
+export default AboutUS;
