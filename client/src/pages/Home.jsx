@@ -590,7 +590,7 @@
 
 import React from "react";
 import style from "../css/Home.module.css";
-import team from "../assets/Traincape_logo-removebg-preview.png";
+import team from "../assets/team.jpeg";
 import card1 from "../assets/card1.jpeg";
 import card2 from "../assets/card2.jpeg";
 import card3 from "../assets/card3.jpeg";

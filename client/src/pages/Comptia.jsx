@@ -15,6 +15,7 @@ import Project from '../assets/comptia/Project.jpeg';
 import Security from '../assets/comptia/Security.jpeg';
 import Server from '../assets/comptia/Server.jpeg';
 import { useEffect } from 'react';
+import AddToCartButton from '../components/AddToCartButton';
 const Comptia = () => {
 
     
@@ -120,6 +121,8 @@ const Comptia = () => {
   }, []);
     return (
         <>
+                          <AddToCartButton />
+        
             <div className="course-detail text-center bg-blue-100 py-10">
         <div className="info flex flex-col md:flex-row gap-6 items-center px-5">
           <Lottie animationData={comptia} className="w-full md:w-1/2" />

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useCartContext } from "../CartContext"; // Adjust the import path as necessary
 import ibmlogo from "../../assets/ibmnewlogo.webp";
 import htmllogo from "../../assets/html.png";
+import AddToCartButton from "../AddToCartButton";
 
 const Webdevelopementhtml = () => {
   const [selectedQuestion, setSelectedQuestion] = useState(null);
@@ -31,6 +32,7 @@ const Webdevelopementhtml = () => {
 
   return (
     <>
+    <AddToCartButton />
       <div className="relative bg-gradient-to-b from-blue-100 to-white w-full h-auto md:h-[20rem] pt-10 px-4 md:px-10 text-left">
         <img
           src={ibmlogo}

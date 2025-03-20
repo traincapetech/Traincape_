@@ -202,8 +202,8 @@ const Footer = () => {
             <div className={footersection.addressText}>
               <h1>OFFICE ADDRESS</h1>
               <p>
-                {/* Khandolia Plaza, 118\C, Dabri - Palam Rd, Vaishali, Vaishali Colony, Dashrath Puri, New Delhi, Delhi, 110045 */}
-                First Floor, Back Side of Nathu Ram Housing Complex, Dabri, South West Delhi, Delhi, 110045
+                Khandolia Plaza, 118\C, Dabri - Palam Rd, Vaishali, Vaishali Colony, Dashrath Puri, New Delhi, Delhi, 110045
+                {/* First Floor, Back Side of Nathu Ram Housing Complex, Dabri, South West Delhi, Delhi, 110045 */}
               </p>
             </div>
           </div>
@@ -326,7 +326,7 @@ const Footer = () => {
             {<Link to="/Internship" className={footersection.linksfooter}>Internship</Link>}
             {<Link to="/PartnerPage" className={footersection.linksfooter}>Partners</Link>}
           </div>
-          {/* <div className={footersection.footerdiv}>
+          <div className={footersection.footerdiv}>
             <h1>Office Map</h1>
             <div className={footersection.gMap}>
 
@@ -340,7 +340,7 @@ const Footer = () => {
               ></iframe>
 
             </div>
-          </div> */}
+          </div>
         </div>
       </div >
 
