@@ -78,7 +78,7 @@ const ForgotPassword = () => {
         setShowTtp(true);
         setLoading(false);
         setSuccessMessage("OTP sent successfully");
-        setShowEmail(false)
+        setShowEmail(false);
       } else {
         setError(result.payload.msg);
         setLoading(false);
@@ -190,7 +190,7 @@ const ForgotPassword = () => {
                 <h1 className="text-3xl font-semibold text-center text-[#152B54] mb-6">
                   Forgot Password
                 </h1>
-                <form>
+                <form onSubmit={(e) => e.preventDefault()}>
                   {showEmail && (
                     <div>
                       <div className="mb-4">
