@@ -23,6 +23,7 @@ import nodejs from "../assets/nodelogo.png";
 import mangodb from "../assets/mongodblogo.png";
 import Machine from "../assets/machinelogo.png";
 import js from "../assets/jslogo.png";
+import AddToCartButton from "../components/AddToCartButton";
 
 const IBM = () => {
   useEffect(() => {
@@ -198,6 +199,8 @@ const IBM = () => {
 
   return (
     <>
+              <AddToCartButton />
+
       <div
         className="bg-gray-100 w-full relative contrast-75 h-[55vh] content-center text-justify"
         style={{

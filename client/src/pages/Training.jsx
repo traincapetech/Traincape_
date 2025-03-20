@@ -10,6 +10,7 @@ import AWS from "../assets/AWS.png";
 // import Herobg from '../assets/herobg.jpg';
 import Cisco from "../assets/Cisco/CiscoIcon.png";
 import BGimg from "../assets/traningBg-4.jpg";
+import AddToCartButton from "../components/AddToCartButton";
 
 const Training = () => {
   const courseData = [
@@ -54,6 +55,8 @@ const Training = () => {
 
   return (
     <>
+                      <AddToCartButton />
+
      <div
   className="relative bg-blue-400 md:pt-10 items-center gap-5 md:p-5 p-6 opacity-80 h-[55vh] md:h-[40vh] lg:h-[50vh]"
   style={{

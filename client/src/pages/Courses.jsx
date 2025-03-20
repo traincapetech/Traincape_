@@ -28,6 +28,7 @@ import Logo12 from "../assets/adobenewlogo2.png";
 import Logo13 from "../assets/autodesklogo.png";
 import Logo14 from "../assets/microsoftlogo-courses.png";
 import { FaStar } from "react-icons/fa";
+import AddToCartButton from "../components/AddToCartButton";
 
 const Courses = () => {
   const navigate = useNavigate();
@@ -85,6 +86,9 @@ const Courses = () => {
   };
 
   return (
+    <>
+                      <AddToCartButton />
+
     <div className="bg-gray-50">
       {/* Banner Section */}
       <div className="relative md:h-[11rem] lg:h-[20rem] mb-12">
@@ -176,6 +180,7 @@ const Courses = () => {
         />
       </div>
     </div>
+    </>
   );
 };
 

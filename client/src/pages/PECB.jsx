@@ -13,6 +13,7 @@ import ComptiaCourse from '../components/ComptiaCourse';
 // import sysops from '../assets/AWS/sysops.png';
 import PECB_Overview from '../assets/PECB1.png';
 import { useEffect } from 'react';
+import AddToCartButton from '../components/AddToCartButton';
 const PECB = () => {
 
     const courseData = [
@@ -103,6 +104,8 @@ const PECB = () => {
 
     return (
         <>
+                          <AddToCartButton />
+        
             {/* Hero Section */}
             <div className="course-detail text-center bg-blue-100 py-10">
                 <div className="info flex flex-col md:flex-row gap-6 items-center px-5">
