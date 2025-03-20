@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import store from "./store/store";
 import { Provider } from "react-redux";
 import { CartProvider } from "./components/CartContext";
+import {ToastContainer} from 'react-toastify'
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -16,6 +17,7 @@ root.render(
       <App />
       {/* </CartProvider> */}
     </BrowserRouter>
+    <ToastContainer />
   </Provider>
 );
 

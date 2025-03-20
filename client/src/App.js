@@ -26,6 +26,7 @@ import Navbar from "./components/Navbar";
 import { setUserFromLocalStorage } from "./slices/userSlice"; // Import the action
 import WebsiteCounter from "./components/WebsiteCounter";
 import FooterPractise from "./components/FooterPractise";
+
 function App() {
   const dispatch = useDispatch();
   const location = useLocation(); // Get the current location

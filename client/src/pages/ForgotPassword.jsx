@@ -9,7 +9,7 @@ import { reset_password, sendOTPToEmail, verifyOtp } from "../slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "./loadingPage/Loading";
 import axios from "axios";
-
+import { toast } from "react-toastify";
 const ForgotPassword = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -146,7 +146,7 @@ const ForgotPassword = () => {
         setError(false);
         navigate("/login");
         setLoading(false);
-        alert("Password changed Successfully");
+        toast("Password changed Successfully");
       } else {
         setError(result.payload.msg);
         setLoading(false);
