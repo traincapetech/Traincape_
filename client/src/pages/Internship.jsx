@@ -9,8 +9,6 @@ import support from "../assets/support.jpg";
 import progress from "../assets/progress.jpg";
 import career from "../pages/Career/Career.module.css";
 import emailjs from "@emailjs/browser";
-import careerImg from "../assets/CareerPageIMG.svg";
-
 import love from "../assets/Love (1).jpg";
 import Akshay from "../assets/Akshay (1).jpg";
 import Ritik from "../assets/Ritik (1).jpg";
@@ -19,6 +17,7 @@ import one from '../assets/1.png';
 import two from '../assets/2.png';
 import three from '../assets/3.png';
 import four from '../assets/4.png';
+
 export default function Internship() {
   const [payoload, setPayoload] = useState({
     name: "",
@@ -28,6 +27,12 @@ export default function Internship() {
     phoneNumber: "",
     resumeLink: "",
   });
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const images = [
+    vanshika, Tripti, love, Akansha, Akshay, Ritik, one, two, three, four
+  ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -71,31 +76,33 @@ export default function Internship() {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % images.length);
+    }, 3000); // Change slide every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [images.length]);
+
   return (
     <>
-      <div>
+      
         <div className="internship-banner"></div>
         <div className="banner-text">
           <h1>Kickstart Your Career with Our Internship Program!</h1>
           <h3>Gain hands-on experience, learn from industry experts, and work on real projects that make an impact. Join us and take the first step toward a successful career!</h3>
-            <h5>Unlock opportunities, develop new skills, grow your professional network.</h5> 
+          <h5>Unlock opportunities, develop new skills, grow your professional network.</h5> 
         </div>
-      </div>
+      
 
       <div className="intern">
         <div className="carousel-container">
-          <div className="carousel-slides">
-            <div className="carousel-slide"><img src={vanshika} alt="Slide 1"/></div>
-            <div className="carousel-slide"><img src={Tripti} alt="Slide 2"/></div>
-            <div className="carousel-slide"><img src={love} alt="Slide 3"/></div>
-            <div className="carousel-slide"><img src={Akansha} alt="Slide 4"/></div>
-            <div className="carousel-slide"><img src={Akshay} alt="Slide 5"/></div>
-            <div className="carousel-slide"><img src={Ritik} alt="Slide 6"/></div>
-            <div className="carousel-slide"><img src={one} alt="Slide 7"/></div>
-            <div className="carousel-slide"><img src={two} alt="Slide 8"/></div>
-            <div className="carousel-slide"><img src={three} alt="Slide 9"/></div>
-            <div className="carousel-slide"><img src={four} alt="Slide 10"/></div>
-            
+          <div className="carousel-slides" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
+            {images.map((img, index) => (
+              <div key={index} className="carousel-slide">
+                <img src={img} alt={`Slide ${index + 1}`} />
+              </div>
+            ))}
           </div>
         </div>
         <div className="our-intern"> 
@@ -212,4 +219,3 @@ export default function Internship() {
     </>
   );
 }
-

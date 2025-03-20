@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+// import { useCart } from "../components/c"; // Import the useCart hook
 import banner from "../assets/ibmbanner.jpg";
 import banner2 from "../assets/ibmbanner2.jpg";
 import IBMCourses from "../components/IBMCourses";
@@ -30,145 +31,167 @@ const IBM = () => {
 
   const ibmcourses = [
     {
+      id: 1,
       image: html,
       title: "CERTIFICATION COURSE",
-      description: "IBM Web Development using HTML Certification Course",
-      price: "₹3000",
+      description: "IBM Web Development using HTML",
+      price: "3000",
       url: "/htmlcourse",
     },
+
     {
+      id: 2,
       image: c,
       title: "CERTIFICATION COURSE",
-      description: "IBM Software Foundation Course C Certification Course",
-      price: "₹3000",
+      description: "IBM Software Foundation Course C",
+      price: "3000",
       url: "/C-course",
     },
+
     {
+      id: 3,
       image: foundationc,
       title: "CERTIFICATION COURSE",
       description: "IBM Software Foundation Course C++ Certification Course",
-      price: "₹3000",
+      price: "3000",
       url: "/IBMSoftwareFoundation",
     },
     {
+      id: 3,
       image: rdbms,
       title: "CERTIFICATION COURSE",
       description: "IBM RDBMS - Database Fundamentals Certification Course",
-      price: "₹3000",
+      price: "3000",
       url: "/IBMRDBMS",
     },
     {
+      id: 4,
       image: sql,
       title: "CERTIFICATION COURSE",
       description: "IBM SQL and Relational Database 101 Certification Course",
-      price: "₹3000",
+      price: "3000",
       url: "/IBMSQL",
     },
     {
+      id: 5,
       image: tensorlow,
       title: "CERTIFICATION COURSE",
       description: "IBM Deep Learning with TensorFlow Certification Course",
-      price: "₹3000",
+      price: "3000",
       url: "/IBMDeepLearning",
     },
     {
+      id: 6,
       image: datasci,
       title: "CERTIFICATION COURSE",
       description: "IBM Data Science Methodology Certification Course",
-      price: "₹3000",
+      price: "3000",
       url: "/IBMMethodology",
     },
     {
+      id: 7,
       image: pydatasci,
       title: "CERTIFICATION COURSE",
       description: "IBM Python for Data Science Certification Course",
-      price: "₹3000",
+      price: "3000",
       url: "/IBMPython",
     },
     {
+      id: 8,
       image: Api,
       title: "CERTIFICATION COURSE",
       description: "IBM Rest API Certification Course",
-      price: "₹3000",
+      price: "3000",
       url: "/IBMRestAPI",
     },
     {
+      id: 9,
       image: scala101,
       title: "CERTIFICATION COURSE",
       description: "IBM Scala 101 Certification Course",
-      price: "₹3000",
+      price: "3000",
       url: "/IBMScala",
     },
     {
+      id: 10,
       image: aglie,
       title: "CERTIFICATION COURSE",
       description: "IBM Agile Methodologies Certification Course",
-      price: "₹3000",
+      price: "3000",
       url: "/IBMAgileMethodologies",
     },
     {
+      id: 11,
       image: devops,
       title: "CERTIFICATION COURSE",
       description: "IBM DevOps Fundamentals Certification Course",
-      price: "₹3000",
+      price: "3000",
       url: "/IBMDevopsFundamentals",
     },
     {
+      id: 12,
       image: pydataanalis,
       title: "CERTIFICATION COURSE",
       description: "IBM Data Analysis with Python Certification Course",
-      price: "₹3000",
+      price: "3000",
       url: "/IBMDataAnalysis",
     },
     {
+      id: 13,
       image: cloudfunda,
       title: "CERTIFICATION COURSE",
       description: "IBM Cloud Fundamental Certification Course",
-      price: "₹3000",
+      price: "3000",
       url: "/IBMCloudFundamental",
     },
     {
+      id: 14,
       image: container,
       title: "CERTIFICATION COURSE",
       description:
         "IBM Introduction to Containers, Kubernetes and OpenShift V2 Certification Course",
-      price: "₹3000",
+      price: "3000",
       url: "/IBMKubernetes",
     },
     {
+      id: 15,
       image: bigdata,
       title: "CERTIFICATION COURSE",
       description:
         "IBM Introduction to Big Data, Hadoop and the Ecosystems Certification Course",
-      price: "₹3000",
+      price: "3000",
       url: "/IBMBigData",
     },
     {
+      id: 16,
       image: nodejs,
       title: "CERTIFICATION COURSE",
       description: "IBM Node JS Certification Course",
-      price: "₹3000",
+      price: "3000",
       url: "/IBMNodeJs",
     },
     {
+      id: 17,
       image: mangodb,
       title: "CERTIFICATION COURSE",
       description: "IBM NoSQL – MongoDB Certification Course",
-      price: "₹3000",
+      price: "3000",
       url: "/IBMNoSQL",
     },
     {
+      id: 18,
       image: Machine,
       title: "CERTIFICATION COURSE",
       description: "IBM Machine Learning with Python Certification Course",
-      price: "₹3000",
+      price: "3000",
       url: "/IBMMachineLearning",
     },
     {
+      id: 19,
       image: js,
       title: "CERTIFICATION COURSE",
       description: "IBM JavaScript Certification Course",
-      price: "₹3000",
+      price: "3000",
       url: "/IBMJavaScript",
     },
   ];
@@ -194,16 +217,6 @@ const IBM = () => {
               <br />
               including AI/ML, Analytics, Blockchain, Cloud, Cybersecurity, Data
               Science, and more.
-              <br />
-              <br />
-              The IBM Certification Courses have created revolutionary
-              transformation in higher education,
-              <br />
-              rapidly building industry-ready software competencies that
-              organizations need.
-              <br />
-              <br />
-              
             </h5>
           </div>
           <div className="hidden lg:block p-10  mt-5 ">
@@ -217,15 +230,8 @@ const IBM = () => {
       </div>
       <div className="bg-teal-50 py-10 px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center mx-auto">
-          {ibmcourses.map((course, index) => (
-            <IBMCourses
-              key={index}
-              title={course.title}
-              image={course.image}
-              price={course.price}
-              description={course.description}
-              url={course.url}
-            />
+          {ibmcourses.map((course) => (
+            <IBMCourses key={course.id} {...course} />
           ))}
         </div>
       </div>

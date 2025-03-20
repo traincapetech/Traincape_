@@ -77,12 +77,18 @@ const Courses = () => {
       },
     ],
   };
+  // Function to handle Add to Cart and navigate to the cart page
+  const handleAddToCart = (course) => {
+    // Store the selected course in localStorage or global state
+    localStorage.setItem("selectedCourse", JSON.stringify(course));
+    navigate("/cart");
+  };
 
   return (
     <div className="bg-gray-50">
       {/* Banner Section */}
-      <div className="relative h-[22rem] mb-12">
-        <div className="w-full h-[24rem] overflow-hidden">
+      <div className="relative md:h-[11rem] lg:h-[20rem] mb-12">
+        <div className="w-full md:h-[11rem] lg:h-[25rem] overflow-hidden">
           <AutoPlay />
         </div>
       </div>
@@ -105,7 +111,7 @@ const Courses = () => {
 
       {/* Course Details Section */}
       <div className="flex flex-wrap justify-center gap-8 px-4">
-        <CourseDetails />
+        <CourseDetails onAddToCart={handleAddToCart} />
       </div>
 
       {/* Learner Outcomes Section */}

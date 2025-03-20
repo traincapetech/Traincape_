@@ -1,16 +1,33 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCartContext } from "../CartContext"; // Adjust the import path as necessary
 import ibmlogo from "../../assets/ibmnewlogo.webp";
 import htmllogo from "../../assets/html.png";
 
 const Webdevelopementhtml = () => {
   const [selectedQuestion, setSelectedQuestion] = useState(null);
+  const { addToCart } = useCartContext();
+  const navigate = useNavigate();
 
   const toggleAnswer = (index) => {
     setSelectedQuestion((prev) => (prev === index ? null : index));
   };
+
   useEffect(() => {
-      window.scrollTo(0, 0);
-    }, []);
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleAddToCart = () => {
+    const product = {
+      id: "1", // You can use a unique ID for this course
+      title: "IBM Web Development using HTML Certification Course",
+      price: 3000,
+      image: htmllogo,
+      quantity: 1,
+    };
+    addToCart(product);
+    navigate("/cart"); // Navigate only after adding to cart
+  };
 
   return (
     <>
@@ -32,7 +49,7 @@ const Webdevelopementhtml = () => {
 
           {/* Image */}
           <img
-            className="w-36 h-20 object-cover"
+            className="w-36 h-20 object-cover ml-10"
             src={htmllogo}
             alt="HTML Logo"
           />
@@ -48,18 +65,16 @@ const Webdevelopementhtml = () => {
       </div>
 
       {/* Fixed Pricing Section */}
-      <div className="fixed bottom-0 left-0 right-0 md:bottom-10 md:left-auto md:right-10 lg:right-[1rem] lg:top-[25rem] xl:right-[15rem] xl:top-[30rem] max-w-full lg:h-[15rem] md:max-w-xs bg-white p-6 shadow-lg rounded-lg border hover:shadow-xl transition-shadow">
+      <div className="fixed bottom-0 left-0 right-0 md:bottom-10 md:left-auto md:right-10 lg:right-[1rem] lg:top-[25rem] xl:right-[15rem] xl:top-[30rem] max-w-full lg:h-[13rem] md:max-w-xs bg-white p-6 shadow-lg rounded-lg border hover:shadow-xl transition-shadow">
         <h2 className="text-lg font-bold text-gray-800">
           IBM Web Development Using HTML Certification Course
         </h2>
         <p className="text-xl font-bold text-gray-900 mt-2">₹3,000</p>
         <div className="mt-2 flex space-x-2">
-          <input
-            type="number"
-            defaultValue="1"
-            className="border px-2 py-1 w-16 text-center rounded-md"
-          />
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-lg">
+          <button
+            onClick={handleAddToCart}
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+          >
             Add To Cart
           </button>
           <button className="bg-blue-900 text-white px-4 py-2 rounded-lg">

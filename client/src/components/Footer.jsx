@@ -150,7 +150,7 @@
 //           <div className={footersection.footerdiv}>
 //             <h1>Office Map</h1>
 //             <div className={footersection.gMap}>
-              
+
 //               <iframe
 //                 src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d7005.482564332026!2d77.081908!3d28.6075373!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjjCsDI4JzI2LjYiTiA3N8KwMDcnNDguNyJF!5e0!3m2!1sen!2sin!4v1737112443686!5m2!1sen!2sinhttps://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2141.324905682962!2d77.08584820125589!3d28.610166815955754!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d05ecdc6529c1%3A0x7419fbbcac72b568!2sTraincape%20technology%20Pvt%20Ltd!5e0!3m2!1sen!2sin!4v1737112758433!5m2!1sen!2sin"
 //                 width="600"
@@ -202,7 +202,8 @@ const Footer = () => {
             <div className={footersection.addressText}>
               <h1>OFFICE ADDRESS</h1>
               <p>
-                Khandolia Plaza, 118\C, Dabri - Palam Rd, Vaishali, Vaishali Colony, Dashrath Puri, New Delhi, Delhi, 110045
+                {/* Khandolia Plaza, 118\C, Dabri - Palam Rd, Vaishali, Vaishali Colony, Dashrath Puri, New Delhi, Delhi, 110045 */}
+                First Floor, Back Side of Nathu Ram Housing Complex, Dabri, South West Delhi, Delhi, 110045
               </p>
             </div>
           </div>
@@ -325,7 +326,7 @@ const Footer = () => {
             {<Link to="/Internship" className={footersection.linksfooter}>Internship</Link>}
             {<Link to="/PartnerPage" className={footersection.linksfooter}>Partners</Link>}
           </div>
-          <div className={footersection.footerdiv}>
+          {/* <div className={footersection.footerdiv}>
             <h1>Office Map</h1>
             <div className={footersection.gMap}>
 
@@ -337,17 +338,18 @@ const Footer = () => {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
+
             </div>
-          </div>
+          </div> */}
         </div>
-      </div>
+      </div >
 
       <div className={footersection.copyRight}>
-        <h1>Copyright © 2021 Traincape Technology. All Rights Reserved.</h1>
+        <h1>Copyright © 2021 Traincape Technology(OPC) Private Limited. All Rights Reserved.</h1>
       </div>
       {/* <WebsiteCounter /> */}
 
-    </div>
+    </div >
   );
 };
 

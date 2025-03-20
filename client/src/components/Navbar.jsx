@@ -983,9 +983,9 @@ const Navbar = () => {
             <Link to="/training" className={`${isActive("/training")} text-xl`}>
               Training
             </Link>
-            <Link to="/PartnerPage" className={`${isActive("/PartnerPage")} text-xl`}>
+            {/* <Link to="/PartnerPage" className={`${isActive("/PartnerPage")} text-xl`}>
               Partners
-            </Link>
+            </Link> */}
           </div>
 
           {/* Pay Now Button and Login/Logout Buttons on the Right */}
@@ -1119,9 +1119,9 @@ const Navbar = () => {
           >
             Training
           </Link>
-          <Link to="/PartnerPage" className={`${isActive("/PartnerPage")} text-xl`}>
+          {/* <Link to="/PartnerPage" className={`${isActive("/PartnerPage")} text-xl`}>
               Partners
-            </Link>
+            </Link> */}
 
           {/* Pay Now Button */}
           <div className="relative">
@@ -1213,9 +1213,9 @@ const Navbar = () => {
           <Link to="/training" className={`${isActive("/training")} text-xl`}>
             Training
           </Link>
-          <Link to="/PartnerPage" className={`${isActive("/PartnerPage")} text-xl`}>
+          {/* <Link to="/PartnerPage" className={`${isActive("/PartnerPage")} text-xl`}>
               Partners
-            </Link>
+            </Link> */}
         </div>
 
         {/* Pay Now Button and Login/Logout Buttons on the Right */}

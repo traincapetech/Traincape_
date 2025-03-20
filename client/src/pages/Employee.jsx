@@ -23,12 +23,12 @@ const Employee = () => {
   });
 
   const boardMembers = [
-    // {
-    //   name: "Madan Mohan Tiwari",
-    //   title: "International Sales EXECUTIVE & Team Leader",
-    //   image: madan,
-    //   linkdin: "https://www.linkedin.com/in/madan-mohan-tiwari-3a8532317",
-    // },
+    {
+      name: "Madan Mohan Tiwari",
+      title: "International Sales EXECUTIVE & Team Leader",
+      image: madan,
+      linkdin: "https://www.linkedin.com/in/madan-mohan-tiwari-3a8532317",
+    },
     {
       name: "Rajesh",
       title: "Graphic Designer",

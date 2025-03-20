@@ -225,6 +225,11 @@ const ContactUs = () => {
                     <option value="Cloud Computing">Cloud Computing</option>
                     <option value="Cyber Security">Cyber Security</option>
                     <option value="Project Management">Project Management</option>
+                    <option value="Project Management">Microsoft</option>
+                    <option value="Project Management">CompTIA</option>
+                    <option value="Project Management">Certiport</option>
+                    <option value="Project Management">PECB</option>
+                    <option value="Project Management">Partner</option>
                   </select>
                 </div>
 

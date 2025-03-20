@@ -1,17 +1,34 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCartContext } from "../CartContext"; // Adjust the import path as necessary
 import ibmlogo from "../../assets/ibmnewlogo.webp";
 import Clogo from "../../assets/clogo.png";
 
 const WebdevelopementC = () => {
   const [selectedQuestion, setSelectedQuestion] = useState(null);
+  const { addToCart } = useCartContext();
+  const navigate = useNavigate();
 
   const toggleAnswer = (index) => {
     setSelectedQuestion((prev) => (prev === index ? null : index));
   };
 
   useEffect(() => {
-      window.scrollTo(0, 0);
-    }, []);
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleAddToCart = () => {
+    const product = {
+      id: "2", // You can use a unique ID for this course
+      title: "IBM Web Development using C Certification Course",
+      price: 3000,
+      image: Clogo,
+      quantity: 1,
+    };
+    addToCart(product);
+    navigate("/cart"); // Navigate only after adding to cart
+  };
+
   return (
     <>
       <div className="relative bg-gradient-to-b from-blue-100 to-white w-full h-auto md:h-[20rem] pt-10 px-4 md:px-10 text-left">
@@ -32,9 +49,9 @@ const WebdevelopementC = () => {
 
           {/* Image */}
           <img
-            className="w-36 h-20 object-contain md:pl-16"
+            className="w-36 h-20 object-contain ml-10"
             src={Clogo}
-            alt="HTML Logo"
+            alt="C Logo"
           />
 
           {/* Description */}
@@ -48,18 +65,16 @@ const WebdevelopementC = () => {
       </div>
 
       {/* Fixed Pricing Section */}
-      <div className="fixed bottom-0 left-0 right-0 md:bottom-10 md:left-auto md:right-10 lg:right-[1rem] lg:top-[25rem] xl:right-[15rem] xl:top-[30rem] max-w-full lg:h-[15rem] md:max-w-xs bg-white p-6 shadow-lg rounded-lg border hover:shadow-xl transition-shadow">
+      <div className="fixed bottom-0 left-0 right-0 md:bottom-10 md:left-auto md:right-10 lg:right-[1rem] lg:top-[25rem] xl:right-[15rem] xl:top-[30rem] max-w-full lg:h-[13rem] md:max-w-xs bg-white p-6 shadow-lg rounded-lg border hover:shadow-xl transition-shadow">
         <h2 className="text-lg font-bold text-gray-800">
           IBM Web Development Using C Certification Course
         </h2>
         <p className="text-xl font-bold text-gray-900 mt-2">₹3,000</p>
         <div className="mt-2 flex space-x-2">
-          <input
-            type="number"
-            defaultValue="1"
-            className="border px-2 py-1 w-16 text-center rounded-md"
-          />
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-lg">
+          <button
+            onClick={handleAddToCart}
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+          >
             Add To Cart
           </button>
           <button className="bg-blue-900 text-white px-4 py-2 rounded-lg">
@@ -77,20 +92,20 @@ const WebdevelopementC = () => {
             <span>FAQ's</span>
           </div>
           <p className="text-gray-700 mt-4 tracking-wide">
-            Embark on your software development journey with the IBM Software
-            Foundation Course in C. This comprehensive program delves into the
-            fundamentals of C, a powerful and widely-used programming language
-            that underpins countless applications and operating systems.
+            The IBM Web Development using C Certification Course provides a
+            comprehensive introduction to the foundational language of the web.
+            You’ll master the essentials of C, learning to structure content,
+            create web pages, and incorporate multimedia elements.
           </p>
           <br />
           <p className="text-gray-700 mt-2 tracking-wide">
-            You’ll master essential concepts like data types, operators, control
-            structures, memory management, and file handling. Through hands-on
-            projects and exercises, you’ll gain practical experience in building
-            efficient and reliable C programs. By the end of the course, you’ll
-            have a solid foundation in C programming, preparing you for advanced
-            software development roles or further specialization in other
-            languages.
+            This course covers everything from basic tags and elements to
+            advanced concepts like semantic C5, forms, and accessibility.
+            Through hands-on projects and quizzes, you’ll gain practical
+            experience in building interactive and engaging web pages. Upon
+            completion, you’ll receive an industry-recognized IBM certification,
+            demonstrating your proficiency in C and opening doors to a
+            rewarding career in web development.
           </p>
 
           {/* Benefits */}
@@ -168,7 +183,7 @@ const WebdevelopementC = () => {
               <p className="mt-2 text-gray-700">
                 To earn the certification, you need to pass a comprehensive exam
                 that tests your knowledge and practical abilities. The exam
-                covers various topics and requires a solid understanding of HTML
+                covers various topics and requires a solid understanding of C
                 and its tools.{" "}
               </p>
             )}

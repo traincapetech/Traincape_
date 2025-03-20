@@ -188,7 +188,7 @@
 import React, { useEffect } from 'react'
 import banner from '../assets/banner.jpeg';
 import style from '../css/AboutUS.module.css';
-import Owner from '../assets/ParichaySir.jpeg'
+import Owner from '../assets/Parichay-Sir.jpeg'
 import image1 from '../assets/Traincape Technology Deck_page-0002.jpg';
 // import image2 from '../assets/Traincape Technology Deck_page-0012.jpg';
 import image3 from '../assets/Traincape Technology Deck_page-0003.jpg';

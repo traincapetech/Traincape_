@@ -586,11 +586,11 @@
 
 // export default Home;
 
-//Tripti code//
+//Updated By Sumit Jain //
 
 import React from "react";
 import style from "../css/Home.module.css";
-import team from "../assets/team.jpeg";
+import team from "../assets/Traincape_logo-removebg-preview.png";
 import card1 from "../assets/card1.jpeg";
 import card2 from "../assets/card2.jpeg";
 import card3 from "../assets/card3.jpeg";
@@ -599,119 +599,167 @@ import card5 from "../assets/card5.jpeg";
 import card6 from "../assets/card6.jpeg";
 import { FaSquareWhatsapp } from "react-icons/fa6";
 import Typewriter from "typewriter-effect";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Rotation from "../components/Rotation";
 import HomeBanner from "../components/HomeBanner";
 import banner from "../assets/banner.json";
 import HomeSlider from "../components/HomeSlider";
+import Slider from "react-slick";
 import Herobg from '../assets/herobg.jpg'
 
 
-// import banner from '../homebackround.jpg';
+// logo images
+import comptia from "../assets/comptia-2.webp";
+import pecb from "../assets/PECB1.png";
+import certiport from "../assets/certiportlogo.png";
+import pearson from "../assets/pearsonlogo.png";
+import etraind from "../assets/etrainlogo.png";
+// Import Partner Logos
+import Logo1 from "../assets/SBS.png";
+import Logo2 from "../assets/ThreatMatrix.png";
+import Logo3 from "../assets/Digitalearn.webp";
+import Logo4 from "../assets/Gruslabs.svg";
+import Logo5 from "../assets/MSA.png";
+import Logo6 from "../assets/spectre.webp";
 
 const Home = () => {
   const bannerText = {
-    title: "Expert IT Solutions & Management",
-    description:" Elevate your business with premium IT support and management services tailored to optimize your technology landscape. Our dedicated team of professionals ensures seamless, efficient, and innovative solutions to meet your unique IT needs.",
+    title: "Want a Suggestion?",
+    type1: "Cloud Computing",
+    type2: " Cyber Security",
+    type3: "Project Management",
+    type4: "Development",
     ctaText: "Get Started",
     ctaLink: "/get-started", // Link to the page you want to navigate to
   };
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 3000,
+    cssEase: "linear",
+    rtl: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
   const navigate = useNavigate();
+  const partners = [
+    { logo: Logo1, url: "https://sbs-mea.com/" },
+    { logo: Logo2, url: "https://threatmatrix.co.uk/" },
+    {
+      logo: Logo3,
+      url: "https://digitalearnsolution.com/",
+    },
+    { logo: Logo4, url: "https://www.gruslabs.com/" },
+    { logo: Logo5, url: "https://msasoftware.in/" },
+    { logo: Logo6, url: "https://spectreme.ai/" },
+  ];
+
   return (
     <div>
-      {/* <div className={style.topbanner}>
-        <div className={style.banner}></div>
-        <div className={style.bannertext}>
-          <h1 className="text-stroke">Expert IT Solutions & Management</h1>
-          <h3>
-            Elevate your business with premium IT support and management
-            services tailored to optimize your technology landscape. Our
-            dedicated team of professionals ensures seamless, efficient, and
-            innovative solutions to meet your unique IT needs.
-          </h3>
-        </div>
-      </div> */}
-      <div className="pt-28 bg-[#152B54] md:pt-0 lg:pt-0" 
+       <div className="  md:pt-0 lg:pt-0  " 
        style={{ backgroundImage: `url(${Herobg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
       >
-        
         <HomeBanner text={bannerText} animationData={banner} />
       </div>
 
-      <div className="">
-        {/* This div will be visible only on small screens */}
+      {/* Logos Section */}
+      <div className="my-10">
+        <p className="bg-gray-200 text-center font-bold uppercase text-4xl py-10">
+          Vendors and Providers
+        </p>
+        <Slider {...settings}>
+          {[comptia, pecb, certiport, pearson, etraind].map((logo, index) => (
+            <div key={index} className="flex justify-center p-3">
+              <img
+                src={logo}
+                alt={`Logo ${index + 1}`}
+                className="object-cover w-full max-w-[200px] mx-auto"
+              />
+            </div>
+          ))}
+        </Slider>
+      </div>
+
+      {/* <div>
+        { Mobile View - Visible only on small screens }
         <div className="block md:hidden">
-          {/* <div className={style.ribbon}>
-            <div className={style.box}>
-              <img
-                src="https://omsoftsolution.com/wp-content/uploads/2023/07/hm02-1-e1689741567859.webp"
-                alt=""
-              />
-              <h3>WEB DESIGN</h3>
-            </div>
-            <div className={style.box}>
-              <img
-                src="https://omsoftsolution.com/wp-content/uploads/2023/07/hm03-1-e1689741602280.webp"
-                alt=""
-              />
-              <h3>WEB DEVELOPMENT</h3>
-            </div>
-            <div className={style.box}>
-              <img
-                src="https://omsoftsolution.com/wp-content/uploads/2023/07/hm04-e1686026304907-1.webp"
-                alt=""
-              />
-              <h3>SEO SERVICES</h3>
-            </div>
-            <div className={style.box}>
-              <img
-                src="https://omsoftsolution.com//wp-content/uploads/2023/05/hm05-e1686026365357.webp"
-                alt=""
-              />
-              <h3>APP DEVELOPMENT</h3>
-            </div>
-            <div className={style.box}>
-              <img
-                src="https://omsoftsolution.com//wp-content/uploads/2023/05/hm06-e1686026415227.webp"
-                alt=""
-              />
-              <h3>DIGITAL MARKETING</h3>
-            </div>
-            <div className={style.box}>
-              <img
-                src="https://omsoftsolution.com//wp-content/uploads/2023/05/hm07-e1686026451998.webp"
-                alt=""
-              />
-              <h3>SOFTWARE SERVICES</h3>
-            </div>
-          </div> */}
           <HomeSlider />
         </div>
 
-        {/* Rotation component: Visible on medium and larger screens */}
+        Rotation Component - Visible on medium and larger screens
         <div className="hidden md:block">
           <Rotation />
         </div>
-      </div>
+      </div> */}
 
-      <div className={style.aboutus}>
-        <h1>About Us</h1>
-        <div className={style.about}>
-          <div className={style.aboutext}>
-            <h2>Empowering Your Business with Seamless IT Solutions</h2>
-            At our company, we specialize in delivering premier IT support and
-            management services tailored to optimize your technology operations.
-            Our mission is to empower businesses with innovative, reliable, and
-            scalable IT solutions that drive success. With a commitment to
-            excellence, we ensure your technology works flawlessly so you can
-            focus on what truly matters—growing your business.
-          </div>
-          <div className={style.aboutimg}>
-            <img src={team} alt="" />
-          </div>
-        </div>
-      </div>
+<div className="w-full px-8  md:px-24 items-center sm:h-[10rem] md:h-[35rem]">
+  <h1 className="text-center text-3xl md:text-4xl font-semibold">
+    About Us
+  </h1>
+  <div className="flex flex-col md:flex-row gap-6 md:gap-10 mt-6">
+    {/* Text Section */}
+    <div className="flex-1">
+      <h2 className="text-2xl md:text-3xl font-semibold">
+        Empowering Your Business with Seamless IT Solutions
+      </h2>
+      <p className="mt-4 text-sm md:text-base">
+        At our company, we specialize in delivering premier IT support and
+        management services tailored to optimize your technology operations. Our
+        mission is to empower businesses with innovative, reliable, and scalable
+        IT solutions that drive success. With a commitment to excellence, we
+        ensure your technology works flawlessly so you can focus on what truly
+        matters—growing your business.
+      </p>
+      <NavLink to="/about-us">
+        <button className="bg-blue-500  text-white py-2 px-6 rounded-md hover:bg-blue-700 transition duration-300 mt-5 text-sm md:text-base">
+          About Us
+        </button>
+      </NavLink>
+    </div>
+
+    {/* Image Section */}
+    <div className="flex-1 hidden md:block">
+      <img src={team} alt="Team" className="w-full h-[30rem] rounded-lg" />
+    </div>
+  </div>
+</div>
+
+      {/* Services Section */}
+
       <div className={style.card}>
         <h2>Our Latest Services</h2>
         <div className={style.cards}>
@@ -790,6 +838,7 @@ const Home = () => {
         </div>
       </div>
 
+      {/* Hero Section with YouTube Video */}
       <div
         className={style.hero}
         data-aos="zoom-in-up"
@@ -797,7 +846,6 @@ const Home = () => {
         data-aos-duration="2000"
       >
         <div className={style.heroImg}>
-          {/* <img src={hero} alt="Hero Image" /> */}
           <iframe
             className={style.vdo}
             src="https://www.youtube.com/embed/cZjkxmzo1Xg?autoplay=1&loop=1&playlist=cZjkxmzo1Xg&controls=1&mute=1"
@@ -821,20 +869,11 @@ const Home = () => {
           <p>
             Compellingly mesh cross-platform portals through functional human
             capital world-class architectures for orthogonal initiatives.
-            Assertively benchmark visionary quality vectors after covalent
-            e-tailers. Intrinsicly enhance 24/7 users and supply process
           </p>
           <div className={style.call}>
-            
-              
-              <Link
-                
-                to="https://wa.me/+916280281505"
-                target="_blank"
-              >
-            <FaSquareWhatsapp className={style.whatappicon} />
-              </Link>
-            
+            <Link to="https://wa.me/+916280281505" target="_blank">
+              <FaSquareWhatsapp className={style.whatappicon} />
+            </Link>
             <div>
               <p>24 HOURS SERVICE AVAILABLE</p>
               <h4
@@ -849,11 +888,80 @@ const Home = () => {
           <div className={style.btnDiv}>
             <button
               className={style.herobtn}
-              onClick={() => navigate("/about-us")}
+              onClick={() => navigate("/contact-us")}
             >
-              ABOUT US
+              Contact US
             </button>
           </div>
+        </div>
+      </div>
+
+      {/* Why Choose Us Section */}
+      <div className="bg-cyan-50 p-10 px-4 lg:px-28">
+        <h2 className="text-5xl font-mono font-extrabold text-center mb-10">
+          <span className="text-7xl font-serif">W</span>hy Students Are Choosing
+          Traincape Technology
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+          {[
+            { count: "1,00,000+", label: "Sales" },
+            { count: "5,00+", label: "Certification Courses" },
+            { count: "8K+", label: "Users" },
+            { count: "30,000,000+", label: "Hours" },
+          ].map((item, index) => (
+            <div key={index} className="text-center">
+              <span className="text-4xl font-semibold">{item.count}</span>
+              <p className="text-base text-blue-500">{item.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* Partner section */}
+      <div className="bg-gray-100 w-full text-center mt-6 sm:mt-8 md:mt-0 p-4 sm:p-6 md:p-10">
+        <p className="text-lg sm:text-xl font-medium text-gray-600 mb-6">
+          Empowering partnerships and fostering teamwork to achieve unparalleled
+          excellence. Our dedicated approach and shared vision create a synergy
+          that fuels innovation and drives sustainable success for all.
+        </p>
+
+        <div className="flex flex-wrap justify-center  gap-4 sm:gap-6 md:gap-8 mb-6">
+          {partners.map((partner, index) => (
+            <div
+              key={index}
+              className="hover:scale-110 w-40  h-20 sm:h-24 md:h-28 lg:h-32 rounded-full overflow-hidden flex items-center justify-center bg-white"
+            >
+              <a
+                href={partner.url}
+                className="w-full h-full flex items-center justify-center"
+              >
+                <img
+                  src={partner.logo}
+                  alt={partner.name}
+                  className="w-[85%] h-[85%] object-contain"
+                  style={{ filter: "invert(1)" }}
+                />
+              </a>
+            </div>
+          ))}
+        </div>
+        <div className="flex gap-9">
+          <button
+            onClick={() => {
+              navigate("/contact-us");
+            }}
+            className="mt-4 bg-black w-60 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-gray-800 transition-all"
+          >
+            Become a partner →
+          </button>
+
+          <button
+            onClick={() => {
+              navigate("/PartnerPage");
+            }}
+            className="mt-4 bg-gray-400 w-72 text-black border-gray-400 border-2 uppercase px-6 py-3 rounded-lg text-xl font-semibold hover:bg-gray-200 transition-all"
+          >
+            Partners
+          </button>
         </div>
       </div>
     </div>

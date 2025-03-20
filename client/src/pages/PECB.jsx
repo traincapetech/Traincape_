@@ -13,6 +13,7 @@ import ComptiaCourse from '../components/ComptiaCourse';
 // import sysops from '../assets/AWS/sysops.png';
 import PECB_Overview from '../assets/PECB1.png';
 import { useEffect } from 'react';
+import TT from '../assets/TT.png'
 const PECB = () => {
 
     const courseData = [
@@ -93,6 +94,11 @@ const PECB = () => {
             image: PECB_Overview,
             title: "SCADA Security Manager",
             url: "/SCADASecurityManager"
+        },
+        {
+            image: TT,
+            title: "Go4 Whatsup",
+            url: "/Go4Whatsup"
         },
 
     ];

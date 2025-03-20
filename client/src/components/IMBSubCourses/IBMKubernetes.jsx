@@ -1,17 +1,33 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCartContext } from "../CartContext";
 import ibmlogo from "../../assets/ibmnewlogo.webp";
 import container from "../../assets/containerlogo.jpeg";
 
 const IBMKubernetes = () => {
     const [selectedQuestion, setSelectedQuestion] = useState(null);
-
-    const toggleAnswer = (index) => {
+      const { addToCart } = useCartContext();
+      const navigate = useNavigate();
+    
+      const toggleAnswer = (index) => {
         setSelectedQuestion((prev) => (prev === index ? null : index));
-    };
-
-    useEffect(() => {
+      };
+    
+      useEffect(() => {
         window.scrollTo(0, 0);
-      }, []);
+      }, []);
+    
+      const handleAddToCart = () => {
+        const product = {
+          id: "14", // You can use a unique ID for this course
+          title: "IBM Introduction to Containers, Kubernetes, and OpenShift V2 Certification Course",
+          price: 3000,
+          image: container,
+          quantity: 1,
+        };
+        addToCart(product);
+        navigate("/cart"); // Navigate only after adding to cart
+      };
     return (
         <>
             <div className="relative bg-gradient-to-b from-blue-100 to-white w-full h-auto md:h-[20rem] pt-10 px-4 md:px-10 text-left">
@@ -32,7 +48,7 @@ const IBMKubernetes = () => {
 
                     {/* Image */}
                     <img
-                        className="w-36 h-20 object-contain md:pl-16"
+                        className="w-[10rem] h-20 object-cover md:pl-16"
                         src={container}
                         alt="HTML Logo"
                     />
@@ -48,18 +64,20 @@ const IBMKubernetes = () => {
             </div>
 
             {/* Fixed Pricing Section */}
-            <div className="fixed bottom-0 left-0 right-0 md:bottom-10 md:left-auto md:right-10 lg:right-[1rem] lg:top-[25rem] xl:right-[15rem] xl:top-[30rem] max-w-full lg:h-[15rem] md:max-w-xs bg-white p-6 shadow-lg rounded-lg border hover:shadow-xl transition-shadow">
+            <div className="fixed bottom-0 left-0 right-0 md:bottom-10 md:left-auto md:right-10 lg:right-[1rem] lg:top-[25rem] xl:right-[15rem] xl:top-[30rem] max-w-full lg:h-[13rem] md:max-w-xs bg-white p-6 shadow-lg rounded-lg border hover:shadow-xl transition-shadow">
                 <h2 className="text-lg font-bold text-gray-800">
                 IBM Introduction to Containers, Kubernetes, and OpenShift V2 Certification Course
                 </h2>
                 <p className="text-xl font-bold text-gray-900 mt-2">₹3,000</p>
                 <div className="mt-2 flex space-x-2">
-                    <input
+                    {/* <input
                         type="number"
                         defaultValue="1"
                         className="border px-2 py-1 w-16 text-center rounded-md"
-                    />
-                    <button className="bg-blue-600 text-white px-4 py-2 rounded-lg">
+                    /> */}
+                    <button 
+                                onClick={handleAddToCart}
+                                className="bg-blue-600 text-white px-4 py-2 rounded-lg">
                         Add To Cart
                     </button>
                     <button className="bg-blue-900 text-white px-4 py-2 rounded-lg">

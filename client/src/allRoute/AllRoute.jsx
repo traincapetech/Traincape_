@@ -219,6 +219,10 @@ import IBMNodeJs from "../components/IMBSubCourses/IBMNodeJs";
 import IBMNoSQL from "../components/IMBSubCourses/IBMNoSQL";
 import IBMMachineLearning from "../components/IMBSubCourses/IBMMachineLearning";
 import IBMJavaScript from "../components/IMBSubCourses/IBMJavaScript";
+import Go4Whatsup from "../pages/Pecb/Go4Whatsup";
+import ForgotPassword from "../pages/ForgotPassword";
+import Cart from "../pages/Cart";
+
 
 const AllRoute = () => {
   const token = localStorage.getItem("token");
@@ -392,7 +396,9 @@ const AllRoute = () => {
       <Route path="/IBMNoSQL" element={<IBMNoSQL/>}/>    
       <Route path="/IBMMachineLearning" element={<IBMMachineLearning/>}/>    
       <Route path="/IBMJavaScript" element={<IBMJavaScript/>}/>    
-
+      <Route path="/Go4Whatsup" element={<Go4Whatsup/>}/>    
+      <Route path="/ForgotPassword" element={<ForgotPassword/>}/>    
+      <Route path="/Cart" element={<Cart/>}/> 
     </Routes>
   );
 };
