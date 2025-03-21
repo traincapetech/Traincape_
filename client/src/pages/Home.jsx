@@ -590,7 +590,7 @@
 
 import React from "react";
 import style from "../css/Home.module.css";
-import team from "../assets/Traincape_logo-removebg-preview.png";
+import team from "../assets/team.jpeg";
 import card1 from "../assets/card1.jpeg";
 import card2 from "../assets/card2.jpeg";
 import card3 from "../assets/card3.jpeg";
@@ -605,8 +605,7 @@ import HomeBanner from "../components/HomeBanner";
 import banner from "../assets/banner.json";
 import HomeSlider from "../components/HomeSlider";
 import Slider from "react-slick";
-import Herobg from '../assets/herobg.jpg'
-
+import Herobg from "../assets/bannerimg2.jpg";
 
 // logo images
 import comptia from "../assets/comptia-2.webp";
@@ -690,11 +689,17 @@ const Home = () => {
 
   return (
     <div>
-       <div className="  md:pt-0 lg:pt-0  " 
-       style={{ backgroundImage: `url(${Herobg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-      >
-        <HomeBanner text={bannerText} animationData={banner} />
-      </div>
+     <div
+  className="md:pt-0 lg:pt-0"
+  style={{
+    background: "linear-gradient(to bottom, #003366, #0066cc, #66ccff, #99ccff)", 
+    backgroundSize: "cover", 
+    backgroundPosition: "center",
+  }}
+>
+  <HomeBanner text={bannerText} animationData={banner} />
+</div>
+
 
       {/* Logos Section */}
       <div className="my-10">
@@ -726,37 +731,42 @@ const Home = () => {
         </div>
       </div> */}
 
-<div className="w-full px-8  md:px-24 items-center sm:h-[10rem] md:h-[35rem]">
-  <h1 className="text-center text-3xl md:text-4xl font-semibold">
-    About Us
-  </h1>
-  <div className="flex flex-col md:flex-row gap-6 md:gap-10 mt-6">
-    {/* Text Section */}
-    <div className="flex-1">
-      <h2 className="text-2xl md:text-3xl font-semibold">
-        Empowering Your Business with Seamless IT Solutions
-      </h2>
-      <p className="mt-4 text-sm md:text-base">
-        At our company, we specialize in delivering premier IT support and
-        management services tailored to optimize your technology operations. Our
-        mission is to empower businesses with innovative, reliable, and scalable
-        IT solutions that drive success. With a commitment to excellence, we
-        ensure your technology works flawlessly so you can focus on what truly
-        matters—growing your business.
-      </p>
-      <NavLink to="/about-us">
-        <button className="bg-blue-500  text-white py-2 px-6 rounded-md hover:bg-blue-700 transition duration-300 mt-5 text-sm md:text-base">
+      <div className="w-full px-8  md:px-24 items-center sm:h-[10rem] md:h-[35rem]">
+        <h1 className="text-center text-3xl md:text-4xl font-semibold">
           About Us
-        </button>
-      </NavLink>
-    </div>
+        </h1>
+        <div className="flex flex-col md:flex-row gap-6 md:gap-10 mt-6">
+          {/* Text Section */}
+          <div className="flex-1">
+            <h2 className="text-2xl md:text-3xl font-semibold">
+              Empowering Your Business with Seamless IT Solutions
+            </h2>
+            <p className="mt-4 text-sm md:text-base">
+              At our company, we specialize in delivering premier IT support and
+              management services tailored to optimize your technology
+              operations. Our mission is to empower businesses with innovative,
+              reliable, and scalable IT solutions that drive success. With a
+              commitment to excellence, we ensure your technology works
+              flawlessly so you can focus on what truly matters—growing your
+              business.
+            </p>
+            <NavLink to="/about-us">
+              <button className="bg-blue-500  text-white py-2 px-6 rounded-md hover:bg-blue-700 transition duration-300 mt-5 text-sm md:text-base">
+                About Us
+              </button>
+            </NavLink>
+          </div>
 
-    {/* Image Section */}
-    <div className="flex-1 hidden md:block">
-      <img src={team} alt="Team" className="w-full h-[30rem] rounded-lg" />
-    </div>
-  </div>
-</div>
+          {/* Image Section */}
+          <div className="flex-1 hidden md:block">
+            <img
+              src={team}
+              alt="Team"
+              className="lg:pl-16 w-auto h-[20rem] rounded-lg"
+            />
+          </div>
+        </div>
+      </div>
 
       {/* Services Section */}
 

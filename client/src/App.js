@@ -25,6 +25,9 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import { setUserFromLocalStorage } from "./slices/userSlice"; // Import the action
 import WebsiteCounter from "./components/WebsiteCounter";
+import { CartProvider } from "./components/CartContext";
+import AddToCartButton from "./components/AddToCartButton";
+
 function App() {
   const dispatch = useDispatch();
   const location = useLocation(); // Get the current location
@@ -33,14 +36,22 @@ function App() {
     dispatch(setUserFromLocalStorage()); // Dispatch action to set user from localStorage
   }, [dispatch]);
 
+  // List of pages where you want to hide the AddToCartButton
+  const hideOnPages = ['/', '/contact-us', '/about-us', '/review-page', '/our-services'];
+
   return (
-    <div>
-      {/* Conditionally render Navbar and Footer based on the current route */}
-      {location.pathname !== '/test' && <Navbar />}
-      <AllRoute />
-      {location.pathname !== '/test' && <Footer />}
-      <WebsiteCounter />
-    </div>
+    <CartProvider> {/* Wrap the entire app with CartProvider */}
+      <div>
+        {/* Conditionally render Navbar and Footer based on the current route */}
+        {location.pathname !== '/test' && <Navbar />}
+        <AllRoute />
+        {location.pathname !== '/test' && <Footer />}
+        <WebsiteCounter />
+        
+        {/* Conditionally render AddToCartButton based on the current route */}
+        {!hideOnPages.includes(location.pathname) && <AddToCartButton />}
+      </div>
+    </CartProvider>
   );
 }
 

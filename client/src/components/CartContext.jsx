@@ -54,9 +54,11 @@ export const CartProvider = ({ children }) => {
       return updatedCart;
     });
   };
+  // Update total items whenever cart changes
+  const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeItem, updateQuantity, subtotal }}>
+    <CartContext.Provider value={{ cart, addToCart, removeItem, updateQuantity, subtotal, totalItems  }}>
       {children}
     </CartContext.Provider>
   );
