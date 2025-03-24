@@ -38,7 +38,7 @@ const IBMKubernetes = () => {
   };
   return (
     <>
-                          <AddToCartButton />
+      <AddToCartButton />
 
       <div className="relative bg-gradient-to-b from-blue-100 to-white w-full h-auto md:h-[20rem] pt-10 px-4 md:px-10 text-left">
         <img
@@ -93,9 +93,9 @@ const IBMKubernetes = () => {
           >
             Add To Cart
           </button>
-          <button className="bg-blue-900 text-white px-4 py-2 rounded-lg">
+          {/* <button className="bg-blue-900 text-white px-4 py-2 rounded-lg">
             Buy Now
-          </button>
+          </button> */}
         </div>
         {/* Confirmation Message */}
         {showConfirmation && (

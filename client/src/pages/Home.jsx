@@ -692,7 +692,7 @@ const Home = () => {
      <div
   className="md:pt-0 lg:pt-0"
   style={{
-    background: "linear-gradient(to bottom, #003366, #0066cc, #66ccff, #99ccff)", 
+    background: "linear-gradient(to bottom, #45469650,#e5e7eb ", 
     backgroundSize: "cover", 
     backgroundPosition: "center",
   }}
@@ -711,7 +711,7 @@ const Home = () => {
             <div key={index} className="flex justify-center p-3">
               <img
                 src={logo}
-                alt={`Logo ${index + 1}`}
+                alt={`${index + 1}`}
                 className="object-cover w-full max-w-[200px] mx-auto"
               />
             </div>
