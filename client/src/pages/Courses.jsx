@@ -6,10 +6,10 @@ import AutoPlay from "../pages/AutoPlay";
 import Slider from "react-slick";
 import CourseDetails from "../components/CoursesDetails";
 import banner from "../assets/banner.jpeg";
-import review1 from "../assets/review2.jpeg";
-import review2 from "../assets/review3.jpeg";
+import review1 from "../assets/review5.jpeg";
+import review2 from "../assets/review2.jpeg";
 import review3 from "../assets/review4.jpeg";
-import review4 from "../assets/review5.jpeg";
+import review4 from "../assets/review6.png";
 import gif from "../assets/student-mgmt.gif";
 
 // Import Logos
@@ -143,8 +143,8 @@ const Courses = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 px-5 mt-10">
           {[{ name: "Asim Farooq", review: "This is a great company. Everyone is very experienced and knowledgeable. I would recommend everyone to partner and work with them. Highly recommend checking them out!", image: review1 }, 
           { name: "Manish kumar", review: "I'm so happy to find this training center. They provide outstanding training, support, coaching, and tutoring for all IT related courses. Always available for any questions regarding exam prep and certification.", image: review2 }, 
-          { name: "John Doe", review: "The team was awesome to work with, provided great expertise and communication to help me successfully complete my goal. I highly recommend them and will do more business in the future.", image: review3 },
-          { name: "Jane Smith", review: "This company is fantastic! The training is top-notch and helped me land a new job. I couldn't have asked for a better experience. Will definitely return for more courses!", image: review4 }].map((testimonial, index) => (
+          { name: "Muthiah Lakshmanan", review: "The team was awesome to work with, provided great expertise and communication to help me successfully complete my goal. I highly recommend them and will do more business in the future.", image: review3 },
+          { name: "rohit mullick", review: "If you want to do certifications in your respective field and enhance your career then this institute is the one of best I came across with.. Would really recommend to people who want to enhance their skills and climb the ladder by selecting quite a good range certifications which this institute offer.", image: review4 }].map((testimonial, index) => (
             <div key={index} className="bg-white rounded-md h-auto w-full max-w-xs m-2 mt-10 relative">
               <div className="bg-red-400 rounded-full w-[6rem] sm:w-[7rem] mx-auto mt-10 h-[6rem] sm:h-[7rem] absolute top-0 left-0 right-0">
                 <img src={testimonial.image} className="w-full h-full object-cover rounded-full" alt={`review${index + 1}`} />
