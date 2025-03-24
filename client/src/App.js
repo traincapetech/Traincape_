@@ -36,10 +36,9 @@ function App() {
 
   return (
     <div>
-      {/* Conditionally render Navbar and Footer based on the current route */}
-      {location.pathname !== '/test' && <Navbar />}
+      <Navbar />
       <AllRoute />
-      {location.pathname !== '/test' && <Footer />}
+      <Footer />
       <WebsiteCounter />
     </div>
   );
