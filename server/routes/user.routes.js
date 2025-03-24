@@ -225,9 +225,10 @@ userRouter.post("/sendOTPToEmail", async (req, res) => {
     const otp = String(Math.floor(100000 + Math.random() * 900000));
     user.verifyOtp = otp;
     user.verifyOtpExpireAt = Date.now() + 24 * 60 * 60 * 1000;
+
+    await user.save();
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      // to: "ishaanj2612@gmail.com",
       to: email,
       subject: "Password Reset OTP",
       html: `
@@ -246,14 +247,22 @@ userRouter.post("/sendOTPToEmail", async (req, res) => {
 </div>
 `,
     };
+    // Use promisify to make sendMail return a promise
+    const sendMailPromise = () => {
+      return new Promise((resolve, reject) => {
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(info);
+          }
+        });
+      });
+    };
 
-    transporter.sendMail(mailOptions, (error) => {
-      if (error) {
-        return res.status(500).json({ message: "Error sending email" });
-      }
-      res.json({ message: "OTP sent to email" });
-    });
-    await user.save();
+    // Wait for the email to be sent
+    await sendMailPromise();
+
     res.json({ success: true, message: "OTP sent successfully" });
   } catch (error) {
     console.error(error);

@@ -293,6 +293,7 @@ export const sendOTPToEmail = createAsyncThunk(
     try {
       const response = await axios.post(
         `http://localhost:8080/users/sendOTPToEmail`,
+        // `https://traincape-backend-1.onrender.com//users/sendOTPToEmail`,
         { email }
       );
       return response.data;

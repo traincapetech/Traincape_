@@ -917,7 +917,6 @@ const Navbar = () => {
 
   const handleLogout = () => {
     dispatch(logoutUser());
-    window.location.href = "/login";
     navigate("/login");
   };
 
