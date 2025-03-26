@@ -122,72 +122,85 @@
 // };
 
 //Updated by Ritik
-const express = require("express");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-require("dotenv").config();
+// const express = require("express");
+// const bcrypt = require("bcrypt");
+// const jwt = require("jsonwebtoken");
+// require("dotenv").config();
 
-const { UserModel } = require("../model/user.model");
+// const { UserModel } = require("../model/user.model");
 
-const userRouter = express.Router();
+// const userRouter = express.Router();
 
-userRouter.post("/register", async (req, res) => {
-  const { username, email, password, role, phoneNumber, address, pinCode, country, linkedIn, interest } = req.body;
-  try {
-    // Check if email already exists
+// userRouter.post("/register", async (req, res) => {
+//   const { username, email, password, role, phoneNumber, address, pinCode, country, linkedIn, interest } = req.body;
+//   try {
+//     // Check if email already exists
     
     
-    const existingUser = await UserModel.findOne({email: email.trim()});
+//     const existingUser = await UserModel.findOne({email: email.trim()});
     
-    if (existingUser) {
-      return res.status(400).send({ msg: "Email already registered" });
-    }
+//     if (existingUser) {
+//       return res.status(400).send({ msg: "Email already registered" });
+//     }
 
-    bcrypt.hash(password, 5, async (err, hash) => {
-      const user = new UserModel({ username, email, password: hash, role, phoneNumber, address, pinCode, country, linkedIn, interest });
-      await user.save();
-      res.status(200).send({
-        msg: "The new user has been registered",
-        registeredUser: user,
-      });
-    });
-  } catch (error) {
-    res.status(500).send({ error: error.message });
-  }
-});
+//     bcrypt.hash(password, 5, async (err, hash) => {
+//       const user = new UserModel({ username, email, password: hash, role, phoneNumber, address, pinCode, country, linkedIn, interest });
+//       await user.save();
+//       res.status(200).send({
+//         msg: "The new user has been registered",
+//         registeredUser: user,
+//       });
+//     });
+//   } catch (error) {
+//     res.status(500).send({ error: error.message });
+//   }
+// });
 
 
 
-userRouter.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    const user = await UserModel.findOne({ email });
-    if (!user) {
-      return res.status(400).send({ msg: "Wrong Credentials" });
-    }
-    bcrypt.compare(password, user.password, (err, result) => {
-      if (err || !result) {
-        return res.status(401).send({ msg: "Wrong Credentials" });
-      }
-      const token = jwt.sign(
-        { userId: user._id, username: user.username },
-        process.env.secretKey,
-        { expiresIn: "1h" }
-      );
-      res.status(200).send({
-        msg: "Login successful!",
-        token,
-        user: {
-          username: user.username,
-          email: user.email
-        },
-      });
-    });
-  } catch (error) {
-    res.status(500).send({ error: error.message });
-  }
-});
+// userRouter.post("/login", async (req, res) => {
+//   const { email, password } = req.body;
+//   try {
+//     const user = await UserModel.findOne({ email });
+//     if (!user) {
+//       return res.status(400).send({ msg: "Wrong Credentials" });
+//     }
+//     bcrypt.compare(password, user.password, (err, result) => {
+//       if (err || !result) {
+//         return res.status(401).send({ msg: "Wrong Credentials" });
+//       }
+//       const token = jwt.sign(
+//         { userId: user._id, username: user.username },
+//         process.env.secretKey,
+//         { expiresIn: "1h" }
+//       );
+//       res.status(200).send({
+//         msg: "Login successful!",
+//         token,
+//         user: {
+//           username: user.username,
+//           email: user.email
+//         },
+//       });
+//     });
+//   } catch (error) {
+//     res.status(500).send({ error: error.message });
+//   }
+// });
 
-module.exports = {
-  userRouter,
-};
+// module.exports = {
+//   userRouter,
+// };
+//newuser.route.js
+import express from "express";
+import { registerUser, getnewuser, getnewUserById, loginNewUser} from "../controllers/newuser.controller.js";
+
+const router = express.Router();
+
+//create a new user
+router.post("/register", registerUser);
+router.get("/all", getnewuser);
+router.get("/:id", getnewUserById);
+router.post("/login", loginNewUser);
+
+export default router;

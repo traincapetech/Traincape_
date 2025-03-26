@@ -288,15 +288,16 @@ const Signup = () => {
         })
       );
 
-      if (result.type === "user/signupUser/fulfilled") {
-        // alert("Registration successful! Please log in.");
+      if (signupUser.fulfilled.match(result)) {
+        // Show success message and navigate to login
+        alert("Registration successful! Please log in.");
         navigate("/login");
-      } else {
+      } else if (signupUser.rejected.match(result)) {
         setSignupError(result.payload?.msg || "Signup failed.");
       }
     } catch (error) {
       setSignupError("An error occurred during signup.");
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -470,3 +471,5 @@ const Signup = () => {
 };
 
 export default Signup;
+
+

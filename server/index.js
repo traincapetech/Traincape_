@@ -32,41 +32,37 @@
 // });
 // Updated by saurav
 // index.js
-const express = require("express");
-const cors = require("cors");
-const { connection } = require("./db");
+// //app.js
+import router from "./Routes/newuser.route.js";
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import connectdb from "./db.js";
 
-const { userRouter } = require("./routes/user.routes");
-const { reviewRouter } = require("./routes/review.routes");
-const { bookRouter } = require("./routes/book.routes");
-const { questionRouter } = require("./routes/question.routes"); 
-const { resultRouter } = require("./routes/result.routes");
+dotenv.config();
 
-require("dotenv").config();
+const port = process.env.PORT || 3000;
 
 const app = express();
+connectdb();
+
+app.use(cors({
+    methods: ['POST', 'GET', 'PUT', 'DELETE' ],
+    credentials: true,
+}));
 
 app.use(express.json());
-app.use(cors());
 
-app.use("/questions", questionRouter);  
-app.use("/results", resultRouter);  // Add the resultRouter here
-app.use("/users", userRouter);
-app.use("/review", reviewRouter);
-app.use("/books", bookRouter);
+//Routes
+app.use("/users", router);
 
-app.get("/", (req, res) => { 
-  res.status(200).send({
-    message: "This is our Homepage",
-  });
+
+app.get('/', (req, res) => {
+    res.send('Hello World!');
 });
 
-app.listen(process.env.PORT, async () => {
-  try {
-    await connection;
-    console.log("Connected to MongoDB");
-    console.log(`Server is running on port ${process.env.PORT}`);
-  } catch (error) {
-    console.log("Error connecting to MongoDB:", error);
-  }
+app.listen(port, () => {
+    console.log(`Server is listening ${port}`);
 });
+
+export default app;

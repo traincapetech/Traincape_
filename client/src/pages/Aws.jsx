@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Lottie from 'lottie-react';
 import comptia from '../assets/comptia.json';
 import ComptiaCourse from '../components/ComptiaCourse';
@@ -11,7 +11,6 @@ import machine from '../assets/AWS/machine.png';
 import security from '../assets/AWS/security.png';
 import solution from '../assets/AWS/solution.png';
 import sysops from '../assets/AWS/sysops.png';
-import { useEffect } from 'react';
 import AddToCartButton from '../components/AddToCartButton';
 const Aws = () => {
 

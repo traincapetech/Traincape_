@@ -692,7 +692,7 @@ const Home = () => {
      <div
   className="md:pt-0 lg:pt-0"
   style={{
-    background: "linear-gradient(to bottom, #45469650,#e5e7eb ", 
+    background: "linear-gradient(to bottom, #b8c0ff,#e5e7eb ", 
     backgroundSize: "cover", 
     backgroundPosition: "center",
   }}

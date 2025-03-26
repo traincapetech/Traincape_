@@ -55,41 +55,87 @@
 // };
 
 //Updated buy Ritik
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
-const userSchema = mongoose.Schema(
-  {
-    username: { type: String, required: true },
-    email: {
-      type: String,
-      unique: true,
-      required: true,
-      lowercase: true, // Enforce lowercase for email
+// const userSchema = mongoose.Schema(
+//   {
+//     username: { type: String, required: true },
+//     email: {
+//       type: String,
+//       unique: true,
+//       required: true,
+//       lowercase: true, // Enforce lowercase for email
+//     },
+//     password: { type: String, required: true },
+//     role: {
+//       type: String,
+//       enum: ["admin", "user"],
+//       default: "user",
+//     },
+//     phoneNumber: { type: String, required: true }, // Added phoneNumber field
+//     address: { type: String, required: true }, // Added address field
+//     pinCode: { type: String, required: true }, // Added pinCode field
+//     country: { type: String, required: true }, // Added country field
+//     linkedIn: { type: String }, // Added linkedIn field
+//     interest: { type: String, required: true }, // Added interest field
+//     testHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: "Result" }],
+//   },
+//   {
+//     versionKey: false, // Disable __v field
+//   }
+// );
+
+// // Ensure a unique index is created for the 'email' field if not already created
+// userSchema.index({ email: 1 }, { unique: true });
+
+// const UserModel = mongoose.model("users", userSchema);
+
+// module.exports = {
+//   UserModel,
+// };
+//newuser.model.js
+import mongoose from "mongoose";
+import validator from "validator";
+
+const newuser = mongoose.Schema({
+    username:{
+        type: String,
+        required: true
     },
-    password: { type: String, required: true },
-    role: {
-      type: String,
-      enum: ["admin", "user"],
-      default: "user",
+    email:{
+        type: String,
+        required: true,
+        validate: [validator.isEmail, "Please enter a valid email"]
     },
-    phoneNumber: { type: String, required: true }, // Added phoneNumber field
-    address: { type: String, required: true }, // Added address field
-    pinCode: { type: String, required: true }, // Added pinCode field
-    country: { type: String, required: true }, // Added country field
-    linkedIn: { type: String }, // Added linkedIn field
-    interest: { type: String, required: true }, // Added interest field
-    testHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: "Result" }],
-  },
-  {
-    versionKey: false, // Disable __v field
-  }
-);
+    password:{
+        type: String,
+        required: true,
+    },
+    phone:{
+        type: Number,
+        required: true
+    },
+    address:{
+        type: String,
+        required: true
+    },
+    pincode:{
+        type: Number,
+        required: true
+    },
+    country:{
+        type: String,
+        required: true
+    },
+    linkedIn:{
+        type: String
+    },
+    interest:{
+        type: String,
+        required: true
+    },
+}) 
 
-// Ensure a unique index is created for the 'email' field if not already created
-userSchema.index({ email: 1 }, { unique: true });
+const NewUser = mongoose.model("NewUser", newuser);
 
-const UserModel = mongoose.model("users", userSchema);
-
-module.exports = {
-  UserModel,
-};
+ export default NewUser;
