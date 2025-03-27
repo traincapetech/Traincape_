@@ -1,6 +1,5 @@
 //About.jsx
 
-
 // import React, { useEffect } from "react";
 // // import aboutus from "../css/AboutUS.module.css";
 // import aboutus from "../css/AboutUS.module.css";
@@ -185,117 +184,309 @@
 
 // export default AboutUS;
 
-import React, { useEffect } from 'react'
-import banner from '../assets/banner.jpeg';
-import style from '../css/AboutUS.module.css';
-import Owner from '../assets/Parichay-Sir.jpeg'
-import image1 from '../assets/Traincape Technology Deck_page-0002.jpg';
-// import image2 from '../assets/Traincape Technology Deck_page-0012.jpg';
-import image3 from '../assets/Traincape Technology Deck_page-0003.jpg';
-// import image4 from '../assets/Traincape Technology Deck_page-0004.jpg';
-// import image5 from '../assets/Traincape Technology Deck_page-0005.jpg';
-import image6 from '../assets/Traincape Technology Deck_page-0008.jpg';
-import vision from '../assets/vision.jpeg';
-import values from '../assets/values.jpeg';
-import mission from '../assets/mission.jpeg';
+import React, { useEffect } from "react";
+import { Helmet } from "react-helmet";
+import banner from "../assets/banner.jpeg";
+import Owner from "../assets/ParichaySir.jpeg";
+import image1 from "../assets/about-gallery/Traincape Technology Deck_page-0002.jpg";
+import image3 from "../assets/about-gallery/Traincape Technology Deck_page-0003.jpg";
+import image6 from "../assets/about-gallery/Traincape Technology Deck_page-0008.jpg";
+import vision from "../assets/vision.jpeg";
+import values from "../assets/values.jpeg";
+import mission from "../assets/mission.jpeg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-// import Slider from "react-slick";
+import Slider from "react-slick";
+import { FaLaptopCode, FaMobileAlt, FaCertificate, FaUsers, FaChalkboardTeacher, FaAward } from "react-icons/fa";
+
+// Import CSS with styled components or CSS modules
+import styles from "../css/AboutUS.module.css";
 
 const AboutUS = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-}, []);
+  }, []);
+
+  // Settings for the testimonial slider
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    pauseOnHover: true
+  };
+
+  // Service data
+  const services = [
+    {
+      icon: <FaLaptopCode size={40} />,
+      title: "Website Development",
+      description: "Custom-built, responsive websites designed to drive business growth and enhance your digital presence."
+    },
+    {
+      icon: <FaMobileAlt size={40} />,
+      title: "App Development",
+      description: "Innovative mobile applications for iOS and Android platforms that provide seamless user experiences."
+    },
+    {
+      icon: <FaCertificate size={40} />,
+      title: "Certification Vouchers",
+      description: "Discounted vouchers for CompTIA, PECB, Microsoft, and other industry-recognized certifications."
+    },
+    {
+      icon: <FaUsers size={40} />,
+      title: "Internship Programs",
+      description: "Hands-on training opportunities for students and professionals looking to enhance their skills."
+    },
+    {
+      icon: <FaChalkboardTeacher size={40} />,
+      title: "Professional Training",
+      description: "Expert-led training programs in cybersecurity, cloud computing, project management, and more."
+    },
+    {
+      icon: <FaAward size={40} />,
+      title: "Free Assessments",
+      description: "Online assessments to test your knowledge and earn certificates validating your expertise."
+    }
+  ];
+
   return (
-    <div>
+    <>
+      {/* SEO Metadata */}
+      <Helmet>
+        <title>About Traincape Technology | IT Training & Certification Experts</title>
+        <meta name="description" content="Traincape Technology provides professional IT training, certification vouchers for CompTIA, PECB, Microsoft, and custom software development services. Learn more about our mission to empower professionals with globally recognized certifications." />
+        <meta name="keywords" content="Traincape Technology, IT Training, CompTIA certification, PECB certification, Microsoft certification, website development, app development, cybersecurity training, IT internship" />
+        <meta property="og:title" content="About Traincape Technology | IT Training & Certification Experts" />
+        <meta property="og:description" content="Traincape Technology provides professional IT training, certification vouchers for CompTIA, PECB, Microsoft, and custom software development services." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://traincapetech.in/about-us" />
+        <meta property="og:image" content={banner} />
+        
+        {/* Schema.org markup for better SEO */}
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Traincape Technology",
+              "url": "https://traincapetech.in",
+              "logo": "https://traincapetech.in/logo.png",
+              "foundingDate": "2021",
+              "founders": [
+                {
+                  "@type": "Person",
+                  "name": "Parichay Singh Rana"
+                }
+              ],
+              "description": "Traincape Technology provides IT training, certification vouchers, and software development services.",
+              "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "India"
+              },
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+916280281505",
+                "contactType": "customer service"
+              },
+              "sameAs": [
+                "https://www.facebook.com/traincapetech",
+                "https://www.linkedin.com/company/traincapetech",
+                "https://twitter.com/traincapetech"
+              ]
+            }
+          `}
+        </script>
+      </Helmet>
 
-      <img src={banner} useMap="#image-map" className={style.bannerimg} alt='banner' />
-
-      {/* <map name="image-map">
-        <area target="_self" alt="Training" title="" href="/CompTIA-single-page" coords="790,90,628,124" shape="rect" />
-        <area target="_self" alt="Vouchers" title="" href="" coords="814,165,627,133" shape="rect" />
-        <area target="_self" alt="internship" title="" href="/Internship" coords="815,173,637,203" shape="rect" />
-        <area target="_self" alt="project" title="" href="" coords="812,244,639,217" shape="rect" />
-        <area target="_self" alt="cyber security" title="" href="" coords="828,279,609,252" shape="rect" />
-        <area target="_self" alt="App development" title="" href="" coords="591,326,858,296" shape="rect" />
-        <area target="_self" alt="Website development" title="" href="" coords="616,336,834,402" shape="rect" />
-        <area target="_self" alt="Software development" title="" href="" coords="619,414,818,479" shape="rect" />
-        <area target="_self" alt="comptia" title="" href="/CompTIA-single-page" coords="862,192,1204,105" shape="rect" />
-        <area target="_self" alt="Pecb" title="" href="" coords="888,210,1182,302" shape="rect" />
-        <area target="_self" alt="certiport" title="" href="" coords="863,324,1274,415" shape="rect" />
-        <area target="_self" alt="Website-link" title="" href="https://traincapetech.in/" coords="1064,548,770,579" shape="rect" />
-        <area target="_self" alt="Gmail" title="" href="https://traincapetech.in/contact-us" coords="983,606,732,633" shape="rect" />
-        <area target="_self" alt="WhatsApp" title="" href="https://wa.me/+441253928501" coords="1231,616,980,643" shape="rect" />
-        <area target="_self" alt="WhatsApp" title="" href="https://wa.me/+916280281505" coords="1235,590,984,617" shape="rect" />
-        <area target="_self" alt="Computer" title="" href="https://traincapetech.in/Courses-details" coords="1258,437,1103,555" shape="rect" />
-        <area target="_self" alt="EnrollNow" title="" href="https://traincapetech.in/contact-us" coords="1024,477,820,536" shape="rect" />
-        <area target="_self" alt="Traincape " title="" href="https://traincapetech.in/" coords="554,36,193,408" shape="rect" />
-        <area target="_self" alt="" title="" href="" coords="" shape="rect" />
-        <area target="_self" alt="" title="" href="" coords="" shape="rect" />
-
-      </map> */}
-
-      <div className={style.title}>
-        <h4>Our Chairman</h4>
-        <h1> Mr. Parichay Singh Rana</h1>
-
-
-        <div className={style.owner}>
-
-          <div className={style.ownerdiv}>
-            <img src={Owner} alt="owner of traincape" className={style.ownerimg} />
-          </div>
-          <div className={style.ownerinfo}>
-            <h3>Founded in 2021 by <span>Parichay Singh Rana</span> , Traincape Technology emerged with a vision to redefine how businesses harness the power of technology. Built on a foundation of expertise and innovation, our mission is to provide bespoke, reliable, and forward-thinking tech solutions. We believe in empowering businesses to unlock their true potential by delivering tools and strategies that drive success. At Traincape, we don’t just adapt to technological advancements; we anticipate them, ensuring our clients stay ahead in an ever-evolving digital landscape</h3>
-          </div>
-        </div>
-      </div>
-
-      <div className={style.carouselcontainer}>
-        <h1>Why We Are Best</h1>
-          <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
-        <div className="carousel-inner">
-          <div className="carousel-item active" data-bs-interval="10000">
-            <img src={image1} className="d-block w-100" alt="..."/>
-          </div>
-          <div className="carousel-item" data-bs-interval="2000">
-            <img src={image6} className="d-block w-100" alt="..."/>
-          </div>
-          <div className="carousel-item">
-            <img src={image3} className="d-block w-100" alt="..."/>
-          </div>
-        </div>
-        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Previous</span>
-        </button>
-        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Next</span>
-        </button>
-      </div>
-      </div>
-      <div className={style.visionmission}>
-        <h1>Our Vision & Mission</h1>
-        <div className={style.purpose}>
-          <div className={style.vision}>
-            <img src={vision} alt="" />
-            <h3>Vision</h3>
-            <p>At Traincape Technology, our vision is to be a global leader in IT training and solutions, empowering individuals and businesses to achieve excellence through innovation, expertise, and cutting-edge technology. </p>
-          </div>
-          <div className={style.mission}>
-            <img src={mission} alt="" />
-            <h3>Mission</h3>
-            <p>As an authorized partner of CompTIA and PECB, our mission is to deliver industry-leading training programs that empower professionals with globally recognized certifications. </p>
-          </div>
-          <div className={style.values}>
-            <img src={values} alt="" />
-            <h3>Values</h3>
-            <p>We uphold innovation, integrity, customer-centricity, and a steadfast commitment to delivering quality in every service we provide.</p>
+      {/* Hero Section */}
+      <section className={styles.heroSection}>
+        <div className={styles.heroOverlay}>
+          <img src={banner} alt="Traincape Technology - IT Training and Certification" className={styles.bannerimg} />
+          <div className={styles.heroContent}>
+            <h1>About Traincape Technology</h1>
+            <p>Empowering professionals with globally recognized certifications and cutting-edge technology solutions</p>
           </div>
         </div>
-      </div>
-    </div >
-  )
-}
-export default AboutUS
+      </section>
+
+      {/* Our Story Section */}
+      <section className={styles.storySection}>
+        <div className={styles.container}>
+          <div className={styles.sectionTitle}>
+            <h2>Our Story</h2>
+            <div className={styles.underline}></div>
+          </div>
+          
+          <div className={styles.founderProfile}>
+            <div className={styles.founderImageContainer}>
+              <img src={Owner} alt="Parichay Singh Rana - Founder of Traincape Technology" className={styles.founderImage} />
+              <h3 className={styles.founderName}>Mr. Parichay Singh Rana</h3>
+              <p className={styles.founderTitle}>Founder & Chairman</p>
+            </div>
+            
+            <div className={styles.founderStory}>
+              <p>
+                Founded in 2021 by <strong>Parichay Singh Rana</strong>, Traincape Technology emerged with a vision to redefine how businesses harness the power of technology. Built on a foundation of expertise and innovation, our mission is to provide bespoke, reliable, and forward-thinking tech solutions.
+              </p>
+              <p>
+                As an authorized partner of CompTIA and PECB, we are committed to delivering high-quality training programs that help professionals advance their careers with globally recognized certifications.
+              </p>
+              <p>
+                We believe in empowering businesses to unlock their true potential by delivering tools and strategies that drive success. At Traincape, we don't just adapt to technological advancements; we anticipate them, ensuring our clients stay ahead in an ever-evolving digital landscape.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Vision, Mission, Values Section */}
+      <section className={styles.vmvSection}>
+        <div className={styles.container}>
+          <div className={styles.sectionTitle}>
+            <h2>Our Vision, Mission & Values</h2>
+            <div className={styles.underline}></div>
+          </div>
+          
+          <div className={styles.vmvGrid}>
+            <div className={styles.vmvCard}>
+              <div className={styles.vmvIconContainer}>
+                <img src={vision} alt="Traincape Technology Vision" className={styles.vmvIcon} />
+              </div>
+              <h3>Vision</h3>
+              <p>
+                At Traincape Technology, our vision is to be a global leader in IT training and solutions, empowering individuals and businesses to achieve excellence through innovation, expertise, and cutting-edge technology.
+              </p>
+            </div>
+            
+            <div className={styles.vmvCard}>
+              <div className={styles.vmvIconContainer}>
+                <img src={mission} alt="Traincape Technology Mission" className={styles.vmvIcon} />
+              </div>
+              <h3>Mission</h3>
+              <p>
+                As an authorized partner of CompTIA and PECB, our mission is to deliver industry-leading training programs that empower professionals with globally recognized certifications. We strive to bridge the gap between theoretical knowledge and practical skills through immersive learning experiences.
+              </p>
+            </div>
+            
+            <div className={styles.vmvCard}>
+              <div className={styles.vmvIconContainer}>
+                <img src={values} alt="Traincape Technology Values" className={styles.vmvIcon} />
+              </div>
+              <h3>Values</h3>
+              <p>
+                We uphold innovation, integrity, customer-centricity, and a steadfast commitment to delivering quality in every service we provide. We believe in continuous learning, ethical practices, and building lasting relationships based on trust and mutual growth.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className={styles.servicesSection}>
+        <div className={styles.container}>
+          <div className={styles.sectionTitle}>
+            <h2>Our Services</h2>
+            <div className={styles.underline}></div>
+            <p className={styles.sectionSubtitle}>Comprehensive IT solutions to drive your success</p>
+          </div>
+          
+          <div className={styles.servicesGrid}>
+            {services.map((service, index) => (
+              <div key={index} className={styles.serviceCard}>
+                <div className={styles.serviceIcon}>
+                  {service.icon}
+                </div>
+                <h3>{service.title}</h3>
+                <p>{service.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us Section */}
+      <section className={styles.whyChooseSection}>
+        <div className={styles.container}>
+          <div className={styles.sectionTitle}>
+            <h2>Why Choose Traincape Technology</h2>
+            <div className={styles.underline}></div>
+          </div>
+          
+          <div className={styles.sliderContainer}>
+            <Slider {...settings}>
+              <div className={styles.slideItem}>
+                <img src={image1} alt="Traincape Technology Excellence" className={styles.slideImage} />
+                <div className={styles.slideCaption}>
+                  <h3>Excellence in Training</h3>
+                  <p>Our expert-led training programs ensure high success rates in certification exams.</p>
+                </div>
+              </div>
+              <div className={styles.slideItem}>
+                <img src={image6} alt="Traincape Technology Partnerships" className={styles.slideImage} />
+                <div className={styles.slideCaption}>
+                  <h3>Strategic Partnerships</h3>
+                  <p>Official partners with leading certification bodies like CompTIA and PECB.</p>
+                </div>
+              </div>
+              <div className={styles.slideItem}>
+                <img src={image3} alt="Traincape Technology Development" className={styles.slideImage} />
+                <div className={styles.slideCaption}>
+                  <h3>Custom Development Solutions</h3>
+                  <p>Tailored web and mobile applications designed to meet your unique business needs.</p>
+                </div>
+              </div>
+            </Slider>
+          </div>
+        </div>
+      </section>
+
+      {/* Certifications Section */}
+      <section className={styles.certificationsSection}>
+        <div className={styles.container}>
+          <div className={styles.sectionTitle}>
+            <h2>Certification Partnerships</h2>
+            <div className={styles.underline}></div>
+          </div>
+          
+          <div className={styles.certificationGrid}>
+            <div className={styles.certificationCard}>
+              <h3>CompTIA</h3>
+              <p>Official partners offering certification vouchers for A+, Network+, Security+, and more.</p>
+              <a href="/training-comptia" className={styles.certLink}>Learn More</a>
+            </div>
+            
+            <div className={styles.certificationCard}>
+              <h3>PECB</h3>
+              <p>Certified training provider for ISO, cybersecurity, and risk management certifications.</p>
+              <a href="/PECB" className={styles.certLink}>Learn More</a>
+            </div>
+            
+            <div className={styles.certificationCard}>
+              <h3>Microsoft</h3>
+              <p>Authorized training partner offering certification vouchers for various Microsoft technologies.</p>
+              <a href="/microsoft" className={styles.certLink}>Learn More</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className={styles.ctaSection}>
+        <div className={styles.container}>
+          <h2>Ready to advance your career or business?</h2>
+          <p>Get in touch with our team to discuss your training needs or development projects.</p>
+          <div className={styles.ctaButtons}>
+            <a href="/contact-us" className={styles.primaryButton}>Contact Us</a>
+            <a href="/Courses-details" className={styles.secondaryButton}>Explore Courses</a>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default AboutUS;

@@ -155,7 +155,7 @@
 //       <div className="absolute inset-0 bg-black opacity-50"></div>
 
 //       <div className="absolute inset-0 flex justify-center items-center">
-        
+
 //         <div className="grid-cols-1 md:flex m-auto p-4">
 //           <div className="bg-[#152B54] w-fit md:w-[30%]  ml-auto">
 //           <Lottie  animationData={signup} loop={true} className=' w-full h-full my-auto'/>
@@ -234,14 +234,18 @@ import React, { useEffect, useState } from "react";
 import { FaRegEyeSlash, FaEye } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 import { signupUser } from "../slices/userSlice";
 import banner from "../../src/assets/loginbanner.jpeg";
 import Lottie from "lottie-react";
-import signup from "../assets/signup.json";import logo from "../assets/WhatsApp_Image_2024-06-22_at_10.01.48-removebg-preview.png";
+import signup from "../assets/signup.json";
+import logo from "../assets/WhatsApp_Image_2024-06-22_at_10.01.48-removebg-preview.png";
 
 const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [countries, setCountries] = useState([]);
 
   const [payload, setPayload] = useState({
     username: "",
@@ -252,25 +256,122 @@ const Signup = () => {
     pinCode: "",
     country: "",
     linkedIn: "",
-    interest: "" 
+    interest: "",
   });
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [signupError, setSignupError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    fetchCountries();
+  }, []);
+
+  const fetchCountries = async () => {
+    try {
+      const response = await axios.get("https://restcountries.com/v3.1/all");
+      const countryList = response.data
+        .map((country) => ({
+          code: country.cca2,
+          name: country.name.common,
+        }))
+        .sort((a, b) => a.name.localeCompare(b.name));
+      setCountries(countryList);
+    } catch (error) {
+      console.error("Error fetching countries:", error);
+      toast.error("Failed to load countries. Using fallback list.");
+      // Fallback to a basic list if API fails
+      setCountries([
+        { code: "US", name: "United States" },
+        { code: "GB", name: "United Kingdom" },
+        { code: "CA", name: "Canada" },
+        { code: "AU", name: "Australia" },
+        { code: "IN", name: "India" },
+        { code: "DE", name: "Germany" },
+        { code: "FR", name: "France" },
+        { code: "JP", name: "Japan" },
+        { code: "CN", name: "China" },
+        { code: "BR", name: "Brazil" },
+      ]);
+    }
+  };
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
 
   const handleChange = (e) => {
-    setPayload({ ...payload, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    if (name === "phoneNumber") {
+      // Allow only numeric values
+      const numericValue = value.replace(/\D/g, ""); // Removes non-numeric characters
+      setPayload((prev) => ({ ...prev, [name]: numericValue }));
+    } else {
+      setPayload((prev) => ({ ...prev, [name]: value }));
+    }
+
+    // Clear field-specific error when user types
+    if (errors[name]) {
+      setErrors({
+        ...errors,
+        [name]: null,
+      });
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Username validation
+    if (payload.username.trim().length < 6) {
+      newErrors.username = "Username must be at least 6 characters";
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(payload.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+
+    // Password validation
+    if (payload.password.length < 8) {
+      newErrors.password = "Password must be at least 8 characters";
+    }
+    // Pin code validation
+    const pinCodeRegex = /^\d{5,6}$/;
+    if (!pinCodeRegex.test(payload.pinCode)) {
+      newErrors.pinCode = "Please enter a valid 5-6 digit pin code";
+    }
+
+    // Country validation
+    if (payload.country.trim() === "") {
+      newErrors.country = "Country is required";
+    }
+
+    // Address validation
+    if (payload.address.trim() === "") {
+      newErrors.address = "Address is required";
+    }
+
+    // Interest validation
+    if (payload.interest === "") {
+      newErrors.interest = "Please select an interest";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Log the payload data to the console for debugging purposes
-    // console.log(payload);
+    if (!validateForm()) {
+      return;
+    }
 
+    setIsLoading(true);
     setSignupError(null);
 
     try {
@@ -284,181 +385,359 @@ const Signup = () => {
           pinCode: payload.pinCode,
           country: payload.country,
           linkedIn: payload.linkedIn,
-          interest: payload.interest
+          interest: payload.interest,
         })
       );
 
       if (result.type === "user/signupUser/fulfilled") {
-        // alert("Registration successful! Please log in.");
         navigate("/login");
       } else {
-        setSignupError(result.payload?.msg || "Signup failed.");
+        const errorMessage =
+          result.payload?.msg || "Signup failed. Please try again.";
+        setSignupError(errorMessage);
       }
     } catch (error) {
-      setSignupError("An error occurred during signup.");
-      console.log(error);
+      setSignupError(
+        "An error occurred during signup. Please try again later."
+      );
+      console.error("Signup error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
-    <div className="w-full h-[205vh] md:h-[150vh] bg-cover bg-center relative" style={{ backgroundImage: `url(${banner})` }}>
+    <div
+      className="w-full min-h-screen bg-cover bg-center relative"
+      style={{ backgroundImage: `url(${banner})` }}
+    >
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
-      <div className="absolute inset-0 flex justify-center items-center">
-        <div className="grid-cols-1 md:flex m-auto p-4">
-          <div className="bg-[#152B54] w-fit md:w-[30%] ml-auto">
-          <div className="relative">
-            <img
-              src={logo}
-              alt="Traincape Technology"
-              className="w-[90px] h-[90px] md:w-[130px] md:h-[130px] absolute top-0"
-            />
+      <div className="absolute inset-0 flex justify-center items-center p-4 overflow-auto">
+        <div className="grid-cols-1 md:flex m-auto p-4 max-w-6xl">
+          {/* Left Animation Section */}
+          <div className="bg-[#152B54] w-full md:w-[30%] relative ml-auto mb-4 md:mb-0">
+            <div className="relative z-10">
+              <img
+                src={logo}
+                alt="Traincape Technology"
+                className="w-[90px] h-[90px] md:w-[130px] md:h-[130px] absolute top-0 left-0"
+              />
+            </div>
+            <div className="h-full flex justify-center items-center">
+              <Lottie
+                animationData={signup}
+                loop={true}
+                style={{ width: "100%", height: "auto", maxHeight: "100%" }}
+                renderSettings={{
+                  preserveAspectRatio: "xMidYMid slice",
+                }}
+              />
+            </div>
           </div>
-            <Lottie animationData={signup} loop={true} className="w-full h-full my-auto" />
-          </div>
+
           {/* Right Signup Form */}
-          <div className="bg-white bg-opacity-90 p-8 shadow-lg w-full sm:w-[400px] mr-auto">
-            <h1 className="text-3xl font-semibold text-center text-[#152B54] mb-6">Sign Up</h1>
-            {signupError && <p className="text-red-500 text-sm mb-4">{signupError}</p>}
-            <form onSubmit={handleSubmit}>
+          <div className="bg-white bg-opacity-90 p-6 md:p-8 shadow-lg w-full md:w-[400px] mr-auto">
+            <h1 className="text-2xl md:text-3xl font-semibold text-center text-[#152B54] mb-6">
+              Sign Up
+            </h1>
+
+            {signupError && (
+              <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-4">
+                <p className="text-red-700 text-sm">{signupError}</p>
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} noValidate>
               <div className="mb-4">
-                <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
+                <label
+                  htmlFor="username"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Username*
+                </label>
                 <input
                   type="text"
                   id="username"
                   name="username"
+                  placeholder="UserName"
+                  value={payload.username}
                   required
                   onChange={handleChange}
-                  className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className={`w-full px-4 py-2 mt-2 border ${errors.username ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#152B54]`}
+                  aria-invalid={errors.username ? "true" : "false"}
                 />
+                {errors.username && (
+                  <p className="mt-1 text-xs text-red-500">{errors.username}</p>
+                )}
               </div>
 
               <div className="mb-4">
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Email*
+                </label>
                 <input
                   type="email"
                   id="email"
                   name="email"
+                  placeholder="Email"
+                  value={payload.email}
                   required
                   onChange={handleChange}
-                  className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className={`w-full px-4 py-2 mt-2 border ${errors.email ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#152B54]`}
+                  aria-invalid={errors.email ? "true" : "false"}
                 />
-              </div>
-
-              <div className="mb-4 relative">
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
-                <input
-                  type={passwordVisible ? "text" : "password"}
-                  id="password"
-                  name="password"
-                  required
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-                />
-                {passwordVisible ? (
-                  <FaEye onClick={togglePasswordVisibility} className="absolute right-4 top-[70%] transform -translate-y-1/2 text-gray-600 cursor-pointer" />
-                ) : (
-                  <FaRegEyeSlash onClick={togglePasswordVisibility} className="absolute right-4 top-[70%] transform -translate-y-1/2 text-gray-600 cursor-pointer" />
+                {errors.email && (
+                  <p className="mt-1 text-xs text-red-500">{errors.email}</p>
                 )}
               </div>
 
-              {/* New Fields */}
-              <div className="mb-4">
-                <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">Phone Number</label>
-                <input
-                  type="text"
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  required
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-                />
+              <div className="mb-4 relative">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Password*
+                </label>
+                <div className="relative">
+                  <input
+                    type={passwordVisible ? "text" : "password"}
+                    id="password"
+                    name="password"
+                    value={payload.password}
+                    required
+                    onChange={handleChange}
+                    placeholder="Password"
+                    className={`w-full px-4 py-2 mt-2 border ${errors.password ? "border-red-500" : "border-gray-300"
+                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#152B54]`}
+                    aria-invalid={errors.password ? "true" : "false"}
+                  />
+                  <button
+                    type="button"
+                    aria-label={
+                      passwordVisible ? "Hide password" : "Show password"
+                    }
+                    onClick={togglePasswordVisibility}
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2"
+                  >
+                    {passwordVisible ? (
+                      <FaEye className="text-gray-600" />
+                    ) : (
+                      <FaRegEyeSlash className="text-gray-600" />
+                    )}
+                  </button>
+                </div>
+                {errors.password && (
+                  <p className="mt-1 text-xs text-red-500">{errors.password}</p>
+                )}
               </div>
 
               <div className="mb-4">
-                <label htmlFor="address" className="block text-sm font-medium text-gray-700">Address</label>
+                <label
+                  htmlFor="phoneNumber"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Phone Number*
+                </label>
+                <input
+                  type="tel"
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  value={payload.phoneNumber}
+                  required
+                  onChange={handleChange}
+                  placeholder="Enter your phone number"
+                  pattern="[0-9]*"
+                  inputMode="numeric"
+                  className={`w-full px-4 py-2 mt-2 border ${errors.phoneNumber ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#152B54]`}
+                  aria-invalid={errors.phoneNumber ? "true" : "false"}
+                />
+                {errors.phoneNumber && (
+                  <p className="mt-1 text-xs text-red-500">{errors.phoneNumber}</p>
+                )}
+              </div>
+
+
+              <div className="mb-4">
+                <label
+                  htmlFor="address"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Address*
+                </label>
                 <input
                   type="text"
                   id="address"
                   name="address"
+                  placeholder="Address"
+                  value={payload.address}
                   required
                   onChange={handleChange}
-                  className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className={`w-full px-4 py-2 mt-2 border ${errors.address ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#152B54]`}
+                  aria-invalid={errors.address ? "true" : "false"}
                 />
+                {errors.address && (
+                  <p className="mt-1 text-xs text-red-500">{errors.address}</p>
+                )}
               </div>
 
               <div className="mb-4">
-                <label htmlFor="pinCode" className="block text-sm font-medium text-gray-700">Pin Code</label>
+                <label
+                  htmlFor="pinCode"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Pin Code*
+                </label>
                 <input
-                  type="text"
+                  type="number"
                   id="pinCode"
                   name="pinCode"
+                  value={payload.pinCode}
                   required
                   onChange={handleChange}
-                  className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  placeholder="5-6 digit code"
+                  className={`w-full px-4 py-2 mt-2 border ${errors.pinCode ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#152B54]`}
+                  aria-invalid={errors.pinCode ? "true" : "false"}
                 />
+                {errors.pinCode && (
+                  <p className="mt-1 text-xs text-red-500">{errors.pinCode}</p>
+                )}
               </div>
 
               <div className="mb-4">
-                <label htmlFor="country" className="block text-sm font-medium text-gray-700">Country</label>
-                <input
-                  type="text"
+                <label
+                  htmlFor="country"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Country*
+                </label>
+                <select
                   id="country"
                   name="country"
+                  value={payload.country}
                   required
                   onChange={handleChange}
-                  className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-                />
+                  className={`w-full px-4 py-2 mt-2 border ${
+                    errors.country ? "border-red-500" : "border-gray-300"
+                  } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#152B54]`}
+                  aria-invalid={errors.country ? "true" : "false"}
+                >
+                  <option value="">Select a country</option>
+                  {countries.map((country) => (
+                    <option key={country.code} value={country.name}>
+                      {country.name}
+                    </option>
+                  ))}
+                </select>
+                {errors.country && (
+                  <p className="mt-1 text-xs text-red-500">{errors.country}</p>
+                )}
               </div>
 
               <div className="mb-4">
-                <label htmlFor="linkedIn" className="block text-sm font-medium text-gray-700">LinkedIn <span className="text-slate-500 text-[10px] ">(optional)</span></label>
+                <label
+                  htmlFor="linkedIn"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  LinkedIn{" "}
+                  <span className="text-slate-500 text-[10px]">(optional)</span>
+                </label>
                 <input
                   type="text"
                   id="linkedIn"
                   name="linkedIn"
-                  // required 
+                  placeholder="LinkedIn"
+                  value={payload.linkedIn}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#152B54]"
                 />
               </div>
 
-              {/* Interest Dropdown */}
-              <div className="mb-4">
-                <label htmlFor="interest" className="block text-sm font-medium text-gray-700">Interest</label>
+              <div className="mb-6">
+                <label
+                  htmlFor="interest"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Interest*
+                </label>
                 <select
                   id="interest"
                   name="interest"
                   onChange={handleChange}
                   value={payload.interest}
-                  className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  required
+                  className={`w-full px-4 py-2 mt-2 border ${errors.interest ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#152B54]`}
+                  aria-invalid={errors.interest ? "true" : "false"}
                 >
                   <option value="">Select Interest</option>
                   <option value="Cloud Computing">Cloud Computing</option>
-                  <option value="Project Management Professional">Project Management Professional</option>
+                  <option value="Project Management Professional">
+                    Project Management Professional
+                  </option>
                   <option value="PECB">PECB</option>
                   <option value="Microsoft">Microsoft</option>
                   <option value="CyberSecurity">CyberSecurity</option>
                   <option value="Non-IT">Non-IT</option>
                 </select>
+                {errors.interest && (
+                  <p className="mt-1 text-xs text-red-500">{errors.interest}</p>
+                )}
               </div>
 
-              {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full py-2 bg-[#152B54] text-white rounded-lg hover:bg-sky-950- transition duration-200"
+                disabled={isLoading}
+                className="w-full py-2 bg-[#152B54] text-white rounded-lg hover:bg-sky-950 transition duration-200 disabled:opacity-50 flex items-center justify-center"
               >
-                Register
+                {isLoading ? (
+                  <>
+                    <svg
+                      className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                    Registering...
+                  </>
+                ) : (
+                  "Register"
+                )}
               </button>
 
               <div className="mt-4 text-center">
                 <p className="text-sm text-gray-700">
                   Already have an account?{" "}
-                  <a href="/login" className="text-[#152B54] hover:underline">Login here</a>
+                  <button
+                    onClick={() => {
+                      navigate("/login");
+                    }}
+                    className="text-[#152B54] hover:underline"
+                  >
+                    Login here
+                  </button>
                 </p>
               </div>
             </form>

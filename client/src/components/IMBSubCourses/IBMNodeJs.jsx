@@ -7,8 +7,8 @@ import AddToCartButton from "../AddToCartButton";
 
 const IBMNodeJs = () => {
   const [selectedQuestion, setSelectedQuestion] = useState(null);
+  const [showConfirmation, setShowConfirmation] = useState(false); // State for confirmation message
   const { addToCart } = useCartContext();
-  const navigate = useNavigate();
 
   const toggleAnswer = (index) => {
     setSelectedQuestion((prev) => (prev === index ? null : index));
@@ -27,11 +27,18 @@ const IBMNodeJs = () => {
       quantity: 1,
     };
     addToCart(product);
-    navigate("/cart"); // Navigate only after adding to cart
+    // Show confirmation message
+    setShowConfirmation(true);
+
+    // Hide the message after 3 seconds
+    setTimeout(() => {
+      setShowConfirmation(false);
+    }, 2000);
   };
   return (
     <>
-    <AddToCartButton />
+                          <AddToCartButton />
+
       <div className="relative bg-gradient-to-b from-blue-100 to-white w-full h-auto md:h-[20rem] pt-10 px-4 md:px-10 text-left">
         <img
           src={ibmlogo}
@@ -83,10 +90,16 @@ const IBMNodeJs = () => {
           >
             Add To Cart
           </button>
-          <button className="bg-blue-900 text-white px-4 py-2 rounded-lg">
+          {/* <button className="bg-blue-900 text-white px-4 py-2 rounded-lg">
             Buy Now
-          </button>
+          </button> */}
         </div>
+        {/* Confirmation Message */}
+        {showConfirmation && (
+          <div className=" mt-5 bg-green-500 text-white px-8  rounded-lg shadow-lg z-50">
+            Item Added to Cart!
+          </div>
+        )}
       </div>
 
       <div className="h-full px-4 md:px-[6rem] lg:px-[20rem] lg:pl-[5rem] xl:px-[40rem] xl:pl-[10rem]">
