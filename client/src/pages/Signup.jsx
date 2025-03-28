@@ -235,7 +235,6 @@ import { FaRegEyeSlash, FaEye } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { toast } from "react-toastify";
 import { signupUser } from "../slices/userSlice";
 import banner from "../../src/assets/loginbanner.jpeg";
 import Lottie from "lottie-react";
@@ -246,6 +245,7 @@ const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [countries, setCountries] = useState([]);
+  const [isLoadingCountries, setIsLoadingCountries] = useState(false);
 
   const [payload, setPayload] = useState({
     username: "",
@@ -263,12 +263,14 @@ const Signup = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
+  // Fetch countries when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
     fetchCountries();
   }, []);
 
   const fetchCountries = async () => {
+    setIsLoadingCountries(true);
     try {
       const response = await axios.get("https://restcountries.com/v3.1/all");
       const countryList = response.data
@@ -280,7 +282,6 @@ const Signup = () => {
       setCountries(countryList);
     } catch (error) {
       console.error("Error fetching countries:", error);
-      toast.error("Failed to load countries. Using fallback list.");
       // Fallback to a basic list if API fails
       setCountries([
         { code: "US", name: "United States" },
@@ -294,6 +295,8 @@ const Signup = () => {
         { code: "CN", name: "China" },
         { code: "BR", name: "Brazil" },
       ]);
+    } finally {
+      setIsLoadingCountries(false);
     }
   };
 
@@ -338,7 +341,23 @@ const Signup = () => {
     // Password validation
     if (payload.password.length < 8) {
       newErrors.password = "Password must be at least 8 characters";
+    } else if (!/[A-Z]/.test(payload.password)) {
+      newErrors.password = "Password must contain at least one uppercase letter";
+    } else if (!/[a-z]/.test(payload.password)) {
+      newErrors.password = "Password must contain at least one lowercase letter";
+    } else if (!/[0-9]/.test(payload.password)) {
+      newErrors.password = "Password must contain at least one number";
+    } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(payload.password)) {
+      newErrors.password = "Password must contain at least one special character";
     }
+
+    // Phone number validation
+    if (!payload.phoneNumber) {
+      newErrors.phoneNumber = "Phone number is required";
+    } else if (payload.phoneNumber.length < 10) {
+      newErrors.phoneNumber = "Please enter a valid phone number";
+    }
+
     // Pin code validation
     const pinCodeRegex = /^\d{5,6}$/;
     if (!pinCodeRegex.test(payload.pinCode)) {
@@ -346,17 +365,17 @@ const Signup = () => {
     }
 
     // Country validation
-    if (payload.country.trim() === "") {
+    if (!payload.country) {
       newErrors.country = "Country is required";
     }
 
     // Address validation
-    if (payload.address.trim() === "") {
+    if (!payload.address.trim()) {
       newErrors.address = "Address is required";
     }
 
     // Interest validation
-    if (payload.interest === "") {
+    if (!payload.interest) {
       newErrors.interest = "Please select an interest";
     }
 
@@ -460,7 +479,7 @@ const Signup = () => {
                   type="text"
                   id="username"
                   name="username"
-                  placeholder="UserName"
+                  placeholder="Username (min. 6 characters)"
                   value={payload.username}
                   required
                   onChange={handleChange}
@@ -484,7 +503,7 @@ const Signup = () => {
                   type="email"
                   id="email"
                   name="email"
-                  placeholder="Email"
+                  placeholder="your.email@example.com"
                   value={payload.email}
                   required
                   onChange={handleChange}
@@ -512,7 +531,7 @@ const Signup = () => {
                     value={payload.password}
                     required
                     onChange={handleChange}
-                    placeholder="Password"
+                    placeholder="Min. 8 characters with letters, numbers & symbols"
                     className={`w-full px-4 py-2 mt-2 border ${errors.password ? "border-red-500" : "border-gray-300"
                       } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#152B54]`}
                     aria-invalid={errors.password ? "true" : "false"}
@@ -551,7 +570,7 @@ const Signup = () => {
                   value={payload.phoneNumber}
                   required
                   onChange={handleChange}
-                  placeholder="Enter your phone number"
+                  placeholder="Phone number (digits only)"
                   pattern="[0-9]*"
                   inputMode="numeric"
                   className={`w-full px-4 py-2 mt-2 border ${errors.phoneNumber ? "border-red-500" : "border-gray-300"
@@ -562,7 +581,6 @@ const Signup = () => {
                   <p className="mt-1 text-xs text-red-500">{errors.phoneNumber}</p>
                 )}
               </div>
-
 
               <div className="mb-4">
                 <label
@@ -575,7 +593,7 @@ const Signup = () => {
                   type="text"
                   id="address"
                   name="address"
-                  placeholder="Address"
+                  placeholder="Your full address"
                   value={payload.address}
                   required
                   onChange={handleChange}
@@ -596,13 +614,13 @@ const Signup = () => {
                   Pin Code*
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   id="pinCode"
                   name="pinCode"
                   value={payload.pinCode}
                   required
                   onChange={handleChange}
-                  placeholder="5-6 digit code"
+                  placeholder="5-6 digit postal/zip code"
                   className={`w-full px-4 py-2 mt-2 border ${errors.pinCode ? "border-red-500" : "border-gray-300"
                     } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#152B54]`}
                   aria-invalid={errors.pinCode ? "true" : "false"}
@@ -625,10 +643,10 @@ const Signup = () => {
                   value={payload.country}
                   required
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 mt-2 border ${
-                    errors.country ? "border-red-500" : "border-gray-300"
-                  } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#152B54]`}
+                  className={`w-full px-4 py-2 mt-2 border ${errors.country ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#152B54]`}
                   aria-invalid={errors.country ? "true" : "false"}
+                  disabled={isLoadingCountries}
                 >
                   <option value="">Select a country</option>
                   {countries.map((country) => (
@@ -654,7 +672,7 @@ const Signup = () => {
                   type="text"
                   id="linkedIn"
                   name="linkedIn"
-                  placeholder="LinkedIn"
+                  placeholder="LinkedIn profile URL"
                   value={payload.linkedIn}
                   onChange={handleChange}
                   className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#152B54]"
@@ -731,6 +749,7 @@ const Signup = () => {
                 <p className="text-sm text-gray-700">
                   Already have an account?{" "}
                   <button
+                    type="button"
                     onClick={() => {
                       navigate("/login");
                     }}
