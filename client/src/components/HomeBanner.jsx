@@ -1,31 +1,16 @@
 import React from "react";
-import Herovideo from "../assets/homebannervideo4.mp4"; // Add your video file path here
-import newgif from "../assets/homegif8.webp";
+import Lottie from "lottie-react"; // Assuming you're using lottie-react for animation
 
 const HomeBanner = ({ text, animationData }) => {
   return (
-    <div className="w-full h-[30rem] relative flex flex-row">
-      {/* Video Background */}
-      <div className="absolute top-0 left-0 w-full h-full">
-        <video
-          autoPlay
-          loop
-          muted
-          className="w-full h-full object-cover"
-        >
-          <source src={Herovideo} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      </div>
-
+    <div className="w-full h-[30rem] flex items-center justify-between px-6 relative">
       {/* Left side - Text */}
-      <div className="relative text-white text-left sm:text-left sm:w-1/2 px-10 sm:px-8 md:px-16">
-        <h1 className="md:text-8xl sm:text-5xl text-4xl font-semibold font-serif mb-4">
+      <div className="text-black">
+        <h1 className="md:text-7xl  text-4xl font-semibold font-serif mb-4 text-center">
           {text.title}
         </h1>
         <br />
-        <br />
-        <p className="md:text-3xl uppercase sm:text-xl text-lg mb-6 font-semibold">
+        <p className="md:text-3xl text-center uppercase font-serif text-xl mb-6 font-semibold">
           {text.type1}
           <br />
           <br />
@@ -36,19 +21,18 @@ const HomeBanner = ({ text, animationData }) => {
           <br />
           <br />
           {text.type4}
-          <br />
         </p>
-        {/* Additional elements can go here (like buttons, links, etc.) */}
       </div>
 
       {/* Right side - Lottie Animation */}
-      {/* <div className="relative w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 flex justify-center items-center">
-        <img
-          src={newgif}
-          alt="Animation"
-          className="w-full h-full object-contain"
-        />
-      </div> */}
+      <div className="md:w-1/3 mt-0 z-50 hidden md:block mx-auto">
+  <Lottie
+    animationData={animationData}
+    loop={true}
+    className="w-full max-w-xl h-auto"
+  />
+</div>
+
     </div>
   );
 };

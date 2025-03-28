@@ -3,6 +3,7 @@ import banner from "../assets/ibmbanner.jpg";
 import banner2 from "../assets/applelogo.png";
 import Card1 from "../assets/applecard1.jpg";
 import SwiftCourses from "../components/SwiftCourses";
+import { useNavigate } from "react-router-dom";
 
 const SwiftDevelopment = () => {
   useEffect(() => {
@@ -19,7 +20,7 @@ const SwiftDevelopment = () => {
     },
    
   ];
-
+const navigate=useNavigate()
   return (
     <>
       <div
@@ -52,6 +53,29 @@ const SwiftDevelopment = () => {
               alt="IBM Banner"
             />
           </div>
+        </div>
+      </div>
+      <div className="flex items-center w-full py-4 px-6 bg-white rounded shadow-md border border-gray-200">
+        <button
+          onClick={() => {
+            navigate("/");
+          }}
+          className="text-gray-600 font-bold py-2 px-4 rounded"
+        >
+          <span className="hover:text-gray-800">Home</span>
+        </button>
+        <div className="flex items-center text-gray-500 font-bold">
+          <span>{" > "}</span>
+          <button
+            onClick={() => {
+              navigate("/Courses-details");
+            }}
+            className="text-gray-600 font-bold py-2 px-4 rounded"
+          >
+            <span className="hover:text-gray-800">Course Details</span>
+          </button>
+          <span>{" > "}</span>
+          <span className="ml-4">Swift Development</span>
         </div>
       </div>
       <div className="bg-teal-50 py-10 px-6">

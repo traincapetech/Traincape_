@@ -3,6 +3,7 @@ import banner from "../assets/ibmbanner.jpg";
 import banner2 from "../assets/PMI.jpg";
 import Card1 from "../assets/pmicard1.jpg";
 import PMICourses from "../components/PMICourses";
+import { useNavigate } from "react-router-dom";
 
 const PMI = () => {
   useEffect(() => {
@@ -154,7 +155,7 @@ const PMI = () => {
     //   url: "/IBMcourses",
     // },
   ];
-
+  const navigate = useNavigate();
   return (
     <>
       <div
@@ -168,16 +169,17 @@ const PMI = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between p-5">
           <div className="lg:w-2/3 w-full">
             <h1 className="text-2xl md:text-4xl lg:text-4xl font-bold font-serif">
-            PMI Project Management
+              PMI Project Management
             </h1>
             <h5 className="text-sm md:text-lg lg:text-xl mt-4">
-            The PMI Project Management Ready® certification is designed to test and validate foundational concepts and knowledge in project management.
-            <br />
-            This is an entry-level certification that does not require any prior work experience in project management and              <br />
-              
-              can help candidates take their first step towards preparing to become a Certified Associate in Project Management (CAPM)®.
-              
-             
+              The PMI Project Management Ready® certification is designed to
+              test and validate foundational concepts and knowledge in project
+              management.
+              <br />
+              This is an entry-level certification that does not require any
+              prior work experience in project management and <br />
+              can help candidates take their first step towards preparing to
+              become a Certified Associate in Project Management (CAPM)®.
             </h5>
           </div>
           <div className="hidden lg:block p-10 mt-5 ">
@@ -187,6 +189,29 @@ const PMI = () => {
               alt="IBM Banner"
             />
           </div>
+        </div>
+      </div>
+      <div className="flex items-center w-full py-4 px-6 bg-white rounded shadow-md border border-gray-200">
+        <button
+          onClick={() => {
+            navigate("/");
+          }}
+          className="text-gray-600 font-bold py-2 px-4 rounded"
+        >
+          <span className="hover:text-gray-800">Home</span>
+        </button>
+        <div className="flex items-center text-gray-500 font-bold">
+          <span>{" > "}</span>
+          <button
+            onClick={() => {
+              navigate("/Courses-details");
+            }}
+            className="text-gray-600 font-bold py-2 px-4 rounded"
+          >
+            <span className="hover:text-gray-800">Course Details</span>
+          </button>
+          <span>{" > "}</span>
+          <span className="ml-4">PMI</span>
         </div>
       </div>
       <div className="bg-teal-50 py-10 px-6">
@@ -207,7 +232,5 @@ const PMI = () => {
     </>
   );
 };
-
-
 
 export default PMI;

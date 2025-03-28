@@ -473,7 +473,7 @@
 
 //Ishaan Jain Code
 import React, { useEffect, useState } from "react";
-import { FaRegEyeSlash, FaEye } from "react-icons/fa6";
+import { FaRegEyeSlash, FaEye,FaArrowLeft } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { signupUser } from "../slices/userSlice";
@@ -613,6 +613,18 @@ const Signup = () => {
       className="w-full min-h-screen bg-cover bg-center relative"
       style={{ backgroundImage: `url(${banner})` }}
     >
+         {/* Back Arrow Button */}
+            <button
+              onClick={()=>{
+                navigate(-1);
+              }}
+              className="absolute top-2 left-2 md:top-4 md:left-4 z-20 text-white bg-[#152B54] 
+                         p-2 md:p-3 rounded-full hover:bg-sky-950 transition duration-200
+                         flex items-center justify-center"
+              aria-label="Go back to home"
+            >
+              <FaArrowLeft className="w-4 h-4 md:w-6 md:h-6" />
+            </button>
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
       <div className="absolute inset-0 flex justify-center items-center p-4 overflow-auto">

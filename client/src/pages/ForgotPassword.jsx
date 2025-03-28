@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import Lottie from "lottie-react";
-import { FaRegEyeSlash, FaEye } from "react-icons/fa6";
+import { FaRegEyeSlash, FaEye,FaArrowLeft } from "react-icons/fa6";
 
 // Assets
 import banner from "../assets/loginbanner.jpeg";
@@ -19,14 +19,14 @@ import Loading from "./loadingPage/Loading";
 const ForgotPassword = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   // State management
   const [currentStep, setCurrentStep] = useState("email"); // email, otp, resetPassword
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
-  
+
   const [payload, setPayload] = useState({
     email: "",
     otp: "",
@@ -39,13 +39,13 @@ const ForgotPassword = () => {
   // Handle OTP input field focus and navigation
   const handleOtpInput = (e, index) => {
     const value = e.target.value;
-    
+
     // Only allow numbers
     if (!/^\d*$/.test(value)) {
       e.target.value = "";
       return;
     }
-    
+
     if (value.length > 0 && index < inputRefs.current.length - 1) {
       inputRefs.current[index + 1].focus();
     }
@@ -61,7 +61,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     const paste = e.clipboardData.getData("text");
     const digits = paste.replace(/\D/g, "").slice(0, 6);
-    
+
     digits.split("").forEach((digit, index) => {
       if (inputRefs.current[index]) {
         inputRefs.current[index].value = digit;
@@ -83,10 +83,10 @@ const ForgotPassword = () => {
     setError("");
     setSuccessMessage("");
     setCurrentStep("email");
-    
+
     // Clear OTP input fields if they exist
     if (inputRefs.current.length > 0) {
-      inputRefs.current.forEach(input => {
+      inputRefs.current.forEach((input) => {
         if (input) input.value = "";
       });
     }
@@ -97,7 +97,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     setError("");
     setSuccessMessage("");
-    
+
     try {
       if (!payload.email.trim()) {
         setError("Email is required");
@@ -106,7 +106,7 @@ const ForgotPassword = () => {
 
       setLoading(true);
       const result = await dispatch(sendOTPToEmail({ email: payload.email }));
-      
+
       if (result.payload.success) {
         setSuccessMessage("OTP sent successfully");
         setCurrentStep("otp");
@@ -125,22 +125,22 @@ const ForgotPassword = () => {
     e.preventDefault();
     setError("");
     setSuccessMessage("");
-    
+
     try {
       // Collect OTP from all input fields
-      const otpArray = inputRefs.current.map(input => input.value);
+      const otpArray = inputRefs.current.map((input) => input.value);
       const otp = otpArray.join("");
-      
+
       if (otp.length !== 6 || !/^\d+$/.test(otp)) {
         setError("Please enter a valid 6-digit OTP");
         return;
       }
-      
+
       setLoading(true);
       const result = await dispatch(verifyOtp({ otp, email: payload.email }));
-      
+
       if (result.payload.success) {
-        setPayload(prev => ({ ...prev, otp }));
+        setPayload((prev) => ({ ...prev, otp }));
         setSuccessMessage("OTP verified successfully");
         setCurrentStep("resetPassword");
       } else {
@@ -158,26 +158,26 @@ const ForgotPassword = () => {
     e.preventDefault();
     setError("");
     setSuccessMessage("");
-    
+
     try {
       const { newPassword, confirmPassword, email, otp } = payload;
-      
+
       // Validate passwords
       if (!newPassword || !confirmPassword) {
         setError("Both password fields are required");
         return;
       }
-      
+
       if (newPassword !== confirmPassword) {
         setError("Passwords do not match");
         return;
       }
-      
+
       if (newPassword.length < 8) {
         setError("Password must be at least 8 characters long");
         return;
       }
-      
+
       setLoading(true);
       const result = await dispatch(
         reset_password({
@@ -186,7 +186,7 @@ const ForgotPassword = () => {
           newPassword,
         })
       );
-      
+
       if (result.payload.success) {
         toast.success("Password changed successfully");
         navigate("/login");
@@ -219,7 +219,9 @@ const ForgotPassword = () => {
                 id="email"
                 name="email"
                 value={payload.email}
-                onChange={(e) => setPayload({ ...payload, email: e.target.value })}
+                onChange={(e) =>
+                  setPayload({ ...payload, email: e.target.value })
+                }
                 className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                 required
               />
@@ -234,7 +236,7 @@ const ForgotPassword = () => {
             </button>
           </div>
         );
-        
+
       case "otp":
         return (
           <div className="mt-4">
@@ -245,18 +247,20 @@ const ForgotPassword = () => {
               Enter the 6-digit code sent to {payload.email}
             </p>
             <div className="flex justify-between mb-3" onPaste={handleOtpPaste}>
-              {Array(6).fill(0).map((_, index) => (
-                <input
-                  key={index}
-                  type="text"
-                  maxLength="1"
-                  className="w-12 h-12 text-3xl text-center border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-                  ref={(el) => (inputRefs.current[index] = el)}
-                  onInput={(e) => handleOtpInput(e, index)}
-                  onKeyDown={(e) => handleOtpKeyDown(e, index)}
-                  required
-                />
-              ))}
+              {Array(6)
+                .fill(0)
+                .map((_, index) => (
+                  <input
+                    key={index}
+                    type="text"
+                    maxLength="1"
+                    className="w-12 h-12 text-3xl text-center border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    ref={(el) => (inputRefs.current[index] = el)}
+                    onInput={(e) => handleOtpInput(e, index)}
+                    onKeyDown={(e) => handleOtpKeyDown(e, index)}
+                    required
+                  />
+                ))}
             </div>
             <div className="flex justify-between">
               <button
@@ -277,7 +281,7 @@ const ForgotPassword = () => {
             </div>
           </div>
         );
-        
+
       case "resetPassword":
         return (
           <div>
@@ -294,7 +298,9 @@ const ForgotPassword = () => {
                   id="newPassword"
                   name="newPassword"
                   value={payload.newPassword}
-                  onChange={(e) => setPayload({ ...payload, newPassword: e.target.value })}
+                  onChange={(e) =>
+                    setPayload({ ...payload, newPassword: e.target.value })
+                  }
                   className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                   required
                 />
@@ -319,7 +325,9 @@ const ForgotPassword = () => {
                 id="confirmPassword"
                 name="confirmPassword"
                 value={payload.confirmPassword}
-                onChange={(e) => setPayload({ ...payload, confirmPassword: e.target.value })}
+                onChange={(e) =>
+                  setPayload({ ...payload, confirmPassword: e.target.value })
+                }
                 className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                 required
               />
@@ -343,21 +351,36 @@ const ForgotPassword = () => {
             </div>
           </div>
         );
-        
+
       default:
         return null;
     }
   };
 
-  return (
+  return loading?(
+  <Loading />
+):
+  (
     <div
       className="w-full md:h-[85vh] h-[120vh] bg-cover bg-center relative"
       style={{ backgroundImage: `url(${banner})` }}
     >
+      {/* Back Arrow Button */}
+      <button
+        onClick={() => {
+          navigate('/login');
+        }}
+        className="absolute top-2 left-2 md:top-4 md:left-4 z-20 text-white bg-[#152B54] 
+                               p-2 md:p-3 rounded-full hover:bg-sky-950 transition duration-200
+                               flex items-center justify-center"
+        aria-label="Go back to home"
+      >
+        <FaArrowLeft className="w-4 h-4 md:w-6 md:h-6" />
+      </button>
       <div className="absolute inset-0 bg-black opacity-50"></div>
-      
-      {loading && <Loading />}
-      
+
+      {/* {loading && <Loading />} */}
+
       <div className="absolute inset-0 flex justify-center items-center">
         <div className="grid-cols-1 md:flex m-auto p-4">
           {/* Left side - animation */}
@@ -375,21 +398,21 @@ const ForgotPassword = () => {
               className="w-full h-full my-auto"
             />
           </div>
-          
+
           {/* Right side - form */}
           <div className="bg-white bg-opacity-90 p-8 shadow-lg w-full sm:w-[400px] mr-auto">
             <h1 className="text-3xl font-semibold text-center text-[#152B54] mb-6">
-              {currentStep === "resetPassword" ? "Reset Password" : "Forgot Password"}
+              {currentStep === "resetPassword"
+                ? "Reset Password"
+                : "Forgot Password"}
             </h1>
-            
+
             <form onSubmit={(e) => e.preventDefault()}>
               {renderFormStep()}
-              
+
               {/* Error and success messages */}
               {error && (
-                <p className="text-center mt-4 text-red-500 text-sm">
-                  {error}
-                </p>
+                <p className="text-center mt-4 text-red-500 text-sm">{error}</p>
               )}
               {successMessage && (
                 <p className="text-center mt-4 text-green-500 text-sm">

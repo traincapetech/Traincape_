@@ -51,14 +51,28 @@ const PartnerSection = () => {
     // { logo: Product10, url: "https://product10.com" },
   ];
 
-   useEffect(() => {
-      window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="bg-gradient-to-r from-blue-200 to-white p-6 sm:p-8 md:p-12 rounded-lg shadow-lg flex flex-col md:flex-col lg:flex-row justify-between items-center w-full mx-auto">
       {/* Left Section */}
       <div className="w-full lg:w-1/2 p-4 sm:p-6 md:p-10">
+        <div className="flex items-center w-full py-4 ">
+          <button
+            onClick={() => {
+              navigate("/");
+            }}
+            className="text-gray-600 font-bold py-2 pr-4 rounded"
+          >
+            <span className="hover:text-gray-800">Home</span>
+          </button>
+          <div className="flex items-center text-gray-500 font-bold">
+            <span>{" > "}</span>
+            <span className="ml-4">About Us</span>
+          </div>
+        </div>
         <h3 className="text-lg font-semibold text-gray-700 mb-4">
           Partners & Team
         </h3>

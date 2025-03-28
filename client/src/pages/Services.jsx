@@ -13,50 +13,55 @@ import project from "../assets/Project Planning.svg";
 import arrow from "../assets/Process arrow.svg";
 import Request from "../assets/Meeting-request.svg";
 import Building from "../assets/Start Building.svg";
-import CloudImg from "../assets/cloud.jpg"
-import UiUx from "../assets/uiux.jpg"
-import DigitalImg from "../assets/digital.jpg"
-import Saas from "../assets/saas.jpg"
-import SoftwareImg from "../assets/software.jpeg"
-import webImg from "../assets/web.png"
+import CloudImg from "../assets/cloud.jpg";
+import UiUx from "../assets/uiux.jpg";
+import DigitalImg from "../assets/digital.jpg";
+import Saas from "../assets/saas.jpg";
+import SoftwareImg from "../assets/software.jpeg";
+import webImg from "../assets/web.png";
 
 const servicesData = [
   {
-    title: 'Cloud Services',
-    description: 'Cloud services provide computing resources over the internet, allowing users to access and use them on-demand without maintaining the underlying infrastructure. These services offer benefits such as cost optimization, scalability, accessibility, reliability, and innovation.',
+    title: "Cloud Services",
+    description:
+      "Cloud services provide computing resources over the internet, allowing users to access and use them on-demand without maintaining the underlying infrastructure. These services offer benefits such as cost optimization, scalability, accessibility, reliability, and innovation.",
     image: cloud,
-    banner: CloudImg
-
+    banner: CloudImg,
   },
   {
-    title: 'UI Development',
-    description: 'UI development involves designing and developing visual and interactive components for websites and applications. Key skills include HTML, CSS, JavaScript, responsive design, and accessibility.',
+    title: "UI Development",
+    description:
+      "UI development involves designing and developing visual and interactive components for websites and applications. Key skills include HTML, CSS, JavaScript, responsive design, and accessibility.",
     image: UI,
-    banner: UiUx
+    banner: UiUx,
   },
   {
-    title: 'Digital Marketing',
-    description: 'Digital marketing uses online strategies and channels to promote products and services, connecting businesses with customers. Techniques include SEO, PPC, social media, content marketing, and leveraging offline media.',
+    title: "Digital Marketing",
+    description:
+      "Digital marketing uses online strategies and channels to promote products and services, connecting businesses with customers. Techniques include SEO, PPC, social media, content marketing, and leveraging offline media.",
     image: Digital,
-    banner: DigitalImg
+    banner: DigitalImg,
   },
   {
-    title: 'Web Development',
-    description: 'Web development involves creating and maintaining websites and web applications. It includes frontend development, backend development, and full-stack development.',
+    title: "Web Development",
+    description:
+      "Web development involves creating and maintaining websites and web applications. It includes frontend development, backend development, and full-stack development.",
     image: Web,
-    banner: webImg
+    banner: webImg,
   },
   {
-    title: 'Software Services',
-    description: 'Software services include custom software development, web development, mobile app development, cloud computing, quality assurance, software maintenance, and consulting.',
+    title: "Software Services",
+    description:
+      "Software services include custom software development, web development, mobile app development, cloud computing, quality assurance, software maintenance, and consulting.",
     image: Software,
-    banner: Saas
+    banner: Saas,
   },
   {
-    title: 'Software Development',
-    description: 'Software development is the process of designing, creating, testing, and maintaining computer programs and applications. It is essential for creating custom applications that automate processes and improve efficiency.',
+    title: "Software Development",
+    description:
+      "Software development is the process of designing, creating, testing, and maintaining computer programs and applications. It is essential for creating custom applications that automate processes and improve efficiency.",
     image: softwareDevelopment,
-    banner: SoftwareImg
+    banner: SoftwareImg,
   },
 ];
 
@@ -67,21 +72,45 @@ const Services = () => {
     window.scrollTo(0, 0);
   }, []);
 
-
   const handleClick = (service) => {
-    navigate('/service-detail', { state: { service } }); // Pass service data through state
+    navigate("/service-detail", { state: { service } }); // Pass service data through state
   };
 
   return (
     <div className="">
       <div className="relative w-full bg-contain bg-[#152B54]">
-        <img src={banner} alt="Banner" className="md:h-[60vh] h-[30vh] w-full opacity-50" />
+        <img
+          src={banner}
+          alt="Banner"
+          className="md:h-[60vh] h-[30vh] w-full opacity-50"
+        />
       </div>
       <div className="max-w-7xl text-center mx-auto py-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="flex items-center w-full py-4 px-6 bg-white rounded shadow-md border border-gray-200">
+          <button
+            onClick={() => {
+              navigate("/");
+            }}
+            className="text-gray-600 font-bold py-2 px-4 rounded"
+          >
+            <span className="hover:text-gray-800">Home</span>
+          </button>
+          <div className="flex items-center text-gray-500 font-bold">
+            <span>{" > "}</span>
+            <span className="ml-4">Our Services</span>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {servicesData.map((service, index) => (
-            <div key={index} className="border p-4 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out">
-              <img src={service.image} alt={service.title} className="w-24 mx-auto object-cover rounded-lg" />
+            <div
+              key={index}
+              className="border p-4 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out"
+            >
+              <img
+                src={service.image}
+                alt={service.title}
+                className="w-24 mx-auto object-cover rounded-lg"
+              />
               <h2 className="text-xl font-semibold mt-4">{service.title}</h2>
               <p className="text-gray-600 mt-2">{service.description}</p>
               <button
@@ -93,7 +122,7 @@ const Services = () => {
             </div>
           ))}
         </div>
-    </div>
+      </div>
       <div className={servicepage.consult}>
         <img
           src="https://i.pinimg.com/736x/b5/fc/e2/b5fce2660baac71920aa53a7f2bc0265.jpg"

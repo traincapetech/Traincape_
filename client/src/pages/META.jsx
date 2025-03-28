@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import banner from "../assets/ibmbanner.jpg";
 import banner2 from "../assets/metalogo2.png";
 import Card1 from "../assets/METAcard1.png";
-import MetaCourses from "../components/MetaCourses"
+import MetaCourses from "../components/MetaCourses";
+import { useNavigate } from "react-router-dom";
 
 const META = () => {
   useEffect(() => {
@@ -13,7 +14,8 @@ const META = () => {
     {
       image: Card1,
       title: "CERTIFICATION COURSE",
-      description: "Meta Certified Digital Marketing Associate E-Learning Course",
+      description:
+        "Meta Certified Digital Marketing Associate E-Learning Course",
       price: "₹1699",
       url: "/IBMcourses",
     },
@@ -154,7 +156,7 @@ const META = () => {
     //   url: "/IBMcourses",
     // },
   ];
-
+  const navigate = useNavigate();
   return (
     <>
       <div
@@ -168,20 +170,25 @@ const META = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between p-5">
           <div className="lg:w-2/3 w-full">
             <h1 className="text-2xl md:text-4xl lg:text-4xl font-bold font-serif">
-            Meta Digital Marketing Certification
+              Meta Digital Marketing Certification
             </h1>
             <h5 className="text-xs md:text-lg lg:text-xl mt-4">
-              The Meta Certified Digital Marketing Associate Certification Exam is for entry-level marketing professionals, advertising and marketing students, interns, etc.
+              The Meta Certified Digital Marketing Associate Certification Exam
+              is for entry-level marketing professionals, advertising and
+              marketing students, interns, etc.
               <br />
-              The exam targets secondary and immediate post-secondary students, including career professionals looking to expand their skillset or switch roles or jobs.
+              The exam targets secondary and immediate post-secondary students,
+              including career professionals looking to expand their skillset or
+              switch roles or jobs.
               <br />
               <br />
-              Learners who earn the Meta Certified Digital Marketing Associate Certification understand the value that
+              Learners who earn the Meta Certified Digital Marketing Associate
+              Certification understand the value that
               <br />
-              advertising on Meta technologies can deliver for businesses, small and large, by helping them reach new and existing customers.
+              advertising on Meta technologies can deliver for businesses, small
+              and large, by helping them reach new and existing customers.
               <br />
               <br />
-             
             </h5>
           </div>
           <div className="hidden lg:block p-10  mt-5 ">
@@ -191,6 +198,29 @@ const META = () => {
               alt="IBM Banner"
             />
           </div>
+        </div>
+      </div>
+      <div className="flex items-center w-full py-4 px-6 bg-white rounded shadow-md border border-gray-200">
+        <button
+          onClick={() => {
+            navigate("/");
+          }}
+          className="text-gray-600 font-bold py-2 px-4 rounded"
+        >
+          <span className="hover:text-gray-800">Home</span>
+        </button>
+        <div className="flex items-center text-gray-500 font-bold">
+          <span>{" > "}</span>
+          <button
+            onClick={() => {
+              navigate("/Courses-details");
+            }}
+            className="text-gray-600 font-bold py-2 px-4 rounded"
+          >
+            <span className="hover:text-gray-800">Course Details</span>
+          </button>
+          <span>{" > "}</span>
+          <span className="ml-4">META</span>
         </div>
       </div>
       <div className="bg-teal-50 py-10 px-6">

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaRegEyeSlash, FaEye } from "react-icons/fa";
+import { FaRegEyeSlash, FaEye, FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../slices/userSlice";
@@ -43,33 +43,33 @@ const Login = () => {
       setErrorMessage("Email and password are required");
       return false;
     }
-    
+
     if (!payload.email) {
       setErrorMessage("Email is required");
       return false;
     }
-    
+
     if (!payload.password) {
       setErrorMessage("Password is required");
       return false;
     }
-    
+
     // Basic email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(payload.email)) {
       setErrorMessage("Please enter a valid email address");
       return false;
     }
-    
+
     return true;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Clear previous errors
     setErrorMessage("");
-    
+
     // Validate form
     if (!validateForm()) {
       return;
@@ -79,10 +79,10 @@ const Login = () => {
       setIsSubmitting(true);
 
       const result = await dispatch(
-        loginUser({ 
-          email: payload.email, 
+        loginUser({
+          email: payload.email,
           password: payload.password,
-          rememberMe: rememberMe
+          rememberMe: rememberMe,
         })
       );
 
@@ -93,8 +93,8 @@ const Login = () => {
         // Handle error from the rejected action
         const errorPayload = result.payload || result.error?.message;
         setErrorMessage(
-          typeof errorPayload === 'string' 
-            ? errorPayload 
+          typeof errorPayload === "string"
+            ? errorPayload
             : "Invalid email or password. Please try again."
         );
         setIsSubmitting(false);
@@ -108,7 +108,7 @@ const Login = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    
+
     // If user is already logged in, redirect to home
     if (user) {
       navigate("/");
@@ -120,6 +120,18 @@ const Login = () => {
       className="w-full min-h-screen bg-cover bg-center relative flex items-center justify-center"
       style={{ backgroundImage: `url(${banner})` }}
     >
+      {/* Back Arrow Button */}
+      <button
+        onClick={()=>{
+          navigate('/');
+        }}
+        className="absolute top-2 left-2 md:top-4 md:left-4 z-20 text-white bg-[#152B54] 
+                   p-2 md:p-3 rounded-full hover:bg-sky-950 transition duration-200
+                   flex items-center justify-center"
+        aria-label="Go back to home"
+      >
+        <FaArrowLeft className="w-4 h-4 md:w-6 md:h-6" />
+      </button>
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
       <div className="relative z-10 w-full max-w-6xl px-4 py-8 flex flex-col md:flex-row items-center">
@@ -137,18 +149,18 @@ const Login = () => {
             className="w-full h-[300px] md:h-[400px]"
           />
         </div>
-        
+
         <div className="bg-white bg-opacity-90 p-6 md:p-8 shadow-lg w-full md:w-1/2 max-w-[450px]">
           <h1 className="text-2xl md:text-3xl font-semibold text-center text-[#152B54] mb-6">
             Login
           </h1>
-          
+
           {errorMessage && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 text-sm">
               {errorMessage}
             </div>
           )}
-          
+
           <form onSubmit={handleSubmit} noValidate>
             <div className="mb-4">
               <label
@@ -196,12 +208,12 @@ const Login = () => {
 
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center">
-                <input 
-                  type="checkbox" 
-                  id="remember" 
+                <input
+                  type="checkbox"
+                  id="remember"
                   checked={rememberMe}
                   onChange={handleRememberMe}
-                  className="mr-2" 
+                  className="mr-2"
                 />
                 <label htmlFor="remember" className="text-sm text-gray-700">
                   Remember me

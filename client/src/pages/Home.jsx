@@ -694,206 +694,222 @@ const Home = () => {
   });
   return (
     <div>
-      <div>
-        <HomeBanner text={bannerText} animationData={banner} />
-      </div>
+    <div
+ className="md:pt-0 lg:pt-0"
+ style={{
+   background: "linear-gradient(to bottom, #b8c0ff,#e5e7eb ", 
+   backgroundSize: "cover", 
+   backgroundPosition: "center",
+ }}
+>
+ <HomeBanner text={bannerText} animationData={banner} />
+</div>
 
-      {/* Logos Section */}
-      <div className="my-10">
-        <p className="bg-gray-200 text-center font-bold uppercase text-4xl py-10">
-          Vendors and Providers
-        </p>
-        <Slider {...settings}>
-          {[comptia, pecb, certiport, pearson, etraind].map((logo, index) => (
-            <div key={index} className="flex justify-center p-3">
-              <img
-                src={logo}
-                alt={`Logo ${index + 1}`}
-                className="object-cover w-full max-w-[200px] mx-auto"
-              />
-            </div>
-          ))}
-        </Slider>
-      </div>
 
-      <div>
-        {/* Mobile View - Visible only on small screens */}
-        <div className="block md:hidden">
-          <HomeSlider />
-        </div>
+     {/* Logos Section */}
+     <div className="my-10">
+       <p className="bg-gray-200 text-center font-bold uppercase text-4xl py-10">
+         Vendors and Providers
+       </p>
+       <Slider {...settings}>
+         {[comptia, pecb, certiport, pearson, etraind].map((logo, index) => (
+           <div key={index} className="flex justify-center p-3">
+             <img
+               src={logo}
+               alt={`${index + 1}`}
+               className="object-cover w-full max-w-[200px] mx-auto"
+             />
+           </div>
+         ))}
+       </Slider>
+     </div>
 
-        {/* Rotation Component - Visible on medium and larger screens
-        <div className="hidden md:block">
-          <Rotation />
-        </div> */}
-      </div>
+     {/* <div>
+       { Mobile View - Visible only on small screens }
+       <div className="block md:hidden">
+         <HomeSlider />
+       </div>
 
-      <div className={style.aboutus}>
-        <h1 className="text-center text-4xl font-semibold py-10">About Us</h1>
-        <div className={style.about}>
-          <div className={style.aboutext}>
-            <h2 className="text-2xl font-semibold">
-              Empowering Your Business with Seamless IT Solutions
-            </h2>
-            <p>
-              At our company, we specialize in delivering premier IT support and
-              management services tailored to optimize your technology
-              operations. Our mission is to empower businesses with innovative,
-              reliable, and scalable IT solutions that drive success. With a
-              commitment to excellence, we ensure your technology works
-              flawlessly so you can focus on what truly matters—growing your
-              business.
-            </p>
-            <NavLink to="/about-us">
-              <button className="bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition duration-300 mt-5">
-                About Us
-              </button>
-            </NavLink>
-          </div>
+       Rotation Component - Visible on medium and larger screens
+       <div className="hidden md:block">
+         <Rotation />
+       </div>
+     </div> */}
 
-          <div className={style.aboutimg}>
-            <img src={team} alt="Team" className="w-full h-auto" />
-          </div>
-        </div>
-      </div>
+     <div className="w-full px-8  md:px-24 items-center sm:h-[10rem] md:h-[35rem]">
+       <h1 className="text-center text-3xl md:text-4xl font-semibold">
+         About Us
+       </h1>
+       <div className="flex flex-col md:flex-row gap-6 md:gap-10 mt-6">
+         {/* Text Section */}
+         <div className="flex-1">
+           <h2 className="text-2xl md:text-3xl font-semibold">
+             Empowering Your Business with Seamless IT Solutions
+           </h2>
+           <p className="mt-4 text-sm md:text-base">
+             At our company, we specialize in delivering premier IT support and
+             management services tailored to optimize your technology
+             operations. Our mission is to empower businesses with innovative,
+             reliable, and scalable IT solutions that drive success. With a
+             commitment to excellence, we ensure your technology works
+             flawlessly so you can focus on what truly matters—growing your
+             business.
+           </p>
+           <NavLink to="/about-us">
+             <button className="bg-blue-500  text-white py-2 px-6 rounded-md hover:bg-blue-700 transition duration-300 mt-5 text-sm md:text-base">
+               About Us
+             </button>
+           </NavLink>
+         </div>
 
-      {/* Services Section */}
+         {/* Image Section */}
+         <div className="flex-1 hidden md:block">
+           <img
+             src={team}
+             alt="Team"
+             className="lg:pl-16 w-auto h-[20rem] rounded-lg"
+           />
+         </div>
+       </div>
+     </div>
 
-      <div className={style.card}>
-        <h2>Our Latest Services</h2>
-        <div className={style.cards}>
-          <div className={style.card1}>
-            <img src={card1} alt="" />
-            <div className={style.cardtext}>
-              <h3>Cloud Services</h3>
-              <h6>
-                Cloud services provide computing resources over the internet,
-                allowing users to access and use them on-demand without
-                maintaining the underlying infrastructure
-              </h6>
-            </div>
-          </div>
-          <div className={style.card2}>
-            <img src={card2} alt="" />
-            <div className={style.cardtext}>
-              <h3>UI Design</h3>
-              <h6>
-                UI design involves designing and developing visual and
-                interactive components for websites and applications. Key skills
-                include HTML, CSS, JavaScript, responsive design, and
-                accessibility.
-              </h6>
-            </div>
-          </div>
-          <div className={style.card1}>
-            <img src={card3} alt="" />
-            <div className={style.cardtext}>
-              <h3>Digital Marketing</h3>
-              <h6>
-                Digital marketing uses online strategies and channels to promote
-                products and services, connecting businesses with customers.
-                Techniques include SEO, PPC, social media, content marketing,
-                and leveraging offline media.
-              </h6>
-            </div>
-          </div>
+     {/* Services Section */}
 
-          <div className={style.card2}>
-            <img src={card4} alt="" />
-            <div className={style.cardtext}>
-              <h3>Web Development</h3>
-              <h6>
-                Web development involves creating and maintaining websites and
-                web applications. It includes frontend development (user
-                interface), backend development (server-side logic), and
-                full-stack development (both). Common languages are HTML, CSS,
-                JavaScript.
-              </h6>
-            </div>
-          </div>
-          <div className={style.card1}>
-            <img src={card5} alt="" />
-            <div className={style.cardtext}>
-              <h3>Software Services</h3>
-              <h6>
-                Software services include custom software development, web
-                development, mobile app development, cloud computing, quality
-                assurance, software maintenance, and consulting.{" "}
-              </h6>
-            </div>
-          </div>
-          <div className={style.card2}>
-            <img src={card6} alt="" />
-            <div className={style.cardtext}>
-              <h3>Software Development</h3>
-              <h6>
-                Software development is the process of designing, creating,
-                testing, and maintaining computer programs and applications. It
-                involves identifying needs, analyzing requirements, designing,
-                developing, testing, deploying, and maintaining software.
-              </h6>
-            </div>
-          </div>
-        </div>
-      </div>
+     <div className={style.card}>
+       <h2>Our Latest Services</h2>
+       <div className={style.cards}>
+         <div className={style.card1}>
+           <img src={card1} alt="" />
+           <div className={style.cardtext}>
+             <h3>Cloud Services</h3>
+             <h6>
+               Cloud services provide computing resources over the internet,
+               allowing users to access and use them on-demand without
+               maintaining the underlying infrastructure
+             </h6>
+           </div>
+         </div>
+         <div className={style.card2}>
+           <img src={card2} alt="" />
+           <div className={style.cardtext}>
+             <h3>UI Design</h3>
+             <h6>
+               UI design involves designing and developing visual and
+               interactive components for websites and applications. Key skills
+               include HTML, CSS, JavaScript, responsive design, and
+               accessibility.
+             </h6>
+           </div>
+         </div>
+         <div className={style.card1}>
+           <img src={card3} alt="" />
+           <div className={style.cardtext}>
+             <h3>Digital Marketing</h3>
+             <h6>
+               Digital marketing uses online strategies and channels to promote
+               products and services, connecting businesses with customers.
+               Techniques include SEO, PPC, social media, content marketing,
+               and leveraging offline media.
+             </h6>
+           </div>
+         </div>
 
-      {/* Hero Section with YouTube Video */}
-      <div
-        className={style.hero}
-        data-aos="zoom-in-up"
-        data-aos-offset="200"
-        data-aos-duration="2000"
-      >
-        <div className={style.heroImg}>
-          <iframe
-            className={style.vdo}
-            src="https://www.youtube.com/embed/cZjkxmzo1Xg?autoplay=1&loop=1&playlist=cZjkxmzo1Xg&controls=1&mute=1"
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-            frameBorder="0"
-          ></iframe>
-        </div>
-        <div className={style.heroText}>
-          <h3>GET BEST IT SOLUTIONS 2022</h3>
-          <h1>
-            <Typewriter
-              options={{
-                autoStart: true,
-                loop: true,
-                delay: 50,
-                strings: ["TRUST OUR BEST IT SOLUTIONS FOR YOUR BUSINESS"],
-              }}
-            />
-          </h1>
-          <p>
-            Compellingly mesh cross-platform portals through functional human
-            capital world-class architectures for orthogonal initiatives.
-          </p>
-          <div className={style.call}>
-            <Link to="https://wa.me/+916280281505" target="_blank">
-              <FaSquareWhatsapp className={style.whatappicon} />
-            </Link>
-            <div>
-              <p>24 HOURS SERVICE AVAILABLE</p>
-              <h4
-                onClick={() =>
-                  (window.location.href = "https://wa.me/+916280281505")
-                }
-              >
-                Chat With Us: +91 6280281505
-              </h4>
-            </div>
-          </div>
-          <div className={style.btnDiv}>
-            <button
-              className={style.herobtn}
-              onClick={() => navigate("/contact-us")}
-            >
-              Contact US
-            </button>
-          </div>
-        </div>
-      </div>
+         <div className={style.card2}>
+           <img src={card4} alt="" />
+           <div className={style.cardtext}>
+             <h3>Web Development</h3>
+             <h6>
+               Web development involves creating and maintaining websites and
+               web applications. It includes frontend development (user
+               interface), backend development (server-side logic), and
+               full-stack development (both). Common languages are HTML, CSS,
+               JavaScript.
+             </h6>
+           </div>
+         </div>
+         <div className={style.card1}>
+           <img src={card5} alt="" />
+           <div className={style.cardtext}>
+             <h3>Software Services</h3>
+             <h6>
+               Software services include custom software development, web
+               development, mobile app development, cloud computing, quality
+               assurance, software maintenance, and consulting.{" "}
+             </h6>
+           </div>
+         </div>
+         <div className={style.card2}>
+           <img src={card6} alt="" />
+           <div className={style.cardtext}>
+             <h3>Software Development</h3>
+             <h6>
+               Software development is the process of designing, creating,
+               testing, and maintaining computer programs and applications. It
+               involves identifying needs, analyzing requirements, designing,
+               developing, testing, deploying, and maintaining software.
+             </h6>
+           </div>
+         </div>
+       </div>
+     </div>
+
+     {/* Hero Section with YouTube Video */}
+     <div
+       className={style.hero}
+       data-aos="zoom-in-up"
+       data-aos-offset="200"
+       data-aos-duration="2000"
+     >
+       <div className={style.heroImg}>
+         <iframe
+           className={style.vdo}
+           src="https://www.youtube.com/embed/cZjkxmzo1Xg?autoplay=1&loop=1&playlist=cZjkxmzo1Xg&controls=1&mute=1"
+           allow="autoplay; encrypted-media"
+           allowFullScreen
+           frameBorder="0"
+         ></iframe>
+       </div>
+       <div className={style.heroText}>
+         <h3>GET BEST IT SOLUTIONS 2022</h3>
+         <h1>
+           <Typewriter
+             options={{
+               autoStart: true,
+               loop: true,
+               delay: 50,
+               strings: ["TRUST OUR BEST IT SOLUTIONS FOR YOUR BUSINESS"],
+             }}
+           />
+         </h1>
+         <p>
+           Compellingly mesh cross-platform portals through functional human
+           capital world-class architectures for orthogonal initiatives.
+         </p>
+         <div className={style.call}>
+           <Link to="https://wa.me/+916280281505" target="_blank">
+             <FaSquareWhatsapp className={style.whatappicon} />
+           </Link>
+           <div>
+             <p>24 HOURS SERVICE AVAILABLE</p>
+             <h4
+               onClick={() =>
+                 (window.location.href = "https://wa.me/+916280281505")
+               }
+             >
+               Chat With Us: +91 6280281505
+             </h4>
+           </div>
+         </div>
+         <div className={style.btnDiv}>
+           <button
+             className={style.herobtn}
+             onClick={() => navigate("/contact-us")}
+           >
+             Contact US
+           </button>
+         </div>
+       </div>
+     </div>
 
       {/* Why Choose Us Section */}
       <div className="bg-cyan-50 p-10 px-4 lg:px-28">
