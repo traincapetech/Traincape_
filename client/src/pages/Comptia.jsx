@@ -15,7 +15,7 @@ import Project from '../assets/comptia/Project.jpeg';
 import Security from '../assets/comptia/Security.jpeg';
 import Server from '../assets/comptia/Server.jpeg';
 import { useEffect } from 'react';
-import {useNavigate} from 'react-router-dom'
+import AddToCartButton from '../components/AddToCartButton';
 const Comptia = () => {
 
     
@@ -119,9 +119,10 @@ const Comptia = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const navigate=useNavigate()
     return (
         <>
+                          <AddToCartButton />
+        
             <div className="course-detail text-center bg-blue-100 py-10">
         <div className="info flex flex-col md:flex-row gap-6 items-center px-5">
           <Lottie animationData={comptia} className="w-full md:w-1/2" />
@@ -134,29 +135,7 @@ const Comptia = () => {
         </div>
       </div>
 
-      <div className="flex items-center w-full py-4 px-6 bg-white rounded shadow-md border border-gray-200">
-        <button
-          onClick={() => {
-            navigate("/");
-          }}
-          className="text-gray-600 font-bold py-2 px-4 rounded"
-        >
-          <span className="hover:text-gray-800">Home</span>
-        </button>
-        <div className="flex items-center text-gray-500 font-bold">
-          <span>{" > "}</span>
-          <button
-            onClick={() => {
-              navigate("/training");
-            }}
-            className="text-gray-600 font-bold py-2 px-4 rounded"
-          >
-            <span className="hover:text-gray-800">Training</span>
-          </button>
-          <span>{" > "}</span>
-          <span className="ml-4">Comptia</span>
-        </div>
-      </div>
+      {/* Courses Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 px-5 py-10">
         {courseData.map((course, index) => (
           <ComptiaCourse

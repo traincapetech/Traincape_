@@ -1,19 +1,45 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCartContext } from "../CartContext"; // Adjust the import path as necessary
 import ibmlogo from "../../assets/ibmnewlogo.webp";
-import foundationc from "../../assets/c++logo.png";
+import cfound from "../../assets/c++logo.png";
+import AddToCartButton from "../AddToCartButton";
 
 const IBMSoftwareFoundation = () => {
   const [selectedQuestion, setSelectedQuestion] = useState(null);
+  const [showConfirmation, setShowConfirmation] = useState(false); // State for confirmation message
+  const { addToCart } = useCartContext();
 
   const toggleAnswer = (index) => {
     setSelectedQuestion((prev) => (prev === index ? null : index));
   };
 
   useEffect(() => {
-      window.scrollTo(0, 0);
-    }, []);
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleAddToCart = () => {
+    const product = {
+      id: "3", // You can use a unique ID for this course
+      title: "IBM Web Development using C++ Certification Course",
+      price: 3000,
+      image: cfound,
+      quantity: 1,
+    };
+    addToCart(product);
+    // Show confirmation message
+    setShowConfirmation(true);
+
+    // Hide the message after 3 seconds
+    setTimeout(() => {
+      setShowConfirmation(false);
+    }, 2000);
+  };
+
   return (
     <>
+                          <AddToCartButton />
+
       <div className="relative bg-gradient-to-b from-blue-100 to-white w-full h-auto md:h-[20rem] pt-10 px-4 md:px-10 text-left">
         <img
           src={ibmlogo}
@@ -32,9 +58,9 @@ const IBMSoftwareFoundation = () => {
 
           {/* Image */}
           <img
-            className="w-36 h-20 object-contain md:pl-16"
-            src={foundationc}
-            alt="HTML Logo"
+            className="w-36 h-20 object-contain ml-10"
+            src={cfound}
+            alt="C++ Logo"
           />
 
           {/* Description */}
@@ -48,24 +74,28 @@ const IBMSoftwareFoundation = () => {
       </div>
 
       {/* Fixed Pricing Section */}
-      <div className="fixed bottom-0 left-0 right-0 md:bottom-10 md:left-auto md:right-10 lg:right-[1rem] lg:top-[25rem] xl:right-[15rem] xl:top-[30rem] max-w-full lg:h-[15rem] md:max-w-xs bg-white p-6 shadow-lg rounded-lg border hover:shadow-xl transition-shadow">
+      <div className="fixed bottom-0 left-0 right-0 md:bottom-10 md:left-auto md:right-10 lg:right-[1rem] lg:top-[25rem] xl:right-[15rem] xl:top-[30rem] max-w-full lg:h-[13rem] md:max-w-xs bg-white p-6 shadow-lg rounded-lg border hover:shadow-xl transition-shadow">
         <h2 className="text-lg font-bold text-gray-800">
           IBM Web Development Using C++ Certification Course
         </h2>
         <p className="text-xl font-bold text-gray-900 mt-2">₹3,000</p>
         <div className="mt-2 flex space-x-2">
-          <input
-            type="number"
-            defaultValue="1"
-            className="border px-2 py-1 w-16 text-center rounded-md"
-          />
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-lg">
+          <button
+            onClick={handleAddToCart}
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+          >
             Add To Cart
           </button>
-          <button className="bg-blue-900 text-white px-4 py-2 rounded-lg">
+          {/* <button className="bg-blue-900 text-white px-4 py-2 rounded-lg">
             Buy Now
-          </button>
+          </button> */}
         </div>
+        {/* Confirmation Message */}
+        {showConfirmation && (
+          <div className=" mt-5 bg-green-500 text-white px-8  rounded-lg shadow-lg z-50">
+            Item Added to Cart!
+          </div>
+        )}
       </div>
 
       <div className="h-full px-4 md:px-[6rem] lg:px-[20rem] lg:pl-[5rem] xl:px-[40rem] xl:pl-[10rem]">
@@ -77,11 +107,20 @@ const IBMSoftwareFoundation = () => {
             <span>FAQ's</span>
           </div>
           <p className="text-gray-700 mt-4 tracking-wide">
-          The IBM Software Foundation Course in C++ is your gateway to the world of software development. This comprehensive course dives into the fundamentals of C++, a powerful and versatile programming language used in a vast array of applications, from operating systems to game development.
+            The IBM Web Development using C++ Certification Course provides a
+            comprehensive introduction to the foundational language of the web.
+            You’ll master the essentials of C++, learning to structure content,
+            create web pages, and incorporate multimedia elements.
           </p>
           <br />
           <p className="text-gray-700 mt-2 tracking-wide">
-          You’ll learn essential concepts like data types, operators, control structures, and functions, while also gaining hands-on experience with object-oriented programming principles. By the end of this course, you’ll have a solid understanding of C++ programming and be equipped with the skills to build efficient and robust software applications.
+            This course covers everything from basic tags and elements to
+            advanced concepts like semantic C++, forms, and accessibility.
+            Through hands-on projects and quizzes, you’ll gain practical
+            experience in building interactive and engaging web pages. Upon
+            completion, you’ll receive an industry-recognized IBM certification,
+            demonstrating your proficiency in C++ and opening doors to a
+            rewarding career in web development.
           </p>
 
           {/* Benefits */}
@@ -157,7 +196,10 @@ const IBMSoftwareFoundation = () => {
             </div>
             {selectedQuestion === 0 && (
               <p className="mt-2 text-gray-700">
-                To earn the certification, you need to pass a comprehensive exam that tests your knowledge and practical abilities. The exam covers various topics and requires a solid understanding of C++and its tools.{" "}
+                To earn the certification, you need to pass a comprehensive exam
+                that tests your knowledge and practical abilities. The exam
+                covers various topics and requires a solid understanding of C++
+                and its tools.{" "}
               </p>
             )}
 

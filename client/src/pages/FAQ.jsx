@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const FAQ = () => {
   const [expandedQuestion, setExpandedQuestion] = useState(null);
@@ -12,24 +11,9 @@ const FAQ = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-const navigate=useNavigate()
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="flex items-center w-full py-4 px-6 bg-white">
-          <button
-            onClick={() => {
-              navigate("/");
-            }}
-            className="text-gray-600 font-bold py-2 px-4 rounded"
-          >
-            <span className="hover:text-gray-800">Home</span>
-          </button>
-          <div className="flex items-center text-gray-500 font-bold">
-            <span>{" > "}</span>
-            <span className="ml-4">FAQ's</span>
-          </div>
-        </div>
       <div className="text-center">
         <h1 className="text-4xl font-bold  mb-2">Frequently Asked Questions</h1>
         <div className="w-32 h-1 bg-blue-500 mx-auto mb-6"></div>

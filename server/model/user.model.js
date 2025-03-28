@@ -27,9 +27,9 @@
 // const userSchema = mongoose.Schema(
 //   {
 //     username: { type: String, required: true }, // It's better to define required for username as well
-//     email: {
-//       type: String,
-//       unique: true,
+//     email: { 
+//       type: String, 
+//       unique: true, 
 //       required: true, // Corrected from 'require' to 'required'
 //       lowercase: true, // Optionally enforce lowercase for consistency
 //     },

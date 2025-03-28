@@ -10,7 +10,7 @@ import AWS from "../assets/AWS.png";
 // import Herobg from '../assets/herobg.jpg';
 import Cisco from "../assets/Cisco/CiscoIcon.png";
 import BGimg from "../assets/traningBg-4.jpg";
-import { useNavigate } from "react-router-dom";
+import AddToCartButton from "../components/AddToCartButton";
 
 const Training = () => {
   const courseData = [
@@ -34,7 +34,7 @@ const Training = () => {
       title: "COMPTIA",
       description: "A comprehensive course on network fundamentals.",
       price: "$300",
-      url: "/training-comptia",
+      url: "/comptia",
     },
     {
       image: mircro,
@@ -52,50 +52,51 @@ const Training = () => {
       url: "/PECB",
     },
   ];
-  const navigate = useNavigate();
+
   return (
     <>
-      <div
-        className="bg-blue-400 md:pt-10 items-center gap-5 md:p-5 p-6 opacity-80 relative md:h-[40vh] lg:h-[50vh] h-[55vh]"
-        style={{
-          backgroundImage: `url(${BGimg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        {/* First Line (Left Aligned on Desktop, Centered on Mobile) */}
-        <div className="font-bold text-4xl md:text-4xl md:pt-14  text-white text-center md:text-left hover:animate-pulse p-6 lg:text-6xl lg:p-4">
-          Unlock Your Tech Potential
-        </div>
+                      <AddToCartButton />
 
-        {/* Second Line (Centered, Larger Text for "Free") */}
-        <div className="font-bold text-4xl md:text-4xl md:pb-12 text-white text-center hover:animate-pulse p-6 lg:text-6xl lg:p-4 lg:pr-40">
-          with Our{" "}
-          <span className="text-5xl md:text-6xl text-cyan-200 lg:text-7xl">
-            Free
-          </span>
-        </div>
+     <div
+  className="relative bg-blue-400 md:pt-10 items-center gap-5 md:p-5 p-6 opacity-80 h-[55vh] md:h-[40vh] lg:h-[50vh]"
+  style={{
+    backgroundImage: `url(${BGimg})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  }}
+>
+  {/* Banner text */}
+  <div className="text-3xl sm:text-4xl md:text-2xl lg:text-5xl font-bold text-white text-center md:text-left hover:animate-pulse p-4 sm:p-6 lg:p-4">
+    Unlock Your Tech Potential
+    <br className="hidden md:block"/>
+    <br />
+    <span className="block sm:inline">
+      with Our
+      <span className="text-cyan-200 ml-2 sm:ml-5 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+        Free
+      </span>
+    </span>
+    <br className="hidden md:block"/>
+    <br className="hidden md:block"/>
+    Comprehensive IT Assessments
+  </div>
 
-        {/* Third Line (Right Aligned on Desktop, Centered on Mobile) */}
-        <div className="font-bold text-4xl md:text-4xl text-white text-center md:text-right p-6 md:p-2 ml-30 mb-56 pb-20 hover:animate-pulse lg:text-6xl ">
-          Comprehensive IT Assessments
-        </div>
-      </div>
-
-      <div className="flex items-center w-full py-4 px-6 bg-white rounded shadow-md border border-gray-200">
-        <button
-          onClick={() => {
-            navigate("/");
-          }}
-          className="text-gray-600 font-bold py-2 px-4 rounded"
-        >
-          <span className="hover:text-gray-800">Home</span>
-        </button>
-        <div className="flex items-center text-gray-500 font-bold">
-          <span>{" > "}</span>
-          <span className="ml-4">Training</span>
-        </div>
-      </div>
+  {/* Hero Section with YouTube Video */}
+  <div
+    className="absolute inset-0 flex justify-center md:justify-end items-center p-4 sm:p-6 z-10 rounded-2xl"
+    data-aos="zoom-in-up"
+    data-aos-offset="200"
+    data-aos-duration="2000"
+  >
+    <iframe
+      className="w-full mt-48 sm:h-64 md:h-72 md:mt-8 lg:h-72 md:w-72 lg:w-1/3 rounded-lg"
+      src="https://www.youtube.com/embed/cZjkxmzo1Xg?autoplay=1&loop=1&playlist=cZjkxmzo1Xg&controls=1&mute=1"
+      allow="autoplay; encrypted-media"
+      allowFullScreen
+      frameBorder="0"
+    ></iframe>
+  </div>
+</div>
 
       <div className="bg-teal-50 py-10 px-6">
         <h4 className="text-blue-600 text-center text-lg">Choose Now</h4>

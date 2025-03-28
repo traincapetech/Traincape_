@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+
 const ViewAssignments = () => {
   const [course, setCourse] = useState("");
   const [level, setLevel] = useState("");
@@ -175,6 +176,10 @@ const ViewAssignments = () => {
       {
         name: "SCADA Security Manager",
         value: "SCADASecurityManager"
+      },
+      {
+        name: "Go4 Whatsup",
+        value: "Go4Whatsup"
       }
     ],
     comptia: [
@@ -276,6 +281,7 @@ const ViewAssignments = () => {
         value: "CCIECollaboration",
       },
     ],
+   
   };
 
   // Fetch questions based on course, level, and sub-topic

@@ -29,7 +29,7 @@
 //       bcrypt.compare(password, user.password, (err, result) => {
 //         if (result) {
 //           res.status(200).send({
-//             msg: "Login successful!",
+//             msg: "Login successful!", 
 //             token: jwt.sign(
 //               { userId: user._id, username: user.username },
 //               process.env.secretKey
@@ -67,9 +67,10 @@
 //   const { username, email, password, role } = req.body;
 //   try {
 //     // Check if email already exists
-
+    
+    
 //     const existingUser = await UserModel.findOne({email: email.trim()});
-
+    
 //     if (existingUser) {
 //       return res.status(400).send({ msg: "Email already registered" });
 //     }
@@ -86,6 +87,8 @@
 //     res.status(500).send({ error: error.message });
 //   }
 // });
+
+
 
 // userRouter.post("/login", async (req, res) => {
 //   const { email, password } = req.body;
@@ -180,6 +183,7 @@ userRouter.post("/register", async (req, res) => {
 userRouter.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
+    const user = await UserModel.findOne({ email });
     if (!user) {
       return res.status(400).send({ msg: "Wrong Credentials" });
     }
@@ -206,6 +210,7 @@ userRouter.post("/login", async (req, res) => {
   }
 });
 
+
 userRouter.post("/sendOTPToEmail", async (req, res) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -222,14 +227,14 @@ userRouter.post("/sendOTPToEmail", async (req, res) => {
         .status(400)
         .send({ msg: "Email Id does not exist in the database" });
     }
+    console.log(email)
     const otp = String(Math.floor(100000 + Math.random() * 900000));
     user.verifyOtp = otp;
     user.verifyOtpExpireAt = Date.now() + 24 * 60 * 60 * 1000;
-
-    await user.save();
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: email,
+      to: "ishaanj2612@gmail.com",
+      // to: email,
       subject: "Password Reset OTP",
       html: `
       <!-- Updated HTML template with image -->
@@ -247,22 +252,15 @@ userRouter.post("/sendOTPToEmail", async (req, res) => {
 </div>
 `,
     };
-    // Use promisify to make sendMail return a promise
-    const sendMailPromise = () => {
-      return new Promise((resolve, reject) => {
-        transporter.sendMail(mailOptions, (error, info) => {
-          if (error) {
-            reject(error);
-          } else {
-            resolve(info);
-          }
-        });
-      });
-    };
 
-    // Wait for the email to be sent
-    await sendMailPromise();
-
+    transporter.sendMail(mailOptions, (error) => {
+      if (error) {
+        return res.status(500).json({ message: "Error sending email" });
+      }
+      res.json({ message: "OTP sent to email" });
+    });
+    await user.save();
+    console.log(user);
     res.json({ success: true, message: "OTP sent successfully" });
   } catch (error) {
     console.error(error);
@@ -300,6 +298,7 @@ userRouter.post("/reset_password", async (req, res) => {
     if (!user) {
       return res.status(400).send({ msg: "Wrong Credentials" });
     }
+    console.log("newPassword", newPassword);
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     user.password = hashedPassword;
     user.resetOtp = "";

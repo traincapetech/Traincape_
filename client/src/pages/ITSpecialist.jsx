@@ -7,7 +7,6 @@ import Card3 from "../assets/itcour3.png";
 import Card4 from "../assets/itcour4.png";
 import Card5 from "../assets/itcour5.png";
 import ITCourses from "../components/ITCourses";
-import { useNavigate } from "react-router-dom";
 
 const ITSpeacialist = () => {
   useEffect(() => {
@@ -53,7 +52,7 @@ const ITSpeacialist = () => {
     },
   
   ];
-const navigate=useNavigate()
+
   return (
     <>
       <div
@@ -84,29 +83,6 @@ const navigate=useNavigate()
               alt="IBM Banner"
             />
           </div>
-        </div>
-      </div>
-      <div className="flex items-center w-full py-4 px-6 bg-white rounded shadow-md border border-gray-200">
-        <button
-          onClick={() => {
-            navigate("/");
-          }}
-          className="text-gray-600 font-bold py-2 px-4 rounded"
-        >
-          <span className="hover:text-gray-800">Home</span>
-        </button>
-        <div className="flex items-center text-gray-500 font-bold">
-          <span>{" > "}</span>
-          <button
-            onClick={() => {
-              navigate("/Courses-details");
-            }}
-            className="text-gray-600 font-bold py-2 px-4 rounded"
-          >
-            <span className="hover:text-gray-800">Course Details</span>
-          </button>
-          <span>{" > "}</span>
-          <span className="ml-4">IT Specialist</span>
         </div>
       </div>
       <div className="bg-teal-50 py-10 px-6">

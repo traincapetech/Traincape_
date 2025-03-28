@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Lottie from 'lottie-react';
 import comptia from '../assets/comptia.json';
 import ComptiaCourse from '../components/ComptiaCourse';
@@ -11,8 +11,7 @@ import machine from '../assets/AWS/machine.png';
 import security from '../assets/AWS/security.png';
 import solution from '../assets/AWS/solution.png';
 import sysops from '../assets/AWS/sysops.png';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import AddToCartButton from '../components/AddToCartButton';
 const Aws = () => {
 
  const courseData = [
@@ -75,13 +74,15 @@ const Aws = () => {
 
 
   ];
-const navigate=useNavigate()
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
     return (
         <>
+                          <AddToCartButton />
+        
             {/* Hero Section */}
       <div className="course-detail text-center bg-blue-100 py-10">
         <div className="info flex flex-col md:flex-row gap-6 items-center px-5">
@@ -94,29 +95,7 @@ const navigate=useNavigate()
           </div>
         </div>
       </div>
-      <div className="flex items-center w-full py-4 px-6 bg-white rounded shadow-md border border-gray-200">
-        <button
-          onClick={() => {
-            navigate("/");
-          }}
-          className="text-gray-600 font-bold py-2 px-4 rounded"
-        >
-          <span className="hover:text-gray-800">Home</span>
-        </button>
-        <div className="flex items-center text-gray-500 font-bold">
-          <span>{" > "}</span>
-          <button
-            onClick={() => {
-              navigate("/training");
-            }}
-            className="text-gray-600 font-bold py-2 px-4 rounded"
-          >
-            <span className="hover:text-gray-800">Training</span>
-          </button>
-          <span>{" > "}</span>
-          <span className="ml-4">AWS</span>
-        </div>
-      </div>
+
       {/* Courses Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-5 py-10">
         {courseData.map((course, index) => (
