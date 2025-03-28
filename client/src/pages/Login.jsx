@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {  FaRegEyeSlash, FaEye } from "react-icons/fa6";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // import axios from "axios";
 import { loginUser } from "../slices/userSlice";
@@ -14,6 +14,10 @@ import signup from "../assets/signup.json";
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Get the redirect path from location state (if it exists)
+  const from = location.state?.from || "/";
 
   const { user, loading, error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -43,8 +47,20 @@ const Login = () => {
       console.log({ loginResult: result });
 
       if (loginUser.fulfilled.match(result)) {
-        // Login successful, navigate to home page
-        window.location.href = "/"; // or navigate('/')
+        // Login successful
+        
+        // Check if there are test parameters to preserve
+        if (location.state?.testParams) {
+          // Navigate to test with the saved parameters
+          const { level, course, subTopic } = location.state.testParams;
+          navigate("/test", { 
+            state: { level, course, subTopic },
+            replace: true 
+          });
+        } else {
+          // Navigate to the path they tried to access or home
+          navigate(from, { replace: true });
+        }
       } else if (loginUser.rejected.match(result)) {
         // Login failed, handle the error
         console.error("Login failed:", result);

@@ -5,7 +5,7 @@ import Test from "../Test/Test";
 const Practice = ({ course, subTopic }) => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-}, []);
+}, []);
   const navigate = useNavigate(); // Initialize useNavigate hook
 
   const [level, setLevel] = useState("");
@@ -16,9 +16,23 @@ const Practice = ({ course, subTopic }) => {
   };
 
   const handleStartQuiz = () => {
-    setStartQuiz(true); // Optionally set startQuiz to true if you want to show the Test component here
-    // Navigate to /test page
-    navigate("/test", { state: { level, course, subTopic } });
+    setStartQuiz(true);
+    
+    // Check if user is logged in
+    const token = localStorage.getItem("token");
+    
+    if (token) {
+      // User is logged in, navigate to test page
+      navigate("/test", { state: { level, course, subTopic } });
+    } else {
+      // User is not logged in, redirect to login page with return location
+      navigate("/login", { 
+        state: { 
+          from: "/test", 
+          testParams: { level, course, subTopic } 
+        } 
+      });
+    }
   };
 
   const handleVerifyCertificate = () => {
@@ -28,7 +42,7 @@ const Practice = ({ course, subTopic }) => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-}, []);
+}, []);
 
   return (
     <div className="p-6 w-full bg-gray-50 flex flex-col justify-center items-center">
@@ -94,7 +108,7 @@ const Practice = ({ course, subTopic }) => {
             <ul className="list-disc pl-5 text-lg">
               <li className="mb-2">You must be logged in to start the test.</li>
               <li className="mb-2">
-                Do not cheat during the test. It’s meant to assess your
+                Do not cheat during the test. It's meant to assess your
                 knowledge accurately.
               </li>
               <li className="mb-2">

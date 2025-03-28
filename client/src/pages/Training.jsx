@@ -34,7 +34,7 @@ const Training = () => {
       title: "COMPTIA",
       description: "A comprehensive course on network fundamentals.",
       price: "$300",
-      url: "/training-comptia",
+      url: "/comptia",
     },
     {
       image: mircro,
