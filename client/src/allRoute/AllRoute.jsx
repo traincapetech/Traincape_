@@ -1,6 +1,7 @@
 // Updated by Saurav
 import React, { Suspense, lazy } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import ForgotPassword from "../pages/ForgotPassword";
 
 // Loading component
 const LoadingComponent = () => (
@@ -161,6 +162,13 @@ const PMI = lazy(() => import("../pages/PMI"));
 const ITSpeacialist = lazy(() => import("../pages/ITSpecialist"));
 const SwiftDevelopment = lazy(() => import("../pages/SwiftDevelopment"));
 const Cart = lazy(() => import("../pages/Cart"));
+const Tally = lazy(() => import("../pages/PopularCertificationCoureses/Tally"));
+const MicrosoftOffice = lazy(() => import("../pages/PopularCertificationCoureses/MicrosoftOffice"));
+const Autodesk = lazy(() => import("../pages/PopularCertificationCoureses/Autodesk"));
+const MicrosoftCertified = lazy(() => import("../pages/PopularCertificationCoureses/MicrosoftCertified"));
+const Adobe = lazy(() => import("../pages/PopularCertificationCoureses/Adobe"));
+const Unity = lazy(() => import("../pages/PopularCertificationCoureses/Unity"));
+const CiscoCard = lazy(() => import("../pages/PopularCertificationCoureses/CiscoCard"));
 
 const AllRoute = () => {
   const token = localStorage.getItem("token");
@@ -178,6 +186,7 @@ const AllRoute = () => {
 
         <Route path="/login" element={!token ? <Login /> : <Navigate to="/" replace />} />
         <Route path="/signup" element={!token ? <Signup /> : <Navigate to="/" replace />} />
+        <Route path="/forgot-password" element={!token ? <ForgotPassword /> : <Navigate to="/" replace />} />
 
         <Route path="/about-us" element={<AboutUS />} />
         <Route path="/contact-us" element={<ContactUs />} />
@@ -343,6 +352,13 @@ const AllRoute = () => {
         <Route path="/ITSpeacialist" element={<ITSpeacialist />} />
         <Route path="/SwiftDevelopment" element={<SwiftDevelopment />} />
         <Route path="/Cart" element={<Cart />} />
+        <Route path="/Tally" element={<Tally />} />
+        <Route path="/MicrosoftOffice" element={<MicrosoftOffice/>} />
+        <Route path="/Autodesk" element={<Autodesk/>} />
+        <Route path="/MicrosoftCertified" element={<MicrosoftCertified/>} />
+        <Route path="/Adobe" element={<Adobe/>} />
+        <Route path="/unity" element={<Unity/>} />
+        <Route path="/ciscocard" element={<CiscoCard/>} />
       </Routes>
     </Suspense>
   );

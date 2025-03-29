@@ -233,7 +233,7 @@ userRouter.post("/sendOTPToEmail", async (req, res) => {
     user.verifyOtpExpireAt = Date.now() + 24 * 60 * 60 * 1000;
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: "ishaanj2612@gmail.com",
+      to: email,
       // to: email,
       subject: "Password Reset OTP",
       html: `

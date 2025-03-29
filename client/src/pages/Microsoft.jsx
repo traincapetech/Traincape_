@@ -4,6 +4,7 @@ import Lottie from 'lottie-react';
 import MicrosoftCourse from '../components/MicrosoftCourse.jsx';
 import mircro from "../assets/Microsoft-Emblem.jpg";
 import AddToCartButton from '../components/AddToCartButton.jsx';
+import { useNavigate } from 'react-router-dom';
 
 
 const Microsoft = () => {
@@ -151,6 +152,8 @@ const Microsoft = () => {
 
 
   ];
+  
+  const navigate = useNavigate();
     return (
         <>
                           <AddToCartButton />
@@ -166,7 +169,29 @@ const Microsoft = () => {
           </div>
         </div>
       </div>
-
+      <div className="flex items-center w-full py-4 px-6 bg-white rounded shadow-md border border-gray-200">
+        <button
+          onClick={() => {
+            navigate("/");
+          }}
+          className="text-gray-600 font-bold py-2 px-4 rounded"
+        >
+          <span className="hover:text-gray-800">Home</span>
+        </button>
+        <div className="flex items-center text-gray-500 font-bold">
+          <span>{" > "}</span>
+          <button
+            onClick={() => {
+              navigate("/training");
+            }}
+            className="text-gray-600 font-bold py-2 px-4 rounded"
+          >
+            <span className="hover:text-gray-800">Training</span>
+          </button>
+          <span>{" > "}</span>
+          <span className="ml-4">Microsoft</span>
+        </div>
+      </div>
       {/* Courses Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 px-5 py-10">
         {courseData.map((course, index) => (

@@ -5,7 +5,7 @@ import { FaWhatsapp } from "react-icons/fa6";
 import { IoMailOutline } from "react-icons/io5";
 import emailjs from "@emailjs/browser";
 import Contact from "../assets/contact.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ContactUs = () => {
   const [payoload, setPayoload] = useState({
@@ -62,9 +62,24 @@ const ContactUs = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const navigate=useNavigate()
   return (
     <section className="md:py-24 py-2">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="flex items-center w-full py-4  bg-white  shadow-md">
+          <button
+            onClick={() => {
+              navigate("/");
+            }}
+            className="text-gray-600 font-bold py-2 px-4 rounded"
+          >
+            <span className="hover:text-gray-800">Home</span>
+          </button>
+          <div className="flex items-center text-gray-500 font-bold">
+            <span>{" > "}</span>
+            <span className="ml-4">Contact Us</span>
+          </div>
+        </div>
         <div className="grid lg:grid-cols-2 grid-cols-1">
           <div className="lg:mb-0 ">
             <div className="group w-full h-full">

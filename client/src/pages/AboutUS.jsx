@@ -200,7 +200,7 @@ import { BsGlobe } from "react-icons/bs";
 import { Helmet } from "react-helmet-async";
 import { AiOutlineCheck } from "react-icons/ai";
 import styles from "../css/AboutUS.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import founderImage from "../assets/Parichay-Sir.jpeg";
 
 const AboutUS = () => {
@@ -223,7 +223,7 @@ const AboutUS = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
+  const navigate = useNavigate();
   return (
     <>
       {/* SEO Metadata */}
@@ -281,7 +281,20 @@ const AboutUS = () => {
           </div>
         </div>
       </section>
-
+      <div className="flex items-center w-full py-4 px-6 bg-white rounded shadow-md border border-gray-200">
+        <button
+          onClick={() => {
+            navigate("/");
+          }}
+          className="text-gray-600 font-bold py-2 px-4 rounded"
+        >
+         <span className="hover:text-gray-800">Home</span> 
+        </button>
+        <div className="flex items-center text-gray-500 font-bold">
+          <span>{" > "}</span>
+          <span className="ml-4">About Us</span>
+        </div>
+      </div>
       {/* Our Story Section */}
       <section className={styles.storySection}>
         <div className={styles.container}>

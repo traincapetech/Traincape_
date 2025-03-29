@@ -78,9 +78,11 @@ const ForgotPassword = () => {
         setShowTtp(true);
         setLoading(false);
         setSuccessMessage("OTP sent successfully");
-        setShowEmail(false)
+        setShowEmail(false);
       } else {
+        console.log(result)
         setError(result.payload.msg);
+        // setError(result.error.message);
         setLoading(false);
       }
     } catch (e) {
