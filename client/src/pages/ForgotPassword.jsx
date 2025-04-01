@@ -48,7 +48,8 @@ const ForgotPassword = () => {
       }
     });
   };
-  const [showOtp, setShowTtp] = useState(false);
+  
+  const [showOtp, setShowOtp] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
 
   const handleChange = (e) => {
@@ -59,7 +60,7 @@ const ForgotPassword = () => {
       newPassword: "",
       confirmPassword: "",
     });
-    setShowTtp(false);
+    setShowOtp(false);
   };
 
   const handleEmailSubmit = async (e) => {
@@ -73,19 +74,23 @@ const ForgotPassword = () => {
       }
 
       const result = await dispatch(sendOTPToEmail({ email: payload.email }));
-      if (result.payload.success) {
+      console.log("OTP response:", result);
+      
+      if (result.payload && result.payload.success) {
         setError(false);
-        setShowTtp(true);
+        setShowOtp(true);
+        setShowEmail(false);
         setLoading(false);
         setSuccessMessage("OTP sent successfully");
-        setShowEmail(false)
       } else {
-        setError(result.payload.msg);
+        console.log(result);
+        setError(result.payload?.message || "Failed to send OTP");
         setLoading(false);
       }
     } catch (e) {
       setLoading(false);
       setError("Please try again later");
+      console.error(e);
     }
   };
 
@@ -100,29 +105,30 @@ const ForgotPassword = () => {
     }
     try {
       setLoading(true);
-      console.log(payload.otp);
+      console.log("Submitting OTP:", otp);
       const result = await dispatch(verifyOtp({ otp, email: payload.email }));
-      console.log("result", result);
-      if (result.payload.success) {
+      console.log("OTP verification result:", result);
+      
+      if (result.payload && result.payload.success) {
         setError(false);
         setShowNewPassword(true);
+        setShowOtp(false);
         setLoading(false);
-        setSuccessMessage("Enter the New Password");
+        setSuccessMessage("OTP verified successfully. Enter your new password");
       } else {
         setSuccessMessage(false);
-        setError(result.payload.message);
+        setError(result.payload?.message || "Invalid OTP");
         setLoading(false);
       }
     } catch (e) {
       setLoading(false);
       setError("Please try again later");
-      console.error(error);
+      console.error(e);
     }
   };
 
   const handleResetPassword = async (e) => {
     setSuccessMessage(false);
-    // Add your reset password logic here
     e.preventDefault();
     if (payload.newPassword !== payload.confirmPassword) {
       setError("Passwords do not match");
@@ -133,28 +139,33 @@ const ForgotPassword = () => {
       return;
     }
     try {
-      console.log("otp at the time of set new password", payload.otp);
+      setLoading(true);
+      console.log("Reset password payload:", {
+        email: payload.email,
+        newPassword: payload.newPassword,
+      });
+      
       const result = await dispatch(
         reset_password({
-          otp: payload.otp,
           email: payload.email,
           newPassword: payload.newPassword,
         })
       );
-      console.log("result", result);
-      if (result.payload.success) {
+      console.log("Password reset result:", result);
+      
+      if (result.payload && result.payload.success) {
         setError(false);
-        navigate("/login");
         setLoading(false);
-        alert("Password changed Successfully");
+        alert("Password changed successfully! Please login with your new password.");
+        navigate("/login");
       } else {
-        setError(result.payload.msg);
+        setError(result.payload?.message || "Failed to reset password");
         setLoading(false);
       }
     } catch (e) {
       setLoading(false);
       setError("Please try again later");
-      console.error(error);
+      console.error(e);
     }
   };
 
@@ -184,162 +195,165 @@ const ForgotPassword = () => {
               />
             </div>
             {/* left forgot page */}
-            {!showNewPassword ? (
-              <div className="bg-white bg-opacity-90 p-8 shadow-lg w-full sm:w-[400px] mr-auto">
-                {/* <div className="bg-white bg-opacity-90 p-8 shadow-lg w-full sm:w-[400px]"> */}
-                <h1 className="text-3xl font-semibold text-center text-[#152B54] mb-6">
-                  Forgot Password
-                </h1>
-                <form>
-                  {showEmail && (
-                    <div>
-                      <div className="mb-4">
-                        <label
-                          htmlFor="email"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          Email
-                        </label>
+            <div className="bg-white bg-opacity-90 p-8 shadow-lg w-full sm:w-[400px] mr-auto">
+              {/* <div className="bg-white bg-opacity-90 p-8 shadow-lg w-full sm:w-[400px]"> */}
+              <h1 className="text-3xl font-semibold text-center text-[#152B54] mb-6">
+                Forgot Password
+              </h1>
+              
+              {error && (
+                <div className="mb-4 p-2 bg-red-100 text-red-800 rounded-md">
+                  {error}
+                </div>
+              )}
+              
+              {successMessage && (
+                <div className="mb-4 p-2 bg-green-100 text-green-800 rounded-md">
+                  {successMessage}
+                </div>
+              )}
+              
+              <form>
+                {/* Email Form */}
+                {showEmail && (
+                  <div>
+                    <div className="mb-4">
+                      <label
+                        htmlFor="email"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        onChange={handleChange}
+                        className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      onClick={handleEmailSubmit}
+                      className="w-full py-2 bg-[#152B54] text-white rounded-lg hover:bg-sky-950 transition duration-200"
+                    >
+                      {loading ? "Loading..." : "Send Reset OTP"}
+                    </button>
+                  </div>
+                )}
+                
+                {/* OTP Form */}
+                {showOtp && (
+                  <div className="mt-4">
+                    <h2 className="text-xl font-semibold text-center text-[#152B54] mb-2">
+                      Reset Password OTP
+                    </h2>
+                    <label
+                      htmlFor="otp"
+                      className="my-3 block text-sm font-medium text-gray-700"
+                    >
+                      Enter the OTP sent to your email
+                    </label>
+                    <div
+                      onPaste={handlePaste}
+                      className="flex justify-between mb-3"
+                    >
+                      {Array(6)
+                        .fill(0)
+                        .map((_, index) => (
+                          <input
+                            type="text"
+                            maxLength="1"
+                            key={index}
+                            required
+                            className="w-12 h-12 text-3xl text-center border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                            ref={(e) => (inputRefs.current[index] = e)}
+                            onInput={(e) => handleInput(e, index)}
+                            onKeyDown={(e) => handleKeyDown(e, index)}
+                          />
+                        ))}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={handleOtpSubmit}
+                      className="w-full py-2 mt-4 bg-[#152B54] text-white rounded-lg hover:bg-sky-950 transition duration-200"
+                    >
+                      Verify OTP
+                    </button>
+                  </div>
+                )}
+                
+                {/* New Password Form */}
+                {showNewPassword && (
+                  <div className="mt-4">
+                    <h2 className="text-xl font-semibold text-center text-[#152B54] mb-2">
+                      Set New Password
+                    </h2>
+                    <div className="mb-4 relative">
+                      <label
+                        htmlFor="newPassword"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        New Password
+                      </label>
+                      <div className="relative">
                         <input
-                          type="email"
-                          id="email"
-                          name="email"
+                          type={passwordVisible ? "text" : "password"}
+                          id="newPassword"
+                          name="newPassword"
+                          value={payload.newPassword}
+                          onChange={(e) =>
+                            setPayload({
+                              ...payload,
+                              newPassword: e.target.value,
+                            })
+                          }
                           required
-                          onChange={handleChange}
                           className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                         />
+                        <button
+                          type="button"
+                          className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 mt-2"
+                          onClick={() => setPasswordVisible(!passwordVisible)}
+                        >
+                          {passwordVisible ? <FaRegEyeSlash /> : <FaEye />}
+                        </button>
                       </div>
-                      <button
-                        type="button"
-                        onClick={handleEmailSubmit}
-                        className="w-full py-2 bg-[#152B54] text-white rounded-lg hover:bg-sky-950 transition duration-200"
-                      >
-                        {loading ? "Loading..." : "Send Reset OTP"}
-                      </button>
                     </div>
-                  )}
-                  {/* OTP */}
-                  {showOtp && (
-                    <div className="mt-4">
-                      <h1 className="text-xl font-semibold text-center text-[#152B54] mb-2">
-                        Reset Password OTP
-                      </h1>
+                    <div className="mb-4">
                       <label
-                        htmlFor="otp"
-                        className="my-3 block text-sm font-medium text-gray-700"
+                        htmlFor="confirmPassword"
+                        className="block text-sm font-medium text-gray-700"
                       >
-                        Ener the OTP sent to your email
+                        Confirm Password
                       </label>
-                      <div
-                        onPaste={handlePaste}
-                        className="flex justify-between mb-3"
-                      >
-                        {Array(6)
-                          .fill(0)
-                          .map((_, index) => (
-                            <input
-                              type="text"
-                              maxLength="1"
-                              key={index}
-                              required
-                              className="w-12 h-12 text-3xl text-center border-2 border-gray-300 rounded-lg  focus:outline-none focus:ring-2 focus:ring-purple-500"
-                              ref={(e) => (inputRefs.current[index] = e)}
-                              onInput={(e) => handleInput(e, index)}
-                              onKeyDown={(e) => handleKeyDown(e, index)}
-                            />
-                          ))}
-                      </div>
-                      <button
-                        type="button"
-                        onClick={handleOtpSubmit}
-                        className="w-full my-3 py-2 bg-[#152B54] text-white rounded-lg hover:bg-sky-950 transition duration-200"
-                      >
-                        {loading ? "Loading..." : "Reset Password"}
-                      </button>
+                      <input
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        value={payload.confirmPassword}
+                        onChange={(e) =>
+                          setPayload({
+                            ...payload,
+                            confirmPassword: e.target.value,
+                          })
+                        }
+                        required
+                        className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      />
                     </div>
-                  )}
-                  {error && (
-                    <p className="text-center mt-2 text-red-500 text-sm mb-4">
-                      {error}
-                    </p>
-                  )}
-                  {successMessage && (
-                    <p className="text-center mt-2 text-green-500 text-sm mb-4">
-                      {successMessage}
-                    </p>
-                  )}
-                </form>
-              </div>
-            ) : (
-              <div className="bg-white bg-opacity-90 p-8 shadow-lg w-full sm:w-[400px] mr-auto">
-                {/* <div className="bg-white bg-opacity-90 p-8 shadow-lg w-full sm:w-[400px]"> */}
-                <h1 className="text-3xl font-semibold text-center text-[#152B54] mb-6">
-                  Reset Password
-                </h1>
-                <form>
-                  <div className="mb-4">
-                    <label
-                      htmlFor="newPassword"
-                      className="block text-sm font-medium text-gray-700"
+                    <button
+                      type="button"
+                      onClick={handleResetPassword}
+                      className="w-full py-2 bg-[#152B54] text-white rounded-lg hover:bg-sky-950 transition duration-200"
                     >
-                      New Password
-                    </label>
-                    <input
-                      type={passwordVisible ? "text" : "password"}
-                      id="newPassword"
-                      name="newPassword"
-                      required
-                      value={payload.newPassword}
-                      onChange={(e) =>
-                        setPayload({ ...payload, newPassword: e.target.value })
-                      }
-                      className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    />
+                      Reset Password
+                    </button>
                   </div>
-                  <div className="mb-4">
-                    <label
-                      htmlFor="confirmPassword"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Confirm Password
-                    </label>
-                    <input
-                      type={passwordVisible ? "text" : "password"}
-                      id="confirmPassword"
-                      name="confirmPassword"
-                      required
-                      value={payload.confirmPassword}
-                      onChange={(e) =>
-                        setPayload({
-                          ...payload,
-                          confirmPassword: e.target.value,
-                        })
-                      }
-                      className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    />
-                  </div>
-                  <button
-                    type="button"
-                    onClick={handleResetPassword}
-                    className={`w-full py-2 bg-[#152B54] text-white rounded-lg hover:bg-sky-950 transition duration-200 ${
-                      loading ? "opacity-50 cursor-not-allowed" : ""
-                    }`}
-                  >
-                    {loading ? "Loading..." : "Reset Password"}
-                  </button>
-                  {error && (
-                    <p className="text-center mt-2 text-red-500 text-sm mb-4">
-                      {error}
-                    </p>
-                  )}
-                  {successMessage && (
-                    <p className="text-center mt-2 text-green-500 text-sm mb-4">
-                      {successMessage}
-                    </p>
-                  )}
-                </form>
-              </div>
-            )}
+                )}
+              </form>
+            </div>
           </div>
         </div>
       )}

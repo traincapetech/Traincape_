@@ -2,47 +2,42 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="https://traincapetech.in/favicon.ico" />
-    <meta property="og:image" content="https://traincapetech.in/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta property="og:image" content="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Traincape Technology - Premier IT Training and Certification provider for AWS, CompTIA, Microsoft, Cisco, PECB, and other IT certifications. Expert-led online courses for IT professionals and career advancement." />
-    <meta name="keywords" content="Traincape Technology, IT training, AWS certification, CompTIA certification, Microsoft certification, Cisco courses, online IT certification, professional IT courses, cloud computing certification, cybersecurity training" />
+    <meta name="description" content="IT Training & Certification provider for AWS, CompTIA, Microsoft, Cisco & PECB. Expert-led online courses for IT professionals." />
+    <meta name="keywords" content="Traincape Technology, IT training, AWS certification, CompTIA, Microsoft, Cisco courses, IT certification" />
     <meta name="author" content="Traincape Technology" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://traincapetech.in/" />
-    <meta property="og:title" content="Traincape Technology - Premier IT Training & Certification" />
-    <meta property="og:description" content="Expert-led online courses for AWS, CompTIA, Microsoft, Cisco and other IT certifications. Advance your IT career with Traincape Technology's professional training programs." />
-    <meta property="og:image" content="https://traincapetech.in/android-chrome-512x512.png" />
+    <meta property="og:title" content="Traincape Technology | IT Training & Certification" />
+    <meta property="og:description" content="Expert-led online courses for AWS, CompTIA, Microsoft, Cisco and other IT certifications. Advance your IT career with us." />
+    <meta property="og:image" content="/android-chrome-512x512.png" />
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://traincapetech.in/" />
-    <meta property="twitter:title" content="Traincape Technology - Premier IT Training & Certification" />
-    <meta property="twitter:description" content="Expert-led online courses for AWS, CompTIA, Microsoft, Cisco and other IT certifications. Advance your IT career with Traincape Technology's professional training programs." />
-    <meta property="twitter:image" content="https://traincapetech.in/android-chrome-512x512.png" />
+    <meta property="twitter:title" content="Traincape Technology | IT Training & Certification" />
+    <meta property="twitter:description" content="Expert-led online courses for AWS, CompTIA, Microsoft, Cisco and other IT certifications. Advance your IT career with us." />
+    <meta property="twitter:image" content="/android-chrome-512x512.png" />
 
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png" />
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" href="https://unpkg.com/aos@next/dist/aos.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"></noscript>
+    
+    <link rel="manifest" href="/manifest.json" />
     <link rel="canonical" href="https://traincapetech.in/" />
+    <link rel="preload" href="/styles.css" as="style" />
+    <link rel="stylesheet" href="/styles.css" />
 
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <!-- Preload key scripts -->
+    <link rel="preload" href="https://unpkg.com/aos@next/dist/aos.js" as="script" />
+    <link rel="preload" href="https://www.googletagmanager.com/gtag/js?id=G-1416H96S6J" as="script" />
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>Traincape Technology | Premier IT Training & Certification Provider</title>
+    <title>Traincape Technology | IT Training & Certification</title>
     
     <!-- JSON-LD for structured data -->
     <script type="application/ld+json">
@@ -85,25 +80,6 @@
       }
     </script>
     
-    <style>
-      /* Style the WhatsApp icon */
-      #whatsapp-icon {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background-color: #25d366;
-        border-radius: 50%;
-        padding: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        cursor: pointer;
-        z-index: 9999;
-      }
-
-      #whatsapp-icon img {
-        width: 40px;
-        height: 40px;
-      }
-    </style>
     <!-- Google tag (gtag.js) -->
     <script
       async
@@ -118,27 +94,16 @@
 
       gtag("config", "G-1416H96S6J");
     </script>
-    <!-- Start of Async Drift Code -->
   </head>
 
   <body>
-    <header style="display: none" aria-hidden="true">
-      <h1>Traincape Technology - Premier IT Training & Certification Provider</h1>
-      <p>Expert-led online training for AWS, CompTIA, Microsoft, Cisco and other IT certifications.</p>
+    <header>
+      <h1>Traincape Technology - IT Training & Certification</h1>
+      <h2>Expert-led online training for IT professionals</h2>
+      <h2>AWS, CompTIA, Microsoft, Cisco certification courses</h2>
     </header>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
 
     <!-- WhatsApp button -->
     <div
@@ -155,5 +120,4 @@
   <script>
     AOS.init({ offset: 300, duration: 1000 });
   </script>
-  <!-- AOS.init(); -->
 </html>

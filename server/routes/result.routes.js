@@ -1,14 +1,25 @@
-const express = require('express');
-const { addResult, getResults, verifyCertificate } = require('../controllers/result.controller');
+import express from "express";
+import { ResultModel } from "../model/result.model.js";
 
-const router = express.Router();
+const resultRouter = express.Router();
 
-// Route to add a new result
-router.post('/addResult', addResult);
+resultRouter.get("/", async (req, res) => {
+  try {
+    const results = await ResultModel.find();
+    res.status(200).send(results);
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+});
 
-// Route to fetch results based on course, sub-topic, or email
-router.get('/getResults', getResults);
+resultRouter.post("/add", async (req, res) => {
+  try {
+    const result = new ResultModel(req.body);
+    await result.save();
+    res.status(201).send({ msg: "Result added successfully", result });
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
+});
 
-router.get('/verifyCertificate', verifyCertificate);
-
-module.exports = { resultRouter: router };
+export { resultRouter };

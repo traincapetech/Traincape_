@@ -85,6 +85,20 @@ const Services = () => {
 
       {/* Services Cards Section */}
       <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+      <div className="flex items-center w-full py-4 mb-10 bg-white rounded shadow-md border border-gray-200">
+          <button
+            onClick={() => {
+              navigate("/");
+            }}
+            className="text-gray-600 font-bold py-2 px-4 rounded"
+          >
+            <span className="hover:text-gray-800">Home</span>
+          </button>
+          <div className="flex items-center text-gray-500 font-bold">
+            <span>{" > "}</span>
+            <span className="ml-4">Our Services</span>
+          </div>
+        </div>
         <div className="text-center mb-12">
           <h2 className="text-base font-semibold tracking-wider text-[#152B54] uppercase">What We Offer</h2>
           <p className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">

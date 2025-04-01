@@ -8,6 +8,7 @@ import Card4 from "../../assets/adobe4.webp";
 import Card5 from "../../assets/adobe5.webp";
 import Card6 from "../../assets/adobe6.webp";
 import AdobeCourses from "../../components/AdobeCourses";
+import { useNavigate } from "react-router-dom";
 
 const Adobe = () => {
   useEffect(() => {
@@ -53,6 +54,7 @@ const Adobe = () => {
     },
   ];
 
+  const navigate=useNavigate()
   return (
     <>
       <div
@@ -88,6 +90,28 @@ const Adobe = () => {
               alt="IBM Banner"
             />
           </div>
+        </div>
+      </div>     <div className="flex items-center w-full py-4 px-6 bg-white rounded shadow-md border border-gray-200">
+        <button
+          onClick={() => {
+            navigate("/");
+          }}
+          className="text-gray-600 font-bold py-2 px-4 rounded"
+        >
+          <span className="hover:text-gray-800">Home</span>
+        </button>
+        <div className="flex items-center text-gray-500 font-bold">
+          <span>{" > "}</span>
+          <button
+            onClick={() => {
+              navigate("/Courses-details");
+            }}
+            className="text-gray-600 font-bold py-2 px-4 rounded"
+          >
+            <span className="hover:text-gray-800">Course Details</span>
+          </button>
+          <span>{" > "}</span>
+          <span className="ml-4">Adobe</span>
         </div>
       </div>
       <div className="bg-teal-50 py-10 px-6">

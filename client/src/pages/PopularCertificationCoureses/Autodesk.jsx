@@ -6,12 +6,14 @@ import Card2 from "../../assets/autodesk2.webp";
 import Card3 from "../../assets/autodesk3.webp";
 import Card4 from "../../assets/autodesk4.webp";
 import MicrosoftOffCourses from "../../components/MicrosoftOffCourses";
+import { useNavigate } from "react-router-dom";
 
 const Autodesk = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const navigate = useNavigate()
   const autodeskcourses = [
     {
       image: Card1,
@@ -74,6 +76,28 @@ const Autodesk = () => {
               alt="IBM Banner"
             />
           </div>
+        </div>
+      </div>     <div className="flex items-center w-full py-4 px-6 bg-white rounded shadow-md border border-gray-200">
+        <button
+          onClick={() => {
+            navigate("/");
+          }}
+          className="text-gray-600 font-bold py-2 px-4 rounded"
+        >
+          <span className="hover:text-gray-800">Home</span>
+        </button>
+        <div className="flex items-center text-gray-500 font-bold">
+          <span>{" > "}</span>
+          <button
+            onClick={() => {
+              navigate("/Courses-details");
+            }}
+            className="text-gray-600 font-bold py-2 px-4 rounded"
+          >
+            <span className="hover:text-gray-800">Course Details</span>
+          </button>
+          <span>{" > "}</span>
+          <span className="ml-4">Autodesk Certified User (ACU)</span>
         </div>
       </div>
       <div className="bg-teal-50 py-10 px-6">
