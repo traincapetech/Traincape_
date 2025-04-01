@@ -1,18 +1,25 @@
-const express = require('express');
-const { addQuestion, getQuestions, updateQuestion, deleteQuestion } = require('../controllers/question.controller');
+import express from "express";
+import { QuestionModel } from "../model/question.model.js";
 
-const router = express.Router();
+const questionRouter = express.Router();
 
-// Route to add a new question
-router.post('/addQuestion', addQuestion);
+questionRouter.get("/", async (req, res) => {
+  try {
+    const questions = await QuestionModel.find();
+    res.status(200).send(questions);
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+});
 
-// Route to get questions based on course, sub-topic, and level
-router.get('/getQuestions', getQuestions);
+questionRouter.post("/add", async (req, res) => {
+  try {
+    const question = new QuestionModel(req.body);
+    await question.save();
+    res.status(201).send({ msg: "Question added successfully", question });
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
+});
 
-// Route to update a question by ID
-router.put('/updateQuestion/:questionId', updateQuestion);
-
-// Route to delete a question by ID
-router.delete('/deleteQuestion/:questionId', deleteQuestion);
-
-module.exports = { questionRouter: router };
+export { questionRouter };

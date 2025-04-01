@@ -58,7 +58,7 @@ const DashboardHeader = () => {
 
         {/* Dropdown menu */}
         {isDropdownOpen && (
-          <div className="absolute right-0 mt-2 bg-white border rounded-md shadow-lg z-10">
+          <div className="absolute right-0 mt-2 bg-white border rounded-md shadow-lg z-50">
             <div className="p-4 text-left">
               {/* Display username and email */}
               <p className="text-gray-600 font-bold text-lg">{user?.username}</p>

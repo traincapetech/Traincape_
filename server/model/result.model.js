@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const resultSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -15,6 +15,6 @@ const resultSchema = new mongoose.Schema({
   timestamps: true // Automatically adds createdAt and updatedAt
 });
 
-const Result = mongoose.model('Result', resultSchema);
+const ResultModel = mongoose.model('results', resultSchema);
 
-module.exports = { Result };
+export { ResultModel };

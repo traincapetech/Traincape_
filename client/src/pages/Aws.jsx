@@ -12,6 +12,7 @@ import security from '../assets/AWS/security.png';
 import solution from '../assets/AWS/solution.png';
 import sysops from '../assets/AWS/sysops.png';
 import AddToCartButton from '../components/AddToCartButton';
+import { useNavigate } from 'react-router-dom';
 const Aws = () => {
 
  const courseData = [
@@ -79,6 +80,7 @@ const Aws = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const navigate=useNavigate()
     return (
         <>
                           <AddToCartButton />
@@ -95,7 +97,29 @@ const Aws = () => {
           </div>
         </div>
       </div>
-
+      <div className="flex items-center w-full py-4 px-6 bg-white rounded shadow-md border border-gray-200">
+        <button
+          onClick={() => {
+            navigate("/");
+          }}
+          className="text-gray-600 font-bold py-2 px-4 rounded"
+        >
+          <span className="hover:text-gray-800">Home</span>
+        </button>
+        <div className="flex items-center text-gray-500 font-bold">
+          <span>{" > "}</span>
+          <button
+            onClick={() => {
+              navigate("/training");
+            }}
+            className="text-gray-600 font-bold py-2 px-4 rounded"
+          >
+            <span className="hover:text-gray-800">Training</span>
+          </button>
+          <span>{" > "}</span>
+          <span className="ml-4">AWS</span>
+        </div>
+      </div>
       {/* Courses Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-5 py-10">
         {courseData.map((course, index) => (

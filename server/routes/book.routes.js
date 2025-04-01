@@ -1,40 +1,36 @@
-const express = require("express");
-const { bookModel } = require("../model/book.model");
+import express from "express";
+import { BookModel } from "../model/book.model.js";
 
 const bookRouter = express.Router();
 
-bookRouter.get("/get-book", async (req, res) => {
+bookRouter.get("/allBooks", async (req, res) => {
   try {
-    let page = Number(req.query.page) || 1;
-    let limit = Number(req.query.limit) || 20;
-    let skip = (page - 1) * limit;
-
-    const book = await bookModel.find().skip(skip).limit(limit);
-
-    const totalbook = await bookModel.countDocuments();
-    const totalPages = Math.ceil(totalbook / limit);
-
-    res.send({
-      book,
-      currentPage: page,
-      totalPages,
-      totalbook,
-    });
+    const books = await BookModel.find();
+    res.send(books);
   } catch (error) {
-    res.status(500).send({ msg: error.message });
+    res.send(error);
   }
 });
 
-bookRouter.post("/create-book", async (req, res) => {
+bookRouter.post("/create", async (req, res) => {
   const payload = req.body;
-
   try {
-    const book = new bookModel(payload);
-    await book.save();
-    res.status(200).send({ msg: "A new Book is created", "new book": book });
+    // Check if payload is an array
+    if (Array.isArray(payload)) {
+      // Create an array of Book documents
+      const books = payload.map((doc) => new BookModel(doc));
+      // Save the Books
+      await BookModel.insertMany(books);
+      res.status(201).send({ msg: "Multiple Books created" });
+    } else {
+      // Create a single Book document
+      const book = new BookModel(payload);
+      await book.save();
+      res.status(201).send({ msg: "A new Book is created" });
+    }
   } catch (error) {
     res.status(400).send({ msg: error.message });
   }
 });
 
-module.exports = { bookRouter };
+export { bookRouter };

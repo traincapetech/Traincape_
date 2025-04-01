@@ -11,18 +11,21 @@ const initialState = {
   error: null,
 };
 
+// Define the base API URL - use environment variable in production
+const BASE_URL = "http://localhost:8081"; // Updated port to 3001
+
 // Async thunk for user login
 export const loginUser = createAsyncThunk(
   "user/loginUser",
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "https://traincape-backend-1.onrender.com/users/login",
+        `${BASE_URL}/users/login`,
         { email, password }
       );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || { msg: "Login failed" });
+      return rejectWithValue(error.response?.data || { message: "Login failed" });
     }
   }
 );
@@ -33,12 +36,12 @@ export const sendOTPToEmail = createAsyncThunk(
   async ({ email }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "https://traincape-backend-1.onrender.com/users/sendOTPToEmail",
+        `${BASE_URL}/users/sendOTPToEmail`,
         { email }
       );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || { msg: "OTP Failed to be Sent" });
+      return rejectWithValue(error.response?.data || { message: "OTP Failed to be Sent" });
     }
   }
 );
@@ -49,12 +52,12 @@ export const verifyOtp = createAsyncThunk(
   async ({ otp, email }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "https://traincape-backend-1.onrender.com/users/verifyOtp",
+        `${BASE_URL}/users/verifyOtp`,
         { otp, email }
       );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || { msg: "OTP Failed to be Verified" });
+      return rejectWithValue(error.response?.data || { message: "OTP Failed to be Verified" });
     }
   }
 );
@@ -62,15 +65,15 @@ export const verifyOtp = createAsyncThunk(
 // Async thunk for password reset
 export const reset_password = createAsyncThunk(
   "user/reset_password",
-  async ({ otp, email, newPassword }, { rejectWithValue }) => {
+  async ({ email, newPassword }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "https://traincape-backend-1.onrender.com/users/reset_password",
-        { otp, email, newPassword }
+        `${BASE_URL}/users/reset_password`,
+        { email, newPassword }
       );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || { msg: "New Password Failed to be Changed" });
+      return rejectWithValue(error.response?.data || { message: "New Password Failed to be Changed" });
     }
   }
 );
@@ -94,7 +97,7 @@ export const signupUser = createAsyncThunk(
   ) => {
     try {
       const response = await axios.post(
-        "https://traincape-backend-1.onrender.com/users/register",
+        `${BASE_URL}/users/register`,
         {
           email,
           password,
@@ -109,7 +112,7 @@ export const signupUser = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || { msg: "Signup failed" });
+      return rejectWithValue(error.response?.data || { message: "Signup failed" });
     }
   }
 );
@@ -154,24 +157,29 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        const { token, user } = action.payload;
+        if (action.payload.success) {
+          const { token, user } = action.payload;
 
-        // Store values in local storage
-        localStorage.setItem("token", token);
-        localStorage.setItem("username", user.username);
-        localStorage.setItem("role", user.role);
-        localStorage.setItem("user", JSON.stringify(user));
+          // Store values in local storage
+          localStorage.setItem("token", token);
+          localStorage.setItem("username", user.username);
+          localStorage.setItem("role", user.role);
+          localStorage.setItem("user", JSON.stringify(user));
 
-        // Update state
-        state.loading = false;
-        state.token = token;
-        state.username = user.username;
-        state.role = user.role;
-        state.user = user;
+          // Update state
+          state.loading = false;
+          state.token = token;
+          state.username = user.username;
+          state.role = user.role;
+          state.user = user;
+        } else {
+          state.loading = false;
+          state.error = action.payload.message;
+        }
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload?.msg || "Login failed";
+        state.error = action.payload?.message || "Login failed";
       })
 
       // Handle signup
@@ -185,7 +193,7 @@ const userSlice = createSlice({
       })
       .addCase(signupUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload?.msg || "Signup failed";
+        state.error = action.payload?.message || "Signup failed";
       })
 
       // Handle OTP sending
@@ -198,7 +206,7 @@ const userSlice = createSlice({
       })
       .addCase(sendOTPToEmail.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload?.msg || "Failed to send OTP";
+        state.error = action.payload?.message || "Failed to send OTP";
       })
 
       // Handle OTP verification
@@ -211,7 +219,7 @@ const userSlice = createSlice({
       })
       .addCase(verifyOtp.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload?.msg || "OTP verification failed";
+        state.error = action.payload?.message || "OTP verification failed";
       })
 
       // Handle password reset
@@ -224,7 +232,7 @@ const userSlice = createSlice({
       })
       .addCase(reset_password.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload?.msg || "Password reset failed";
+        state.error = action.payload?.message || "Password reset failed";
       });
   },
 });

@@ -16,7 +16,7 @@ import HomeBanner from "../components/HomeBanner";
 import HomeSlider from "../components/HomeSlider";
 import Slider from "react-slick";
 import Herobg from "../assets/bannerimg2.jpg";
-
+import { useInView } from "react-intersection-observer";
 // logo images
 import comptia from "../assets/comptia-2.webp";
 import pecb from "../assets/PECB1.png";
@@ -30,7 +30,8 @@ import Logo3 from "../assets/Digitalearn.webp";
 import Logo4 from "../assets/Gruslabs.svg";
 import Logo5 from "../assets/MSA.png";
 import Logo6 from "../assets/spectre.webp";
-
+import CountUp from "react-countup";
+import { div } from "three/tsl";
 // Try to import banner animation
 let bannerAnimation = null;
 try {
@@ -143,7 +144,10 @@ const Home = () => {
     { logo: Logo5, name: "MSA Software", url: "https://msasoftware.in/" },
     { logo: Logo6, name: "Spectre", url: "https://spectreme.ai/" },
   ];
-
+  const { ref, inView } = useInView({
+    triggerOnce: true, // Ensures it animates only once
+    threshold: 0.3, // Start animation when 30% of the div is in view
+  });
   return (
     <div className="bg-gray-50">
       {/* Hero Banner Section */}
@@ -159,7 +163,7 @@ const Home = () => {
             {/* Replace the slider with a simple grid for reliability */}
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
               {[comptia, pecb, certiport, pearson, etraind].map((logo, index) => (
-                <div key={index} className="flex justify-center items-center p-4">
+                <div key={index} className="flex justify-center items-center p-4 ">
                   <div className="bg-white rounded-lg shadow-md p-4 h-24 w-full flex items-center justify-center">
                     <img
                       src={logo}
@@ -380,7 +384,7 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* <div  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {statsItems.map((item, index) => (
               <div 
                 key={index} 
@@ -390,7 +394,35 @@ const Home = () => {
                 <div className="text-gray-600">{item.label}</div>
               </div>
             ))}
-          </div>
+          </div> */}
+          <div
+                    ref={ref}
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10"
+                  >
+                    {[
+                      { count: 100000, label: "Sales" },
+                      { count: 500, label: "Certification Courses" },
+                      { count: 8000, label: "Users" },
+                      { count: 300000, label: "Hours" },
+                    ].map((item, index) => (
+                      <div key={index} className="text-center">
+                        <span className="text-4xl font-semibold">
+                          {inView ? (
+                            <CountUp
+                              start={0}
+                              end={item.count}
+                              duration={2} // Animation duration in seconds
+                              separator={","}
+                            />
+                          ) : (
+                            "0"
+                          )}
+                          +
+                        </span>
+                        <p className="text-base text-blue-500">{item.label}</p>
+                      </div>
+                    ))}
+                  </div>
         </div>
       </section>
 
@@ -407,21 +439,22 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 mb-10">
+          <div className=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 mb-10">
             {partners.map((partner, index) => (
+              
               <a
                 key={index}
                 href={partner.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-gray-100 rounded-xl p-4 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center justify-center h-36"
+                className="bg-blue-900 rounded-xl p-4 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center justify-center h-36"
               >
                 <img
                   src={partner.logo}
                   alt={partner.name || "Partner Logo"}
                   className="max-h-16 max-w-[80%] object-contain grayscale hover:grayscale-0 transition-all duration-300 mb-2"
                 />
-                <p className="text-[#152B54] font-medium text-sm text-center mt-2 line-clamp-1">
+                <p className="text-white font-medium text-sm text-center mt-2 line-clamp-1">
                   {partner.name || partner.url.replace(/(https?:\/\/)?(www\.)?/i, '').split('/')[0]}
                 </p>
               </a>

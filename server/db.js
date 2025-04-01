@@ -1,13 +1,19 @@
-const mongoose = require("mongoose");
-require("dotenv").config();
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-const connection = mongoose.connect(process.env.MongoDBURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-// const connection = mongoose.connect("mongodb://127.0.0.1:27017/mongo?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.10.6")
+dotenv.config();
 
-module.exports = {  
-  connection,
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.error(`Error: ${error.message}`);
+    process.exit(1);
+  }
 };
-console.log("MongoDB URI:", process.env.MongoDBURI);
+
+export { connectDB };

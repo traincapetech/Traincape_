@@ -1,5 +1,6 @@
-const express = require("express");
-const { reviewModel } = require("../model/review.model");
+import express from "express";
+import { reviewModel } from "../model/review.model.js";
+
 const reviewRouter = express.Router();
 
 reviewRouter.get("/all", async (req, res) => {
@@ -10,6 +11,7 @@ reviewRouter.get("/all", async (req, res) => {
     res.send(error);
   }
 });
+
 reviewRouter.post("/create", async (req, res) => {
   const payload = req.body;
   try {
@@ -53,4 +55,4 @@ reviewRouter.get("/get-review", async (req, res) => {
   }
 });
 
-module.exports = { reviewRouter };
+export { reviewRouter };
