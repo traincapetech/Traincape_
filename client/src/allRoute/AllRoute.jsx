@@ -174,12 +174,12 @@ const CiscoCard = lazy(() => import("../pages/PopularCertificationCoureses/Cisco
 const AllRoute = () => {
   const token = localStorage.getItem("token");
   const location = useLocation();
-  
+
   return (
     <Suspense fallback={<LoadingComponent />}>
-      <Routes>
-        <Route path="/review-page" element={<ReviewPage />} />
-        <Route path="/" element={<Home />} />
+    <Routes>
+      <Route path="/review-page" element={<ReviewPage />} />
+      <Route path="/" element={<Home />} />
         <Route 
           path="/ebook-page" 
           element={token ? <BookPage /> : <Navigate to="/login" state={{ from: "/ebook-page" }} replace />} 
@@ -189,29 +189,29 @@ const AllRoute = () => {
         <Route path="/signup" element={!token ? <Signup /> : <Navigate to="/" replace />} />
         <Route path="/forgot-password" element={!token ? <ForgotPassword /> : <Navigate to="/" replace />} />
 
-        <Route path="/about-us" element={<AboutUS />} />
-        <Route path="/contact-us" element={<ContactUs />} />
-        <Route path="/frequently-asked-questions" element={<FAQ />} />
-        <Route path="/our-services" element={<Services />} />
-        <Route path="/Terms-and-Conditions" element={<TermsAndCondition />} />
+      <Route path="/about-us" element={<AboutUS />} />
+      <Route path="/contact-us" element={<ContactUs />} />
+      <Route path="/frequently-asked-questions" element={<FAQ />} />
+      <Route path="/our-services" element={<Services />} />
+      <Route path="/Terms-and-Conditions" element={<TermsAndCondition />} />
 
         <Route 
           path="/Courses-details" 
           element={<Courses />} 
         />
 
-        <Route path="/Career-details" element={<Career />} />
-        <Route path="/Our-Policies" element={<Policy />} />
-        <Route path="/Our-Blogs" element={<Blogs />} />
+      <Route path="/Career-details" element={<Career />} />
+      <Route path="/Our-Policies" element={<Policy />} />
+      <Route path="/Our-Blogs" element={<Blogs />} />
         <Route path="*" element={<NotFound />} />
 
-        <Route path="/CompTIA-single-page" element={<CompTIAsinglePage />} />
+      <Route path="/CompTIA-single-page" element={<CompTIAsinglePage />} />
 
-        <Route path="/home" element={<LandingPage />} />
+      <Route path="/home" element={<LandingPage />} />
         
         {/* Employee and Training Routes */}
-        <Route path="/employee" element={<Employee />} />
-        <Route path="/internship" element={<Internship />} />
+      <Route path="/employee" element={<Employee />} />
+      <Route path="/internship" element={<Internship />} />
         <Route 
           path="/test" 
           element={
@@ -229,11 +229,11 @@ const AllRoute = () => {
             )
           } 
         />
-        <Route path="/training" element={<Training />} />
+      <Route path="/training" element={<Training />} />
         
         {/* Certification Routes */}
         <Route path="/comptia" element={<Comptia />} />
-        <Route path="/aws" element={<Aws />} />
+      <Route path="/aws" element={<Aws />} />
         <Route path="/overview" element={<Overview />} />
         <Route path="/awsNetworking" element={<AwsCertifiedNetworking />} />
         <Route path="/awsSolution" element={<AwsCertifiedSolution />} />
@@ -243,24 +243,24 @@ const AllRoute = () => {
         <Route path="/awsDevops" element={<AwsCertifiedDevops />} />
         <Route path="/awsDeveloper" element={<AwsCertifiedDeveloper />} />
         <Route path="/awsSysops" element={<AwsCertifiedSysops />} />
-        <Route path="/awsSecurity" element={<AwsCertifiedSecurity />} />
+      <Route path="/awsSecurity" element={<AwsCertifiedSecurity />} />
         
         {/* CompTIA Subcourse Routes */}
-        <Route path="/comptiaSecurity" element={<ComptiaSecurity />} />
-        <Route path="/comptiaLinux" element={<ComptiaLinux />} />
-        <Route path="/comptiaProject" element={<ComptiaProject />} />
-        <Route path="/comptiaProject004" element={<ComptiaProject004 />} />
-        <Route path="/comptiaPentest" element={<ComptiaPentest />} />
-        <Route path="/comptiaA" element={<ComptiaA />} />
+      <Route path="/comptiaSecurity" element={<ComptiaSecurity />} />
+      <Route path="/comptiaLinux" element={<ComptiaLinux />} />
+      <Route path="/comptiaProject" element={<ComptiaProject />} />
+      <Route path="/comptiaProject004" element={<ComptiaProject004 />} />
+      <Route path="/comptiaPentest" element={<ComptiaPentest />} />
+      <Route path="/comptiaA" element={<ComptiaA />} />
         <Route path="/comptiaNetwork" element={<ComptiaNetwork />} />
-        <Route path="/comptiaCloud" element={<ComptiaCloud />} />
-        <Route path="/comptiaServer" element={<ComptiaServer />} />
-        <Route path="/comptiaData" element={<ComptiaData />} />
-        <Route path="/comptiaCloudCLO" element={<ComptiaCloudCLO />} />
+      <Route path="/comptiaCloud" element={<ComptiaCloud />} />
+      <Route path="/comptiaServer" element={<ComptiaServer />} />
+      <Route path="/comptiaData" element={<ComptiaData />} />
+      <Route path="/comptiaCloudCLO" element={<ComptiaCloudCLO />} />
         <Route path="/ComptiaSecurity601" element={<ComptiaSecurity601 />} />
-        <Route path="/comptiaCybersecurity" element={<ComptiaCybersecurity />} />
+      <Route path="/comptiaCybersecurity" element={<ComptiaCybersecurity />} />
         <Route path="/comptiaAdvance" element={<ComptiaAdvance />} />
-        <Route path="/comptiaNetwork007" element={<ComptiaNetwork007 />} />
+      <Route path="/comptiaNetwork007" element={<ComptiaNetwork007 />} />
         
         {/* Microsoft Subcourse Routes */}
         <Route path="/microsoftazureadmin" element={<MicrosoftAzureAdmin />} />
@@ -333,19 +333,19 @@ const AllRoute = () => {
         {/* Admin Panel */}
         <Route path="/admin-panel" element={token ? <AdminPanel /> : <Navigate to="/login" state={{ from: "/admin-panel" }} replace />} />
         <Route path="/verify-certificate" element={<VerifyCertificate />} />
-        <Route path="/cer" element={<CertificateTemplate />} />
+      <Route path="/cer" element={<CertificateTemplate />} />
 
         {/* Microsoft */}
         <Route path="/microsoft" element={<Microsoft />} />
 
         {/* PECB */}
-        <Route path="/PECB" element={<PECB />} />
+      <Route path="/PECB" element={<PECB />} />
 
         {/* Cisco */}
         <Route path="/CISCO" element={<Cisco />} />
 
         {/* Other Routes */}
-        <Route path="/service-detail" element={<ServiceDetail />} />
+      <Route path="/service-detail" element={<ServiceDetail />} />
         <Route path="/IBM" element={<IBM />} />
         <Route path="/META" element={<META />} />
         <Route path="/PartnerPage" element={<PartnerPage />} />
@@ -360,7 +360,7 @@ const AllRoute = () => {
         <Route path="/Adobe" element={<Adobe/>} />
         <Route path="/unity" element={<Unity/>} />
         <Route path="/ciscocard" element={<CiscoCard/>} />
-      </Routes>
+    </Routes>
     </Suspense>
   );
 };
