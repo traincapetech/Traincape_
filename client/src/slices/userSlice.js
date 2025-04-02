@@ -78,22 +78,6 @@ export const reset_password = createAsyncThunk(
   }
 );
 
-// Async thunk for password reset
-export const google_auth = createAsyncThunk(
-  "user/auth/google",
-  async ({ name, email, photo }, { rejectWithValue }) => {
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/users/auth/google",
-        { name, email, photo }
-      );
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response?.data || { msg: "google auth failed" });
-    }
-  }
-);
-
 // Async thunk for user signup
 export const signupUser = createAsyncThunk(
   "user/signupUser",
@@ -188,23 +172,6 @@ const userSlice = createSlice({
         state.role = user.role;
         state.user = user;
       })
-      // .addCase(google_auth.fulfilled, (state, action) => {
-      //   const { token, user } = action.payload;
-      //   localStorage.setItem("token", token);
-      //   console.log("user", user);
-      //   console.log("token", token);
-      //   localStorage.setItem("username",  user.username);
-      //   localStorage.setItem("role", user.role);
-      //   localStorage.setItem("user", JSON.stringify(user.rest));
-       
-      //   // Update state
-      //   state.loading = false;
-      //   state.token = token;
-      //   state.username = user.username;
-      //   state.role = user.role;
-      //   state.user = user.rest;
-      // })
-
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload?.msg || "Login failed";

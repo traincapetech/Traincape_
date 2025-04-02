@@ -29,7 +29,7 @@
 //       bcrypt.compare(password, user.password, (err, result) => {
 //         if (result) {
 //           res.status(200).send({
-//             msg: "Login successful!",
+//             msg: "Login successful!", 
 //             token: jwt.sign(
 //               { userId: user._id, username: user.username },
 //               process.env.secretKey
@@ -67,9 +67,10 @@
 //   const { username, email, password, role } = req.body;
 //   try {
 //     // Check if email already exists
-
+    
+    
 //     const existingUser = await UserModel.findOne({email: email.trim()});
-
+    
 //     if (existingUser) {
 //       return res.status(400).send({ msg: "Email already registered" });
 //     }
@@ -86,6 +87,8 @@
 //     res.status(500).send({ error: error.message });
 //   }
 // });
+
+
 
 // userRouter.post("/login", async (req, res) => {
 //   const { email, password } = req.body;
@@ -207,6 +210,7 @@ userRouter.post("/login", async (req, res) => {
   }
 });
 
+
 userRouter.post("/sendOTPToEmail", async (req, res) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -223,7 +227,7 @@ userRouter.post("/sendOTPToEmail", async (req, res) => {
         .status(400)
         .send({ msg: "Email Id does not exist in the database" });
     }
-    console.log(email);
+    console.log(email)
     const otp = String(Math.floor(100000 + Math.random() * 900000));
     user.verifyOtp = otp;
     user.verifyOtpExpireAt = Date.now() + 24 * 60 * 60 * 1000;
@@ -308,60 +312,6 @@ userRouter.post("/reset_password", async (req, res) => {
   } catch (error) {
     console.error(error);
     return res.json({ success: false, message: e.message });
-  }
-});
-
-userRouter.post("/auth/google", async (req, res) => {
-  const { email, newPassword, photo } = req.body;
-  const user = await UserModel.findOne({ email });
-  try {
-    if (user) {
-      const token = jwt.sign({ id: user._id }, process.env.secretKey);
-      user.isAccountVerified = true;
-      const { password: newPassword, ...rest } = user._doc;
-      await user.save();
-      res.cookie("token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-      });
-      return res.json({ success: true, rest });
-    } else {
-      const generatedPassword =
-        Math.random().toString(36).slice(-8) +
-        Math.random().toString(36).slice(-8);
-      const hashedPassword = await bcrypt.hash(generatedPassword, 10);
-      const newUser = new userModel({
-        name: req.body.name,
-        isAccountVerified: true,
-        email: req.body.email,
-        password: hashedPassword,
-        avatar: req.body.photo,
-      });
-      await newUser.save();
-      const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
-        expiresIn: "7d",
-      });
-      const { password: pass, ...rest } = newUser._doc;
-      res.cookie("token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-      });
-      //sending welcome email
-      const mailOptions = {
-        from: process.env.SENDER_EMAIL,
-        to: req.body.email,
-        subject: "Welcome to AapkaGhar",
-        text: `Welcome to AapkaGhar!Your account has been created with email id: ${req.body.email}.`,
-      };
-      await transporter.sendMail(mailOptions);
-      return res.json({ success: true, rest });
-    }
-  } catch (e) {
-    return res.json({ success: false, message: e.message, user });
   }
 });
 module.exports = {

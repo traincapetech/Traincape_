@@ -1,6 +1,7 @@
 // Updated by Saurav
 import React, { Suspense, lazy } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import ForgotPassword from "../pages/ForgotPassword";
 
 // Loading component
 const LoadingComponent = () => (
@@ -18,11 +19,10 @@ const LoadingComponent = () => (
 
 // Lazy load high-level pages for better performance
 const Home = lazy(() => import("../pages/Home"));
-const ForgotPassword = lazy(() => import("../pages/Auth/ForgotPassword"));
-const Login = lazy(() => import("../pages/Auth/Login"));
+const Login = lazy(() => import("../pages/Login"));
 const AboutUS = lazy(() => import("../pages/AboutUS"));
 const ContactUs = lazy(() => import("../pages/ContactUs"));
-const Signup = lazy(() => import("../pages/Auth/Signup"));
+const Signup = lazy(() => import("../pages/Signup"));
 const FAQ = lazy(() => import("../pages/FAQ"));
 const Services = lazy(() => import("../pages/Services"));
 const TermsAndCondition = lazy(() => import("../pages/TermsAndCondition"));

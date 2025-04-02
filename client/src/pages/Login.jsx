@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import { FaRegEyeSlash, FaEye, FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../slices/userSlice";
-import banner from "../../assets/loginbanner.jpeg";
-import logo from "../../assets/WhatsApp_Image_2024-06-22_at_10.01.48-removebg-preview.png";
+import { loginUser } from "../slices/userSlice";
+import banner from "../assets/loginbanner.jpeg";
+import logo from "../assets/WhatsApp_Image_2024-06-22_at_10.01.48-removebg-preview.png";
 import Lottie from "lottie-react";
-import signup from "../../assets/signup.json";
-import OAuth from "./OAuth";
+import signup from "../assets/signup.json";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -123,8 +122,8 @@ const Login = () => {
     >
       {/* Back Arrow Button */}
       <button
-        onClick={() => {
-          navigate("/");
+        onClick={()=>{
+          navigate('/');
         }}
         className="absolute top-2 left-2 md:top-4 md:left-4 z-20 text-white bg-[#152B54] 
                    p-2 md:p-3 rounded-full hover:bg-sky-950 transition duration-200
@@ -236,12 +235,6 @@ const Login = () => {
             >
               {isSubmitting ? "Logging in..." : "Login"}
             </button>
-            <div className="flex text-center items-center my-4">
-              <div className="w-[28%] h-0.5 bg-gray-400 mx-4"></div>
-              <p className="text-gray-900 text-xs">or sign up with</p>
-              <div className="w-[28%] h-0.5 bg-gray-400 mx-4"></div>
-            </div>
-            <OAuth type="sign-in" />
 
             <div className="mt-4 text-center">
               <p className="text-sm text-gray-700">

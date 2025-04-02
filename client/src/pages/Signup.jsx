@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import { FaRegEyeSlash, FaEye, FaArrowLeft } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { signupUser } from "../../slices/userSlice";
-import banner from "../../../src/assets/loginbanner.jpeg";
+import { signupUser } from "../slices/userSlice";
+import banner from "../../src/assets/loginbanner.jpeg";
 import Lottie from "lottie-react";
-import signup from "../../assets/signup.json";
-import logo from "../../assets/WhatsApp_Image_2024-06-22_at_10.01.48-removebg-preview.png";
-import OAuth from "./OAuth";
+import signup from "../assets/signup.json";
+import logo from "../assets/WhatsApp_Image_2024-06-22_at_10.01.48-removebg-preview.png";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -579,12 +578,7 @@ const Signup = () => {
                     "Continue"
                   )}
                 </button>
-                <div className="flex items-center text-center my-4">
-                        <div className="w-[28%] h-0.5 bg-gray-400 mx-4"></div>
-                        <p className='text-gray-900 text-xs'>or sign up with</p>
-                        <div className="w-[28%] h-0.5 bg-gray-400 mx-4"></div>
-                    </div>
-                    <OAuth type='sign-up' />
+
                 <div className="mt-4 text-center">
                   <p className="text-sm text-gray-700">
                     Already have an account?{" "}
