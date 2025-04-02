@@ -11,16 +11,13 @@ const initialState = {
   error: null,
 };
 
-// Define the base API URL - use environment variable in production
-const BASE_URL = "http://localhost:8081"; // Updated port to 3001
-
 // Async thunk for user login
 export const loginUser = createAsyncThunk(
   "user/loginUser",
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `${BASE_URL}/users/login`,
+        "/users/login",
         { email, password }
       );
       return response.data;
@@ -36,7 +33,7 @@ export const sendOTPToEmail = createAsyncThunk(
   async ({ email }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `${BASE_URL}/users/sendOTPToEmail`,
+        "/users/sendOTPToEmail",
         { email }
       );
       return response.data;
@@ -52,7 +49,7 @@ export const verifyOtp = createAsyncThunk(
   async ({ otp, email }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `${BASE_URL}/users/verifyOtp`,
+        "/users/verifyOtp",
         { otp, email }
       );
       return response.data;
@@ -68,7 +65,7 @@ export const reset_password = createAsyncThunk(
   async ({ email, newPassword }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `${BASE_URL}/users/reset_password`,
+        "/users/reset_password",
         { email, newPassword }
       );
       return response.data;
@@ -97,7 +94,7 @@ export const signupUser = createAsyncThunk(
   ) => {
     try {
       const response = await axios.post(
-        `${BASE_URL}/users/register`,
+        "/users/register",
         {
           email,
           password,

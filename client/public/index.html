@@ -33,6 +33,14 @@
     <link rel="preload" href="/styles.css" as="style" />
     <link rel="stylesheet" href="/styles.css" />
 
+    <!-- DNS Prefetch and Preconnect -->
+    <link rel="dns-prefetch" href="https://traincape-backend-1.onrender.com">
+    <link rel="preconnect" href="https://traincape-backend-1.onrender.com" crossorigin>
+    <link rel="dns-prefetch" href="https://unpkg.com">
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+
     <!-- Preload key scripts -->
     <link rel="preload" href="https://unpkg.com/aos@next/dist/aos.js" as="script" />
     <link rel="preload" href="https://www.googletagmanager.com/gtag/js?id=G-1416H96S6J" as="script" />
@@ -83,6 +91,7 @@
     <!-- Google tag (gtag.js) -->
     <script
       async
+      defer
       src="https://www.googletagmanager.com/gtag/js?id=G-1416H96S6J"
     ></script>
     <script>
@@ -92,7 +101,13 @@
       }
       gtag("js", new Date());
 
-      gtag("config", "G-1416H96S6J");
+      gtag("config", "G-1416H96S6J", {
+        send_page_view: false // Defer page view sending until after page load
+      });
+      // Only send pageview when page is fully loaded
+      window.addEventListener('load', function() {
+        gtag('event', 'page_view');
+      });
     </script>
   </head>
 
@@ -113,11 +128,17 @@
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
         alt="WhatsApp"
+        width="40"
+        height="40"
+        loading="lazy"
       />
     </div>
   </body>
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
   <script>
-    AOS.init({ offset: 300, duration: 1000 });
+    // Initialize AOS after page load for better performance
+    window.addEventListener('load', function() {
+      AOS.init({ offset: 200, duration: 800, once: true });
+    });
   </script>
 </html>
