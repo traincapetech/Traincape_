@@ -46,7 +46,12 @@ require("dotenv").config();
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+// Use this configuration
+app.use(cors({
+  origin: 'http://localhost:3000', // Your React app's origin exactly
+  credentials: true,               // Allow credentials
+  exposedHeaders: ['set-cookie']   // If you're using cookies
+}));
 
 app.use("/questions", questionRouter);  
 app.use("/results", resultRouter);  // Add the resultRouter here

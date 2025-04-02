@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from "react";
-import banner from "../assets/loginbanner.jpeg";
-import logo from "../assets/WhatsApp_Image_2024-06-22_at_10.01.48-removebg-preview.png";
+import React, { useState } from "react";
+import banner from "../../assets/loginbanner.jpeg";
+import logo from "../../assets/WhatsApp_Image_2024-06-22_at_10.01.48-removebg-preview.png";
 import Lottie from "lottie-react";
-import signup from "../assets/signup.json";
-import { FaRegEyeSlash, FaEye } from "react-icons/fa6";
+import signup from "../../assets/signup.json";
 import { useNavigate } from "react-router-dom";
-import { reset_password, sendOTPToEmail, verifyOtp } from "../slices/userSlice";
+import { reset_password, sendOTPToEmail, verifyOtp } from "../../slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import Loading from "./loadingPage/Loading";
-import axios from "axios";
+import Loading from "../loadingPage/Loading";
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
