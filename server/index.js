@@ -46,7 +46,13 @@ require("dotenv").config();
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+// Use this configuration
+app.use(cors({
+  origin: 'http://localhost:3000', // Explicitly specify your frontend origin
+  credentials: true,               // Allow credentials
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed methods
+  allowedHeaders: ['Content-Type', 'Authorization'] // Allowed headers
+}));
 
 app.use("/questions", questionRouter);  
 app.use("/results", resultRouter);  // Add the resultRouter here

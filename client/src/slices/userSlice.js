@@ -15,10 +15,13 @@ const initialState = {
 export const loginUser = createAsyncThunk(
   "user/loginUser",
   async ({ email, password }, { rejectWithValue }) => {
+    axios.defaults.withCredentials = true
     try {
       const response = await axios.post(
         "https://traincape-backend-1.onrender.com/users/login",
-        { email, password }
+        { email, password } ,{
+          withCredentials: true
+        }
       );
       return response.data;
     } catch (error) {
@@ -74,6 +77,22 @@ export const reset_password = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || { msg: "New Password Failed to be Changed" });
+    }
+  }
+);
+
+// Async thunk for password reset
+export const google_auth = createAsyncThunk(
+  "user/auth/google",
+  async ({ name, email, photo }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/users/auth/google",
+        { name, email, photo }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || { msg: "google auth failed" });
     }
   }
 );
@@ -172,6 +191,21 @@ const userSlice = createSlice({
         state.role = user.role;
         state.user = user;
       })
+      .addCase(google_auth.fulfilled, (state, action) => {
+        const { token, rest } = action.payload;
+        localStorage.setItem("token", token);
+        localStorage.setItem("username",  rest.username);
+        localStorage.setItem("role", rest.role);
+        localStorage.setItem("user", JSON.stringify(rest));
+       
+        // Update state
+        state.loading = false;
+        state.token = token;
+        state.username = rest.username;
+        state.role = rest.role;
+        state.user = rest;
+      })
+
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload?.msg || "Login failed";
