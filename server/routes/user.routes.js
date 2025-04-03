@@ -87,7 +87,9 @@ userRouter.post("/login", async (req, res) => {
 
 userRouter.post("/sendOTPToEmail", async (req, res) => {
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    // service: "gmail",
+    host: "smtp.hostinger.com",
+    secure:true,
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
