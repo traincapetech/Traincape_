@@ -19,9 +19,7 @@ export const loginUser = createAsyncThunk(
     try {
       const response = await axios.post(
         "https://traincape-backend-1.onrender.com/users/login",
-        { email, password } ,{
-          withCredentials: true
-        }
+        { email, password } 
       );
       return response.data;
     } catch (error) {

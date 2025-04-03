@@ -79,42 +79,42 @@ const Login = () => {
 
     try {
       setIsSubmitting(true);
-      // const result = await dispatch(
-      //   loginUser({
-      //     email: payload.email,
-      //     password: payload.password,
-      //     rememberMe: rememberMe,
-      //   })
-      // );
+      const result = await dispatch(
+        loginUser({
+          email: payload.email,
+          password: payload.password,
+          rememberMe: rememberMe,
+        })
+      );
 
-      // if (loginUser.fulfilled.match(result)) {
-      //   // Login successful, navigate to home page
-      //   navigate("/");
-      // } else {
-      //   // Handle error from the rejected action
-      //   const errorPayload = result.payload || result.error?.message;
-      //   setErrorMessage(
-      //     typeof errorPayload === "string"
-      //       ? errorPayload
-      //       : "Invalid email or password. Please try again."
-      //   );
-      //   setIsSubmitting(false);
-      // }
-      axios.defaults.withCredentials = true;
-      const { data } = await axios.post(`${backendURL}/users/login`, {
-        email: payload.email,
-        password: payload.password,
-        rememberMe: rememberMe,
-      });
-      console.log(data);
-      if (data.success) {
-        console.log(data.success);
-        // setIsLoggedIn(true);
-        // getUserData();
+      if (loginUser.fulfilled.match(result)) {
+        // Login successful, navigate to home page
         navigate("/");
       } else {
-        setErrorMessage(data.msg);
+        // Handle error from the rejected action
+        const errorPayload = result.payload || result.error?.msg;
+        setErrorMessage(
+          typeof errorPayload === "string"
+            ? errorPayload
+            : "Invalid email or password. Please try again."
+        );
+        setIsSubmitting(false);
       }
+      // axios.defaults.withCredentials = true;
+      // const { data } = await axios.post(`${backendURL}/users/login`, {
+      //   email: payload.email,
+      //   password: payload.password,
+      //   rememberMe: rememberMe,
+      // });
+      // console.log(data);
+      // if (data.success) {
+      //   console.log(data.success);
+      //   // setIsLoggedIn(true);
+      //   // getUserData();
+      //   navigate("/");
+      // } else {
+      //   setErrorMessage(data.msg);
+      // }
     } catch (error) {
       console.error("An error occurred:", error);
       setErrorMessage("An unexpected error occurred. Please try again.");
@@ -251,12 +251,12 @@ const Login = () => {
             >
               {isSubmitting ? "Logging in..." : "Login"}
             </button>
-            <div className="flex text-center items-center my-4">
+            {/* <div className="flex text-center items-center my-4">
               <div className="w-[28%] h-0.5 bg-gray-400 mx-4"></div>
               <p className="text-gray-900 text-xs">or sign up with</p>
               <div className="w-[28%] h-0.5 bg-gray-400 mx-4"></div>
             </div>
-            <OAuth type="sign-in" />
+            <OAuth type="sign-in" /> */}
 
             <div className="mt-4 text-center">
               <p className="text-sm text-gray-700">

@@ -579,12 +579,12 @@ const Signup = () => {
                     "Continue"
                   )}
                 </button>
-                <div className="flex items-center text-center my-4">
+                {/* <div className="flex items-center text-center my-4">
                         <div className="w-[28%] h-0.5 bg-gray-400 mx-4"></div>
                         <p className='text-gray-900 text-xs'>or sign up with</p>
                         <div className="w-[28%] h-0.5 bg-gray-400 mx-4"></div>
                     </div>
-                    <OAuth type='sign-up' />
+                    <OAuth type='sign-up' /> */}
                 <div className="mt-4 text-center">
                   <p className="text-sm text-gray-700">
                     Already have an account?{" "}
