@@ -3,7 +3,7 @@ import React, { Suspense, lazy } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import ForgotPassword from "../pages/ForgotPassword";
 import NotFound from "../pages/NotFound";
-
+import Gallery from "../pages/Gallery";
 // Loading component
 const LoadingComponent = () => (
   <div style={{ 
@@ -360,6 +360,7 @@ const AllRoute = () => {
         <Route path="/Adobe" element={<Adobe/>} />
         <Route path="/unity" element={<Unity/>} />
         <Route path="/ciscocard" element={<CiscoCard/>} />
+        <Route path="/Gallery" element={<Gallery/>} />
     </Routes>
     </Suspense>
   );

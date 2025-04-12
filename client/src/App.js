@@ -20,6 +20,8 @@
 import React, { useEffect, Suspense, lazy } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom"; // Import useLocation hook
+import AOS from 'aos'; // Import AOS library
+import 'aos/dist/aos.css'; // Import AOS styles
 import { setUserFromLocalStorage } from "./slices/userSlice"; // Import the action
 import { CartProvider } from "./components/CartContext";
 
@@ -50,6 +52,10 @@ function App() {
 
   useEffect(() => {
     dispatch(setUserFromLocalStorage()); // Dispatch action to set user from localStorage
+    AOS.init({ // Initialize AOS
+      duration: 1000, // values from 0 to 3000, with step 50ms
+      once: true, // whether animation should happen only once - while scrolling down
+    });
   }, [dispatch]);
 
   // List of pages where you want to hide the AddToCartButton
