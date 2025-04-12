@@ -574,6 +574,13 @@ export default function Footer() {
                   <span className="w-0 h-0.5 bg-blue-500 group-hover:w-2 transition-all duration-300 mr-0 group-hover:mr-1"></span>
                   Partners
                 </button>
+                <button
+                  onClick={() => handleNavigation("/Gallery")}
+                  className="text-slate-300 hover:text-blue-300 transition-colors duration-300 text-left flex items-center group"
+                >
+                  <span className="w-0 h-0.5 bg-blue-500 group-hover:w-2 transition-all duration-300 mr-0 group-hover:mr-1"></span>
+                  Gallery
+                </button>
               </div>
             </div>
           </div>

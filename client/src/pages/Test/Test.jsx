@@ -37,7 +37,7 @@ const Test = () => {
       try {
         const encodedSubTopic = encodeURIComponent(subTopic);
         const response = await axios.get(
-          `/questions/getQuestions?course=${course}&subTopic=${encodedSubTopic}&level=${level}`
+          `https://traincape-backend-1.onrender.com/questions/getQuestions?course=${course}&subTopic=${encodedSubTopic}&level=${level}`
         );
         setQuestions(response.data);
       } catch (error) {
@@ -125,7 +125,7 @@ const Test = () => {
 
     try {
       const response = await axios.post(
-        "/results/addResult",
+        "https://traincape-backend-1.onrender.com/results/addResult",
         resultData
       );
       console.log("Result saved successfully:", response.data);

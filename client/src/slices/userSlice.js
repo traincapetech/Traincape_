@@ -17,7 +17,7 @@ export const loginUser = createAsyncThunk(
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "/users/login",
+        "https://traincape-backend-1.onrender.com/users/login",
         { email, password }
       );
       return response.data;
@@ -33,7 +33,7 @@ export const sendOTPToEmail = createAsyncThunk(
   async ({ email }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "/users/sendOTPToEmail",
+        "https://traincape-backend-1.onrender.com/users/sendOTPToEmail",
         { email }
       );
       return response.data;
@@ -49,7 +49,7 @@ export const verifyOtp = createAsyncThunk(
   async ({ otp, email }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "/users/verifyOtp",
+        "https://traincape-backend-1.onrender.com/users/verifyOtp",
         { otp, email }
       );
       return response.data;
@@ -65,7 +65,7 @@ export const reset_password = createAsyncThunk(
   async ({ email, newPassword }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "/users/reset_password",
+        "https://traincape-backend-1.onrender.com/users/reset_password",
         { email, newPassword }
       );
       return response.data;
@@ -94,7 +94,7 @@ export const signupUser = createAsyncThunk(
   ) => {
     try {
       const response = await axios.post(
-        "/users/register",
+        "https://traincape-backend-1.onrender.com/users/register",
         {
           email,
           password,
