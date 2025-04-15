@@ -26,7 +26,9 @@ userRouter.post("/register", async (req, res) => {
     const existingUser = await UserModel.findOne({ email: email.trim() });
 
     if (existingUser) {
-      return res.status(400).send({ success: false, message: "Email already registered" });
+      return res
+        .status(400)
+        .send({ success: false, message: "Email already registered" });
     }
 
     bcrypt.hash(password, 5, async (err, hash) => {
@@ -59,11 +61,15 @@ userRouter.post("/login", async (req, res) => {
   try {
     const user = await UserModel.findOne({ email });
     if (!user) {
-      return res.status(400).send({ success: false, message: "Wrong Credentials" });
+      return res
+        .status(400)
+        .send({ success: false, message: "Wrong Credentials" });
     }
     bcrypt.compare(password, user.password, (err, result) => {
       if (err || !result) {
-        return res.status(401).send({ success: false, message: "Wrong Credentials" });
+        return res
+          .status(401)
+          .send({ success: false, message: "Wrong Credentials" });
       }
       const token = jwt.sign(
         { userId: user._id, username: user.username },
@@ -87,15 +93,13 @@ userRouter.post("/login", async (req, res) => {
 
 userRouter.post("/sendOTPToEmail", async (req, res) => {
   const transporter = nodemailer.createTransport({
-    // service: "gmail",
     host: "smtp.hostinger.com",
-    port: 465,  // Explicitly set the port
-    secure:true,
+    port: 465,
+    secure: true,
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
-    }, // Add this to debug the connection:
-    debug: true,
+    },
   });
   const { email } = req.body;
   try {

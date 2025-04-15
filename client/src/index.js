@@ -8,6 +8,7 @@ import store from "./store/store";
 import { Provider } from "react-redux";
 import { CartProvider } from "./components/CartContext";
 import { HelmetProvider } from 'react-helmet-async';
+import axios from 'axios';
 
 // Create a web worker for performance monitoring
 const isProduction = process.env.NODE_ENV === 'production';
@@ -74,3 +75,17 @@ if (isProduction) {
     document.head.appendChild(link);
   });
 }
+
+// Configure axios defaults to optimize API calls
+axios.defaults.baseURL = 'https://traincape-backend-1.onrender.com';
+axios.defaults.timeout = 10000; // 10 seconds timeout
+axios.defaults.headers.common['Content-Type'] = 'application/json';
+
+// Add response interceptor for consistent error handling
+axios.interceptors.response.use(
+  response => response,
+  error => {
+    const fallbackValue = { success: false, message: 'An error occurred during the request.' };
+    return Promise.reject(error.response?.data || fallbackValue);
+  }
+);
