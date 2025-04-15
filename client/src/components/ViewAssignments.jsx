@@ -292,11 +292,12 @@ const ViewAssignments = () => {
 
     try {
       const encodedSubTopic = encodeURIComponent(subTopic); // URL encode sub-topic
+      console.log("COURSE IS--->",course,"LEVEL IS--->",level,"SUBTOPIC IS--->",subTopic);
       const response = await axios.get(
-        `https://traincape-backend-1.onrender.com/questions/getQuestions?course=${course}&subTopic=${encodedSubTopic}&level=${level}`
+        `http://localhost:8080/questions/getQuestions?course=${course}&subTopic=${encodedSubTopic}&level=${level}`
       );
+      console.log("Response from backend is-->",response.data);
       setQuestions(response.data);
-      console.log(response);
 
     } catch (error) {
       setError("Failed to load questions.");
@@ -432,7 +433,8 @@ const ViewAssignments = () => {
 
       {/* Display all questions */}
       <div className="space-y-4">
-        {questions.map((question) => (
+        {
+        questions && questions.map((question) => (
           <div key={question._id} className="border p-4 rounded-md space-y-4">
             <div className="space-y-2">
               <h3 className="text-2xl font-bold">{question.questionText}</h3>
@@ -464,7 +466,8 @@ const ViewAssignments = () => {
               </button>
             </div>
           </div>
-        ))}
+        ))
+        }
       </div>
 
       {/* Edit Question Form */}
