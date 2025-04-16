@@ -340,8 +340,12 @@ const ViewAssignments = () => {
     const updatedQuestion = { questionText, options, correctAnswer };
 
     try {
+      // const response = await axios.put(
+      //   `https://traincape-backend-1.onrender.com/questions/updateQuestion/${editingQuestion}`,
+      //   updatedQuestion
+      // );
       const response = await axios.put(
-        `https://traincape-backend-1.onrender.com/questions/updateQuestion/${editingQuestion}`,
+        `http://localhost:8080/questions/updateQuestion/${editingQuestion}`,
         updatedQuestion
       );
       console.log('Response:', response);  // Log the response
@@ -361,7 +365,7 @@ const ViewAssignments = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this question?")) {
       try {
-        await axios.delete(`https://traincape-backend-1.onrender.com/questions/deleteQuestion/${id}`);
+        await axios.delete(`http://localhost:8080/questions/deleteQuestion/${id}`);
         fetchQuestions(); // Refresh the question list after deletion
       } catch (error) {
         setError("Failed to delete question.");
