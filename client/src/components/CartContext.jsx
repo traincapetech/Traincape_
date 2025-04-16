@@ -24,18 +24,24 @@ export const CartProvider = ({ children }) => {
   }, [cart]); // Effect runs whenever cart changes
 
   const addToCart = (product) => {
+    // Ensure product has a quantity property, defaulting to 1 if not present
+    const productWithQuantity = {
+      ...product,
+      quantity: product.quantity || 1
+    };
+
     setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === product.id);
+      const existingItem = prevCart.find((item) => item.id === productWithQuantity.id);
       if (existingItem) {
         // If the product already exists in the cart, update the quantity
         return prevCart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + product.quantity }  // Add the quantity
+          item.id === productWithQuantity.id
+            ? { ...item, quantity: item.quantity + productWithQuantity.quantity }  // Add the quantity
             : item
         );
       } else {
-        // Otherwise, add the new product with all its details (including productImage)
-        return [...prevCart, { ...product, quantity: product.quantity }];
+        // Otherwise, add the new product with all its details
+        return [...prevCart, productWithQuantity];
       }
     });
   };

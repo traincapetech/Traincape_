@@ -11,7 +11,7 @@ const reviewCache = new Map();
 const CACHE_EXPIRY = 15 * 60 * 1000; // 15 minutes
 const PREFETCH_TIMEOUT = 3000; // 3 second timeout for prefetch
 const MAIN_REQUEST_TIMEOUT = 10000; // 10 second timeout for main request
-const REVIEWS_PER_PAGE = 18;
+const REVIEWS_PER_PAGE = 12;
 
 // Create axios instance with base configuration
 const reviewsAPI = axios.create({

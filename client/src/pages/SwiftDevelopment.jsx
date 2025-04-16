@@ -14,11 +14,17 @@ const SwiftDevelopment = () => {
     {
       image: Card1,
       title: "CERTIFICATION COURSE",
-      description: "App Development with Swift – Certified User E-Book",
-      price: "₹1149",
-      url: "/IBMcourses",
+      description: "Swift Development Basics",
+      price: "₹1,499",
+      url: "/SwiftDevelopmentBasics",
     },
-   
+    {
+      image: Card1,
+      title: "CERTIFICATION COURSE",
+      description: "Swift Development Advanced",
+      price: "₹1,999",
+      url: "/SwiftDevelopmentAdvanced",
+    },
   ];
 
   const navigate=useNavigate()
@@ -38,7 +44,7 @@ const SwiftDevelopment = () => {
               Apple Certifications
             </h1>
             <h5 className="text-sm md:text-lg lg:text-xl mt-4">
-            Swift is a robust and intuitive programming language created by Apple. It’s easy to learn, simple to use, and super powerful — which makes it a great language for first time coders and full time developers.        
+            Swift is a robust and intuitive programming language created by Apple. It's easy to learn, simple to use, and super powerful — which makes it a great language for first time coders and full time developers.        
             <br />
             App Development with Swift certifications recognize students for their knowledge of Swift, Xcode, and app development tools.              <br />
               <br />

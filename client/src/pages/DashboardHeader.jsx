@@ -26,6 +26,12 @@ const DashboardHeader = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  // Navigate to Admin Panel
+  const navigateToAdmin = () => {
+    navigate("/admin-panel");
+    setIsDropdownOpen(false);
+  };
+
   // Close dropdown if clicked outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -58,13 +64,22 @@ const DashboardHeader = () => {
 
         {/* Dropdown menu */}
         {isDropdownOpen && (
-          <div className="absolute right-0 mt-2 bg-white border rounded-md shadow-lg z-50">
+          <div className="absolute right-0 mt-2 bg-white border rounded-md shadow-lg z-50 w-48">
             <div className="p-4 text-left">
               {/* Display username and email */}
               <p className="text-gray-600 font-bold text-lg">{user?.username}</p>
               <p className="text-sm text-gray-500">{user?.email}</p>
             </div>
             <div className="border-t border-gray-200">
+              {/* Admin panel link */}
+              {user?.role === "admin" && (
+                <button
+                  className="w-full px-4 py-2 text-left text-sm text-blue-600 hover:bg-gray-100 focus:outline-none"
+                  onClick={navigateToAdmin}
+                >
+                  Admin Panel
+                </button>
+              )}
               <button
                 className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-gray-100 focus:outline-none"
                 onClick={handleLogout}

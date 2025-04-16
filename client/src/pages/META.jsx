@@ -17,7 +17,39 @@ const META = () => {
       description:
         "Meta Certified Digital Marketing Associate E-Learning Course",
       price: "₹1699",
-      url: "/IBMcourses",
+      url: "/MetaDigitalMarketing",
+    },
+    {
+      image: Card1,
+      title: "CERTIFICATION COURSE",
+      description:
+        "Meta Front-End Developer Professional Certificate",
+      price: "₹1799",
+      url: "/MetaFrontEndDeveloper",
+    },
+    {
+      image: Card1,
+      title: "CERTIFICATION COURSE",
+      description:
+        "Meta Back-End Developer Professional Certificate",
+      price: "₹1899",
+      url: "/MetaBackEndDeveloper",
+    },
+    {
+      image: Card1,
+      title: "CERTIFICATION COURSE",
+      description:
+        "Meta Android Developer Professional Certificate",
+      price: "₹1899",
+      url: "/MetaAndroidDeveloper",
+    },
+    {
+      image: Card1,
+      title: "CERTIFICATION COURSE",
+      description:
+        "Meta iOS Developer Professional Certificate",
+      price: "₹1999",
+      url: "/MetaIosDeveloper",
     },
     //UNWANTED CARDS
     // {
