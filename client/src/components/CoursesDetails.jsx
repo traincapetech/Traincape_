@@ -90,6 +90,17 @@ const Cards = [
     description: "We offer specialized cybersecurity services that ensure the protection of IT infrastructures and solutions.",
     url:"/ciscocard"
   },
+  // {
+  //   id: "microsoft-powerpoint-associate",
+  //   title: "Microsoft PowerPoint Associate",
+  //   description: "Master the art of creating professional presentations with Microsoft's globally recognized certification.",
+  //   price: 1299,
+  //   originalPrice: 2199,
+  //   discount: "41% off",
+  //   image: "https://upload.wikimedia.org/wikipedia/commons/0/0d/Microsoft_Office_PowerPoint_%282019%E2%80%93present%29.svg",
+  //   category: "Microsoft",
+  //   url: "/MicrosoftCourse/MicrosoftPowerPointAssociate"
+  // },
 ];
 
 const CourseDetails = () => {

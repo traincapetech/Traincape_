@@ -21,31 +21,37 @@ const Tally = () => {
         image: Card5,
         description: "TallyEssential Level – 1",
         price: "₹1149",
-        url: "/IBMcourses",
+        url: "/TallyEssentialLevel1",
       },
     {
       image: Card1,
       description: "TallyEssential Level – 2",
       price: "₹1149",
-      url: "/IBMcourses",
+      url: "/TallyEssentialLevel2",
     },
     {
       image: Card2,
       description: "TallyEssential Level – 3 ",
       price: "₹1149",
-      url: "/IBMcourses",
+      url: "/TallyEssentialLevel3",
     },
     {
       image: Card3,
       description: "TallyProfessional",
       price: "₹1149",
-      url: "/IBMcourses",
+      url: "/TallyProfessional",
     },
     {
       image: Card4,
       description: "TallyEssential Comprehensive",
       price: "₹1149",
-      url: "/IBMcourses",
+      url: "/TallyEssentialComprehensive",
+    },
+    {
+      image: Card5,
+      description: "TallyPrime",
+      price: "₹1149",
+      url: "/TallyPrime",
     },
   ];
 

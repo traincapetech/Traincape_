@@ -17,29 +17,33 @@ const Autodesk = () => {
   const autodeskcourses = [
     {
       image: Card1,
-      description: "Microsoft Office Specialist – Excel Expert Certification",
-      price: "₹1149",
-      url: "/IBMcourses",
+      description: "Autodesk Certified User - AutoCAD",
+      price: "₹1499",
+      url: "/AutodeskCourse/AutodeskAutoCAD",
     },
     {
       image: Card2,
-      description: "Microsoft Office Specialist – Word Expert Certification",
-      price: "₹1149",
-      url: "/IBMcourses",
+      description: "Autodesk Certified User - Revit Architecture",
+      price: "₹1499",
+      url: "/AutodeskCourse/AutodeskRevit",
     },
     {
       image: Card3,
-      description:
-        "Microsoft Office Specialist – PowerPoint Associate Certification ",
-      price: "₹1149",
-      url: "/IBMcourses",
+      description: "Autodesk Certified User - 3ds Max",
+      price: "₹1499",
+      url: "/AutodeskCourse/Autodesk3dsMax",
     },
     {
       image: Card4,
-      description:
-        "Microsoft Office Specialist – Excel Associate Certification",
-      price: "₹1149",
-      url: "/IBMcourses",
+      description: "Autodesk Certified User - Fusion 360",
+      price: "₹1499",
+      url: "/AutodeskCourse/AutodeskFusion360",
+    },
+    {
+      image: Card4,
+      description: "Autodesk Certified User - Maya",
+      price: "₹2499",
+      url: "/AutodeskCourse/AutodeskMaya",
     },
   ];
 

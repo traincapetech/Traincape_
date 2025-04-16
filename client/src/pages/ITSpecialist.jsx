@@ -20,7 +20,7 @@ const ITSpeacialist = () => {
       title: "CERTIFICATION COURSE",
       description: "HTML5 Application Development LearnKey",
       price: "₹1149",
-      url: "/IBMcourses",
+      url: "/ITSpecialistHTML",
     },
 
     {
@@ -28,7 +28,7 @@ const ITSpeacialist = () => {
       title: "CERTIFICATION COURSE",
       description: "IT Specialist – HTML and CSS LearnKey",
       price: "₹1149",
-      url: "/IBMcourses",
+      url: "/ITSpecialistHTML",
     },
     {
       image: Card3,
@@ -36,21 +36,21 @@ const ITSpeacialist = () => {
       description:
         "IT Specialist – Device Configuration and Management LearnKey",
       price: "₹1149",
-      url: "/IBMcourses",
+      url: "/ITSpecialistNetworking",
     },
     {
       image: Card4,
       title: "CERTIFICATION COURSE",
       description: "IT Specialist – Databases LearnKey",
       price: "₹1149",
-      url: "/IBMcourses",
+      url: "/ITSpecialistPython",
     },
     {
       image: Card5,
       title: "CERTIFICATION COURSE",
       description: "IT Specialist – Cybersecurity LearnKey",
       price: "₹1149",
-      url: "/IBMcourses",
+      url: "/ITSpecialistJavaScript",
     },
   ];
 
@@ -71,12 +71,12 @@ const ITSpeacialist = () => {
               Information Technology Specialist
             </h1>
             <h5 className="text-sm md:text-xl lg:text-xl mt-4">
-              Etrainindia provides a full pathway solution that educators can
+              Traincape provides a full pathway solution that educators can
               use to prepare students for the Adobe Certified Professional
               certification.
               <br />
               From tailored learning materials and practice tests to Adobe
-              endorsed certification exams, Etrainindia provides assistance
+              endorsed certification exams, Traincape provides assistance
               every step of the way. <br />
             </h5>
           </div>
