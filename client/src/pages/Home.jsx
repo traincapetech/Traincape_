@@ -11,11 +11,7 @@ import { FaSquareWhatsapp, FaArrowRight } from "react-icons/fa6";
 import { BsCheck2Circle } from "react-icons/bs";
 import Typewriter from "typewriter-effect";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import Rotation from "../components/Rotation";
 import HomeBanner from "../components/HomeBanner";
-import HomeSlider from "../components/HomeSlider";
-import Slider from "react-slick";
-import Herobg from "../assets/bannerimg2.jpg";
 import { useInView } from "react-intersection-observer";
 // logo images
 import comptia from "../assets/comptia-2.webp";
@@ -31,7 +27,6 @@ import Logo4 from "../assets/Gruslabs.svg";
 import Logo5 from "../assets/MSA.png";
 import Logo6 from "../assets/spectre.webp";
 import CountUp from "react-countup";
-import { div } from "three/tsl";
 
 const Home = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
