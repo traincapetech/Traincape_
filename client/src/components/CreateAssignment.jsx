@@ -376,7 +376,7 @@ const CreateAssignment = () => {
             try {
                 // Post the data to the backend
                 const response = await axios.post(
-                    "https://traincape-backend-1.onrender.com/questions/addQuestion",
+                    "https://traincape-backend.onrender.com/questions/addQuestion",
                     questionData
                 );
                 console.log("Question added successfully:", response.data);

@@ -108,10 +108,10 @@ const ContactUs = () => {
                           <FaWhatsapp className="" />
                           <Link
 
-                            to="https://wa.me/+916280281505"
+                            to="https://wa.me/+441253928501"
                             target="_blank"
                           >
-                            +91 6280281505
+                            +44 1253 928501
                           </Link>
                         </p>
                         <p className="text-sm md:text-base flex items-center gap-2 text-slate-300">

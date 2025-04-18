@@ -11,7 +11,7 @@ const Test = () => {
   const location = useLocation();
   const navigate = useNavigate();  // Use useNavigate here
 
-  const { course = "", subTopic = "", level = "" } = location.state || {};
+  const { course, subTopic, level } = location.state || {};
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [timeLeft, setTimeLeft] = useState(1800);
@@ -29,104 +29,20 @@ const Test = () => {
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (!course || !level || !subTopic) {
-      setError("Missing required parameters. Please go back and try again.");
-      return;
-    }
-    
+    if (!course || !level || !subTopic) return;
     setLoading(true);
     setError(null);
 
     const fetchQuestions = async () => {
       try {
-        console.log("Fetching questions with params:", { 
-          course, 
-          subTopic,
-          level 
-        });
-        
-        // For development, prioritize sample questions for CompTIA Security+
-        if (course === "comptia" && subTopic === "CompTIASecurity+701" && level === "easy") {
-          console.log("Loading sample questions for CompTIA Security+");
-          const sampleQuestions = [
-            {
-              _id: "sample1",
-              question: "Which of the following is a type of malware that encrypts files and demands a ransom?",
-              options: ["Trojan", "Worm", "Ransomware", "Spyware"],
-              correctAnswer: "Ransomware",
-              course: "comptia",
-              subTopic: "CompTIASecurity+701",
-              level: "easy"
-            },
-            {
-              _id: "sample2",
-              question: "What is the primary purpose of a firewall?",
-              options: ["Encrypt data", "Filter network traffic", "Scan for viruses", "Backup data"],
-              correctAnswer: "Filter network traffic",
-              course: "comptia",
-              subTopic: "CompTIASecurity+701",
-              level: "easy"
-            },
-            {
-              _id: "sample3",
-              question: "Which of the following is NOT a common authentication factor?",
-              options: ["Something you know", "Something you have", "Something you are", "Somewhere you go"],
-              correctAnswer: "Somewhere you go",
-              course: "comptia",
-              subTopic: "CompTIASecurity+701",
-              level: "easy"
-            },
-            {
-              _id: "sample4",
-              question: "Which protocol is used to securely access websites?",
-              options: ["HTTP", "FTP", "HTTPS", "SMTP"],
-              correctAnswer: "HTTPS",
-              course: "comptia",
-              subTopic: "CompTIASecurity+701",
-              level: "easy"
-            },
-            {
-              _id: "sample5",
-              question: "What does VPN stand for?",
-              options: ["Virtual Private Network", "Very Powerful Network", "Virtual Protocol Network", "Verified Private Node"],
-              correctAnswer: "Virtual Private Network",
-              course: "comptia",
-              subTopic: "CompTIASecurity+701",
-              level: "easy"
-            }
-          ];
-          setQuestions(sampleQuestions);
-          setLoading(false);
-          return; // Skip API call attempt
-        }
-        
-        // Only attempt API call if we're not using sample questions
-        try {
-          const response = await axios.get(`https://traincape-backend-1.onrender.com/question`, {
-            params: {
-              course: course,
-              subTopic: subTopic,
-              level: level
-            }
-          });
-          
-          console.log("API Response:", response.data);
-          
-          if (response.data && Array.isArray(response.data) && response.data.length > 0) {
-            setQuestions(response.data);
-            setLoading(false);
-          } else {
-            setError("No questions found for this topic. Please try a different topic or level.");
-            setLoading(false);
-          }
-        } catch (apiError) {
-          console.error("API Error:", apiError);
-          setError(`API Error: ${apiError.message}. Please try again later.`);
-          setLoading(false);
-        }
+        const encodedSubTopic = encodeURIComponent(subTopic);
+        const response = await axios.get(
+          `https://traincape-backend-1.onrender.com/questions/getQuestions?course=${course}&subTopic=${encodedSubTopic}&level=${level}`
+        );
+        setQuestions(response.data);
       } catch (error) {
-        console.error("Error in fetchQuestions:", error);
-        setError(`Error: ${error.message}`);
+        setError("Failed to load questions.");
+      } finally {
         setLoading(false);
       }
     };
@@ -208,13 +124,10 @@ const Test = () => {
     };
 
     try {
-      console.log("Submitting result data:", resultData);
-      
       const response = await axios.post(
-        "https://traincape-backend-1.onrender.com/results",
+        "https://traincape-backend-1.onrender.com/results/addResult",
         resultData
       );
-      
       console.log("Result saved successfully:", response.data);
 
       const certificateId = response.data.result.certificateId;
@@ -280,46 +193,7 @@ const Test = () => {
   }
 
   if (error) {
-    return (
-      <div className="p-6 bg-red-50 border border-red-200 rounded-lg">
-        <h3 className="text-xl font-bold text-red-700 mb-2">Error Loading Questions</h3>
-        <p className="mb-4">{error}</p>
-        <div className="bg-white p-4 rounded border border-red-100 mb-4">
-          <h4 className="font-semibold mb-2">Debug Information:</h4>
-          <p>Course: {course}</p>
-          <p>Subtopic: {subTopic}</p>
-          <p>Level: {level}</p>
-        </div>
-        <button 
-          onClick={() => navigate(-1)} 
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-        >
-          Go Back
-        </button>
-      </div>
-    );
-  }
-
-  // If we have no questions, show an appropriate message
-  if (!questions || questions.length === 0) {
-    return (
-      <div className="p-6 bg-yellow-50 border border-yellow-200 rounded-lg">
-        <h3 className="text-xl font-bold text-yellow-700 mb-2">No Questions Available</h3>
-        <p className="mb-4">There are no questions available for this combination of course, subtopic, and level.</p>
-        <div className="bg-white p-4 rounded border border-yellow-100 mb-4">
-          <h4 className="font-semibold mb-2">Details:</h4>
-          <p>Course: {course}</p>
-          <p>Subtopic: {subTopic}</p>
-          <p>Level: {level}</p>
-        </div>
-        <button 
-          onClick={() => navigate(-1)} 
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-        >
-          Go Back
-        </button>
-      </div>
-    );
+    return <p>{error}</p>;
   }
 
   return (
@@ -368,7 +242,7 @@ const Test = () => {
         <div className="rounded-lg shadow-md">
           {timeLeft > 0 && questions.length > 0 && !quizSubmitted && (
             <QuestionCard
-              questionText={questions[currentQuestion]?.question || questions[currentQuestion]?.questionText}
+              questionText={questions[currentQuestion]?.questionText}
               options={questions[currentQuestion]?.options || []}
               currentQuestion={currentQuestion}
               setCurrentQuestion={setCurrentQuestion}
