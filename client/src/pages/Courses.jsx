@@ -11,6 +11,7 @@ import review2 from "../assets/review2.jpeg";
 import review3 from "../assets/review4.jpeg";
 import review4 from "../assets/review6.png";
 import gif from "../assets/student-mgmt.gif";
+import mircro from "../assets/Microsoft-Emblem.jpg";
 
 // Import Logos
 import Logo1 from "../assets/ciscologo-courses.webp";

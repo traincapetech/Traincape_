@@ -16,7 +16,7 @@ const PMI = () => {
       title: "CERTIFICATION COURSE",
       description: "PMI Project Management- Ready™ Courseware",
       price: "₹1149",
-      url: "/IBMcourses",
+      url: "/PMIProjectManagement",
     },
     //UNWANTED CARDS
     // {

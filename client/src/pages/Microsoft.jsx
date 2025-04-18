@@ -67,7 +67,7 @@ const Microsoft = () => {
       image: mircro,
         title: "Microsoft security, compliance and Identity",
         description: "Master the art of cloud-based technology and services.",
-        url : "/microsoft S C I"
+        url : "/MicrosoftSecurityFundamentals"
       },
       {
         image: mircro,
@@ -148,6 +148,18 @@ const Microsoft = () => {
         title: "Microsoft Pl-300 Microsoft Power Bi Certification Training",
         description: "Master the art of cloud-based technology and services.",
         url:"/microsoftpl-300"
+      },
+      {
+        image: mircro,
+        title: "Microsoft PowerPoint Associate",
+        description: "Master the art of creating professional presentations. View in Courses section.",
+        url:"/MicrosoftCourse/MicrosoftPowerPointAssociate"
+      },
+      {
+        image: mircro,
+        title: "Microsoft Security, Compliance, and Identity Fundamentals (SC-900)",
+        description: "Learn the fundamental concepts of security, compliance, and identity across cloud-based and related Microsoft services.",
+        url:"/MicrosoftSecurityFundamentals"
       },
 
 

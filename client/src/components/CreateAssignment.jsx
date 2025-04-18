@@ -376,8 +376,13 @@ const CreateAssignment = () => {
             try {
                 // Post the data to the backend
                 const response = await axios.post(
-                    "http://localhost:8080/questions/addQuestion",
-                    questionData
+                    "/questions/addQuestion",
+                    questionData,
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    }
                 );
                 console.log("Question added successfully:", response.data);
             } catch (error) {

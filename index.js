@@ -43,7 +43,7 @@ require("dotenv").config();
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+
 
 app.use("/users", userRouter);
 app.use("/review", reviewRouter);
@@ -54,6 +54,8 @@ app.get("/", (req, res) => {
     message: "This is our Homepage",
   });
 });
+
+
 
 app.listen(process.env.PORT, async () => {
   try {

@@ -77,10 +77,10 @@ const Adobe = () => {
               exam is integrated with an Adobe application and designed by
               experts, allowing for an authentic assessment of job-ready skills.
               <br /> <br />
-              trainIndia provides a full pathway solution that students can use
+              Traincape provides a full pathway solution that students can use
               to prepare for the Adobe Certified Professional certification.
               From tailored learning materials and practice tests to Adobe
-              endorsed certification exams, EtrainIndia provides assistance every step of the way.
+              endorsed certification exams, Traincape provides assistance every step of the way.
             </h5>
           </div>
           <div className="hidden lg:block xl:block  mt-5 p-5">

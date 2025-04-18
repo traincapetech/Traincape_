@@ -11,11 +11,7 @@ import { FaSquareWhatsapp, FaArrowRight } from "react-icons/fa6";
 import { BsCheck2Circle } from "react-icons/bs";
 import Typewriter from "typewriter-effect";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import Rotation from "../components/Rotation";
 import HomeBanner from "../components/HomeBanner";
-import HomeSlider from "../components/HomeSlider";
-import Slider from "react-slick";
-import Herobg from "../assets/bannerimg2.jpg";
 import { useInView } from "react-intersection-observer";
 // logo images
 import comptia from "../assets/comptia-2.webp";
@@ -31,14 +27,6 @@ import Logo4 from "../assets/Gruslabs.svg";
 import Logo5 from "../assets/MSA.png";
 import Logo6 from "../assets/spectre.webp";
 import CountUp from "react-countup";
-import { div } from "three/tsl";
-// Try to import banner animation
-let bannerAnimation = null;
-try {
-  bannerAnimation = require("../assets/banner.json");
-} catch (error) {
-  console.log("Banner animation not loaded:", error);
-}
 
 const Home = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -152,7 +140,7 @@ const Home = () => {
     <div className="bg-gray-50">
       {/* Hero Banner Section */}
       <div className="relative bg-gradient-to-b from-[#1e3a76] to-[#152B54]">
-        <HomeBanner text={bannerText} animationData={bannerAnimation} />
+        <HomeBanner text={bannerText} />
       </div>
 
       {/* Vendors Section with Enhanced Styling - Fixed version */}
@@ -202,10 +190,10 @@ const Home = () => {
                 alt="Team"
                 className="relative z-10 rounded-xl shadow-xl w-full object-cover h-[400px]"
               />
-              <div className="absolute -bottom-4 -right-4 bg-[#152B54] rounded-lg p-3 text-white font-bold shadow-lg z-20">
+              {/* <div className="absolute -bottom-4 -right-4 bg-[#152B54] rounded-lg p-3 text-white font-bold shadow-lg z-20">
                 <span className="text-xl">4+ Years</span>
                 <p className="text-sm">Excellence in IT</p>
-              </div>
+              </div> */}
             </div>
 
             {/* Text Section */}
@@ -318,13 +306,13 @@ const Home = () => {
               </p>
               
               <div className="bg-white/10 rounded-xl p-4 backdrop-blur-sm flex items-center mb-8 border border-white/20">
-                <Link to="https://wa.me/+916280281505" target="_blank" className="mr-3">
+                <Link to="https://wa.me/+441253928501" target="_blank" className="mr-3">
                   <FaSquareWhatsapp className="text-green-400 text-4xl hover:scale-110 transition-transform" />
                 </Link>
                 <div>
                   <p className="text-blue-200 text-sm">24 HOURS SERVICE AVAILABLE</p>
                   <h4 className="text-white font-bold cursor-pointer hover:text-blue-200 transition-colors">
-                    Chat With Us: +91 6280281505
+                    Chat With Us: +44 1253 928501
                   </h4>
                 </div>
               </div>

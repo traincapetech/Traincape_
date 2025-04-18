@@ -65,6 +65,20 @@ const Microsoft = lazy(() => import("../pages/Microsoft"));
 
 // PECB
 const PECB = lazy(() => import("../pages/PECB"));
+const Computerforensics = lazy(() => import("../pages/Pecb/Computer-forensics"));
+const CybersecurityAuditTrainings = lazy(() => import("../pages/Pecb/Cybersecurity-Audit-Trainings"));
+const ISO9001LeadImplementer = lazy(() => import("../pages/Pecb/ISO-9001-Lead-Implementer"));
+const ISO9001 = lazy(() => import("../pages/Pecb/ISO-9001"));
+const ISO22301 = lazy(() => import("../pages/Pecb/ISO-22301"));
+const ISO31000RiskManager = lazy(() => import("../pages/Pecb/ISO-31000-Risk-Manager"));
+const ISO37001 = lazy(() => import("../pages/Pecb/ISO-37001"));
+const ISO45001 = lazy(() => import("../pages/Pecb/ISO-45001"));
+const Isoiec27001LeadImplementer = lazy(() => import("../pages/Pecb/Iso-iec-27001-Lead-Implementer"));
+const Isoiec27001 = lazy(() => import("../pages/Pecb/Iso-iec-27001"));
+const Isoiec27005RiskManager = lazy(() => import("../pages/Pecb/Iso-iec-27005-Risk-Manager"));
+const Isoiec27032CyberSecurity = lazy(() => import("../pages/Pecb/Iso-iec-27032-Cyber-Security"));
+const PecbCertifiedIso27001Foundation = lazy(() => import("../pages/Pecb/Pecb-Certified-Iso-27001-Foundation"));
+const SCADASecurityManager = lazy(() => import("../pages/Pecb/SCADA-Security-Manager"));
 
 // Cisco
 const Cisco = lazy(() => import("../pages/Cisco"));
@@ -109,6 +123,16 @@ const Microsoft365Certification = lazy(() => import("../pages/MicrosoftCourse/Mi
 const MicrosoftCyberAnalyst = lazy(() => import("../pages/MicrosoftCourse/MicrosoftCyberAnalyst"));
 const MicrosoftMS900 = lazy(() => import("../pages/MicrosoftCourse/MicrosoftMs900"));
 const MicrosoftPl300 = lazy(() => import("../pages/MicrosoftCourse/MicrosoftPl300"));
+const MicrosoftExcelExpert = lazy(() => import("../pages/MicrosoftCourse/MicrosoftExcelExpert"));
+const MicrosoftWordAssociate = lazy(() => import("../pages/MicrosoftCourse/MicrosoftWordAssociate"));
+const MicrosoftWordExpert = lazy(() => import("../pages/MicrosoftCourse/MicrosoftWordExpert"));
+const MicrosoftPowerPointAssociate = lazy(() => import("../pages/MicrosoftCourse/MicrosoftPowerPointAssociate"));
+const MicrosoftExcelAssociate = lazy(() => import("../pages/MicrosoftCourse/MicrosoftExcelAssociate"));
+const MicrosoftDynamics365ERP = lazy(() => import("../pages/MicrosoftCourse/MicrosoftDynamics365ERP"));
+const MicrosoftAzureDataFundamentals = lazy(() => import("../pages/MicrosoftCourse/MicrosoftAzureDataFundamentals"));
+const MicrosoftDynamicsCRMFundamentals = lazy(() => import("../pages/MicrosoftCourse/MicrosoftDynamicsCRMFundamentals"));
+const MicrosoftPowerPlatformFundamentals = lazy(() => import("../pages/MicrosoftCourse/MicrosoftPowerPlatformFundamentals"));
+const MicrosoftSecurityFundamentals = lazy(() => import("../pages/MicrosoftCourse/MicrosoftSecurityFundamentals"));
 
 // Cisco subcourses
 const CCSTsupportTech = lazy(() => import("../pages/CiscoCourse/CcstSupportTechnician"));
@@ -154,6 +178,13 @@ const IBMDataAnalysis = lazy(() => import("../components/IMBSubCourses/IBMDataAn
 const IBMCloudFundamental = lazy(() => import("../components/IMBSubCourses/IBMCloudFundamental"));
 const IBMBigData = lazy(() => import("../components/IMBSubCourses/IBMBigData"));
 
+// META subcourses
+const MetaDigitalMarketing = lazy(() => import("../pages/MetaCourse/MetaDigitalMarketing"));
+const MetaFrontEndDeveloper = lazy(() => import("../pages/MetaCourse/MetaFrontEndDeveloper"));
+const MetaBackEndDeveloper = lazy(() => import("../pages/MetaCourse/MetaBackEndDeveloper"));
+const MetaAndroidDeveloper = lazy(() => import("../pages/MetaCourse/MetaAndroidDeveloper"));
+const MetaIosDeveloper = lazy(() => import("../pages/MetaCourse/MetaIosDeveloper"));
+
 // Other pages
 const ServiceDetail = lazy(() => import("../pages/ServiceDetail"));
 const IBM = lazy(() => import("../pages/IBM"));
@@ -170,6 +201,34 @@ const MicrosoftCertified = lazy(() => import("../pages/PopularCertificationCoure
 const Adobe = lazy(() => import("../pages/PopularCertificationCoureses/Adobe"));
 const Unity = lazy(() => import("../pages/PopularCertificationCoureses/Unity"));
 const CiscoCard = lazy(() => import("../pages/PopularCertificationCoureses/CiscoCard"));
+
+// PMI subcourses
+const PMIProjectManagement = lazy(() => import("../pages/PMICourse/PMIProjectManagement"));
+
+// IT Specialist subcourses
+const ITSpecialistPython = lazy(() => import("../pages/ITSpecialistCourse/ITSpecialistPython"));
+const ITSpecialistJavaScript = lazy(() => import("../pages/ITSpecialistCourse/ITSpecialistJavaScript"));
+const ITSpecialistHTML = lazy(() => import("../pages/ITSpecialistCourse/ITSpecialistHTML"));
+const ITSpecialistNetworking = lazy(() => import("../pages/ITSpecialistCourse/ITSpecialistNetworking"));
+
+// Swift Development subcourses
+const SwiftDevelopmentBasics = lazy(() => import("../pages/SwiftCourse/SwiftDevelopmentBasics"));
+const SwiftDevelopmentAdvanced = lazy(() => import("../pages/SwiftCourse/SwiftDevelopmentAdvanced"));
+
+// Tally subcourses (Courses section) 
+const TallyEssentialLevel1 = lazy(() => import("../pages/TallyCourse/TallyEssentialLevel1"));
+const TallyEssentialLevel2 = lazy(() => import("../pages/TallyCourse/TallyEssentialLevel2"));
+const TallyEssentialLevel3 = lazy(() => import("../pages/TallyCourse/TallyEssentialLevel3"));
+const TallyProfessional = lazy(() => import("../pages/TallyCourse/TallyProfessional"));
+const TallyEssentialComprehensive = lazy(() => import("../pages/TallyCourse/TallyEssentialComprehensive"));
+const TallyPrime = lazy(() => import("../pages/TallyCourse/TallyPrime"));
+
+// Autodesk subcourses
+const AutodeskAutoCAD = lazy(() => import("../pages/AutodeskCourse/AutodeskAutoCAD"));
+const AutodeskRevit = lazy(() => import("../pages/AutodeskCourse/AutodeskRevit"));
+const Autodesk3dsMax = lazy(() => import("../pages/AutodeskCourse/Autodesk3dsMax"));
+const AutodeskFusion360 = lazy(() => import("../pages/AutodeskCourse/AutodeskFusion360"));
+const AutodeskMaya = lazy(() => import("../pages/AutodeskCourse/AutodeskMaya"));
 
 const AllRoute = () => {
   const token = localStorage.getItem("token");
@@ -285,6 +344,16 @@ const AllRoute = () => {
         <Route path="/microsoftcyberanalyst" element={<MicrosoftCyberAnalyst />} />
         <Route path="/microsoftMS-900" element={<MicrosoftMS900 />} />
         <Route path="/microsoftpl-300" element={<MicrosoftPl300 />} />
+        <Route path="/MicrosoftSecurityFundamentals" element={<Suspense fallback={<LoadingComponent />}><MicrosoftSecurityFundamentals /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftExcelExpert" element={<Suspense fallback={<LoadingComponent />}><MicrosoftExcelExpert /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftWordAssociate" element={<Suspense fallback={<LoadingComponent />}><MicrosoftWordAssociate /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftWordExpert" element={<Suspense fallback={<LoadingComponent />}><MicrosoftWordExpert /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftPowerPointAssociate" element={<Suspense fallback={<LoadingComponent />}><MicrosoftPowerPointAssociate /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftExcelAssociate" element={<Suspense fallback={<LoadingComponent />}><MicrosoftExcelAssociate /></Suspense>} />
+        <Route path="/MicrosoftDynamics365ERP" element={<Suspense fallback={<LoadingComponent />}><MicrosoftDynamics365ERP /></Suspense>} />
+        <Route path="/MicrosoftAzureDataFundamentals" element={<Suspense fallback={<LoadingComponent />}><MicrosoftAzureDataFundamentals /></Suspense>} />
+        <Route path="/MicrosoftDynamics365CRMFundamentals" element={<Suspense fallback={<LoadingComponent />}><MicrosoftDynamicsCRMFundamentals /></Suspense>} />
+        <Route path="/MicrosoftPowerPlatformFundamentals" element={<Suspense fallback={<LoadingComponent />}><MicrosoftPowerPlatformFundamentals /></Suspense>} />
         
         {/* Cisco Subcourse Routes */}
         <Route path="/CCSTsupportTech" element={<CCSTsupportTech />} />
@@ -330,6 +399,13 @@ const AllRoute = () => {
         <Route path="/IBMCloudFundamental" element={<IBMCloudFundamental />} />
         <Route path="/IBMBigData" element={<IBMBigData />} />
         
+        {/* META Subcourse Routes */}
+        <Route path="/MetaDigitalMarketing" element={<MetaDigitalMarketing />} />
+        <Route path="/MetaFrontEndDeveloper" element={<MetaFrontEndDeveloper />} />
+        <Route path="/MetaBackEndDeveloper" element={<MetaBackEndDeveloper />} />
+        <Route path="/MetaAndroidDeveloper" element={<MetaAndroidDeveloper />} />
+        <Route path="/MetaIosDeveloper" element={<MetaIosDeveloper />} />
+        
         {/* Admin Panel */}
         <Route path="/admin-panel" element={token ? <AdminPanel /> : <Navigate to="/login" state={{ from: "/admin-panel" }} replace />} />
         <Route path="/verify-certificate" element={<VerifyCertificate />} />
@@ -340,6 +416,20 @@ const AllRoute = () => {
 
         {/* PECB */}
       <Route path="/PECB" element={<PECB />} />
+      <Route path="/Computerforensics" element={<Computerforensics />} />
+      <Route path="/CybersecurityAuditTrainings" element={<CybersecurityAuditTrainings />} />
+      <Route path="/ISO9001LeadImplementer" element={<ISO9001LeadImplementer />} />
+      <Route path="/ISO9001" element={<ISO9001 />} />
+      <Route path="/ISO22301" element={<ISO22301 />} />
+      <Route path="/ISO31000RiskManager" element={<ISO31000RiskManager />} />
+      <Route path="/ISO37001" element={<ISO37001 />} />
+      <Route path="/ISO45001" element={<ISO45001 />} />
+      <Route path="/ISOIEC27001LeadImplementer" element={<Isoiec27001LeadImplementer />} />
+      <Route path="/ISOIEC27001" element={<Isoiec27001 />} />
+      <Route path="/ISOIEC27005RiskManager" element={<Isoiec27005RiskManager />} />
+      <Route path="/ISOIEC27032CyberSecurity" element={<Isoiec27032CyberSecurity />} />
+      <Route path="/PecbCertifiedISO27001Foundation" element={<PecbCertifiedIso27001Foundation />} />
+      <Route path="/SCADASecurityManager" element={<SCADASecurityManager />} />
 
         {/* Cisco */}
         <Route path="/CISCO" element={<Cisco />} />
@@ -361,6 +451,34 @@ const AllRoute = () => {
         <Route path="/unity" element={<Unity/>} />
         <Route path="/ciscocard" element={<CiscoCard/>} />
         <Route path="/Gallery" element={<Gallery/>} />
+
+      {/* PMI Subcourse Routes */}
+      <Route path="/PMIProjectManagement" element={<PMIProjectManagement />} />
+
+      {/* IT Specialist Subcourse Routes */}
+      <Route path="/ITSpecialistPython" element={<ITSpecialistPython />} />
+      <Route path="/ITSpecialistJavaScript" element={<ITSpecialistJavaScript />} />
+      <Route path="/ITSpecialistHTML" element={<ITSpecialistHTML />} />
+      <Route path="/ITSpecialistNetworking" element={<ITSpecialistNetworking />} />
+      
+      {/* Swift Development Subcourse Routes */}
+      <Route path="/SwiftDevelopmentBasics" element={<SwiftDevelopmentBasics />} />
+      <Route path="/SwiftDevelopmentAdvanced" element={<SwiftDevelopmentAdvanced />} />
+
+      {/* Tally Subcourse Routes */}
+      <Route path="/TallyEssentialLevel1" element={<TallyEssentialLevel1 />} />
+      <Route path="/TallyEssentialLevel2" element={<TallyEssentialLevel2 />} />
+      <Route path="/TallyEssentialLevel3" element={<TallyEssentialLevel3 />} />
+      <Route path="/TallyProfessional" element={<TallyProfessional />} />
+      <Route path="/TallyEssentialComprehensive" element={<TallyEssentialComprehensive />} />
+      <Route path="/TallyPrime" element={<TallyPrime />} />
+
+      {/* Autodesk Subcourse Routes */}
+      <Route path="/AutodeskCourse/AutodeskAutoCAD" element={<Suspense fallback={<LoadingComponent />}><AutodeskAutoCAD /></Suspense>} />
+      <Route path="/AutodeskCourse/AutodeskRevit" element={<Suspense fallback={<LoadingComponent />}><AutodeskRevit /></Suspense>} />
+      <Route path="/AutodeskCourse/Autodesk3dsMax" element={<Suspense fallback={<LoadingComponent />}><Autodesk3dsMax /></Suspense>} />
+      <Route path="/AutodeskCourse/AutodeskFusion360" element={<Suspense fallback={<LoadingComponent />}><AutodeskFusion360 /></Suspense>} />
+      <Route path="/AutodeskCourse/AutodeskMaya" element={<Suspense fallback={<LoadingComponent />}><AutodeskMaya /></Suspense>} />
     </Routes>
     </Suspense>
   );

@@ -19,31 +19,31 @@ const MicrosoftOffice = () => {
         image: Card1,
         description: "Microsoft Office Specialist – Excel Expert Certification",
         price: "₹1149",
-        url: "/IBMcourses",
+        url: "/MicrosoftCourse/MicrosoftExcelExpert",
       },
     {
       image: Card2,
       description: "Microsoft Office Specialist – Word Expert Certification",
       price: "₹1149",
-      url: "/IBMcourses",
+      url: "/MicrosoftCourse/MicrosoftWordExpert",
     },
     {
       image: Card3,
       description: "Microsoft Office Specialist – PowerPoint Associate Certification ",
       price: "₹1149",
-      url: "/IBMcourses",
+      url: "/MicrosoftCourse/MicrosoftPowerPointAssociate",
     },
     {
       image: Card4,
       description: "Microsoft Office Specialist – Excel Associate Certification",
       price: "₹1149",
-      url: "/IBMcourses",
+      url: "/MicrosoftCourse/MicrosoftExcelAssociate",
     },
     {
       image: Card5,
       description: "Microsoft Office Specialist – Word Associate Certification",
       price: "₹1149",
-      url: "/IBMcourses",
+      url: "/MicrosoftCourse/MicrosoftWordAssociate",
     },
   ];
 
