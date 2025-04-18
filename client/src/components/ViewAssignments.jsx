@@ -311,7 +311,7 @@ const ViewAssignments = () => {
     try {
       const encodedSubTopic = encodeURIComponent(subTopic);
       const response = await axios.get(
-        `https://traincape-backend-1.onrender.com/questions/getQuestions?course=${course}&subTopic=${encodedSubTopic}&level=${level}`
+        `/questions/getQuestions?course=${course}&subTopic=${encodedSubTopic}&level=${level}`
       );
       setQuestions(response.data);
     } catch (error) {
@@ -361,7 +361,7 @@ const ViewAssignments = () => {
 
     try {
       const response = await axios.put(
-        `https://traincape-backend.onrender.com/questions/updateQuestion/${editingQuestion}`,
+        `/questions/updateQuestion/${editingQuestion}`,
         updatedQuestion,
         {
           headers: {
@@ -385,7 +385,7 @@ const ViewAssignments = () => {
     if (window.confirm("Are you sure you want to delete this question?")) {
       try {
         await axios.delete(
-          `https://traincape-backend-1.onrender.com/questions/deleteQuestion/${id}`,
+          `/questions/deleteQuestion/${id}`,
           {
             headers: {
               "Content-Type": "application/json",

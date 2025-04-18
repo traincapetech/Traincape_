@@ -376,7 +376,7 @@ const CreateAssignment = () => {
             try {
                 // Post the data to the backend
                 const response = await axios.post(
-                    "https://traincape-backend.onrender.com/questions/addQuestion",
+                    "/questions/addQuestion",
                     questionData,
                     {
                         headers: {
