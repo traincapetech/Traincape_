@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-
 const ViewAssignments = () => {
   const [course, setCourse] = useState("");
   const [level, setLevel] = useState("");
@@ -17,14 +16,32 @@ const ViewAssignments = () => {
   const courseSubTopics = {
     AWS: [
       { name: "AWS Certified Security", value: "AWSCertifiedSecurity" },
-      { name: "AWS Certified SysOps Administrator", value: "AWSCertifiedSysOpsAdministrator" },
+      {
+        name: "AWS Certified SysOps Administrator",
+        value: "AWSCertifiedSysOpsAdministrator",
+      },
       { name: "AWS Certified Developer", value: "AWSCertifiedDeveloper" },
       { name: "AWS Certified DevOps", value: "AWSCertifiedDevOps" },
-      { name: "AWS Certified Machine Learning", value: "AWSCertifiedMachineLearning" },
-      { name: "AWS Certified Data Analytics", value: "AWSCertifiedDataAnalytics" },
-      { name: "AWS Certified cloud practitioner", value: "AWSCertifiedcloudpractitioner" },
-      { name: "AWS Certified Solutions Architect", value: "AWSCertifiedSolutionsArchitect" },
-      { name: "AWS Certified Advanced Networking", value: "AWSCertifiedAdvancedNetworking" },
+      {
+        name: "AWS Certified Machine Learning",
+        value: "AWSCertifiedMachineLearning",
+      },
+      {
+        name: "AWS Certified Data Analytics",
+        value: "AWSCertifiedDataAnalytics",
+      },
+      {
+        name: "AWS Certified cloud practitioner",
+        value: "AWSCertifiedcloudpractitioner",
+      },
+      {
+        name: "AWS Certified Solutions Architect",
+        value: "AWSCertifiedSolutionsArchitect",
+      },
+      {
+        name: "AWS Certified Advanced Networking",
+        value: "AWSCertifiedAdvancedNetworking",
+      },
     ],
     Microsoft: [
       {
@@ -118,28 +135,27 @@ const ViewAssignments = () => {
         name: "Microsoft Pl-300 Microsoft Power Bi Certification Training",
         value: "MicrosoftPl-300MicrosoftPowerBiCertificationTraining",
       },
-
     ],
     PECB: [
       {
         name: "PECB Computer Forensics",
-        value: "PECBComputerForensics"
+        value: "PECBComputerForensics",
       },
       {
         name: "PECBCybersecurity Audit Training",
-        value: "PECBCybersecurityAuditTraining"
+        value: "PECBCybersecurityAuditTraining",
       },
       {
         name: "PECB ISO 9001 Lead Implementer",
-        value: "PECBISO9001LeadImplementer"
+        value: "PECBISO9001LeadImplementer",
       },
       {
         name: "PECB ISO 9001",
-        value: "PECBISO9001"
+        value: "PECBISO9001",
       },
       {
         name: "PECB ISO 22301",
-        value: "PECBISO22301"
+        value: "PECBISO22301",
       },
       {
         name: "PECB ISO 31000 Risk Manager",
@@ -147,40 +163,40 @@ const ViewAssignments = () => {
       },
       {
         name: "PECB ISO 37001",
-        value: "PECBISO37001"
+        value: "PECBISO37001",
       },
       {
         name: "PECB ISO 45001",
-        value: "PECBISO45001"
+        value: "PECBISO45001",
       },
       {
         name: "PECB ISO IEC 27001 Lead Implementer",
-        value: "PECBISOIEC27001LeadImplementer"
+        value: "PECBISOIEC27001LeadImplementer",
       },
       {
         name: "PECB ISO IEC 27001",
-        value: "PECBISOIEC27001"
+        value: "PECBISOIEC27001",
       },
       {
         name: "PECB ISO IEC 27005 Risk Manager",
-        value: "PECBISOIEC27005RiskManager"
+        value: "PECBISOIEC27005RiskManager",
       },
       {
         name: "PECB ISO IEC 27032 Cyber Security",
-        value: "PECBISOIEC27032CyberSecurity"
+        value: "PECBISOIEC27032CyberSecurity",
       },
       {
         name: "PECB Certified ISO 27001 Foundation",
-        value: "PECBCertifiedISO27001Foundation"
+        value: "PECBCertifiedISO27001Foundation",
       },
       {
         name: "SCADA Security Manager",
-        value: "SCADASecurityManager"
+        value: "SCADASecurityManager",
       },
       {
         name: "Go4 Whatsup",
-        value: "Go4Whatsup"
-      }
+        value: "Go4Whatsup",
+      },
     ],
     comptia: [
       { name: "CompTIA A+", value: "CompTIAA+" }, //Name of the subtpic is the value and name is displyed on the frontend.
@@ -188,7 +204,10 @@ const ViewAssignments = () => {
       { name: "CompTIA Network+ N10-007", value: "CompTIANetwork+N10-007" },
       { name: "CompTIA Security+ SY0-701", value: "CompTIASecurity+701" },
       { name: "CompTIA Advanced Security", value: "CompTIAAdvancedSecurity" },
-      { name: "CompTIA Cybersecurity Analyst", value: "CompTIACybersecurityAnalyst" },
+      {
+        name: "CompTIA Cybersecurity Analyst",
+        value: "CompTIACybersecurityAnalyst",
+      },
       { name: "CompTIA Cloud Essentials+", value: "CompTIACloudEssentials+" },
       { name: "CompTIA Data+", value: "CompTIAData+" },
       { name: "CompTIA Server+", value: "CompTIAServer+" },
@@ -281,7 +300,6 @@ const ViewAssignments = () => {
         value: "CCIECollaboration",
       },
     ],
-   
   };
 
   // Fetch questions based on course, level, and sub-topic
@@ -292,17 +310,24 @@ const ViewAssignments = () => {
 
     try {
       const encodedSubTopic = encodeURIComponent(subTopic); // URL encode sub-topic
-      console.log("COURSE IS--->",course,"LEVEL IS--->",level,"SUBTOPIC IS--->",subTopic);
+      console.log(
+        "COURSE IS--->",
+        course,
+        "LEVEL IS--->",
+        level,
+        "SUBTOPIC IS--->",
+        subTopic
+      );
       const response = await axios.get(
         `http://localhost:8080/questions/getQuestions?course=${course}&subTopic=${encodedSubTopic}&level=${level}`
       );
-      console.log("Response from backend is-->",response.data);
+      console.log("Response from backend is-->", response.data);
       setQuestions(response.data);
-
     } catch (error) {
       setError("Failed to load questions.");
     } finally {
       setLoading(false);
+      setEditingQuestion(null);
     }
   };
 
@@ -332,7 +357,11 @@ const ViewAssignments = () => {
   };
 
   const handleSave = async () => {
-    if (!questionText || options.some(option => option.trim() === "") || !correctAnswer) {
+    if (
+      !questionText ||
+      options.some((option) => option.trim() === "") ||
+      !correctAnswer
+    ) {
       alert("Please fill in all fields.");
       return;
     }
@@ -340,32 +369,28 @@ const ViewAssignments = () => {
     const updatedQuestion = { questionText, options, correctAnswer };
 
     try {
-      // const response = await axios.put(
-      //   `https://traincape-backend-1.onrender.com/questions/updateQuestion/${editingQuestion}`,
-      //   updatedQuestion
-      // );
       const response = await axios.put(
         `http://localhost:8080/questions/updateQuestion/${editingQuestion}`,
         updatedQuestion
       );
-      console.log('Response:', response);  // Log the response
+      console.log("Response:", response); // Log the response
       fetchQuestions(); // Refresh the question list
       setEditingQuestion(null); // Reset editing state
       setQuestionText("");
       setOptions([]);
       setCorrectAnswer("");
-
     } catch (error) {
-      console.error('Error response:', error.response); // Log the error response
+      console.error("Error response:", error.response); // Log the error response
       setError("Failed to update question.");
     }
   };
 
-
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this question?")) {
       try {
-        await axios.delete(`http://localhost:8080/questions/deleteQuestion/${id}`);
+        await axios.delete(
+          `http://localhost:8080/questions/deleteQuestion/${id}`
+        );
         fetchQuestions(); // Refresh the question list after deletion
       } catch (error) {
         setError("Failed to delete question.");
@@ -380,7 +405,9 @@ const ViewAssignments = () => {
       {/* Course, Level, and Sub-topic Filters */}
       <div className="flex gap-6 mb-6">
         <div>
-          <label className="block text-lg font-medium mb-2">Select Course</label>
+          <label className="block text-lg font-medium mb-2">
+            Select Course
+          </label>
           <select
             className="w-full p-2 border rounded-md"
             value={course}
@@ -398,7 +425,9 @@ const ViewAssignments = () => {
 
         {course && (
           <div>
-            <label className="block text-lg font-medium mb-2">Select Sub-Topic</label>
+            <label className="block text-lg font-medium mb-2">
+              Select Sub-Topic
+            </label>
             <select
               className="w-full p-2 border rounded-md"
               value={subTopic}
@@ -416,7 +445,9 @@ const ViewAssignments = () => {
         )}
 
         <div>
-          <label className="block text-lg font-medium mb-2">Select Difficulty Level</label>
+          <label className="block text-lg font-medium mb-2">
+            Select Difficulty Level
+          </label>
           <select
             className="w-full p-2 border rounded-md"
             value={level}
@@ -432,46 +463,49 @@ const ViewAssignments = () => {
       </div>
 
       {/* Loading or error state */}
-      {loading && <div className="text-center text-xl">Loading questions...</div>}
+      {loading && (
+        <div className="text-center text-xl">Loading questions...</div>
+      )}
       {error && <div className="text-center text-red-500">{error}</div>}
 
       {/* Display all questions */}
       <div className="space-y-4">
-        {
-        questions && questions.map((question) => (
-          <div key={question._id} className="border p-4 rounded-md space-y-4">
-            <div className="space-y-2">
-              <h3 className="text-2xl font-bold">{question.questionText}</h3>
-              <div>
-                <p className="text-xl font-medium mb-2">Options:</p>
-                <ol className="list-decimal pl-5 space-y-1">
-                  {question.options.map((option, index) => (
-                    <li key={index} className="text-lg">{option}</li>
-                  ))}
-                </ol>
+        {questions &&
+          questions.map((question) => (
+            <div key={question._id} className="border p-4 rounded-md space-y-4">
+              <div className="space-y-2">
+                <h3 className="text-2xl font-bold">{question.questionText}</h3>
+                <div>
+                  <p className="text-xl font-medium mb-2">Options:</p>
+                  <ol className="list-decimal pl-5 space-y-1">
+                    {question.options.map((option, index) => (
+                      <li key={index} className="text-lg">
+                        {option}
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+                <p className="bg-green-500 text-slate-800 px-2 py-1.5 rounded-md w-fit">
+                  Correct Answer: {question.correctAnswer}
+                </p>
               </div>
-              <p className="bg-green-500 text-slate-800 px-2 py-1.5 rounded-md w-fit">
-                Correct Answer: {question.correctAnswer}
-              </p>
-            </div>
 
-            <div className="flex gap-4">
-              <button
-                className="px-4 py-2 bg-blue-500 text-white rounded-md"
-                onClick={() => handleEdit(question)}
-              >
-                Edit
-              </button>
-              <button
-                className="px-4 py-2 bg-red-500 text-white rounded-md"
-                onClick={() => handleDelete(question._id)}
-              >
-                Delete
-              </button>
+              <div className="flex gap-4">
+                <button
+                  className="px-4 py-2 bg-blue-500 text-white rounded-md"
+                  onClick={() => handleEdit(question)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="px-4 py-2 bg-red-500 text-white rounded-md"
+                  onClick={() => handleDelete(question._id)}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
-          </div>
-        ))
-        }
+          ))}
       </div>
 
       {/* Edit Question Form */}
@@ -479,7 +513,9 @@ const ViewAssignments = () => {
         <div className="mt-6 border p-4 rounded-md space-y-4">
           <h2 className="text-2xl font-semibold">Edit Question</h2>
           <div>
-            <label className="block text-lg font-medium mb-2">Question Text</label>
+            <label className="block text-lg font-medium mb-2">
+              Question Text
+            </label>
             <input
               type="text"
               className="w-full p-2 border rounded-md"
@@ -500,7 +536,9 @@ const ViewAssignments = () => {
                   value={option}
                   onChange={(e) =>
                     setOptions((prevOptions) =>
-                      prevOptions.map((opt, i) => (i === index ? e.target.value : opt))
+                      prevOptions.map((opt, i) =>
+                        i === index ? e.target.value : opt
+                      )
                     )
                   }
                   placeholder={`Option ${index + 1}`}
@@ -511,7 +549,9 @@ const ViewAssignments = () => {
           </div>
 
           <div>
-            <label className="block text-lg font-medium mb-2">Correct Answer</label>
+            <label className="block text-lg font-medium mb-2">
+              Correct Answer
+            </label>
             <select
               className="w-full p-2 border rounded-md"
               value={correctAnswer}
