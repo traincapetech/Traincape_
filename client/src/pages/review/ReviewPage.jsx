@@ -110,7 +110,7 @@ const ReviewPage = () => {
 
           <div className="flex justify-center mt-6">
             <a
-              href="https://www.google.com/maps/place/Traincape+technology+Pvt+Ltd/"
+              href="https://www.google.com/maps/place/Traincape+Technology+Pvt+Ltd/@28.6103792,77.0820093,16.5z/data=!4m8!3m7!1s0x390d05ecdc6529c1:0x7419fbbcac72b568!8m2!3d28.607552!4d77.0819803!9m1!1b1!16s%2Fg%2F11p5zlpbky?entry=ttu&g_ep=EgoyMDI1MDQxNC4xIKXMDSoASAFQAw%3D%3D"
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition duration-300"
