@@ -37,7 +37,7 @@ const Test = () => {
       try {
         const encodedSubTopic = encodeURIComponent(subTopic);
         const response = await axios.get(
-          `https://traincape-backend-1.onrender.com/questions/getQuestions?course=${course}&subTopic=${encodedSubTopic}&level=${level}`
+          `http://localhost:8080/questions/getQuestions?course=${course}&subTopic=${encodedSubTopic}&level=${level}`
         );
         setQuestions(response.data);
       } catch (error) {

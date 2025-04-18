@@ -311,7 +311,7 @@ const ViewAssignments = () => {
     try {
       const encodedSubTopic = encodeURIComponent(subTopic);
       const response = await axios.get(
-        `/questions/getQuestions?course=${course}&subTopic=${encodedSubTopic}&level=${level}`
+        `http://localhost:8080/questions/getQuestions?course=${course}&subTopic=${encodedSubTopic}&level=${level}`
       );
       setQuestions(response.data);
     } catch (error) {
@@ -361,7 +361,7 @@ const ViewAssignments = () => {
 
     try {
       const response = await axios.put(
-        `/questions/updateQuestion/${editingQuestion}`,
+        `http://localhost:8080/questions/updateQuestion/${editingQuestion}`,
         updatedQuestion,
         {
           headers: {
@@ -385,7 +385,7 @@ const ViewAssignments = () => {
     if (window.confirm("Are you sure you want to delete this question?")) {
       try {
         await axios.delete(
-          `/questions/deleteQuestion/${id}`,
+          `http://localhost:8080/questions/deleteQuestion/${id}`,
           {
             headers: {
               "Content-Type": "application/json",

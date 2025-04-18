@@ -121,7 +121,7 @@ dotenv.config();
 const app = express();
 
 const corsOptions = {
-  origin: 'https://traincapetech.in',
+  origin: ['https://traincapetech.in','http://localhost:3000'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 };
