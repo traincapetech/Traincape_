@@ -120,8 +120,14 @@ dotenv.config();
 
 const app = express();
 
+const corsOptions = {
+  origin: 'https://traincapetech.in',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use(express.json());
-app.use(cors());
 
 app.use("/questions", questionRouter);  
 app.use("/results", resultRouter);
@@ -149,10 +155,4 @@ const startServer = async () => {
   }
 };
 
-// Enable CORS for your domain
-app.use(cors({
-  origin: 'https://traincapetech.in',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
 startServer();
