@@ -309,9 +309,9 @@ const ViewAssignments = () => {
     setError(null);
 
     try {
-      const encodedSubTopic = encodeURIComponent(subTopic); // URL encode sub-topic
+      const encodedSubTopic = encodeURIComponent(subTopic);
       const response = await axios.get(
-        `https://traincape-backend.onrender.com/questions/getQuestions?course=${course}&subTopic=${encodedSubTopic}&level=${level}`
+        `https://traincape-backend-1.onrender.com/questions/getQuestions?course=${course}&subTopic=${encodedSubTopic}&level=${level}`
       );
       setQuestions(response.data);
     } catch (error) {
@@ -362,7 +362,12 @@ const ViewAssignments = () => {
     try {
       const response = await axios.put(
         `https://traincape-backend.onrender.com/questions/updateQuestion/${editingQuestion}`,
-        updatedQuestion
+        updatedQuestion,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
       console.log("Response:", response); // Log the response
       fetchQuestions(); // Refresh the question list
@@ -380,7 +385,12 @@ const ViewAssignments = () => {
     if (window.confirm("Are you sure you want to delete this question?")) {
       try {
         await axios.delete(
-          `https://traincape-backend-1.onrender.com/questions/deleteQuestion/${id}`
+          `https://traincape-backend-1.onrender.com/questions/deleteQuestion/${id}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
         fetchQuestions(); // Refresh the question list after deletion
       } catch (error) {
