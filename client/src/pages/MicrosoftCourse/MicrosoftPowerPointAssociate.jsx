@@ -20,7 +20,7 @@ const MicrosoftPowerPointAssociate = () => {
   const handleAddToCart = () => {
     const product = {
       id: "microsoft-powerpoint-associate",
-      name: "Microsoft PowerPoint Associate",
+      title: "Microsoft PowerPoint Associate",
       price: 1499,
       image: mircro,
       amount: 1,

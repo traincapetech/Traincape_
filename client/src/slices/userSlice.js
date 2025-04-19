@@ -17,7 +17,7 @@ export const loginUser = createAsyncThunk(
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "https://traincape-backend-1.onrender.com/users/login",
+       "http://localhost:8080/users/login",
         { email, password }
       );
       return response.data;

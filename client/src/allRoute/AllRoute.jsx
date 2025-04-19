@@ -193,7 +193,7 @@ const PartnerPage = lazy(() => import("../pages/PartnerPage"));
 const PMI = lazy(() => import("../pages/PMI"));
 const ITSpeacialist = lazy(() => import("../pages/ITSpecialist"));
 const SwiftDevelopment = lazy(() => import("../pages/SwiftDevelopment"));
-const Cart = lazy(() => import("../pages/Cart"));
+const Cart = lazy(() => import("../pages/Cart/Cart"));
 const Tally = lazy(() => import("../pages/PopularCertificationCoureses/Tally"));
 const MicrosoftOffice = lazy(() => import("../pages/PopularCertificationCoureses/MicrosoftOffice"));
 const Autodesk = lazy(() => import("../pages/PopularCertificationCoureses/Autodesk"));
