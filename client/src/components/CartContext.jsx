@@ -60,9 +60,12 @@ export const CartProvider = ({ children }) => {
       return updatedCart;
     });
   };
-
+  const clearCart = () => {
+    setCart([]);
+    localStorage.removeItem("cart");
+  };
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeItem, updateQuantity, subtotal }}>
+    <CartContext.Provider value={{ clearCart,cart, addToCart, removeItem, updateQuantity, subtotal }}>
       {children}
     </CartContext.Provider>
   );

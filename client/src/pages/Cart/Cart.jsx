@@ -3,8 +3,18 @@ import { useCartContext } from "../../components/CartContext";
 import CartItem from "./CartItem";
 import FormatPrice from "../../components/Formatprice";
 import { Link } from "react-router-dom";
-import { FaShoppingBag, FaPaypal, FaCreditCard, FaUniversity, FaAngleDown } from "react-icons/fa";
+import axios from "axios";
+import {
+  FaPaypal,
+  FaCreditCard,
+  FaUniversity,
+  FaAngleDown,
+} from "react-icons/fa";
 import EmptyCart from "./EmptyCart";
+import { loadStripe } from "@stripe/stripe-js";
+
+// Now we can access the email property
+const email = JSON.parse(localStorage.getItem("user") || "{}")?.email || "";
 
 const Cart = () => {
   const { cart } = useCartContext();
@@ -37,21 +47,79 @@ Email: ${accountDetails.email}
   }, 0);
 
   if (cart.length === 0) {
-    return (
-     <EmptyCart/>
-    );
+    return <EmptyCart />;
   }
 
   const handlePayNow = () => {
+    console.log("cart is-->", cart);
     setShowDropdown((prev) => !prev);
+  };
+
+  const handleStripeCheckout = async () => {
+    try {
+      const stripe = await loadStripe(
+        ""
+      );
+
+      // Prepare line items for Stripe
+      const lineItems = cart.map((item) => ({
+        price_data: {
+          currency: "inr",
+          product_data: {
+            name: item.title,
+            // images: [item.image], this make the url too long for the stripe
+          },
+          unit_amount: item.price*100, // Stripe expects amounts in cents
+        },
+        quantity: item.quantity,
+      }));
+
+      const paymentResponse = await axios({
+        method: "post",
+        url: `http://localhost:8080/payments/stripe`,
+        data: {
+          lineItems,
+          success_url: `${window.location.origin}/success`,
+          cancel_url: `${window.location.origin}/cancel-stripe-payment`,
+          email,
+          productIds:cart.map(item => item.id),
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
+        timeout: 15000,
+      });
+      const session = paymentResponse.data;
+      console.log("Session--->", session);
+      if (session.url) {
+        window.location.href = session.url;
+        return { redirecting: true, sessionId: session.sessionId };
+      } else {
+        // Fall back to redirectToCheckout if no URL
+        const result = await stripe.redirectToCheckout({
+          sessionId: session.sessionId,
+        });
+
+        if (result.error) {
+          throw new Error(result.error.message);
+        }
+        return { redirecting: true, sessionId: session.sessionId };
+      }
+    } catch (error) {
+      console.log("Error:", error);
+    }
   };
 
   return (
     <section className="py-12 px-4 md:px-16 bg-gray-50 min-h-screen">
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">Your Shopping Cart</h1>
-          <p className="text-gray-600 mt-2">{totalItems} item{totalItems !== 1 ? 's' : ''} in your cart</p>
+          <h1 className="text-3xl font-bold text-gray-800">
+            Your Shopping Cart
+          </h1>
+          <p className="text-gray-600 mt-2">
+            {totalItems} item{totalItems !== 1 ? "s" : ""} in your cart
+          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -77,8 +145,10 @@ Email: ${accountDetails.email}
           {/* Order Summary Column */}
           <div className="lg:col-span-1">
             <div className="bg-white shadow-sm rounded-xl p-6 sticky top-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4">Order Summary</h2>
-              
+              <h2 className="text-xl font-bold text-gray-800 mb-4">
+                Order Summary
+              </h2>
+
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between text-gray-600">
                   <span>Subtotal</span>
@@ -101,7 +171,11 @@ Email: ${accountDetails.email}
                   className="w-full bg-blue-600 text-white px-5 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-300 flex items-center justify-between"
                 >
                   <span className="font-medium">Proceed to Checkout</span>
-                  <FaAngleDown className={`transition-transform duration-300 ${showDropdown ? 'rotate-180' : ''}`} />
+                  <FaAngleDown
+                    className={`transition-transform duration-300 ${
+                      showDropdown ? "rotate-180" : ""
+                    }`}
+                  />
                 </button>
 
                 {showDropdown && (
@@ -113,13 +187,14 @@ Email: ${accountDetails.email}
                       <FaPaypal className="text-blue-600 mr-3" />
                       <span>PayPal</span>
                     </Link>
-                    <Link
-                      to="https://buy.stripe.com/8wM2az10TaYQgww29d"
+                    <button
+                      onClick={() => handleStripeCheckout()}
+                      // to="https://buy.stripe.com/8wM2az10TaYQgww29d"
                       className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 transition-colors"
                     >
                       <FaCreditCard className="text-purple-600 mr-3" />
                       <span>Credit / Debit Card</span>
-                    </Link>
+                    </button>
                     <button
                       onClick={() => {
                         alert(alertMessage);
@@ -135,8 +210,19 @@ Email: ${accountDetails.email}
               </div>
 
               <div className="mt-6 pt-6 border-t border-gray-200 text-xs text-gray-500">
-                <p className="mb-2">We accept secure payments via PayPal, credit cards, and bank transfers.</p>
-                <p>Need help? Contact us at <a href="mailto:sales@traincapetech.info" className="text-blue-600">sales@traincapetech.info</a></p>
+                <p className="mb-2">
+                  We accept secure payments via PayPal, credit cards, and bank
+                  transfers.
+                </p>
+                <p>
+                  Need help? Contact us at{" "}
+                  <a
+                    href="mailto:sales@traincapetech.info"
+                    className="text-blue-600"
+                  >
+                    sales@traincapetech.info
+                  </a>
+                </p>
               </div>
             </div>
           </div>

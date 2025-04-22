@@ -19,7 +19,7 @@ const BookPage = () => {
     setLoading(true);
     try {
       const res = await axios.get(
-        `https://traincape-backend-1.onrender.com/books/get-book?page=${page}&limit=20`
+        `http://localhost:8080/books/get-book?page=${page}&limit=20`
       );
       setData(res.data.book);
       setCurrentPage(res.data.currentPage);
