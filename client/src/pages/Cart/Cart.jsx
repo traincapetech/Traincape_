@@ -58,7 +58,7 @@ Email: ${accountDetails.email}
   const handleStripeCheckout = async () => {
     try {
       const stripe = await loadStripe(
-        "pk_test_51RA7gzR4IpVwwNdkSnaCFniqyAdSIFkPIcztaYVwuIlmUImYiPtSS2UEnDQjMS9GF2BddzsU75t1PjRqiWh0aa1E00bBEJqgio"
+        process.env.REACT_APP_STRIPE_PK
       );
 
       // Prepare line items for Stripe
