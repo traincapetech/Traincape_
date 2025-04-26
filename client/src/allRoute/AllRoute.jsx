@@ -20,6 +20,7 @@ const LoadingComponent = () => (
 
 // Lazy load high-level pages for better performance
 const Home = lazy(() => import("../pages/Home"));
+const UserPage = lazy(() => import("../pages/userPage/UserPage"));
 const Login = lazy(() => import("../pages/Login"));
 const AboutUS = lazy(() => import("../pages/AboutUS"));
 const ContactUs = lazy(() => import("../pages/ContactUs"));
@@ -56,7 +57,7 @@ const AwsCertifiedSysops = lazy(() => import("../pages/AWS/AwsCertifiedSysops"))
 const AwsCertifiedSecurity = lazy(() => import("../pages/AWS/AwsCertifiedSecurity"));
 
 // Admin imports
-const AdminPanel = lazy(() => import("../pages/AdminPanel"));
+const AdminPanel = lazy(() => import("../pages/AdminPanel/AdminPanel"));
 const VerifyCertificate = lazy(() => import("../pages/Test/VerifyCertificate"));
 const CertificateTemplate = lazy(() => import("../pages/Test/CertificateTemplate"));
 
@@ -193,7 +194,10 @@ const PartnerPage = lazy(() => import("../pages/PartnerPage"));
 const PMI = lazy(() => import("../pages/PMI"));
 const ITSpeacialist = lazy(() => import("../pages/ITSpecialist"));
 const SwiftDevelopment = lazy(() => import("../pages/SwiftDevelopment"));
-const Cart = lazy(() => import("../pages/Cart"));
+const Cart = lazy(() => import("../pages/Cart/Cart"));
+const SuccessCartPayment = lazy(() => import("../pages/Cart/SuccessCartPayment"));
+const CancelCartPayment = lazy(() => import("../pages/Cart/CancelCartPayment"));
+
 const Tally = lazy(() => import("../pages/PopularCertificationCoureses/Tally"));
 const MicrosoftOffice = lazy(() => import("../pages/PopularCertificationCoureses/MicrosoftOffice"));
 const Autodesk = lazy(() => import("../pages/PopularCertificationCoureses/Autodesk"));
@@ -443,6 +447,8 @@ const AllRoute = () => {
         <Route path="/ITSpeacialist" element={<ITSpeacialist />} />
         <Route path="/SwiftDevelopment" element={<SwiftDevelopment />} />
         <Route path="/Cart" element={<Cart />} />
+        <Route path="/success" element={<SuccessCartPayment />} />
+        <Route path="/cancel-stripe-payment" element={<CancelCartPayment />} />
         <Route path="/Tally" element={<Tally />} />
         <Route path="/MicrosoftOffice" element={<MicrosoftOffice/>} />
         <Route path="/Autodesk" element={<Autodesk/>} />

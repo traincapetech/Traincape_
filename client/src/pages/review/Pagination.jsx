@@ -1,56 +1,22 @@
-// import React from "react";
-
-// const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
-//   const handlePageChange = (page) => {
-//     setCurrentPage(page);
-//   };
-
-//   const renderPageNumbers = () => {
-//     const pages = [];
-//     for (let i = 1; i <= totalPages; i++) {
-//       pages.push(
-//         <button
-//           key={i}
-//           onClick={() => handlePageChange(i)}
-//           disabled={currentPage === i}
-//           style={{
-//             margin: "0 5px",
-//             padding: "5px 10px",
-//           }}
-//         >
-//           {i}
-//         </button>
-//       );
-//     }
-//     return pages;
-//   };
-
-//   return (
-//     <div
-//       style={{ marginTop: "20px", display: "flex", justifyContent: "center" }}
-//     >
-//       {renderPageNumbers()}
-//     </div>
-//   );
-// };
-
-// export default Pagination;
-
-// Updated by Triptiimport React from "react";
 import React from "react";
 
 const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
   const handlePageChange = (page) => {
-    setCurrentPage(page);
+    if (page !== currentPage && page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
   };
 
   const renderPageNumbers = () => {
     const pages = [];
-    // If there are fewer than 5 pages, show all of them. 
-    // Otherwise, show a set of 5 pages (previous, current, next).
     const visiblePages = 5;
-    const startPage = Math.max(1, currentPage - Math.floor(visiblePages / 2));
-    const endPage = Math.min(totalPages, startPage + visiblePages - 1);
+    let startPage = Math.max(1, currentPage - Math.floor(visiblePages / 2));
+    let endPage = startPage + visiblePages - 1;
+
+    if (endPage > totalPages) {
+      endPage = totalPages;
+      startPage = Math.max(1, endPage - visiblePages + 1);
+    }
 
     for (let i = startPage; i <= endPage; i++) {
       pages.push(
@@ -58,11 +24,11 @@ const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
           key={i}
           onClick={() => handlePageChange(i)}
           disabled={currentPage === i}
-          className={`px-3 py-2 rounded-md text-sm sm:text-base ${
-            currentPage === i
-              ? "bg-blue-600 text-white"
-              : "bg-gray-300 text-gray-800 hover:bg-blue-500 hover:text-white"
-          }`}
+          className={`min-w-[2.5rem] h-10 px-3 rounded-md font-medium transition-all duration-200
+            ${currentPage === i
+              ? "bg-blue-600 text-white shadow-md"
+              : "bg-gray-100 text-gray-700 hover:bg-blue-500 hover:text-white"}
+          `}
         >
           {i}
         </button>
@@ -72,11 +38,11 @@ const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
   };
 
   return (
-    <div className="flex flex-wrap justify-center items-center space-x-2 mt-6 sm:space-x-4">
+    <div className="flex flex-wrap justify-center items-center gap-2 mt-8">
       <button
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="px-3 py-2 rounded-md text-sm sm:text-base bg-gray-300 text-gray-800 hover:bg-blue-500 hover:text-white disabled:bg-gray-200"
+        className="h-10 px-4 rounded-md bg-gray-200 text-gray-600 font-medium hover:bg-blue-500 hover:text-white disabled:opacity-50 transition-all"
       >
         Prev
       </button>
@@ -86,7 +52,7 @@ const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
       <button
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="px-3 py-2 rounded-md text-sm sm:text-base bg-gray-300 text-gray-800 hover:bg-blue-500 hover:text-white disabled:bg-gray-200"
+        className="h-10 px-4 rounded-md bg-gray-200 text-gray-600 font-medium hover:bg-blue-500 hover:text-white disabled:opacity-50 transition-all"
       >
         Next
       </button>
