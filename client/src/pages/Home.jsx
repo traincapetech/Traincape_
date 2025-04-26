@@ -13,6 +13,7 @@ import Typewriter from "typewriter-effect";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import HomeBanner from "../components/HomeBanner";
 import { useInView } from "react-intersection-observer";
+import CountUp from "react-countup";
 // logo images
 import comptia from "../assets/comptia-2.webp";
 import pecb from "../assets/PECB1.png";
@@ -26,7 +27,6 @@ import Logo3 from "../assets/Digitalearn.webp";
 import Logo4 from "../assets/Gruslabs.svg";
 import Logo5 from "../assets/MSA.png";
 import Logo6 from "../assets/spectre.webp";
-import CountUp from "react-countup";
 
 const Home = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import React, { useEffect, useState, useCallback } from "react";
 import ReviewCard from "./ReviewCard";
 import Loading from "../loadingPage/Loading";
@@ -11,17 +11,19 @@ const reviewCache = new Map();
 
 const reviewsAPI = axios.create({
   timeout: 10000,
-  headers: { 'Content-Type': 'application/json' }
+  headers: { "Content-Type": "application/json" },
 });
 
 const processReviews = (reviews) => {
   return Array.isArray(reviews)
-    ? reviews.map(review => ({
+    ? reviews.map((review) => ({
         ...review,
-        image: review.image?.startsWith('http') ? review.image : `/${review.image?.replace(/^\/+/, '')}`,
-        name: review.name || 'Anonymous',
+        image: review.image?.startsWith("http")
+          ? review.image
+          : `/${review.image?.replace(/^\/+/, "")}`,
+        name: review.name || "Anonymous",
         star: review.star || 0,
-        review: review.review || 'No review provided.'
+        review: review.review || "No review provided.",
       }))
     : [];
 };
@@ -49,13 +51,15 @@ const ReviewPage = () => {
     }
 
     try {
-      const res = await reviewsAPI.get(`http://localhost:8080/review/get-review?page=${page}&limit=${REVIEWS_PER_PAGE}`);
+      const res = await reviewsAPI.get(
+        `http://localhost:8080/review/get-review?page=${page}&limit=${REVIEWS_PER_PAGE}`
+      );
       const processed = processReviews(res.data.review);
       reviewCache.set(cacheKey, {
         reviews: processed,
         currentPage: res.data.currentPage,
         totalPages: res.data.totalPages,
-        timestamp: Date.now()
+        timestamp: Date.now(),
       });
       setData(processed);
       setCurrentPage(res.data.currentPage);
@@ -85,7 +89,10 @@ const ReviewPage = () => {
             >
               Home
             </button>
-            <span className="ml-4 text-gray-500 font-bold"> &gt; Our Reviews</span>
+            <span className="ml-4 text-gray-500 font-bold">
+              {" "}
+              &gt; Our Reviews
+            </span>
           </div>
 
           {data.length > 0 ? (
@@ -108,14 +115,22 @@ const ReviewPage = () => {
             />
           )}
 
-          <div className="flex justify-center mt-6">
+          <div className="flex justify-center mt-8">
             <a
-              href="https://www.google.com/maps/place/Traincape+Technology+Pvt+Ltd/@28.6103792,77.0820093,16.5z/data=!4m8!3m7!1s0x390d05ecdc6529c1:0x7419fbbcac72b568!8m2!3d28.607552!4d77.0819803!9m1!1b1!16s%2Fg%2F11p5zlpbky?entry=ttu&g_ep=EgoyMDI1MDQxNC4xIKXMDSoASAFQAw%3D%3D"
+              href="https://search.google.com/local/writereview?placeid=ChIJwSll3OwFDTkRaLVyrLz7GXQ"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition duration-300"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-yellow-500 text-white text-lg font-semibold rounded-2xl shadow-lg hover:bg-yellow-600 hover:scale-105 transition-transform duration-300"
             >
-              Write a Review
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                className="w-6 h-6 text-white"
+              >
+                <path d="M12 .587l3.668 7.568L24 9.748l-6 5.858L19.335 24 12 20.018 4.665 24 6 15.606 0 9.748l8.332-1.593z" />
+              </svg>
+              Write a Google Review
             </a>
           </div>
         </div>

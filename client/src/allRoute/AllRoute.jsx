@@ -22,7 +22,7 @@ const LoadingComponent = () => (
 const Home = lazy(() => import("../pages/Home"));
 const UserPage = lazy(() => import("../pages/userPage/UserPage"));
 const Login = lazy(() => import("../pages/Login"));
-const AboutUS = lazy(() => import("../pages/AboutUS"));
+const AboutUS = lazy(() => import("../pages/AboutUs/AboutUS"));
 const ContactUs = lazy(() => import("../pages/ContactUs"));
 const Signup = lazy(() => import("../pages/Signup"));
 const FAQ = lazy(() => import("../pages/FAQ"));
