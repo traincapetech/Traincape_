@@ -72,9 +72,9 @@ const Sidebar = ({ role, selectedOption, onSelectOption }) => {
 
     // Student & Client Management
     {
-      id: "studentManagement",
+      id: "employeeManagement",
       icon: Users,
-      label: "Student Management",
+      label: "Employee Management",
       category: "Users",
     },
     {

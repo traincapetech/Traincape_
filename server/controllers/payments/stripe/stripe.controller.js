@@ -8,14 +8,6 @@ const stripe = new Stripe(
   }
 );
 
-// Get the frontend URL with better fallback handling
-const FRONTEND_URL =
-  process.env.NODE_ENV === "production"
-    ? process.env.FRONTEND_URL || "https://tamd-website.onrender.com"
-    : "https://tamdhealth.com/";
-
-console.log("Using FRONTEND_URL for payment redirects:", FRONTEND_URL);
-
 // Create payment session
 const StripePayment = async (req, res) => {
   const { lineItems, success_url, cancel_url, email, productIds } = req.body;

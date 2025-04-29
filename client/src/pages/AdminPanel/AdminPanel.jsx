@@ -12,6 +12,7 @@ import {
   ChevronLeft
 } from "lucide-react";
 import CourseAnalytics from "./CourseAnalytics/CourseAnalytics";
+import EmployeeManagement from "./EmployeeManagement/EmployeeManagement";
 
 const AdminPanel = () => {
   const [selectedOption, setSelectedOption] = useState("roleSelection");
@@ -71,6 +72,8 @@ const AdminPanel = () => {
         return <ViewAssignments role={role} selectedCourse={selectedCourse} />; // Pass selected course to ViewAssignments
       case "courseAnalytics":
         return <CourseAnalytics role={role} selectedCourse={selectedCourse} />; // Pass selected course to courseAnalytics
+      case "employeeManagement":
+        return <EmployeeManagement role={role} selectedCourse={selectedCourse} />; // Pass selected course to courseAnalytics
       default:
         return <div>Select an option</div>;
     }

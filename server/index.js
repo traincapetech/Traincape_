@@ -9,6 +9,7 @@ import { bookRouter } from "./routes/book.routes.js";
 import { questionRouter } from "./routes/question.routes.js"; 
 import { resultRouter } from "./routes/result.routes.js";
 import { paymentRouter } from "./routes/payment.routes.js";
+import { employeeRouter } from "./routes/employee.routes.js";
 
 dotenv.config(); 
 
@@ -26,6 +27,7 @@ app.options('*', cors(corsOptions));
 app.use(express.json());
 
 app.use("/questions", questionRouter);  
+app.use("/employees", employeeRouter);  
 app.use("/results", resultRouter);
 app.use("/users", userRouter);
 app.use("/review", reviewRouter);
