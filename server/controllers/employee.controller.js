@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 
 export const addEmployee = async (req, res) => {
   console.log("REQESTED BODY IS--->", req.body);
+  // console.log("FILES:", req.files);
+
   try {
     const {
       offerLetter,
@@ -56,6 +58,19 @@ export const addEmployee = async (req, res) => {
       role,
       joiningDate,
       department,
+      photo: req.files?.photo?.[0]?.filename || photo || null,
+      tenthMarksheet:
+        req.files?.tenthMarksheet?.[0]?.filename || tenthMarksheet || null,
+      twelfthMarksheet:
+        req.files?.twelfthMarksheet?.[0]?.filename || twelfthMarksheet || null,
+      bachelorsCertificate:
+        req.files?.bachelorsCertificate?.[0]?.filename || bachelorsCertificate || null,
+      pgCertificate: req.files?.pgCertificate?.[0]?.filename || pgCertificate || null,
+      aadharCard: req.files?.aadharCard?.[0]?.filename || aadharCard || null,
+      panCard: req.files?.panCard?.[0]?.filename || panCard || null,
+      policeClearance: req.files?.policeClearance?.[0]?.filename ||policeClearance || null,
+      resume: req.files?.resume?.[0]?.filename ||resume  || null,
+      offerLetter: req.files?.offerLetter?.[0]?.filename ||offerLetter || null,
     });
 
     // Save the employee to the database

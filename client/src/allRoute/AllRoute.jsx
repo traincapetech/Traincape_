@@ -58,6 +58,7 @@ const AwsCertifiedSecurity = lazy(() => import("../pages/AWS/AwsCertifiedSecurit
 
 // Admin imports
 const AdminPanel = lazy(() => import("../pages/AdminPanel/AdminPanel"));
+const EmployeeInfoPage = lazy(() => import("../pages/AdminPanel/EmployeeManagement/UserPage"));
 const VerifyCertificate = lazy(() => import("../pages/Test/VerifyCertificate"));
 const CertificateTemplate = lazy(() => import("../pages/Test/CertificateTemplate"));
 
@@ -412,6 +413,7 @@ const AllRoute = () => {
         
         {/* Admin Panel */}
         <Route path="/admin-panel" element={token ? <AdminPanel /> : <Navigate to="/login" state={{ from: "/admin-panel" }} replace />} />
+        <Route path="/admin-panel/:employeeId" element={token ? <EmployeeInfoPage /> : <Navigate to="/login" state={{ from: "/admin-panel" }} replace />} />
         <Route path="/verify-certificate" element={<VerifyCertificate />} />
       <Route path="/cer" element={<CertificateTemplate />} />
 

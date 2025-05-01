@@ -416,11 +416,10 @@ export default function EditEmployee({ employeeId, onClose }) {
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               >
                 <option value="">Select Department</option>
-                <option value="Engineering">Tech</option>
-                <option value="Marketing">Sales</option>
+                <option value="Tech">Tech</option>
+                <option value="Marketing">Marketing</option>
                 <option value="Sales">Sales</option>
                 <option value="HR">HR</option>
-                <option value="Finance">Marketing</option>
               </select>
             </div>
 

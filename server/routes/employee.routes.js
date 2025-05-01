@@ -7,7 +7,7 @@ import {
   getDatabyEmployeeId,
   updateEmployee,
 } from "../controllers/Employee.controller.js";
-import { uploadFiles } from "../utils/multer.js";
+import uploadFiles  from "../middleware/multer.middleware.js";
 
 const employeeRouter = express.Router();
 

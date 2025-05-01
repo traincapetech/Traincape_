@@ -11,8 +11,10 @@ import {
 } from "lucide-react";
 import { useEffect } from "react";
 import EditEmployee from "./EditEmployee";
+import { useNavigate } from "react-router-dom";
 
 const EmployeeManagement = () => {
+  const navigate=useNavigate();
   const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState(false);
@@ -144,21 +146,66 @@ const EmployeeManagement = () => {
         return;
       }
       try {
+        const formData = new FormData();
+
+        // Append text fields
+        formData.append("fullName", newEmployee.fullName);
+        formData.append("email", newEmployee.email);
+        formData.append("phoneNumber", newEmployee.phoneNumber);
+        formData.append("whatsappNumber", newEmployee.whatsappNumber);
+        formData.append("linkedinUrl", newEmployee.linkedinUrl);
+        formData.append("currentAddress", newEmployee.currentAddress);
+        formData.append("permanentAddress", newEmployee.permanentAddress);
+        formData.append("collegeName", newEmployee.collegeName);
+        formData.append("role", newEmployee.role);
+        formData.append("department", newEmployee.department);
+        formData.append("joiningDate", newEmployee.joiningDate);
+        formData.append("internshipDuration", newEmployee.internshipDuration);
+        formData.append("status", newEmployee.status);
+
+        // Append boolean field as string
+        formData.append(
+          "isWhatsAppSameAsPhone",
+          String(newEmployee.isWhatsAppSameAsPhone)
+        );
+
+        // Append file fields (only if not null)
+        if (newEmployee.photo) formData.append("photo", newEmployee.photo);
+        if (newEmployee.tenthMarksheet)
+          formData.append("tenthMarksheet", newEmployee.tenthMarksheet);
+        if (newEmployee.twelfthMarksheet)
+          formData.append("twelfthMarksheet", newEmployee.twelfthMarksheet);
+        if (newEmployee.bachelorsCertificate)
+          formData.append(
+            "bachelorsCertificate",
+            newEmployee.bachelorsCertificate
+          );
+        if (newEmployee.pgCertificate)
+          formData.append("pgCertificate", newEmployee.pgCertificate);
+        if (newEmployee.aadharCard)
+          formData.append("aadharCard", newEmployee.aadharCard);
+        if (newEmployee.panCard)
+          formData.append("panCard", newEmployee.panCard);
+        if (newEmployee.policeClearance)
+          formData.append("policeClearance", newEmployee.policeClearance);
+        if (newEmployee.resume) formData.append("resume", newEmployee.resume);
+        if (newEmployee.offerLetter)
+          formData.append("offerLetter", newEmployee.offerLetter);
         // Post the data to the backend
         const response = await axios.post(
           "http://localhost:8080/employees/addEmployee",
-          newEmployee,
+          formData,
           {
             headers: {
-              "Content-Type": "application/json",
+              // "Content-Type": "application/json",
             },
           }
         );
         fetchEmployees();
         alert("Employee added successfully");
-      } catch (error) {
-        console.error("Error adding Employee:", error);
-        setErrorMessage("Error adding Employee. Please Try again later.");
+      } catch (e) {
+        console.error("Error adding Employee:", e);
+        setErrorMessage("Error adding Employee.", e.error);
       }
       // Reset form
       setNewEmployee({
@@ -190,7 +237,6 @@ const EmployeeManagement = () => {
 
       setIsAddingEmployee(false);
       setActiveSection("personal");
-      setErrorMessage(null);
     }
   };
 
@@ -843,7 +889,12 @@ const EmployeeManagement = () => {
                           >
                             <Trash size={18} />
                           </button>
-                          <button className="text-gray-600 hover:text-gray-900">
+                          <button
+                            onClick={() =>
+                              navigate(`/admin-panel/${employee._id}`)
+                            }
+                            className="text-gray-600 hover:text-gray-900"
+                          >
                             <User size={18} />
                           </button>
                         </div>
