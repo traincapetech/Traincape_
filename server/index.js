@@ -24,8 +24,13 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
+
 app.use(express.json());
 
+// ✅ Serve static files if you want to access uploaded files
+app.use("/uploads", express.static("uploads"));
+
+// ✅ All routes
 app.use("/questions", questionRouter);  
 app.use("/employees", employeeRouter);  
 app.use("/results", resultRouter);

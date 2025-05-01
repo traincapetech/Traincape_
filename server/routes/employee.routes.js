@@ -7,16 +7,17 @@ import {
   getDatabyEmployeeId,
   updateEmployee,
 } from "../controllers/Employee.controller.js";
-import uploadFiles  from "../middleware/multer.middleware.js";
+import { upload } from "../middleware/multer.middleware.js";
 
 const employeeRouter = express.Router();
+// Create uploads directory if it doesn't exist
 
 // Route definitions
 employeeRouter.get("/getEmployees", getEmployees);
 
 employeeRouter.post(
   "/addEmployee",
-  //  uploadFiles,
+  upload.any(),
   addEmployee
 );
 

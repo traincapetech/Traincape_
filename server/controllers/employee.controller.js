@@ -1,11 +1,11 @@
 // question.controller.js
 import EmployeeModel from "../model/employee.model.js";
 import mongoose from "mongoose";
+import { uploadToDrive } from "../utils/googleDriveService.js";
 
 export const addEmployee = async (req, res) => {
   console.log("REQESTED BODY IS--->", req.body);
-  // console.log("FILES:", req.files);
-
+  console.log("REQESTED FILES  IS--->", req.files);
   try {
     const {
       offerLetter,
@@ -33,6 +33,33 @@ export const addEmployee = async (req, res) => {
       department,
     } = req.body;
 
+    // const driveFolderId = "YOUR_GOOGLE_DRIVE_FOLDER_ID"; // replace with your folder
+
+    // const fileFields = [
+    //   "photo",
+    //   "tenthMarksheet",
+    //   "twelfthMarksheet",
+    //   "bachelorsCertificate",
+    //   "pgCertificate",
+    //   "aadharCard",
+    //   "panCard",
+    //   "policeClearance",
+    //   "resume",
+    //   "offerLetter",
+    // ];
+
+    // const fileUrls = {};
+
+    // for (let field of fileFields) {
+    //   if (req.files?.[field]?.[0]) {
+    //     const file = req.files[field][0];
+    //     const url = await uploadToDrive(file, driveFolderId);
+    //     fileUrls[field] = url;
+
+    //     // Optionally delete temp file after upload
+    //     fs.unlinkSync(path.resolve(file.path));
+    //   }
+    // }
     // Create a new employee in the database
     const newEmployee = new EmployeeModel({
       offerLetter,
@@ -58,19 +85,7 @@ export const addEmployee = async (req, res) => {
       role,
       joiningDate,
       department,
-      photo: req.files?.photo?.[0]?.filename || photo || null,
-      tenthMarksheet:
-        req.files?.tenthMarksheet?.[0]?.filename || tenthMarksheet || null,
-      twelfthMarksheet:
-        req.files?.twelfthMarksheet?.[0]?.filename || twelfthMarksheet || null,
-      bachelorsCertificate:
-        req.files?.bachelorsCertificate?.[0]?.filename || bachelorsCertificate || null,
-      pgCertificate: req.files?.pgCertificate?.[0]?.filename || pgCertificate || null,
-      aadharCard: req.files?.aadharCard?.[0]?.filename || aadharCard || null,
-      panCard: req.files?.panCard?.[0]?.filename || panCard || null,
-      policeClearance: req.files?.policeClearance?.[0]?.filename ||policeClearance || null,
-      resume: req.files?.resume?.[0]?.filename ||resume  || null,
-      offerLetter: req.files?.offerLetter?.[0]?.filename ||offerLetter || null,
+      // ...fileUrls,
     });
 
     // Save the employee to the database
