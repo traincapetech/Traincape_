@@ -14,7 +14,7 @@ import EditEmployee from "./EditEmployee";
 import { useNavigate } from "react-router-dom";
 
 const EmployeeManagement = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState(false);
@@ -191,8 +191,11 @@ const EmployeeManagement = () => {
         if (newEmployee.resume) formData.append("resume", newEmployee.resume);
         if (newEmployee.offerLetter)
           formData.append("offerLetter", newEmployee.offerLetter);
+        for (let [key, value] of formData.entries()) {
+          console.log(key, value);
+        }
         // Post the data to the backend
-        const response = await axios.post(
+        await axios.post(
           "http://localhost:8080/employees/addEmployee",
           formData,
           {
@@ -205,7 +208,7 @@ const EmployeeManagement = () => {
         alert("Employee added successfully");
       } catch (e) {
         console.error("Error adding Employee:", e);
-        setErrorMessage("Error adding Employee.", e.error);
+        setErrorMessage(`Error adding Employee.${e.error}`);
       }
       // Reset form
       setNewEmployee({
@@ -377,7 +380,7 @@ const EmployeeManagement = () => {
                         Phone Number <span className="text-red-500">*</span>
                       </label>
                       <input
-                        type="tel"
+                        type="number"
                         name="phoneNumber"
                         className="w-full p-2 border border-gray-300 rounded-lg"
                         value={newEmployee.phoneNumber}
@@ -391,10 +394,14 @@ const EmployeeManagement = () => {
                         WhatsApp Number (optional if same as phone)
                       </label>
                       <input
-                        type="tel"
+                        type="number"
                         name="whatsappNumber"
                         className="w-full p-2 border border-gray-300 rounded-lg mb-2"
-                        value={newEmployee.whatsappNumber}
+                        value={
+                          newEmployee.isWhatsAppSameAsPhone
+                            ? newEmployee.phoneNumber
+                            : newEmployee.whatsappNumber
+                        }
                         onChange={handleInputChange}
                         disabled={newEmployee.isWhatsAppSameAsPhone}
                       />

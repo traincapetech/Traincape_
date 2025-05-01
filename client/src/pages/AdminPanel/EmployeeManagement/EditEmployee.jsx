@@ -3,7 +3,6 @@ import { X, Save, Trash, CheckCircle } from "lucide-react";
 import axios from "axios";
 
 export default function EditEmployee({ employeeId, onClose }) {
-  const [employee, setEmployee] = useState(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [formData, setFormData] = useState({
@@ -35,7 +34,6 @@ export default function EditEmployee({ employeeId, onClose }) {
 
   // Simulate fetching employee data
   useEffect(() => {
-    // In a real application, you would fetch the employee data from an API
     setLoading(true);
     const fetchData = async () => {
       // Simulate API call delay
@@ -43,7 +41,6 @@ export default function EditEmployee({ employeeId, onClose }) {
         `http://localhost:8080/employees/getEmployee/${employeeId}`
       );
       console.log("Data from backend is--->", response.data.employee);
-      setEmployee(response.data.employee);
       setFormData(response.data.employee);
       setLoading(false);
     };
