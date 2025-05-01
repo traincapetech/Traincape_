@@ -200,7 +200,7 @@ const EmployeeManagement = () => {
           formData,
           {
             headers: {
-              // "Content-Type": "application/json",
+              "Content-Type": "multipart/form-data",
             },
           }
         );
@@ -211,32 +211,32 @@ const EmployeeManagement = () => {
         setErrorMessage(`Error adding Employee.${e.error}`);
       }
       // Reset form
-      setNewEmployee({
-        fullName: "",
-        email: "",
-        phoneNumber: "",
-        whatsappNumber: "",
-        linkedinUrl: "",
-        currentAddress: "",
-        permanentAddress: "",
-        photo: null,
-        collegeName: "",
-        role: "",
-        department: "",
-        joiningDate: "",
-        internshipDuration: "",
-        status: "Active",
-        tenthMarksheet: null,
-        twelfthMarksheet: null,
-        bachelorsCertificate: null,
-        pgCertificate: null,
-        aadharCard: null,
-        panCard: null,
-        policeClearance: null,
-        resume: null,
-        offerLetter: null,
-        isWhatsAppSameAsPhone: false,
-      });
+      // setNewEmployee({
+      //   fullName: "",
+      //   email: "",
+      //   phoneNumber: "",
+      //   whatsappNumber: "",
+      //   linkedinUrl: "",
+      //   currentAddress: "",
+      //   permanentAddress: "",
+      //   photo: null,
+      //   collegeName: "",
+      //   role: "",
+      //   department: "",
+      //   joiningDate: "",
+      //   internshipDuration: "",
+      //   status: "Active",
+      //   tenthMarksheet: null,
+      //   twelfthMarksheet: null,
+      //   bachelorsCertificate: null,
+      //   pgCertificate: null,
+      //   aadharCard: null,
+      //   panCard: null,
+      //   policeClearance: null,
+      //   resume: null,
+      //   offerLetter: null,
+      //   isWhatsAppSameAsPhone: false,
+      // });
 
       setIsAddingEmployee(false);
       setActiveSection("personal");
