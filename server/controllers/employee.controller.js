@@ -1,11 +1,6 @@
 // question.controller.js
 import EmployeeModel from "../model/employee.model.js";
-import mongoose from "mongoose";
-import { uploadToDrive } from "../utils/googleDriveService.js";
-
 export const addEmployee = async (req, res) => {
-  console.log("REQUESTED BODY IS--->", req.body);
-  console.log("REQUESTED FILES IS--->", req.files);
   try {
     const {
       email,
@@ -31,81 +26,28 @@ export const addEmployee = async (req, res) => {
       });
     }
 
-    const driveFolderId = process.env.GOOGLE_DRIVE_FOLDER_ID;
-
-    if (!driveFolderId) {
-      throw new Error(
-        "Google Drive folder ID not configured in environment variables"
-      );
-    }
-
-    console.log(`Using Google Drive folder ID: ${driveFolderId}`);
-
-    // Your files are stored in an array of objects, each with a fieldname property
-    // Upload files to Google Drive and store URLs
-    const fileUrls = {};
-    const uploadPromises = [];
-
-    if (req.files && Array.isArray(req.files) && req.files.length > 0) {
-      console.log(`Processing ${req.files.length} files from request`);
-
-      // Process each file in the array
-      for (const file of req.files) {
-        const fieldname = file.fieldname;
-        console.log(
-          `Processing file for ${fieldname}: ${file.originalname} (${file.size} bytes)`
-        );
-
-        try {
-          // Create a promise for each upload
-          const uploadPromise = uploadToDrive(file, driveFolderId)
-            .then((url) => {
-              console.log(
-                `✅ Successfully uploaded ${fieldname} to Drive, URL: ${url}`
-              );
-              fileUrls[fieldname] = url;
-
-              // Clean up the temporary file after upload
-              return fs.promises.unlink(file.path).catch((err) => {
-                console.warn(
-                  `Failed to delete temporary file ${file.path}:`,
-                  err
-                );
-              });
-            })
-            .catch((error) => {
-              console.error(`❌ Error uploading ${fieldname} to Drive:`, error);
-              return null;
-            });
-
-          uploadPromises.push(uploadPromise);
-        } catch (error) {
-          console.error(`Failed to process ${fieldname} file:`, error);
+    // Process uploaded files (from upload.any())
+    const fileData = {};
+    if (req.files && typeof req.files === "object") {
+      for (const [fieldname, fileArray] of Object.entries(req.files)) {
+        const file = fileArray[0]; // Only take the first file per field
+        if (file && file.buffer) {
+          fileData[fieldname] = {
+            data: file.buffer,
+            contentType: file.mimetype,
+            filename: file.originalname,
+            size: file.size,
+          };
+          console.log(`✅ Processed file for field: ${fieldname}`);
+        } else {
+          console.warn(`⚠️ Skipping ${fieldname}, no valid buffer`);
         }
       }
     } else {
-      console.log("No files found in the request");
+      console.log("No files found in request");
     }
 
-    // Wait for all uploads to complete
-    if (uploadPromises.length > 0) {
-      console.log(
-        `Waiting for ${uploadPromises.length} file uploads to complete...`
-      );
-      const results = await Promise.allSettled(uploadPromises);
-      console.log(
-        `Upload results: ${
-          results.filter((r) => r.status === "fulfilled").length
-        } succeeded, ${
-          results.filter((r) => r.status === "rejected").length
-        } failed`
-      );
-      console.log("Successfully uploaded file URLs:", Object.keys(fileUrls));
-    } else {
-      console.log("No files to upload");
-    }
-
-    // Create a new employee in the database
+    // Create employee document
     const employeeData = {
       fullName,
       email,
@@ -122,31 +64,37 @@ export const addEmployee = async (req, res) => {
       internshipDuration: internshipDuration || "",
     };
 
-    // Add file URLs to employee data
-    for (const field in fileUrls) {
-      if (fileUrls[field]) {
-        employeeData[field] = fileUrls[field];
-      }
+    // Attach file data to corresponding fields
+    for (const field in fileData) {
+      employeeData[field] = fileData[field];
     }
 
-    console.log(
-      "Creating employee with data:",
-      JSON.stringify(employeeData, null, 2)
-    );
-
+    // Save to DB
     const newEmployee = new EmployeeModel(employeeData);
-
-    // Save the employee to the database
     const savedEmployee = await newEmployee.save();
-    console.log("Employee saved successfully with ID:", savedEmployee._id);
+
+    console.log("✅ Employee saved with ID:", savedEmployee._id);
 
     res.status(201).json({
       success: true,
       message: "Employee added successfully",
-      data: savedEmployee,
+      data: {
+        _id: savedEmployee._id,
+        fullName: savedEmployee.fullName,
+        email: savedEmployee.email,
+        role: savedEmployee.role,
+        department: savedEmployee.department,
+        status: savedEmployee.status,
+        uploadedFiles: Object.keys(fileData).map((key) => ({
+          fieldname: key,
+          filename: fileData[key].filename,
+          contentType: fileData[key].contentType,
+          size: fileData[key].size,
+        })),
+      },
     });
   } catch (error) {
-    console.error("Error adding employee:", error);
+    console.error("❌ Error adding employee:", error);
     res.status(500).json({
       success: false,
       message: "Failed to add employee",
@@ -176,12 +124,12 @@ export const getEmployees = async (req, res) => {
     });
   }
 };
+
 export const getDatabyEmployeeId = async (req, res) => {
   try {
-    const { employeeId } = req.params;
-    console.log(employeeId);
-    // If using Mongoose with MongoDB
-    const employee = await EmployeeModel.findById(employeeId).select("-__v"); // Exclude the version field
+    const { id } = req.params;
+
+    const employee = await EmployeeModel.findById(id);
 
     if (!employee) {
       return res.status(404).json({
@@ -190,14 +138,109 @@ export const getDatabyEmployeeId = async (req, res) => {
       });
     }
 
+    // Convert Mongoose document to plain object
+    const responseData = employee.toObject();
+
+    // Define which fields are files
+    const fileFields = [
+      "photo",
+      "tenthMarksheet",
+      "twelfthMarksheet",
+      "bachelorsCertificate",
+      "pgCertificate",
+      "aadharCard",
+      "panCard",
+      "policeClearance",
+      "resume",
+      "offerLetter",
+    ];
+
+    const files = {};
+    fileFields.forEach((field) => {
+      if (employee[field]) {
+        files[field] = {
+          filename: employee[field].filename,
+          contentType: employee[field].contentType,
+          size: employee[field].size,
+          data: employee[field].data?.toString("base64"), // encode binary as base64
+        };
+      }
+    });
+
+    // Add file data to response
+    responseData.files = files;
+
     res.status(200).json({
       success: true,
-      employee,
+      data: responseData,
     });
   } catch (error) {
-    console.error("Error fetching Employee:", error);
+    console.error("Error fetching employee:", error);
     res.status(500).json({
       success: false,
+      message: "Failed to fetch employee details",
+      error: error.message,
+    });
+  }
+};
+
+
+// NEW ENDPOINT: Get a specific file for an employee
+export const getEmployeeFile = async (req, res) => {
+  try {
+    const { id, fileType } = req.params;
+    // Validate the fileType to prevent unauthorized access
+    const validFileTypes = [
+      "photo",
+      "tenthMarksheet",
+      "twelfthMarksheet",
+      "bachelorsCertificate",
+      "pgCertificate",
+      "aadharCard",
+      "panCard",
+      "policeClearance",
+      "resume",
+      "offerLetter",
+    ];
+
+    if (!validFileTypes.includes(fileType)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid file type requested",
+      });
+    }
+
+    // Project only the requested file field to minimize data transfer
+    const employee = await EmployeeModel.findById(id).select(`${fileType}`);
+
+    if (!employee) {
+      return res.status(404).json({
+        success: false,
+        message: "Employee not found",
+      });
+    }
+
+    // Check if the requested file exists
+    if (!employee[fileType]) {
+      return res.status(404).json({
+        success: false,
+        message: `${fileType} not found for this employee`,
+      });
+    }
+    // // Set appropriate headers for file download
+    // res.set({
+    //   "Content-Type": employee[fileType].contentType,
+    //   "Content-Disposition": `inline; filename="${employee[fileType].filename}"`,
+    //   "Content-Length": employee[fileType].size,
+    // });
+    console.log(employee[fileType]);
+    // Send the file data as response
+    res.send(employee[fileType].data);
+  } catch (error) {
+    console.error(`Error fetching ${req.params.fileType} for employee:`, error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch file",
       error: error.message,
     });
   }
@@ -237,7 +280,6 @@ export const deleteEmployee = async (req, res) => {
 };
 
 export const updateEmployee = async (req, res) => {
-  // console.log("REQESTED BODY IS--->", req.body);
   console.log("REQESTED PARAM IS--->", req.params);
 
   const { employeeId } = req.params;
@@ -272,6 +314,77 @@ export const updateEmployee = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Error updating employee",
+      error: err.message,
+    });
+  }
+};
+
+// NEW ENDPOINT: Update employee files
+export const updateEmployeeFiles = async (req, res) => {
+  console.log("REQUESTED FILES IS--->", req.files);
+  const { employeeId } = req.params;
+
+  try {
+    const employee = await EmployeeModel.findById(employeeId);
+
+    if (!employee) {
+      return res.status(404).json({
+        success: false,
+        message: "Employee not found",
+      });
+    }
+
+    // Process uploaded files and prepare update data
+    const updateData = {};
+
+    if (req.files && Array.isArray(req.files) && req.files.length > 0) {
+      console.log(`Processing ${req.files.length} files for update`);
+
+      // Process each file in the array
+      for (const file of req.files) {
+        const fieldname = file.fieldname;
+        console.log(
+          `Processing file for ${fieldname}: ${file.originalname} (${file.size} bytes)`
+        );
+
+        try {
+          // Prepare file data for MongoDB update
+          updateData[fieldname] = {
+            data: file.buffer,
+            contentType: file.mimetype,
+            filename: file.originalname,
+            size: file.size,
+          };
+
+          console.log(`✅ Successfully processed ${fieldname} for update`);
+        } catch (error) {
+          console.error(`Failed to process ${fieldname} file:`, error);
+        }
+      }
+
+      // Update employee with new files
+      const updatedEmployee = await EmployeeModel.findByIdAndUpdate(
+        employeeId,
+        { $set: updateData },
+        { new: true }
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Employee files updated successfully",
+        updatedFiles: Object.keys(updateData),
+      });
+    } else {
+      return res.status(400).json({
+        success: false,
+        message: "No files provided for update",
+      });
+    }
+  } catch (err) {
+    console.error("Error updating employee files:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Error updating employee files",
       error: err.message,
     });
   }

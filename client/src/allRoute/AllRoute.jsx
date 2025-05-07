@@ -58,7 +58,7 @@ const AwsCertifiedSecurity = lazy(() => import("../pages/AWS/AwsCertifiedSecurit
 
 // Admin imports
 const AdminPanel = lazy(() => import("../pages/AdminPanel/AdminPanel"));
-const EmployeeInfoPage = lazy(() => import("../pages/AdminPanel/EmployeeManagement/UserPage"));
+const EmployeeInfoPage = lazy(() => import("../pages/AdminPanel/EmployeeManagement/UserPage/UserPage"));
 const VerifyCertificate = lazy(() => import("../pages/Test/VerifyCertificate"));
 const CertificateTemplate = lazy(() => import("../pages/Test/CertificateTemplate"));
 

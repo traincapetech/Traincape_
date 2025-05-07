@@ -6,7 +6,10 @@ import {
   deleteEmployee,
   getDatabyEmployeeId,
   updateEmployee,
-} from "../controllers/Employee.controller.js";
+  getEmployeeFile,
+  updateEmployeeFiles,
+} from "../controllers/employee.controller.js";
+
 import { upload } from "../middleware/multer.middleware.js";
 
 const employeeRouter = express.Router();
@@ -17,12 +20,26 @@ employeeRouter.get("/getEmployees", getEmployees);
 
 employeeRouter.post(
   "/addEmployee",
-  upload.any(),
+  upload.fields([
+    { name: "photo" },
+    { name: "resume" },
+    { name: "tenthMarksheet" },
+    { name: "twelfthMarksheet" },
+    { name: "bachelorsCertificate" },
+    { name: "pgCertificate" },
+    { name: "aadharCard" },
+    { name: "panCard" },
+    { name: "policeClearance" },
+    { name: "offerLetter" },
+  ]),
   addEmployee
 );
 
 employeeRouter.delete("/deleteEmployee/:employeeId", deleteEmployee);
 employeeRouter.put("/updateEmployee/:employeeId", updateEmployee);
-employeeRouter.get("/getEmployee/:employeeId", getDatabyEmployeeId);
+employeeRouter.get("/getEmployee/:id", getDatabyEmployeeId);
+// New routes for file handling
+employeeRouter.get("/:id/file/:fileType", getEmployeeFile);
+employeeRouter.post("/:employeeId/files", upload.any(), updateEmployeeFiles);
 
 export { employeeRouter };
