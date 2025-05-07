@@ -1,4 +1,4 @@
-import express from "express";
+  import express from "express";
 import nodemailer from "nodemailer";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -182,6 +182,8 @@ userRouter.post("/reset_password", async (req, res) => {
       return res.status(400).send({ msg: "Wrong Credentials" });
     }
     const hashedPassword = await bcrypt.hash(newPassword, 10);
+    console.log("Hashed Password is",hashedPassword);
+    console.log("User Password is",user.password);
     user.password = hashedPassword;
     user.resetOtp = "";
     user.resetOtpExpireAt = 0;
@@ -196,5 +198,18 @@ userRouter.post("/reset_password", async (req, res) => {
     return res.json({ success: false, message: error.message });
   }
 });
-
+userRouter.get("/details", async (req, res) => {
+  const useremail="ishaanj2612@gmail.com"
+  try {
+    const user = await UserModel.findOne({ email:useremail });
+    if (!user) {
+      return res.status(400).send({ msg: "Wrong Credentials" });
+    }
+  
+    res.status(200).send(user);
+  } catch (error) {
+    console.error(error);
+    return res.json({ success: false, message: error.message });
+  }
+});
 export { userRouter };
