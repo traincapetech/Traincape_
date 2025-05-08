@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { X, Save, Trash, CheckCircle } from "lucide-react";
+import { X, Save, CheckCircle } from "lucide-react";
 import axios from "axios";
 
 export default function EditEmployee({ employeeId, onClose }) {
@@ -40,8 +40,8 @@ export default function EditEmployee({ employeeId, onClose }) {
       const response = await axios.get(
         `http://localhost:8080/employees/getEmployee/${employeeId}`
       );
-      console.log("Data from backend is--->", response.data.employee);
-      setFormData(response.data.employee);
+      console.log("Data from backend is--->", response.data);
+      setFormData(response.data.data);
       setLoading(false);
     };
 
@@ -95,13 +95,14 @@ export default function EditEmployee({ employeeId, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSaving(true);
-
+    console.log("Saving employee data:", formData);
+    return;
     try {
       const response = await axios.put(
         `http://localhost:8080/employees/updateEmployee/${employeeId}`,
         formData // Missing data parameter for what needs to be updated
       );
-      // Close the modal after successful save
+
       onClose();
     } catch (error) {
       console.error("Error saving employee data:", error);
@@ -156,7 +157,7 @@ export default function EditEmployee({ employeeId, onClose }) {
       </div>
     );
   }
-
+  console.log("Formadata is", formData);
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto">
       <div className="bg-white rounded-lg p-6 w-full max-w-4xl shadow-lg my-8">
@@ -310,9 +311,11 @@ export default function EditEmployee({ employeeId, onClose }) {
                   hover:file:bg-indigo-100"
               />
               {formData.photo && (
-                <div className="mt-1 flex items-center text-sm text-green-600">
-                  <CheckCircle size={16} className="mr-1" />
-                  Photo selected
+                <div>
+                  <div className="mt-1 flex items-center text-sm text-green-600">
+                    <CheckCircle size={16} className="mr-1" />
+                    Photo selected
+                  </div>
                 </div>
               )}
             </div>
