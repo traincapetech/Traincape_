@@ -246,8 +246,12 @@ export const getDatabyEmployeeId = async (req, res) => {
 //   }
 // };
 export const updateEmployee = async (req, res) => {
+  console.log(req.body);
+  console.log(req.files);
   const { employeeId } = req.params;
-
+  console.log(employeeId);
+  return;
+  
   try {
     let employeeData = { ...req.body };
 

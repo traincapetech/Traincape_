@@ -35,7 +35,22 @@ employeeRouter.post(
   addEmployee
 );
 
-employeeRouter.put("/updateEmployee/:employeeId", updateEmployee);
+employeeRouter.put(
+  "/updateEmployee/:employeeId",
+  upload.fields([
+    { name: "photo" },
+    { name: "resume" },
+    { name: "tenthMarksheet" },
+    { name: "twelfthMarksheet" },
+    { name: "bachelorsCertificate" },
+    { name: "pgCertificate" },
+    { name: "aadharCard" },
+    { name: "panCard" },
+    { name: "policeClearance" },
+    { name: "offerLetter" },
+  ]),
+  updateEmployee
+);
 employeeRouter.delete("/deleteEmployee/:employeeId", deleteEmployee);
 employeeRouter.get("/getEmployee/:id", getDatabyEmployeeId);
 // New routes for file handling

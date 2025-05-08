@@ -5,7 +5,7 @@ import {
   Search,
 } from "lucide-react";
 import { useEffect } from "react";
-import EditEmployee from "./EditEmployee";
+import EditEmployee from "./editEmployee/EditEmployee";
 import {
   EducationalInfoSection,
   EmploymentSpecificInfoSection,
@@ -284,121 +284,128 @@ const EmployeeManagement = () => {
     fetchEmployees();
   }, []);
   return (
-    <div className="p-6 max-w-6xl mx-auto bg-white rounded-lg shadow">
-      {loading ? (
-        <p>Loading employees...</p>
-      ) : (
-        <div>
-          <div className="flex items-center justify-between mb-6">
-            <h1 className="text-2xl font-bold text-gray-800">
-              Employee Management
-            </h1>
-            <button
-              onClick={() => setIsAddingEmployee(!isAddingEmployee)}
-              className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              <Plus size={18} className="mr-2" />
-              Add Employee
-            </button>
+    <div className="w-full p-4 sm:p-6 bg-white rounded-lg shadow">
+    {loading ? (
+      <p className="text-center">Loading employees...</p>
+    ) : (
+      <div>
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-800">
+            Employee Management
+          </h1>
+          <button
+            onClick={() => setIsAddingEmployee(!isAddingEmployee)}
+            className="w-full sm:w-auto flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            <Plus size={18} className="mr-2" />
+            Add Employee
+          </button>
+        </div>
+  
+        {/* Search */}
+        <div className="mb-6 relative">
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <Search size={18} className="text-gray-400" />
           </div>
-          <div className="mb-6 relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Search size={18} className="text-gray-400" />
+          <input
+            type="text"
+            placeholder="Search employees by name, email, department or role..."
+            className="pl-10 w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+  
+        {/* Add Employee Form */}
+        {isAddingEmployee && (
+          <div className="mb-6 p-4 border border-gray-200 rounded-lg bg-gray-50">
+            <h2 className="text-lg font-semibold mb-4">Add New Employee</h2>
+  
+            <PersonalInfoSection
+              activeSection={activeSection}
+              toggleSection={toggleSection}
+              newEmployee={newEmployee}
+              handleInputChange={handleInputChange}
+              handleFileChange={handleFileChange}
+              setNewEmployee={setNewEmployee}
+            />
+            <EducationalInfoSection
+              activeSection={activeSection}
+              toggleSection={toggleSection}
+              newEmployee={newEmployee}
+              handleInputChange={handleInputChange}
+              handleFileChange={handleFileChange}
+              setNewEmployee={setNewEmployee}
+            />
+            <IdentityVerificationInfoSection
+              activeSection={activeSection}
+              toggleSection={toggleSection}
+              newEmployee={newEmployee}
+              handleInputChange={handleInputChange}
+              handleFileChange={handleFileChange}
+              setNewEmployee={setNewEmployee}
+            />
+            <EmploymentSpecificInfoSection
+              activeSection={activeSection}
+              toggleSection={toggleSection}
+              newEmployee={newEmployee}
+              handleInputChange={handleInputChange}
+              handleFileChange={handleFileChange}
+              setNewEmployee={setNewEmployee}
+            />
+  
+            {/* Form buttons */}
+            <div className="mt-6 flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2">
+              <button
+                onClick={() => {
+                  setIsAddingEmployee(false);
+                  setErrorMessage(null);
+                }}
+                className="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleAddEmployee}
+                className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              >
+                Save Employee
+              </button>
             </div>
-            <input
-              type="text"
-              placeholder="Search employees by name, email, department or role..."
-              className="pl-10 w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+          </div>
+        )}
+  
+        {/* Error Message */}
+        {errorMessage && (
+          <p className="text-center my-5 text-red-500">{errorMessage}</p>
+        )}
+  
+        {/* Employee Table */}
+        <EmployeeTable
+          employees={employees}
+          filteredEmployees={filteredEmployees}
+          onDelete={handleDelete}
+          setIsEditingEmployee={setIsEditingEmployee}
+          setEditingEmployeeId={setEditingEmployeeId}
+        />
+  
+        {/* Edit Employee Dialog */}
+        {isEditingEmployee && (
+          <div>
+            <EditEmployee
+              employeeId={editingEmployeeId}
+              onClose={() => {
+                setIsEditingEmployee(false);
+                setEditingEmployeeId(null);
+                fetchEmployees();
+              }}
             />
           </div>
-          {isAddingEmployee && (
-            <div className="mb-6 p-4 border border-gray-200 rounded-lg bg-gray-50">
-              <h2 className="text-lg font-semibold mb-4">Add New Employee</h2>
-
-              {/* Personal Information Section */}
-              <PersonalInfoSection
-                activeSection={activeSection}
-                toggleSection={toggleSection}
-                newEmployee={newEmployee}
-                handleInputChange={handleInputChange}
-                handleFileChange={handleFileChange}
-                setNewEmployee={setNewEmployee}
-              />
-              {/* Educational Details Section */}
-              <EducationalInfoSection
-                activeSection={activeSection}
-                toggleSection={toggleSection}
-                newEmployee={newEmployee}
-                handleInputChange={handleInputChange}
-                handleFileChange={handleFileChange}
-                setNewEmployee={setNewEmployee}
-              />
-
-              {/* Identity & Verification Documents Section */}
-              <IdentityVerificationInfoSection
-                activeSection={activeSection}
-                toggleSection={toggleSection}
-                newEmployee={newEmployee}
-                handleInputChange={handleInputChange}
-                handleFileChange={handleFileChange}
-                setNewEmployee={setNewEmployee}
-              />
-              {/* Employment Specific Fields Section */}
-              <EmploymentSpecificInfoSection
-                activeSection={activeSection}
-                toggleSection={toggleSection}
-                newEmployee={newEmployee}
-                handleInputChange={handleInputChange}
-                handleFileChange={handleFileChange}
-                setNewEmployee={setNewEmployee}
-              />
-              <div className="mt-6 flex justify-end space-x-2">
-                <button
-                  onClick={() => {
-                    setIsAddingEmployee(false);
-                    setErrorMessage(null);
-                  }}
-                  className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleAddEmployee}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                >
-                  Save Employee
-                </button>
-              </div>
-            </div>
-          )}
-          {errorMessage && (
-            <p className="text-center my-5 text-red-500">{errorMessage}</p>
-          )}
-          <EmployeeTable
-            employees={employees}
-            filteredEmployees={filteredEmployees}
-            onDelete={handleDelete}
-            setIsEditingEmployee={setIsEditingEmployee}
-            setEditingEmployeeId={setEditingEmployeeId}
-          />
-
-          {isEditingEmployee && (
-            <div>
-              <EditEmployee
-                employeeId={editingEmployeeId}
-                onClose={() => {
-                  setIsEditingEmployee(false);
-                  setEditingEmployeeId(null);
-                  fetchEmployees();
-                }}
-              />
-            </div>
-          )}
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    )}
+  </div>
   );
 };
 
