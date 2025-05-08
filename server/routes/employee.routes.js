@@ -6,8 +6,8 @@ import {
   deleteEmployee,
   getDatabyEmployeeId,
   updateEmployee,
-  getEmployeeFile,
-  updateEmployeeFiles,
+  // getEmployeeFile,
+  // updateEmployeeFiles,
 } from "../controllers/employee.controller.js";
 
 import { upload } from "../middleware/multer.middleware.js";
@@ -35,11 +35,11 @@ employeeRouter.post(
   addEmployee
 );
 
-employeeRouter.delete("/deleteEmployee/:employeeId", deleteEmployee);
 employeeRouter.put("/updateEmployee/:employeeId", updateEmployee);
+employeeRouter.delete("/deleteEmployee/:employeeId", deleteEmployee);
 employeeRouter.get("/getEmployee/:id", getDatabyEmployeeId);
 // New routes for file handling
-employeeRouter.get("/:id/file/:fileType", getEmployeeFile);
-employeeRouter.post("/:employeeId/files", upload.any(), updateEmployeeFiles);
+// employeeRouter.get("/:id/file/:fileType", getEmployeeFile);
+// employeeRouter.post("/:employeeId/files", upload.any(), updateEmployeeFiles);
 
 export { employeeRouter };

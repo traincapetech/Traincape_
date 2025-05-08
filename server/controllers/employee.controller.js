@@ -1,5 +1,6 @@
 // question.controller.js
 import EmployeeModel from "../model/employee.model.js";
+
 export const addEmployee = async (req, res) => {
   try {
     const {
@@ -184,64 +185,140 @@ export const getDatabyEmployeeId = async (req, res) => {
   }
 };
 
+// // NEW ENDPOINT: Get a specific file for an employee
+// export const getEmployeeFile = async (req, res) => {
+//   try {
+//     const { id, fileType } = req.params;
+//     // Validate the fileType to prevent unauthorized access
+//     const validFileTypes = [
+//       "photo",
+//       "tenthMarksheet",
+//       "twelfthMarksheet",
+//       "bachelorsCertificate",
+//       "pgCertificate",
+//       "aadharCard",
+//       "panCard",
+//       "policeClearance",
+//       "resume",
+//       "offerLetter",
+//     ];
 
-// NEW ENDPOINT: Get a specific file for an employee
-export const getEmployeeFile = async (req, res) => {
+//     if (!validFileTypes.includes(fileType)) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Invalid file type requested",
+//       });
+//     }
+
+//     // Project only the requested file field to minimize data transfer
+//     const employee = await EmployeeModel.findById(id).select(`${fileType}`);
+
+//     if (!employee) {
+//       return res.status(404).json({
+//         success: false,
+//         message: "Employee not found",
+//       });
+//     }
+
+//     // Check if the requested file exists
+//     if (!employee[fileType]) {
+//       return res.status(404).json({
+//         success: false,
+//         message: `${fileType} not found for this employee`,
+//       });
+//     }
+//     // // Set appropriate headers for file download
+//     // res.set({
+//     //   "Content-Type": employee[fileType].contentType,
+//     //   "Content-Disposition": `inline; filename="${employee[fileType].filename}"`,
+//     //   "Content-Length": employee[fileType].size,
+//     // });
+//     console.log(employee[fileType]);
+//     // Send the file data as response
+//     res.send(employee[fileType].data);
+//   } catch (error) {
+//     console.error(`Error fetching ${req.params.fileType} for employee:`, error);
+//     res.status(500).json({
+//       success: false,
+//       message: "Failed to fetch file",
+//       error: error.message,
+//     });
+//   }
+// };
+export const updateEmployee = async (req, res) => {
+  const { employeeId } = req.params;
+
   try {
-    const { id, fileType } = req.params;
-    // Validate the fileType to prevent unauthorized access
-    const validFileTypes = [
-      "photo",
-      "tenthMarksheet",
-      "twelfthMarksheet",
-      "bachelorsCertificate",
-      "pgCertificate",
-      "aadharCard",
-      "panCard",
-      "policeClearance",
-      "resume",
-      "offerLetter",
-    ];
+    let employeeData = { ...req.body };
 
-    if (!validFileTypes.includes(fileType)) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid file type requested",
-      });
+    // Remove fields that shouldn't be updated
+    delete employeeData._id;
+    delete employeeData.createdAt;
+    delete employeeData.updatedAt;
+
+    // Process uploaded files (from upload.any())
+    const fileData = {};
+    if (req.files && typeof req.files === "object") {
+      for (const [fieldname, fileArray] of Object.entries(req.files)) {
+        const file = fileArray[0]; // Only take the first file per field
+        if (file && file.buffer) {
+          fileData[fieldname] = {
+            data: file.buffer,
+            contentType: file.mimetype,
+            filename: file.originalname,
+            size: file.size,
+          };
+          console.log(`✅ Processed file for field: ${fieldname}`);
+        } else {
+          console.warn(`⚠️ Skipping ${fieldname}, no valid buffer`);
+        }
+      }
+    } else {
+      console.log("No files found in request");
     }
 
-    // Project only the requested file field to minimize data transfer
-    const employee = await EmployeeModel.findById(id).select(`${fileType}`);
+    // Attach file data to employeeData
+    for (const field in fileData) {
+      employeeData[field] = fileData[field];
+    }
 
-    if (!employee) {
+    const updatedEmployee = await EmployeeModel.findByIdAndUpdate(
+      employeeId,
+      { $set: employeeData },
+      { new: true }
+    );
+
+    if (!updatedEmployee) {
       return res.status(404).json({
         success: false,
         message: "Employee not found",
       });
     }
 
-    // Check if the requested file exists
-    if (!employee[fileType]) {
-      return res.status(404).json({
-        success: false,
-        message: `${fileType} not found for this employee`,
-      });
-    }
-    // // Set appropriate headers for file download
-    // res.set({
-    //   "Content-Type": employee[fileType].contentType,
-    //   "Content-Disposition": `inline; filename="${employee[fileType].filename}"`,
-    //   "Content-Length": employee[fileType].size,
-    // });
-    console.log(employee[fileType]);
-    // Send the file data as response
-    res.send(employee[fileType].data);
-  } catch (error) {
-    console.error(`Error fetching ${req.params.fileType} for employee:`, error);
-    res.status(500).json({
+    return res.status(200).json({
+      success: true,
+      message: "Employee updated successfully",
+      data: {
+        _id: updatedEmployee._id,
+        fullName: updatedEmployee.fullName,
+        email: updatedEmployee.email,
+        role: updatedEmployee.role,
+        department: updatedEmployee.department,
+        status: updatedEmployee.status,
+        updatedFiles: Object.keys(fileData).map((key) => ({
+          fieldname: key,
+          filename: fileData[key].filename,
+          contentType: fileData[key].contentType,
+          size: fileData[key].size,
+        })),
+      },
+    });
+  } catch (err) {
+    console.error("Error updating employee:", err);
+    return res.status(500).json({
       success: false,
-      message: "Failed to fetch file",
-      error: error.message,
+      message: "Error updating employee",
+      error: err.message,
     });
   }
 };
@@ -279,113 +356,73 @@ export const deleteEmployee = async (req, res) => {
   }
 };
 
-export const updateEmployee = async (req, res) => {
-  console.log("REQESTED PARAM IS--->", req.params);
+// // NEW ENDPOINT: Update employee files
+// export const updateEmployeeFiles = async (req, res) => {
+//   console.log("REQUESTED FILES IS--->", req.files);
+//   const { employeeId } = req.params;
 
-  const { employeeId } = req.params;
-  let employeeData = { ...req.body };
+//   try {
+//     const employee = await EmployeeModel.findById(employeeId);
 
-  // Remove fields that shouldn't be updated
-  delete employeeData._id;
-  delete employeeData.createdAt;
-  delete employeeData.updatedAt;
+//     if (!employee) {
+//       return res.status(404).json({
+//         success: false,
+//         message: "Employee not found",
+//       });
+//     }
 
-  console.log("employee data after deleting is->", employeeData);
-  try {
-    const updatedEmployee = await EmployeeModel.findByIdAndUpdate(
-      employeeId, // ID to find
-      { $set: employeeData }, // Fields to update
-      { new: true } // Return the updated document
-    );
+//     // Process uploaded files and prepare update data
+//     const updateData = {};
 
-    if (!updatedEmployee) {
-      return res.status(404).json({
-        success: false,
-        message: "Employee not found",
-      });
-    }
+//     if (req.files && Array.isArray(req.files) && req.files.length > 0) {
+//       console.log(`Processing ${req.files.length} files for update`);
 
-    return res.status(200).json({
-      success: true,
-      message: "Employee updated successfully",
-    });
-  } catch (err) {
-    console.error("Error updating employee:", err);
-    return res.status(500).json({
-      success: false,
-      message: "Error updating employee",
-      error: err.message,
-    });
-  }
-};
+//       // Process each file in the array
+//       for (const file of req.files) {
+//         const fieldname = file.fieldname;
+//         console.log(
+//           `Processing file for ${fieldname}: ${file.originalname} (${file.size} bytes)`
+//         );
 
-// NEW ENDPOINT: Update employee files
-export const updateEmployeeFiles = async (req, res) => {
-  console.log("REQUESTED FILES IS--->", req.files);
-  const { employeeId } = req.params;
+//         try {
+//           // Prepare file data for MongoDB update
+//           updateData[fieldname] = {
+//             data: file.buffer,
+//             contentType: file.mimetype,
+//             filename: file.originalname,
+//             size: file.size,
+//           };
 
-  try {
-    const employee = await EmployeeModel.findById(employeeId);
+//           console.log(`✅ Successfully processed ${fieldname} for update`);
+//         } catch (error) {
+//           console.error(`Failed to process ${fieldname} file:`, error);
+//         }
+//       }
 
-    if (!employee) {
-      return res.status(404).json({
-        success: false,
-        message: "Employee not found",
-      });
-    }
+//       // Update employee with new files
+//       const updatedEmployee = await EmployeeModel.findByIdAndUpdate(
+//         employeeId,
+//         { $set: updateData },
+//         { new: true }
+//       );
 
-    // Process uploaded files and prepare update data
-    const updateData = {};
-
-    if (req.files && Array.isArray(req.files) && req.files.length > 0) {
-      console.log(`Processing ${req.files.length} files for update`);
-
-      // Process each file in the array
-      for (const file of req.files) {
-        const fieldname = file.fieldname;
-        console.log(
-          `Processing file for ${fieldname}: ${file.originalname} (${file.size} bytes)`
-        );
-
-        try {
-          // Prepare file data for MongoDB update
-          updateData[fieldname] = {
-            data: file.buffer,
-            contentType: file.mimetype,
-            filename: file.originalname,
-            size: file.size,
-          };
-
-          console.log(`✅ Successfully processed ${fieldname} for update`);
-        } catch (error) {
-          console.error(`Failed to process ${fieldname} file:`, error);
-        }
-      }
-
-      // Update employee with new files
-      const updatedEmployee = await EmployeeModel.findByIdAndUpdate(
-        employeeId,
-        { $set: updateData },
-        { new: true }
-      );
-
-      return res.status(200).json({
-        success: true,
-        message: "Employee files updated successfully",
-        updatedFiles: Object.keys(updateData),
-      });
-    } else {
-      return res.status(400).json({
-        success: false,
-        message: "No files provided for update",
-      });
-    }
-  } catch (err) {
-    console.error("Error updating employee files:", err);
-    return res.status(500).json({
-      success: false,
-      message: "Error updating employee files",
-      error: err.message,
-    });
-  }
-};
+//       return res.status(200).json({
+//         success: true,
+//         message: "Employee files updated successfully",
+//         updatedFiles: Object.keys(updateData),
+//       });
+//     } else {
+//       return res.status(400).json({
+//         success: false,
+//         message: "No files provided for update",
+//       });
+//     }
+//   } catch (err) {
+//     console.error("Error updating employee files:", err);
+//     return res.status(500).json({
+//       success: false,
+//       message: "Error updating employee files",
+//       error: err.message,
+//     });
+//   }
+// };

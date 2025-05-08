@@ -831,7 +831,18 @@ const EmployeeManagement = () => {
                           <div className="flex-shrink-0 h-10 w-10 bg-gray-300 rounded-full flex items-center justify-center">
                             {employee.photo ? (
                               <img
-                                src="/api/placeholder/40/40"
+                                src={`data:${
+                                  employee.photo.contentType
+                                };base64,${
+                                  // Browser-compatible way to convert array to base64
+                                  btoa(
+                                    Array.from(
+                                      new Uint8Array(employee.photo.data.data)
+                                    )
+                                      .map((byte) => String.fromCharCode(byte))
+                                      .join("")
+                                  )
+                                }`}
                                 alt={employee.fullName}
                                 className="h-10 w-10 rounded-full"
                               />

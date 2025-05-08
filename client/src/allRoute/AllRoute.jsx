@@ -20,7 +20,6 @@ const LoadingComponent = () => (
 
 // Lazy load high-level pages for better performance
 const Home = lazy(() => import("../pages/Home"));
-const UserPage = lazy(() => import("../pages/userPage/UserPage"));
 const Login = lazy(() => import("../pages/Login"));
 const AboutUS = lazy(() => import("../pages/AboutUs/AboutUS"));
 const ContactUs = lazy(() => import("../pages/ContactUs"));
