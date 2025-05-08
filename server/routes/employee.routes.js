@@ -52,9 +52,7 @@ employeeRouter.put(
   updateEmployee
 );
 employeeRouter.delete("/deleteEmployee/:employeeId", deleteEmployee);
+
 employeeRouter.get("/getEmployee/:id", getDatabyEmployeeId);
-// New routes for file handling
-// employeeRouter.get("/:id/file/:fileType", getEmployeeFile);
-// employeeRouter.post("/:employeeId/files", upload.any(), updateEmployeeFiles);
 
 export { employeeRouter };

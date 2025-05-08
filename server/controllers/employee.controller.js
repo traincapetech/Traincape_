@@ -185,94 +185,30 @@ export const getDatabyEmployeeId = async (req, res) => {
   }
 };
 
-// // NEW ENDPOINT: Get a specific file for an employee
-// export const getEmployeeFile = async (req, res) => {
-//   try {
-//     const { id, fileType } = req.params;
-//     // Validate the fileType to prevent unauthorized access
-//     const validFileTypes = [
-//       "photo",
-//       "tenthMarksheet",
-//       "twelfthMarksheet",
-//       "bachelorsCertificate",
-//       "pgCertificate",
-//       "aadharCard",
-//       "panCard",
-//       "policeClearance",
-//       "resume",
-//       "offerLetter",
-//     ];
-
-//     if (!validFileTypes.includes(fileType)) {
-//       return res.status(400).json({
-//         success: false,
-//         message: "Invalid file type requested",
-//       });
-//     }
-
-//     // Project only the requested file field to minimize data transfer
-//     const employee = await EmployeeModel.findById(id).select(`${fileType}`);
-
-//     if (!employee) {
-//       return res.status(404).json({
-//         success: false,
-//         message: "Employee not found",
-//       });
-//     }
-
-//     // Check if the requested file exists
-//     if (!employee[fileType]) {
-//       return res.status(404).json({
-//         success: false,
-//         message: `${fileType} not found for this employee`,
-//       });
-//     }
-//     // // Set appropriate headers for file download
-//     // res.set({
-//     //   "Content-Type": employee[fileType].contentType,
-//     //   "Content-Disposition": `inline; filename="${employee[fileType].filename}"`,
-//     //   "Content-Length": employee[fileType].size,
-//     // });
-//     console.log(employee[fileType]);
-//     // Send the file data as response
-//     res.send(employee[fileType].data);
-//   } catch (error) {
-//     console.error(`Error fetching ${req.params.fileType} for employee:`, error);
-//     res.status(500).json({
-//       success: false,
-//       message: "Failed to fetch file",
-//       error: error.message,
-//     });
-//   }
-// };
 export const updateEmployee = async (req, res) => {
-  console.log(req.body);
-  console.log(req.files);
-  const { employeeId } = req.params;
-  console.log(employeeId);
-  return;
-  
   try {
     let employeeData = { ...req.body };
+    const { employeeId } = req.params;
 
     // Remove fields that shouldn't be updated
     delete employeeData._id;
     delete employeeData.createdAt;
     delete employeeData.updatedAt;
 
-    // Process uploaded files (from upload.any())
-    const fileData = {};
+    // Only process and update file fields if they are sent
+    const updatedFileFields = {};
+
     if (req.files && typeof req.files === "object") {
       for (const [fieldname, fileArray] of Object.entries(req.files)) {
         const file = fileArray[0]; // Only take the first file per field
         if (file && file.buffer) {
-          fileData[fieldname] = {
+          updatedFileFields[fieldname] = {
             data: file.buffer,
             contentType: file.mimetype,
             filename: file.originalname,
             size: file.size,
           };
-          console.log(`✅ Processed file for field: ${fieldname}`);
+          console.log(`✅ Updated file for field: ${fieldname}`);
         } else {
           console.warn(`⚠️ Skipping ${fieldname}, no valid buffer`);
         }
@@ -281,10 +217,8 @@ export const updateEmployee = async (req, res) => {
       console.log("No files found in request");
     }
 
-    // Attach file data to employeeData
-    for (const field in fileData) {
-      employeeData[field] = fileData[field];
-    }
+    // Merge file updates into employeeData
+    Object.assign(employeeData, updatedFileFields);
 
     const updatedEmployee = await EmployeeModel.findByIdAndUpdate(
       employeeId,
@@ -309,11 +243,11 @@ export const updateEmployee = async (req, res) => {
         role: updatedEmployee.role,
         department: updatedEmployee.department,
         status: updatedEmployee.status,
-        updatedFiles: Object.keys(fileData).map((key) => ({
+        updatedFiles: Object.keys(updatedFileFields).map((key) => ({
           fieldname: key,
-          filename: fileData[key].filename,
-          contentType: fileData[key].contentType,
-          size: fileData[key].size,
+          filename: updatedFileFields[key].filename,
+          contentType: updatedFileFields[key].contentType,
+          size: updatedFileFields[key].size,
         })),
       },
     });

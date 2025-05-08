@@ -1,163 +1,15 @@
-import { useState, useEffect } from "react";
-import { X, Save, CheckCircle } from "lucide-react";
-import axios from "axios";
+// components/EditEmployeeModal.jsx
 
-export default function EditEmployee({ employeeId, onClose }) {
-  const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phoneNumber: "",
-    whatsappNumber: "",
-    linkedinUrl: "",
-    currentAddress: "",
-    permanentAddress: "",
-    photo: null,
-    collegeName: "",
-    role: "",
-    department: "",
-    joiningDate: "",
-    internshipDuration: "",
-    status: "Active",
-    tenthMarksheet: null,
-    twelfthMarksheet: null,
-    bachelorsCertificate: null,
-    pgCertificate: null,
-    aadharCard: null,
-    panCard: null,
-    policeClearance: null,
-    resume: null,
-    offerLetter: null,
-    isWhatsAppSameAsPhone: false,
-  });
+import { X, CheckCircle, Save } from "lucide-react";
+import React from "react";
 
-  // Simulate fetching employee data
-  useEffect(() => {
-    setLoading(true);
-    const fetchData = async () => {
-      // Simulate API call delay
-      const response = await axios.get(
-        `http://localhost:8080/employees/getEmployee/${employeeId}`
-      );
-      console.log("Data from backend is--->", response.data);
-      setFormData(response.data.data);
-      setLoading(false);
-    };
-
-    fetchData();
-  }, [employeeId]);
-
-  const handleChange = (e) => {
-    const { name, value, type, checked, files } = e.target;
-
-    setFormData((prev) => {
-      if (type === "file") {
-        return {
-          ...prev,
-          [name]: files[0] || null,
-        };
-      }
-
-      if (type === "checkbox") {
-        if (name === "isWhatsAppSameAsPhone") {
-          return {
-            ...prev,
-            [name]: checked,
-            whatsappNumber: checked ? prev.phoneNumber : prev.whatsappNumber,
-          };
-        } else {
-          return {
-            ...prev,
-            [name]: checked,
-          };
-        }
-      }
-
-      if (name === "phoneNumber") {
-        return {
-          ...prev,
-          [name]: value,
-          whatsappNumber: prev.isWhatsAppSameAsPhone
-            ? value
-            : prev.whatsappNumber,
-        };
-      }
-
-      // ✅ Allow whatsappNumber to be updated if it's being edited directly
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSaving(true);
-    console.log("Saving employee data:", formData);
-    return;
-    try {
-      const response = await axios.put(
-        `http://localhost:8080/employees/updateEmployee/${employeeId}`,
-        formData // Missing data parameter for what needs to be updated
-      );
-
-      onClose();
-    } catch (error) {
-      console.error("Error saving employee data:", error);
-      setSaving(false);
-    }
-  };
-
-  // Helper function to create file input fields
-  const FileInput = ({ id, name, label }) => (
-    <div>
-      <label htmlFor={id} className="block text-sm font-medium text-gray-700">
-        {label}
-      </label>
-      <input
-        type="file"
-        id={id}
-        name={name}
-        onChange={handleChange}
-        className="mt-1 block w-full text-sm text-gray-500
-          file:mr-4 file:py-2 file:px-4
-          file:rounded-md file:border-0
-          file:text-sm file:font-medium
-          file:bg-indigo-50 file:text-indigo-700
-          hover:file:bg-indigo-100"
-      />
-      {formData[name] && (
-        <div className="mt-1 flex items-center text-sm text-green-600">
-          <CheckCircle size={16} className="mr-1" />
-          File selected
-        </div>
-      )}
-    </div>
-  );
-
-  if (loading) {
-    return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div className="bg-white rounded-lg p-6 w-full max-w-4xl shadow-lg">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold">Edit Employee</h2>
-            <button
-              onClick={onClose}
-              className="p-1 rounded-full hover:bg-gray-200"
-            >
-              <X size={20} />
-            </button>
-          </div>
-          <div className="py-8 flex justify-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  console.log("Formadata is", formData);
+const EditEmployeeModal = ({
+  formData,
+  handleChange,
+  handleSubmit,
+  onClose,
+  saving,
+}) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto">
       <div className="bg-white rounded-lg p-6 w-full max-w-4xl shadow-lg my-8">
@@ -310,14 +162,6 @@ export default function EditEmployee({ employeeId, onClose }) {
                   file:bg-indigo-50 file:text-indigo-700
                   hover:file:bg-indigo-100"
               />
-              {formData.photo && (
-                <div>
-                  <div className="mt-1 flex items-center text-sm text-green-600">
-                    <CheckCircle size={16} className="mr-1" />
-                    Photo selected
-                  </div>
-                </div>
-              )}
             </div>
 
             <div className="md:col-span-2">
@@ -381,10 +225,10 @@ export default function EditEmployee({ employeeId, onClose }) {
 
             <div>
               <label
-                htmlFor="status"
+                htmlFor="department"
                 className="block text-sm font-medium text-gray-700"
               >
-                Status
+                Department
               </label>
               <select
                 id="role"
@@ -475,8 +319,8 @@ export default function EditEmployee({ employeeId, onClose }) {
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               >
                 <option value="Active">Active</option>
-                <option value="Inactive">Completed</option>
-                <option value="On Leave">Resigned</option>
+                <option value="Completed">Completed</option>
+                <option value="Resigned">Resigned</option>
                 <option value="Terminated">Terminated</option>
               </select>
             </div>
@@ -488,40 +332,200 @@ export default function EditEmployee({ employeeId, onClose }) {
               </h3>
               <div className="border-b border-gray-200 mb-4"></div>
             </div>
+            <div className="space-y-4">
+              <div className="text-lg font-medium mb-2">
+                Educational Documents
+              </div>
 
-            <FileInput
-              id="tenthMarksheet"
-              name="tenthMarksheet"
-              label="10th Marksheet"
-            />
-            <FileInput
-              id="twelfthMarksheet"
-              name="twelfthMarksheet"
-              label="12th Marksheet"
-            />
-            <FileInput
-              id="bachelorsCertificate"
-              name="bachelorsCertificate"
-              label="Bachelor's Certificate"
-            />
-            <FileInput
-              id="pgCertificate"
-              name="pgCertificate"
-              label="PG Certificate"
-            />
-            <FileInput id="aadharCard" name="aadharCard" label="Aadhar Card" />
-            <FileInput id="panCard" name="panCard" label="PAN Card" />
-            <FileInput
-              id="policeClearance"
-              name="policeClearance"
-              label="Police Clearance"
-            />
-            <FileInput id="resume" name="resume" label="Resume" />
-            <FileInput
-              id="offerLetter"
-              name="offerLetter"
-              label="Offer Letter"
-            />
+              <div>
+                <label
+                  htmlFor="tenthMarksheet"
+                  className="block font-medium mb-1"
+                >
+                  10th Marksheet
+                </label>
+
+                <input
+                  type="file"
+                  id="tenthMarksheet"
+                  name="tenthMarksheet"
+                  onChange={handleChange}
+                  className="mt-1 block w-full text-sm text-gray-500
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-md file:border-0
+                  file:text-sm file:font-medium
+                  file:bg-indigo-50 file:text-indigo-700
+                  hover:file:bg-indigo-100"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="twelfthMarksheet"
+                  className="block font-medium mb-1"
+                >
+                  12th Marksheet
+                </label>
+                <input
+                  type="file"
+                  id="twelfthMarksheet"
+                  name="twelfthMarksheet"
+                  onChange={handleChange}
+                  className="mt-1 block w-full text-sm text-gray-500
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-md file:border-0
+                  file:text-sm file:font-medium
+                  file:bg-indigo-50 file:text-indigo-700
+                  hover:file:bg-indigo-100"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="bachelorsCertificate"
+                  className="block font-medium mb-1"
+                >
+                  Bachelor's Certificate
+                </label>
+                <input
+                  type="file"
+                  id="bachelorsCertificate"
+                  name="bachelorsCertificate"
+                  onChange={handleChange}
+                  className="mt-1 block w-full text-sm text-gray-500
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-md file:border-0
+                  file:text-sm file:font-medium
+                  file:bg-indigo-50 file:text-indigo-700
+                  hover:file:bg-indigo-100"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="pgCertificate"
+                  className="block font-medium mb-1"
+                >
+                  PG Certificate
+                </label>
+
+                <input
+                  type="file"
+                  id="pgCertificate"
+                  name="pgCertificate"
+                  onChange={handleChange}
+                  className="mt-1 block w-full text-sm text-gray-500
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-md file:border-0
+                  file:text-sm file:font-medium
+                  file:bg-indigo-50 file:text-indigo-700
+                  hover:file:bg-indigo-100"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-4 mt-6">
+              <div className="text-lg font-medium mb-2">Identity Documents</div>
+
+              <div>
+                <label htmlFor="aadharCard" className="block font-medium mb-1">
+                  Aadhar Card
+                </label>
+                <input
+                  type="file"
+                  id="aadharCard"
+                  name="aadharCard"
+                  onChange={handleChange}
+                  className="mt-1 block w-full text-sm text-gray-500
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-md file:border-0
+                  file:text-sm file:font-medium
+                  file:bg-indigo-50 file:text-indigo-700
+                  hover:file:bg-indigo-100"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="panCard" className="block font-medium mb-1">
+                  PAN Card
+                </label>
+                <input
+                  type="file"
+                  id="panCard"
+                  name="panCard"
+                  onChange={handleChange}
+                  className="mt-1 block w-full text-sm text-gray-500
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-md file:border-0
+                  file:text-sm file:font-medium
+                  file:bg-indigo-50 file:text-indigo-700
+                  hover:file:bg-indigo-100"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="policeClearance"
+                  className="block font-medium mb-1"
+                >
+                  Police Clearance
+                </label>
+                <input
+                  type="file"
+                  id="policeClearance"
+                  name="policeClearance"
+                  onChange={handleChange}
+                  className="mt-1 block w-full text-sm text-gray-500
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-md file:border-0
+                  file:text-sm file:font-medium
+                  file:bg-indigo-50 file:text-indigo-700
+                  hover:file:bg-indigo-100"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-4 mt-6">
+              <div className="text-lg font-medium mb-2">
+                Professional Documents
+              </div>
+
+              <div>
+                <label htmlFor="resume" className="block font-medium mb-1">
+                  Resume
+                </label>
+                <input
+                  type="file"
+                  id="resume"
+                  name="resume"
+                  onChange={handleChange}
+                  className="mt-1 block w-full text-sm text-gray-500
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-md file:border-0
+                  file:text-sm file:font-medium
+                  file:bg-indigo-50 file:text-indigo-700
+                  hover:file:bg-indigo-100"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="offerLetter" className="block font-medium mb-1">
+                  Offer Letter
+                </label>
+                <input
+                  type="file"
+                  id="offerLetter"
+                  name="offerLetter"
+                  onChange={handleChange}
+                  className="mt-1 block w-full text-sm text-gray-500
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-md file:border-0
+                  file:text-sm file:font-medium
+                  file:bg-indigo-50 file:text-indigo-700
+                  hover:file:bg-indigo-100"
+                />
+              </div>
+            </div>
           </div>
 
           <div className="mt-8 flex justify-end">
@@ -529,14 +533,14 @@ export default function EditEmployee({ employeeId, onClose }) {
               <button
                 type="button"
                 onClick={onClose}
-                className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={saving}
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
               >
                 {saving ? (
                   <>
@@ -556,4 +560,6 @@ export default function EditEmployee({ employeeId, onClose }) {
       </div>
     </div>
   );
-}
+};
+
+export default EditEmployeeModal;
