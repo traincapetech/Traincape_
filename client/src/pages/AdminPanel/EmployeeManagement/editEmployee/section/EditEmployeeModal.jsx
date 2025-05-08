@@ -1,6 +1,6 @@
 // components/EditEmployeeModal.jsx
 
-import { X, CheckCircle, Save } from "lucide-react";
+import { X, Save } from "lucide-react";
 import React from "react";
 
 const EditEmployeeModal = ({
