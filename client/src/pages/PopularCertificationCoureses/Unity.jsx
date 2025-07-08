@@ -12,32 +12,32 @@ const Unity = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const navigate = useNavigate();
+
   const unitycourses = [
     {
       image: Card1,
       description: "Unity Certified User – Artist Courseware",
       price: "₹4800",
-      url: "/IBMcourses",
+      url: "/UnityCourse/ArtistCourseware",
     },
     {
       image: Card2,
       description: "Unity Certified User – Programmer Courseware",
       price: "₹4800",
-      url: "/IBMcourses",
+      url: "/UnityCourse/UnityProgrammer",
     },
     {
       image: Card3,
-      description:
-        "Unity Certified User – VR Developer Courseware",
+      description: "Unity Certified User – VR Developer Courseware",
       price: "₹4800",
-      url: "/IBMcourses",
+      url: "/UnityCourse/DeveloperCourseware",
     },
-    
   ];
 
-  const navigate=useNavigate()
   return (
     <>
+      {/* Banner Section */}
       <div
         className="bg-gray-100 w-full relative contrast-75 h-[65vh] content-center text-justify"
         style={{
@@ -47,36 +47,37 @@ const Unity = () => {
         }}
       >
         <div className="flex flex-col lg:flex-row items-center justify-between p-5">
-          <div className="lg:w-2/3 w-full ">
-            <h1 className="text-2xl  md:text-3xl lg:text-4xl font-bold font-serif ">
+          <div className="lg:w-2/3 w-full">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold font-serif">
               UNITY
             </h1>
             <h5 className="text-sm md:text-lg lg:text-base xl:text-xl mt-4">
               The Unity Certified User (UCU) certification is an entry-level
-              credential that allow individuals to get started in interactive
+              credential that allows individuals to get started in interactive
               content creation for industries such as gaming, entertainment,
               automotive, AEC, and XR.
               <br /> <br />
-              Unity Certified User certification helps employers and
-              institutions verify a candidate’s knowledge and skills using Unity
-              technology to succeed in these industries. Whether it’s a desire
-              to create games and apps or build new worlds in AR/VR, Unity
-              Certified User certification is the place to start.
+              Unity Certified User certification helps employers and institutions
+              verify a candidate's knowledge and skills using Unity technology to
+              succeed in these industries. Whether it's a desire to create games
+              and apps or build new worlds in AR/VR, Unity Certified User
+              certification is the place to start.
             </h5>
           </div>
-          <div className="hidden lg:block xl:block  mt-5 p-5">
+          <div className="hidden lg:block xl:block mt-5 p-5">
             <img
               className="w-[28rem] h-64 transition-transform duration-300 ease-in-out hover:scale-110"
               src={banner2}
-              alt="IBM Banner"
+              alt="Unity Banner"
             />
           </div>
         </div>
-      </div>   <div className="flex items-center w-full py-4 px-6 bg-white rounded shadow-md border border-gray-200">
+      </div>
+
+      {/* Breadcrumb Navigation */}
+      <div className="flex items-center w-full py-4 px-6 bg-white rounded shadow-md border border-gray-200">
         <button
-          onClick={() => {
-            navigate("/");
-          }}
+          onClick={() => navigate("/")}
           className="text-gray-600 font-bold py-2 px-4 rounded"
         >
           <span className="hover:text-gray-800">Home</span>
@@ -84,9 +85,7 @@ const Unity = () => {
         <div className="flex items-center text-gray-500 font-bold">
           <span>{" > "}</span>
           <button
-            onClick={() => {
-              navigate("/Courses-details");
-            }}
+            onClick={() => navigate("/Courses-details")}
             className="text-gray-600 font-bold py-2 px-4 rounded"
           >
             <span className="hover:text-gray-800">Course Details</span>
@@ -95,6 +94,8 @@ const Unity = () => {
           <span className="ml-4">Unity</span>
         </div>
       </div>
+
+      {/* Courses Grid */}
       <div className="bg-teal-50 py-10 px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center mx-auto">
           {unitycourses.map((course, index) => (

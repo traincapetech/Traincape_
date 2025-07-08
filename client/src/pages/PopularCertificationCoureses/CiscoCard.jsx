@@ -16,15 +16,14 @@ const CiscoCard = () => {
       image: Card1,
       description: "Cisco Certified Support Technician – Networking LearnKey",
       price: "₹1149",
-      url: "/IBMcourses",
+      url: "/CCSTNetworkingDetail",
     },
     {
       image: Card2,
       description: "Cisco Certified Support Technician – Cybersecurity LearnKey",
       price: "₹1149",
-      url: "/IBMcourses",
+      url: "/CCSTCybersecurityDetail",
     },
-  
   ];
 
   const navigate = useNavigate();
@@ -47,7 +46,7 @@ const CiscoCard = () => {
               This program includes two certification exams designed to validate
               work-ready skills and knowledge to help learners find a job in the
               field of networking and cybersecurity. Earning a Cisco Certified
-              Support Technician certification showcases the learner’s skillset
+              Support Technician certification showcases the learner's skillset
               to employers, telling them they are ready to roll up their sleeves
               on day one.
               <br /> <br />

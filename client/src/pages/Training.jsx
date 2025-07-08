@@ -99,30 +99,23 @@ const Training = () => {
           ></iframe>
         </div>
       </div>
-      <div className="flex items-center w-full py-4 px-6 bg-white rounded shadow-md border border-gray-200">
-        <button
-          onClick={() => {
-            navigate("/");
-          }}
-          className="text-gray-600 font-bold py-2 px-4 rounded"
-        >
-          <span className="hover:text-gray-800">Home</span>
-        </button>
-        <div className="flex items-center text-gray-500 font-bold">
-          <span>{" > "}</span>
-          <span className="ml-4">Training</span>
-        </div>
-      </div>
-      <div className="bg-teal-50 py-10 px-6">
-        <h4 className="text-blue-600 text-center text-lg">Choose Now</h4>
-        <h1 className="text-2xl font-bold text-center mb-8">
-          Our Popular Courses
+
+
+      <div className="bg-black py-10 px-6">
+
+        <h1 className="text-blue-600 text-center text-3xl font-semibold mb-4">
+          Choose Now
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center mx-auto ">
+<h2 className="text-white text-4xl font-extrabold text-center mb-8">
+
+          Our Popular Courses
+        </h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center mx-auto bg-gradient-to-r from-red-700 via-slate-700 to-gray-700 py-12 px-6 rounded-xl shadow-lg">
           {courseData.map((course, index) => (
             <CourseCard
               key={index}
-              image={course.image}
+              image={course.image} 
               price={course.price}
               title={course.title}
               description={course.description}

@@ -88,7 +88,7 @@ const PMIProjectManagement = () => {
       </div>
 
       {/* Fixed Pricing Section */}
-      <div className="fixed bottom-0 left-0 right-0 md:bottom-10 md:left-auto md:right-10 lg:right-[1rem] lg:top-[25rem] xl:right-[10rem] xl:top-[25rem] max-w-full md:max-w-xs bg-white p-6 shadow-xl rounded-xl border border-gray-100 z-40 backdrop-blur-sm bg-white/95">
+      <div className="fixed bottom-0 left-0 right-0 md:bottom-10 md:left-auto md:right-10 lg:right-[1rem] lg:top-[25rem] xl:right-[15rem] xl:top-[30rem] max-w-full md:max-w-xs bg-white p-6 shadow-xl rounded-xl border border-gray-100 z-40 backdrop-blur-sm bg-white/95">
         <h2 className="text-lg font-bold text-gray-800 border-b pb-2 mb-3">
           PMI Project Management Professional (PMP)
         </h2>

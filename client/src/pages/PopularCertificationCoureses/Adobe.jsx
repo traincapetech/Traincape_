@@ -10,6 +10,14 @@ import Card6 from "../../assets/adobe6.webp";
 import AdobeCourses from "../../components/AdobeCourses";
 import { useNavigate } from "react-router-dom";
 
+// ✅ Import Adobe Course Pages
+import AdobePhotoshop from "./AdobeCourses/AdobePhotoshop";
+import AdobeInDesign from "./AdobeCourses/AdobeInDesign";
+import AdobeIllustrator from "./AdobeCourses/AdobeIllustrator";
+import AdobePremierePro from "./AdobeCourses/AdobePremierePro";
+import AdobeAnimate from "./AdobeCourses/AdobeAnimate";
+import AdobeAfterEffects from "./AdobeCourses/AdobeAfterEffects";
+
 const Adobe = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -20,41 +28,42 @@ const Adobe = () => {
       image: Card1,
       description: "Adobe Certified Professional – Photoshop Certification",
       price: "₹1149",
-      url: "/AdobeCourses",
+      url: "/AdobeCourses/AdobePhotoshop",
     },
     {
       image: Card2,
       description: "Adobe Certified Professional – InDesign Certification",
       price: "₹1149",
-      url: "/AdobeCourses",
+      url: "/AdobeCourses/AdobeInDesign",
     },
     {
       image: Card3,
       description: "Adobe Certified Professional – Illustrator Certification",
       price: "₹1149",
-      url: "/AdobeCourses",
+      url: "/AdobeCourses/AdobeIllustrator",
     },
     {
       image: Card4,
       description: "Adobe Certified Professional – Premiere Pro Certification",
       price: "₹1149",
-      url: "/AdobeCourses",
+      url: "/AdobeCourses/AdobePremierePro",
     },
     {
       image: Card5,
       description: "Adobe Certified Professional – Animate Certification",
       price: "₹1149",
-      url: "/AdobeCourses",
+      url: "/AdobeCourses/AdobeAnimate",
     },
     {
       image: Card6,
       description: "Adobe Certified Professional – After Effects Certification",
       price: "₹1149",
-      url: "/AdobeCourses",
+      url: "/AdobeCourses/AdobeAfterEffects",
     },
   ];
 
-  const navigate=useNavigate()
+  const navigate = useNavigate();
+
   return (
     <>
       <div
@@ -66,32 +75,34 @@ const Adobe = () => {
         }}
       >
         <div className="flex flex-col lg:flex-row items-center justify-between p-5">
-          <div className="lg:w-2/3 w-full ">
-            <h1 className="text-2xl  md:text-3xl lg:text-4xl font-bold font-serif ">
+          <div className="lg:w-2/3 w-full">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold font-serif">
               Adobe Certified Professional (ACP)
             </h1>
             <h5 className="text-sm md:text-lg lg:text-base xl:text-xl mt-4">
-              Adobe Certified Professional is the industry-recognized
-              certification that demonstrates mastery of Adobe Creative Cloud
-              software and must-have knowledge for digital media careers. Each
-              exam is integrated with an Adobe application and designed by
-              experts, allowing for an authentic assessment of job-ready skills.
+              Adobe Certified Professional is the industry-recognized certification that
+              demonstrates mastery of Adobe Creative Cloud software and must-have
+              knowledge for digital media careers. Each exam is integrated with an Adobe
+              application and designed by experts, allowing for an authentic assessment
+              of job-ready skills.
               <br /> <br />
-              Traincape provides a full pathway solution that students can use
-              to prepare for the Adobe Certified Professional certification.
-              From tailored learning materials and practice tests to Adobe
-              endorsed certification exams, Traincape provides assistance every step of the way.
+              Traincape provides a full pathway solution that students can use to prepare
+              for the Adobe Certified Professional certification. From tailored learning
+              materials and practice tests to Adobe endorsed certification exams,
+              Traincape provides assistance every step of the way.
             </h5>
           </div>
-          <div className="hidden lg:block xl:block  mt-5 p-5">
+          <div className="hidden lg:block xl:block mt-5 p-5">
             <img
               className="w-[28rem] h-64 transition-transform duration-300 ease-in-out hover:scale-110"
               src={banner2}
-              alt="IBM Banner"
+              alt="Adobe Banner"
             />
           </div>
         </div>
-      </div>     <div className="flex items-center w-full py-4 px-6 bg-white rounded shadow-md border border-gray-200">
+      </div>
+
+      <div className="flex items-center w-full py-4 px-6 bg-white rounded shadow-md border border-gray-200">
         <button
           onClick={() => {
             navigate("/");
@@ -114,6 +125,7 @@ const Adobe = () => {
           <span className="ml-4">Adobe</span>
         </div>
       </div>
+
       <div className="bg-teal-50 py-10 px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center mx-auto">
           {adobecourses.map((course, index) => (

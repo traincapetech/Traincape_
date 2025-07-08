@@ -127,7 +127,7 @@
 //           <div className={blog.blogpost}>
 //             {/* <img src="blog-image.jpg" alt="Blog Post" /> */}
 //             <h2> Forefront AI </h2>
-//             <p>Website hacking course in HINDI </p>
+//             <p>hacking course in HINDI </p>
 //             <Link
 //               className={blog.links}
 //               to="https://mega.nz/file/kqxkQKxB#7TjCd2-_YwZZjBx6Hm15VT_E99tF-8-LbWc_kpiOS2I"
@@ -322,7 +322,7 @@ const Blogs = () => {
     },
     {
       name: "WORDPRESS 2023",
-      description: "THE COMPLETE WORDPRESS WEBSITE COURSE",
+      description: "THE COMPLETE WORDPRESS COURSE",
       link: "https://drive.google.com/drive/folders/1tnOqp3maCiEHUV8QrxKj-rzev2cD2993",
     },
     {

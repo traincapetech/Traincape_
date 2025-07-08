@@ -2,11 +2,16 @@ import { UserModel } from "../../../model/user.model.js";
 import Stripe from "stripe";
 
 const stripe = new Stripe(
-"",
+  process.env.STRIPE_SK,
   {
     apiVersion: "2023-10-16",
   }
 );
+
+// Get the frontend URL with better fallback handling
+const FRONTEND_URL = process.env.FRONTEND_URL || "https://traincapetech.in";
+
+console.log("Using FRONTEND_URL for payment redirects:", FRONTEND_URL);
 
 // Create payment session
 const StripePayment = async (req, res) => {

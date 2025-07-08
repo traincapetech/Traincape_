@@ -23,10 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json*
 
-server\utils\ishaan-service-account.json
-
-
 .vercel
-
 .env
-

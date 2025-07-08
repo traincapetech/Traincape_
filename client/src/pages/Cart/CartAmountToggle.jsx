@@ -31,4 +31,4 @@ const CartAmountToggle = ({ quantity, setDecrease, setIncrease }) => {
   );
 };
 
-export default CartAmountToggle;
+export default CartAmountToggle; 

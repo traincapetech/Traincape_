@@ -4,6 +4,17 @@ import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import ForgotPassword from "../pages/ForgotPassword";
 import NotFound from "../pages/NotFound";
 import Gallery from "../pages/Gallery";
+import CertificateLookup from "../pages/CertificateLookup";
+import AdobePhotoshop from "../pages/PopularCertificationCoureses/AdobeCourses/AdobePhotoshop";
+import AdobeInDesign from "../pages/PopularCertificationCoureses/AdobeCourses/AdobeInDesign";
+import AdobeIllustrator from "../pages/PopularCertificationCoureses/AdobeCourses/AdobeIllustrator";
+import AdobePremierePro from "../pages/PopularCertificationCoureses/AdobeCourses/AdobePremierePro";
+import AdobeAnimate from "../pages/PopularCertificationCoureses/AdobeCourses/AdobeAnimate";
+import AdobeAfterEffects from "../pages/PopularCertificationCoureses/AdobeCourses/AdobeAfterEffects";
+import ArtistCourseware from "../pages/UnityCourse/Artist Courseware";
+import DeveloperCourseware from "../pages/UnityCourse/Developer Courseware";
+import UnityProgrammer from "../pages/UnityCourse/UnityProgrammer";
+
 // Loading component
 const LoadingComponent = () => (
   <div style={{ 
@@ -20,8 +31,9 @@ const LoadingComponent = () => (
 
 // Lazy load high-level pages for better performance
 const Home = lazy(() => import("../pages/Home"));
+// const UserPage = lazy(() => import("../pages/userPage/UserPage"));
 const Login = lazy(() => import("../pages/Login"));
-const AboutUS = lazy(() => import("../pages/AboutUs/AboutUS"));
+const AboutUS = lazy(() => import("../pages/AboutUS"));
 const ContactUs = lazy(() => import("../pages/ContactUs"));
 const Signup = lazy(() => import("../pages/Signup"));
 const FAQ = lazy(() => import("../pages/FAQ"));
@@ -56,8 +68,7 @@ const AwsCertifiedSysops = lazy(() => import("../pages/AWS/AwsCertifiedSysops"))
 const AwsCertifiedSecurity = lazy(() => import("../pages/AWS/AwsCertifiedSecurity"));
 
 // Admin imports
-const AdminPanel = lazy(() => import("../pages/AdminPanel/AdminPanel"));
-const EmployeeInfoPage = lazy(() => import("../pages/AdminPanel/EmployeeManagement/UserPage/UserPage"));
+const AdminPanel = lazy(() => import("../pages/AdminPanel"));
 const VerifyCertificate = lazy(() => import("../pages/Test/VerifyCertificate"));
 const CertificateTemplate = lazy(() => import("../pages/Test/CertificateTemplate"));
 
@@ -234,6 +245,9 @@ const Autodesk3dsMax = lazy(() => import("../pages/AutodeskCourse/Autodesk3dsMax
 const AutodeskFusion360 = lazy(() => import("../pages/AutodeskCourse/AutodeskFusion360"));
 const AutodeskMaya = lazy(() => import("../pages/AutodeskCourse/AutodeskMaya"));
 
+const CCSTNetworkingDetail = lazy(() => import("../pages/PopularCertificationCoureses/CCSTNetworkingDetail"));
+const CCSTCybersecurityDetail = lazy(() => import("../pages/PopularCertificationCoureses/CCSTCybersecurityDetail"));
+
 const AllRoute = () => {
   const token = localStorage.getItem("token");
   const location = useLocation();
@@ -257,6 +271,8 @@ const AllRoute = () => {
       <Route path="/frequently-asked-questions" element={<FAQ />} />
       <Route path="/our-services" element={<Services />} />
       <Route path="/Terms-and-Conditions" element={<TermsAndCondition />} />
+   <Route path="/CertificateLookup" element={<CertificateLookup />} />
+
 
         <Route 
           path="/Courses-details" 
@@ -380,6 +396,8 @@ const AllRoute = () => {
         <Route path="/CCIEdatacenter" element={<CCIEdatacenter />} />
         <Route path="/CCIEserviceprovider" element={<CCIEserviceprovider />} />
         <Route path="/CCIEcollab" element={<CCIEcollab />} />
+        <Route path="/CCSTNetworkingDetail" element={<CCSTNetworkingDetail />} />
+        <Route path="/CCSTCybersecurityDetail" element={<CCSTCybersecurityDetail />} />
         
         {/* IBM Subcourse Routes */}
         <Route path="/IBMAgileMethodologies" element={<IBMAgileMethodologies />} />
@@ -412,7 +430,6 @@ const AllRoute = () => {
         
         {/* Admin Panel */}
         <Route path="/admin-panel" element={token ? <AdminPanel /> : <Navigate to="/login" state={{ from: "/admin-panel" }} replace />} />
-        <Route path="/admin-panel/:employeeId" element={token ? <EmployeeInfoPage /> : <Navigate to="/login" state={{ from: "/admin-panel" }} replace />} />
         <Route path="/verify-certificate" element={<VerifyCertificate />} />
       <Route path="/cer" element={<CertificateTemplate />} />
 
@@ -486,6 +503,19 @@ const AllRoute = () => {
       <Route path="/AutodeskCourse/Autodesk3dsMax" element={<Suspense fallback={<LoadingComponent />}><Autodesk3dsMax /></Suspense>} />
       <Route path="/AutodeskCourse/AutodeskFusion360" element={<Suspense fallback={<LoadingComponent />}><AutodeskFusion360 /></Suspense>} />
       <Route path="/AutodeskCourse/AutodeskMaya" element={<Suspense fallback={<LoadingComponent />}><AutodeskMaya /></Suspense>} />
+
+      {/* Adobe Courses */}
+      <Route path="/AdobeCourses/AdobePhotoshop" element={<AdobePhotoshop />} />
+      <Route path="/AdobeCourses/AdobeInDesign" element={<AdobeInDesign />} />
+      <Route path="/AdobeCourses/AdobeIllustrator" element={<AdobeIllustrator />} />
+      <Route path="/AdobeCourses/AdobePremierePro" element={<AdobePremierePro />} />
+      <Route path="/AdobeCourses/AdobeAnimate" element={<AdobeAnimate />} />
+      <Route path="/AdobeCourses/AdobeAfterEffects" element={<AdobeAfterEffects />} />
+
+      {/* Unity Courses */}
+      <Route path="/UnityCourse/ArtistCourseware" element={<ArtistCourseware />} />
+      <Route path="/UnityCourse/DeveloperCourseware" element={<DeveloperCourseware />} />
+      <Route path="/UnityCourse/UnityProgrammer" element={<UnityProgrammer />} />
     </Routes>
     </Suspense>
   );
