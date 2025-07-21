@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 // Import the images used in servicesData
 import cloud from "../assets/Cloud-services.svg";
 import UI from "../assets/UI-development.svg";
@@ -71,12 +72,23 @@ const getBannerForService = (title) => {
       return cloudBanner;
   }
 };
+=======
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
 
 const ServiceDetail = () => {
   const location = useLocation();
   const navigate = useNavigate();
+<<<<<<< HEAD
   // Use the passed service or the first from servicesData
   const service = location.state?.service || servicesData[0];
+=======
+  const { service } = location.state; // Access the passed service data
+
+  // Function to handle navigation to the Contact Us page
+  const handleGetStartedClick = () => {
+    navigate("/contact-us");
+  };
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
 
   // Always call useEffect first
   useEffect(() => {
@@ -155,8 +167,13 @@ const ServiceDetail = () => {
           <p className="mt-4 md:text-lg text-base text-gray-700 leading-relaxed">
             We offer innovative solutions that cater to your specific business
             needs. Our team of experts is dedicated to providing tailored
+<<<<<<< HEAD
             services that ensure your success. Whether you're looking to
             optimize your business processes or expand your capabilities, we're
+=======
+            services that ensure your success. Whether you’re looking to
+            optimize your business processes or expand your capabilities, we’re
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
             here to help you achieve your goals.
           </p>
         </div>

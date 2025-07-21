@@ -5,6 +5,7 @@ dotenv.config();
 
 const connectDB = async () => {
   try {
+<<<<<<< HEAD
     // Use MongoDBURI environment variable, or fall back to MONGO_URI
     const uri = process.env.MongoDBURI || process.env.MONGO_URI;
     if (!uri) {
@@ -12,6 +13,9 @@ const connectDB = async () => {
     }
     
     const conn = await mongoose.connect(uri, {
+=======
+    const conn = await mongoose.connect(process.env.MONGO_URI, {
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

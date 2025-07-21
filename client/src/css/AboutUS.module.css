@@ -36,8 +36,12 @@ section {
 }
 
 .sectionTitle h2 {
+<<<<<<< HEAD
   font-family: 'Lora', serif;
   font-size: 2rem;
+=======
+  font-size: 1.8rem;
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
   color: var(--primary-color);
   margin-bottom: 10px;
   font-weight: 700;
@@ -62,6 +66,7 @@ section {
 }
 
 .sectionSubtitle {
+<<<<<<< HEAD
   font-family: 'Open Sans', sans-serif;
   font-size: 1.1rem;
   color: var(--text-light);
@@ -77,6 +82,31 @@ section {
   width: 200px;
   height: 200px;
   border-radius: 50%;
+=======
+  font-size: 1rem;
+  color: var(--text-light);
+  max-width: 700px;
+  margin: 15px auto 0;
+  line-height: 1.6;
+}
+
+/* Hero Section */
+.heroSection {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+
+.heroOverlay {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.bannerimg {
+  width: 100%;
+  height: 100%;
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
   object-fit: cover;
   border: 4px solid var(--primary-color);
   box-shadow: var(--box-shadow);
@@ -87,6 +117,7 @@ section {
   cursor: pointer;
 }
 
+<<<<<<< HEAD
 .founderImage:hover {
   transform: scale(1.05);
   box-shadow: 0 8px 20px rgba(21, 43, 84, 0.6);
@@ -112,6 +143,34 @@ section {
 
 .founderName:hover {
   color: var(--accent-color);
+=======
+.heroContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: var(--white);
+  width: 90%;
+  max-width: 800px;
+  z-index: 2;
+  padding: 0 15px;
+}
+
+.heroContent h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.heroContent p {
+  font-size: 1rem;
+  line-height: 1.6;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  max-width: 700px;
+  margin: 0 auto;
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
 }
 
 .founderTitle {
@@ -332,7 +391,10 @@ p:hover {
   color: var(--text-dark);
   line-height: 1.6;
   flex-grow: 1;
+<<<<<<< HEAD
   font-family: 'Roboto', sans-serif;
+=======
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
 }
 
 /* Services Section */
@@ -884,5 +946,9 @@ p:hover {
   .whyChooseItem h3 {
     font-size: 1.4rem;
   }
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa

@@ -73,11 +73,16 @@ const ReviewPage = () => {
   }, [currentPage, fetchReviews]);
 
   return (
+<<<<<<< HEAD
     <div className="bg-gray-900 min-h-screen mx-auto lg:px-16 px-2 py-8 text-white">
+=======
+    <div className="mx-auto lg:px-16 px-2 py-8">
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
       {loading ? (
         <Loading type="reviews" />
       ) : (
         <div className="fade-in">
+<<<<<<< HEAD
           <div className="flex items-center w-full py-4 px-6 bg-gray-800 text-white rounded shadow-md border border-gray-700 mb-6">
             <button
               onClick={() => navigate("/")}
@@ -86,6 +91,16 @@ const ReviewPage = () => {
               Home
             </button>
             <span className="ml-4 font-bold"> &gt; Our Reviews</span>
+=======
+          <div className="flex items-center w-full py-4 px-6 bg-white rounded shadow-md border border-gray-200">
+            <button
+              onClick={() => navigate("/")}
+              className="text-gray-600 font-bold py-2  rounded hover:text-gray-800"
+            >
+              Home
+            </button>
+            <span className="ml-4 text-gray-500 font-bold"> &gt; Our Reviews</span>
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
           </div>
 
           {data.length > 0 ? (
@@ -95,7 +110,11 @@ const ReviewPage = () => {
               ))}
             </div>
           ) : (
+<<<<<<< HEAD
             <p className="text-center text-lg text-gray-300 col-span-full">
+=======
+            <p className="text-center text-lg text-gray-500 col-span-full">
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
               {error || "No reviews available."}
             </p>
           )}
@@ -124,4 +143,8 @@ const ReviewPage = () => {
   );
 };
 
+<<<<<<< HEAD
 export default React.memo(ReviewPage);
+=======
+export default React.memo(ReviewPage);
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa

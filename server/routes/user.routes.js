@@ -96,7 +96,10 @@ userRouter.post("/login", async (req, res) => {
       });
     });
   } catch (error) {
+<<<<<<< HEAD
     console.error("Login error:", error);
+=======
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
     res.status(500).send({ success: false, message: error.message });
   }
 });
@@ -208,6 +211,7 @@ userRouter.post("/reset_password", async (req, res) => {
     return res.json({ success: false, message: error.message });
   }
 });
+<<<<<<< HEAD
 userRouter.get("/details", async (req, res) => {
   const useremail="ishaanj2612@gmail.com"
   try {
@@ -220,6 +224,22 @@ userRouter.get("/details", async (req, res) => {
   } catch (error) {
     console.error(error);
     return res.json({ success: false, message: error.message });
+=======
+userRouter.get("/:email", async (req, res) => {
+  const { email } = req.params;
+  try {
+    const user = await UserModel.findOne({ email });
+    if (!user) {
+      return res.status(404).send({ msg: "User not found" });
+    }
+    // user.transactions = [];
+    // user.courses = [];
+    await user.save();
+    res.status(200).send({ success: true, user });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ success: false, message: error.message });
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
   }
 });
 export { userRouter };

@@ -449,6 +449,7 @@ export default function Footer() {
       {/* Links and Explore */}
       <div className="mx-auto px-4 md:px-12 lg:px-24 py-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
 
+<<<<<<< HEAD
         {/* About Us */}
         <div className="space-y-4">
           <h3 className="text-center sm:text-left font-semibold text-lg pb-3 text-blue-100 border-b border-blue-600/40 tracking-wide">
@@ -458,6 +459,52 @@ export default function Footer() {
             Traincape Technology's specific methodologies for measuring and prioritizing customer satisfaction. Many companies use various methods to gauge and prioritize customer satisfaction.
           </p>
         </div>
+=======
+            {/* Explore */}
+            <div className="space-y-3">
+              <h3 className=" font-bold text-base pb-2 inline-block text-blue-50 border-b border-blue-500/30">
+                EXPLORE
+              </h3>
+              <div className="grid grid-cols-1 gap-1 text-xs">
+                <button
+                  className="text-slate-300 hover:text-blue-300 transition-colors duration-300 text-left flex items-center group"
+                  onClick={() => handleNavigation("/about-us")}
+                >
+                  <span className="w-0 h-0.5 bg-blue-500 group-hover:w-2 transition-all duration-300 mr-0 group-hover:mr-1"></span>
+                  What we do
+                </button>
+                <button
+                  onClick={() => handleNavigation("/Our-Blogs")}
+                  className="text-slate-300 hover:text-blue-300 transition-colors duration-300 text-left flex items-center group"
+                >
+                  <span className="w-0 h-0.5 bg-blue-500 group-hover:w-2 transition-all duration-300 mr-0 group-hover:mr-1"></span>
+                  Resources
+                </button>
+                <button
+                  onClick={() => handleNavigation("/Internship")}
+                  className="text-slate-300 hover:text-blue-300 transition-colors duration-300 text-left flex items-center group"
+                >
+                  <span className="w-0 h-0.5 bg-blue-500 group-hover:w-2 transition-all duration-300 mr-0 group-hover:mr-1"></span>
+                  Internship
+                </button>
+                <button
+                  onClick={() => handleNavigation("/PartnerPage")}
+                  className="text-slate-300 hover:text-blue-300 transition-colors duration-300 text-left flex items-center group"
+                >
+                  <span className="w-0 h-0.5 bg-blue-500 group-hover:w-2 transition-all duration-300 mr-0 group-hover:mr-1"></span>
+                  Partners
+                </button>
+                <button
+                  onClick={() => handleNavigation("/Gallery")}
+                  className="text-slate-300 hover:text-blue-300 transition-colors duration-300 text-left flex items-center group"
+                >
+                  <span className="w-0 h-0.5 bg-blue-500 group-hover:w-2 transition-all duration-300 mr-0 group-hover:mr-1"></span>
+                  Gallery
+                </button>
+              </div>
+            </div>
+          </div>
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
 
         {/* Social Media */}
         <div className="space-y-4 text-center sm:text-left">

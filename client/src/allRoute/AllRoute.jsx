@@ -4,6 +4,7 @@ import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import ForgotPassword from "../pages/ForgotPassword";
 import NotFound from "../pages/NotFound";
 import Gallery from "../pages/Gallery";
+<<<<<<< HEAD
 import CertificateLookup from "../pages/CertificateLookup";
 import AdobePhotoshop from "../pages/PopularCertificationCoureses/AdobeCourses/AdobePhotoshop";
 import AdobeInDesign from "../pages/PopularCertificationCoureses/AdobeCourses/AdobeInDesign";
@@ -29,6 +30,22 @@ const LoadingComponent = () => (
   </div>
 );
 
+=======
+// Loading component
+const LoadingComponent = () => (
+  <div style={{ 
+    display: 'flex', 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    height: '70vh',
+    fontSize: '18px',
+    color: '#333'
+  }}>
+    <p>Loading content...</p>
+  </div>
+);
+
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
 // Lazy load high-level pages for better performance
 const Home = lazy(() => import("../pages/Home"));
 // const UserPage = lazy(() => import("../pages/userPage/UserPage"));
@@ -244,9 +261,12 @@ const AutodeskRevit = lazy(() => import("../pages/AutodeskCourse/AutodeskRevit")
 const Autodesk3dsMax = lazy(() => import("../pages/AutodeskCourse/Autodesk3dsMax"));
 const AutodeskFusion360 = lazy(() => import("../pages/AutodeskCourse/AutodeskFusion360"));
 const AutodeskMaya = lazy(() => import("../pages/AutodeskCourse/AutodeskMaya"));
+<<<<<<< HEAD
 
 const CCSTNetworkingDetail = lazy(() => import("../pages/PopularCertificationCoureses/CCSTNetworkingDetail"));
 const CCSTCybersecurityDetail = lazy(() => import("../pages/PopularCertificationCoureses/CCSTCybersecurityDetail"));
+=======
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
 
 const AllRoute = () => {
   const token = localStorage.getItem("token");
@@ -273,7 +293,10 @@ const AllRoute = () => {
       <Route path="/Terms-and-Conditions" element={<TermsAndCondition />} />
    <Route path="/CertificateLookup" element={<CertificateLookup />} />
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
         <Route 
           path="/Courses-details" 
           element={<Courses />} 
@@ -396,8 +419,11 @@ const AllRoute = () => {
         <Route path="/CCIEdatacenter" element={<CCIEdatacenter />} />
         <Route path="/CCIEserviceprovider" element={<CCIEserviceprovider />} />
         <Route path="/CCIEcollab" element={<CCIEcollab />} />
+<<<<<<< HEAD
         <Route path="/CCSTNetworkingDetail" element={<CCSTNetworkingDetail />} />
         <Route path="/CCSTCybersecurityDetail" element={<CCSTCybersecurityDetail />} />
+=======
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
         
         {/* IBM Subcourse Routes */}
         <Route path="/IBMAgileMethodologies" element={<IBMAgileMethodologies />} />
@@ -503,6 +529,7 @@ const AllRoute = () => {
       <Route path="/AutodeskCourse/Autodesk3dsMax" element={<Suspense fallback={<LoadingComponent />}><Autodesk3dsMax /></Suspense>} />
       <Route path="/AutodeskCourse/AutodeskFusion360" element={<Suspense fallback={<LoadingComponent />}><AutodeskFusion360 /></Suspense>} />
       <Route path="/AutodeskCourse/AutodeskMaya" element={<Suspense fallback={<LoadingComponent />}><AutodeskMaya /></Suspense>} />
+<<<<<<< HEAD
 
       {/* Adobe Courses */}
       <Route path="/AdobeCourses/AdobePhotoshop" element={<AdobePhotoshop />} />
@@ -516,6 +543,8 @@ const AllRoute = () => {
       <Route path="/UnityCourse/ArtistCourseware" element={<ArtistCourseware />} />
       <Route path="/UnityCourse/DeveloperCourseware" element={<DeveloperCourseware />} />
       <Route path="/UnityCourse/UnityProgrammer" element={<UnityProgrammer />} />
+=======
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
     </Routes>
     </Suspense>
   );

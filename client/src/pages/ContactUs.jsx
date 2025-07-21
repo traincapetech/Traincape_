@@ -2,10 +2,15 @@ import React, { useEffect, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa6";
 import { IoMailOutline } from "react-icons/io5";
 import emailjs from "@emailjs/browser";
+<<<<<<< HEAD
 import AIImage from "../assets/aii.jpeg"; // <-- New import
 
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+=======
+import Contact from "../assets/contact.png";
+import { Link, useNavigate } from "react-router-dom";
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
 
 const ContactUs = () => {
   const [payoload, setPayoload] = useState({
@@ -55,11 +60,16 @@ const ContactUs = () => {
     window.scrollTo(0, 0);
   }, []);
 
+<<<<<<< HEAD
   const navigate = useNavigate();
 
+=======
+  const navigate=useNavigate()
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
   return (
     <section className="bg-gradient-to-br from-cyan-800 via-teal-700 to-blue-800 py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<<<<<<< HEAD
         <div className="grid lg:grid-cols-2 grid-cols-1 gap-8">
           {/* Image Section */}
           <motion.div
@@ -109,6 +119,83 @@ const ContactUs = () => {
                         11:00 AM - 07:00 PM IST <br />
                         Monday to Saturday
                       </p>
+=======
+      <div className="flex items-center w-full py-4  bg-white  shadow-md">
+          <button
+            onClick={() => {
+              navigate("/");
+            }}
+            className="text-gray-600 font-bold py-2 px-4 rounded"
+          >
+            <span className="hover:text-gray-800">Home</span>
+          </button>
+          <div className="flex items-center text-gray-500 font-bold">
+            <span>{" > "}</span>
+            <span className="ml-4">Contact Us</span>
+          </div>
+        </div>
+        <div className="grid lg:grid-cols-2 grid-cols-1">
+          <div className="lg:mb-0 ">
+            <div className="group w-full h-full">
+              <div className="relative h-full">
+                <img
+                  src={Contact}
+                  alt="ContactUs tailwind section"
+                  className="w-full h-full bg-black object-cover"
+                />
+                <div className="absolute inset-0 bg-black opacity-65"></div> {/* Semi-transparent overlay */}
+
+                <div className="absolute top-0 w-full lg:p-11 md:p-5 p-2 z-10">
+                  <div className="bg-transparent rounded-lg md:p-6 block border-4 border-transparent animate-borderGlow">
+                    <div className="md:space-y-4 space-y-2">
+                      <div>
+                        <h4 className="md:text-3xl text-lg font-bold text-white">Office Address</h4>
+                        <p className="text-sm md:text-lg text-slate-300">
+                          India, USA, Nigeria
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="md:text-2xl text-lg font-bold text-white">
+                          Phone Number & Email
+                        </h4>
+                        <p className="text-sm md:text-base flex items-center gap-2 text-slate-300">
+                          <FaWhatsapp className="" />
+                          <Link
+
+                            to="https://wa.me/+441253928501"
+                            target="_blank"
+                          >
+                            +44 1253 928501
+                          </Link>
+                        </p>
+                        <p className="text-sm md:text-base flex items-center gap-2 text-slate-300">
+                          <IoMailOutline className="" />
+                          <Link
+
+                            to="mailto:sales@traincapetech.info"
+                            target="_blank"
+                          >
+                            sales@traincapetech.info
+                          </Link>
+                        </p>
+                      </div>
+
+                      <div>
+                        <h4 className="text-lg md:text-2xl font-bold text-white">Our Address</h4>
+                        <p className="text-sm md:text-base text-slate-200">
+                          Khandolia Plaza, 118\C, Dabri - Palam Rd, Vaishali, Vaishali {" "}
+                          <br />
+                          Colony, Dashrath Puri, New Delhi, Delhi, 110045
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="text-lg md:text-2xl font-bold text-white">Timings</h4>
+                        <p className="text-sm md:text-base text-slate-200">
+                          11:00 AM - 07:00 PM IST <br />
+                          Monday to Saturday
+                        </p>
+                      </div>
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
                     </div>
                   </div>
                 </div>

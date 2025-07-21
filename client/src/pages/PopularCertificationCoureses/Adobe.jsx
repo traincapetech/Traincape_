@@ -9,6 +9,7 @@ import Card5 from "../../assets/adobe5.webp";
 import Card6 from "../../assets/adobe6.webp";
 import AdobeCourses from "../../components/AdobeCourses";
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 
 // ✅ Import Adobe Course Pages
 import AdobePhotoshop from "./AdobeCourses/AdobePhotoshop";
@@ -17,6 +18,8 @@ import AdobeIllustrator from "./AdobeCourses/AdobeIllustrator";
 import AdobePremierePro from "./AdobeCourses/AdobePremierePro";
 import AdobeAnimate from "./AdobeCourses/AdobeAnimate";
 import AdobeAfterEffects from "./AdobeCourses/AdobeAfterEffects";
+=======
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
 
 const Adobe = () => {
   useEffect(() => {
@@ -62,8 +65,12 @@ const Adobe = () => {
     },
   ];
 
+<<<<<<< HEAD
   const navigate = useNavigate();
 
+=======
+  const navigate=useNavigate()
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
   return (
     <>
       <div
@@ -86,10 +93,17 @@ const Adobe = () => {
               application and designed by experts, allowing for an authentic assessment
               of job-ready skills.
               <br /> <br />
+<<<<<<< HEAD
               Traincape provides a full pathway solution that students can use to prepare
               for the Adobe Certified Professional certification. From tailored learning
               materials and practice tests to Adobe endorsed certification exams,
               Traincape provides assistance every step of the way.
+=======
+              Traincape provides a full pathway solution that students can use
+              to prepare for the Adobe Certified Professional certification.
+              From tailored learning materials and practice tests to Adobe
+              endorsed certification exams, Traincape provides assistance every step of the way.
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
             </h5>
           </div>
           <div className="hidden lg:block xl:block mt-5 p-5">
@@ -99,6 +113,28 @@ const Adobe = () => {
               alt="Adobe Banner"
             />
           </div>
+        </div>
+      </div>     <div className="flex items-center w-full py-4 px-6 bg-white rounded shadow-md border border-gray-200">
+        <button
+          onClick={() => {
+            navigate("/");
+          }}
+          className="text-gray-600 font-bold py-2 px-4 rounded"
+        >
+          <span className="hover:text-gray-800">Home</span>
+        </button>
+        <div className="flex items-center text-gray-500 font-bold">
+          <span>{" > "}</span>
+          <button
+            onClick={() => {
+              navigate("/Courses-details");
+            }}
+            className="text-gray-600 font-bold py-2 px-4 rounded"
+          >
+            <span className="hover:text-gray-800">Course Details</span>
+          </button>
+          <span>{" > "}</span>
+          <span className="ml-4">Adobe</span>
         </div>
       </div>
 

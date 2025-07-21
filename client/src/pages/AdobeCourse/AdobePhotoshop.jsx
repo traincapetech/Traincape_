@@ -21,7 +21,11 @@ const AdobePhotoshop = () => {
       id: "adobe-photoshop-certified-professional",
       title: "Adobe Photoshop Certified Professional",
       price: 2499,
+<<<<<<< HEAD
       image: "https://www.adobe.com/conte`  nt/dam/shared/images/product-icons/svg/photoshop.svg",
+=======
+      image: "https://www.adobe.com/content/dam/shared/images/product-icons/svg/photoshop.svg",
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
       quantity: 1,
     };
     addToCart(product);

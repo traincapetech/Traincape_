@@ -3,7 +3,11 @@ import { Helmet } from "react-helmet-async";
 import "./Gallery.css";
 
 // Import a few key images for the gallery
+<<<<<<< HEAD
 import teamImg from '../assets/team.jpeg';
+=======
+import teamImg from "../assets/team.jpeg";
+>>>>>>> 483e8a211b47a7f5a94f042ba4a57e95406f49fa
 import workingBoy from "../assets/workingboy.jpg";
 import training from "../assets/training.jpg";
 import unitybanner from "../assets/unitybanner.jpg";
