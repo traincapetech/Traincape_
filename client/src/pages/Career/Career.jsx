@@ -7,7 +7,6 @@ import { GiSkills } from "react-icons/gi";
 import { GiUpgrade } from "react-icons/gi";
 import emailjs from "@emailjs/browser";
 import hand from '../../assets/hand.jpg';
-// import careerImg from "../../assets/CareerPageIMG.svg";
 
 const Career = () => {
   const [payoload, setPayoload] = useState({
@@ -20,24 +19,20 @@ const Career = () => {
   });
 
   const handleSubmit = (e) => {
-    // Your EmailJS serviceIdD and templateId and Public Key
     const serviceId = "service_pjwgjas";
     const templateId = "template_oihg6cs";
     const publicId = "GmJ24jEVf6swWXgb0";
 
-    // Create a new object that contains dynamic template params
     const [name, email, subject, message, phoneNumber, resumeLink] =
       Object.values(payoload);
     const templateParams = {
       from_name: name,
       from_email: email,
       from_subject: subject,
-      to_name: "Parichay singh Rana",
-      message: `Name - ${name}\nEmail - ${email}\nWhatsapp-Number - ${phoneNumber}\nSelect Roll - ${subject}\nMessage - ${message} \nResume Link - ${resumeLink}`,
+      to_name: "Parichay Singh Rana",
+      message: `Name - ${name}\nEmail - ${email}\nWhatsapp-Number - ${phoneNumber}\nSelect Role - ${subject}\nMessage - ${message} \nResume Link - ${resumeLink}`,
     };
     e.preventDefault();
-
-    //send the Email using EmailJS
 
     emailjs.send(serviceId, templateId, templateParams, publicId).then(
       (res) => {
@@ -60,166 +55,135 @@ const Career = () => {
   const handleChange = (e) => {
     setPayoload({ ...payoload, [e.target.name]: e.target.value });
   };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   return (
     <div className={career.container}>
-    <div className={career.banner}>
-      <div className={career.bannerIMG}>
-        <img src={banner} alt="Banner IMG" className={career.bannerimg} />
+      <div className={career.banner}>
+        <div className={career.bannerIMG}>
+          <img src={banner} alt="Career Banner" className={career.bannerimg} />
+        </div>
+       
       </div>
-      <div className={career.bannerText}>
-        {/* <h1>JOIN US</h1> */}
-        {/* <p>
-          Learning opportunities are essential for upgrading skills and
-          advancing careers. They include training courses, self-training, and
-          attending professional events to stay relevant and enhance
-          employability.
-        </p> */}
-        {/* <button className={career.joinBtn}>Join Us</button> */}
-      </div>
-    </div>
-    <div className={career.benefits}>
-      <div className={career.banefitText}>
-        <h3>BENEFITS</h3>
-        <h1>Why You Should Join Our Awesome Team</h1>
-        <p>
-          This article defines learning opportunities as situations in which
-          it is possible for you to do something that you want to do. It also
-          provides examples of how learning opportunities can be used in
-          different contexts.
-        </p>
-      </div>
-      <div className={career.banefit}>
-        <div>
-          <i>
-            <AiOutlineTeam className={career.icon} />
-          </i>
-          <h1>Team Work</h1>
+
+      <div className={career.benefits}>
+        <div className={career.banefitText}>
+          <h3>PERKS & CULTURE</h3>
+          <h1>Why Work With Us</h1>
           <p>
-            Teamwork is key to success. Quotes like "Alone we can do so
-            little; together we can do so much" and "Teamwork makes the dream
-            work" emphasize the power of collaboration and unity.
+            Discover the values, environment, and growth-driven mindset that define who we are. We’re more than a company — we’re a team where talent is nurtured and careers thrive.
           </p>
         </div>
-        <div>
-          <i>
-            <SiFsecure className={career.icon} />
-          </i>
-          <h1>Secured Feature</h1>
-          <p>
-            Secured features protect software and data from unauthorized
-            access and security threats. They include system secure feature
-            keys, secure software development, and security mechanisms like
-            authentication and audits.
-          </p>
-        </div>
-        <div>
-          <i>
-            <GiSkills className={career.icon} />
-          </i>
-          <h1>Learning Oportunity</h1>
-          <p>
-            Learning opportunities refer to the types of work or tasks that
-            students face to achieve knowledge and enhance learning value.
-            These opportunities can include classroom, online, blended,
-            self-guided, coaching, mentoring, and other educational
-            experiences.
-          </p>
-        </div>
-        <div>
-          <i>
-            <GiUpgrade className={career.icon} />
-          </i>
-          <h1>Upgrate Skilss</h1>
-          <p>
-            Learning opportunities are essential for upgrading skills and
-            advancing careers. They include training courses, self-training,
-            and attending professional events to stay relevant and enhance
-            employability.
-          </p>
+        <div className={career.banefit}>
+          <div>
+            <i><AiOutlineTeam className={career.icon} /></i>
+            <h1>Collaborative Culture</h1>
+            <p>
+              We believe great ideas come from great teams. Our culture encourages open communication, mutual respect, and creative collaboration to achieve shared goals.
+            </p>
+          </div>
+          <div>
+            <i><SiFsecure className={career.icon} /></i>
+            <h1>Secure Environment</h1>
+            <p>
+              Your safety and data security are top priorities. We invest in secure systems and transparent practices to ensure peace of mind at every level.
+            </p>
+          </div>
+          <div>
+            <i><GiSkills className={career.icon} /></i>
+            <h1>Skill Development</h1>
+            <p>
+              We offer ongoing learning through mentorship, workshops, and real-world challenges — so you’re constantly evolving with your role and the industry.
+            </p>
+          </div>
+          <div>
+            <i><GiUpgrade className={career.icon} /></i>
+            <h1>Career Growth</h1>
+            <p>
+              Join a place where ambition is rewarded. We support your career roadmap with opportunities for internal mobility, leadership roles, and project ownership.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-    <div className={career.contact}>
-      <div className={career.officeMail}>
-        <h1>Want To Join US</h1>
-        <p>We're Ready To Connect You!</p>
-        <div className={career.NameAndEmail}>
-          <br />
+
+      <div className={career.contact}>
+        <div className={career.officeMail}>
+          <h1>Excited to Join?</h1>
+          <p>Submit your details and we’ll get in touch soon!</p>
+          <div className={career.NameAndEmail}>
+            <br />
+            <input
+              type="text"
+              name="name"
+              value={payoload.name}
+              className={career.inputbox}
+              placeholder="Full Name"
+              required
+              onChange={handleChange}
+            />
+            <br />
+            <input
+              type="email"
+              name="email"
+              value={payoload.email}
+              className={career.inputbox}
+              placeholder="Email Address"
+              required
+              onChange={handleChange}
+            />
+            <br />
+          </div>
+          <input
+            type="tel"
+            name="phoneNumber"
+            value={payoload.phoneNumber}
+            className={career.inputbox}
+            placeholder="Phone / WhatsApp Number"
+            required
+            onChange={handleChange}
+          />
           <input
             type="text"
-            name="name"
-            value={payoload.name}
+            name="resumeLink"
+            value={payoload.resumeLink}
             className={career.inputbox}
-            placeholder="Your Name"
+            placeholder="Google Drive Link to Your Resume"
             required
             onChange={handleChange}
           />
-          <br />
-          <input
-            type="email"
-            name="email"
-            value={payoload.email}
-            className={career.inputbox}
-            placeholder="Your Email"
+          <select
+            name="subject"
+            id={career.select}
             required
             onChange={handleChange}
-          />
+          >
+            <option value="">Select Position</option>
+            <option value="lead-person">Team Lead</option>
+            <option value="sale-person">Sales Executive</option>
+          </select>
           <br />
+          <br />
+          <textarea
+            name="message"
+            className={career.textarea}
+            cols="30"
+            rows="10"
+            placeholder="Tell us why you'd be a great fit"
+            onChange={handleChange}
+          ></textarea>
+          <button className={career.contactBtn} onClick={handleSubmit}>
+            Submit Application
+          </button>
         </div>
-        <input
-          type="tel"
-          name="phoneNumber"
-          value={payoload.phoneNumber}
-          className={career.inputbox}
-          placeholder="Phone Number"
-          required
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="resumeLink"
-          value={payoload.resumeLink}
-          className={career.inputbox}
-          placeholder="Paste Your Google Drive Resume Link"
-          required
-          onChange={handleChange}
-        />
-        <select
-          name="subject"
-          id={career.select}
-          required
-          onChange={handleChange}
-        >
-          <option value="">Select Role</option>
-          <option value="lead-person">Lead Person</option>
-          <option value="sale-person">Sale Person</option>
-          {/* <option value="Project Management">Project Management</option> */}
-        </select>
-        <br />
-        <br />
-        <textarea
-          name="message"
-          className={career.textarea}
-          cols="30"
-          rows="10"
-          placeholder="Your Message"
-          onChange={handleChange}
-        ></textarea>
-        <button className={career.contactBtn} onClick={handleSubmit}>
-          Send Message
-        </button>
-      </div>
-      <div className={career.contactImg}>
-        <img src={hand} alt="Carrer" />
+        <div className={career.contactImg}>
+          <img src={hand} alt="Join Us" />
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
 };
-
-
 
 export default Career;
