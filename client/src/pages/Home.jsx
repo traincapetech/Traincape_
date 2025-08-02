@@ -13,7 +13,7 @@ import Typewriter from "typewriter-effect"
 import img1 from "../assets/img-1.jpg"
 import img2 from "../assets/img-2.jpg"
 import img3 from "../assets/img-3.jpg"
-import img4 from "../assets/img4.jpg"
+import img4 from "../assets/img2.jpg"
 
 // Service cards
 import card1 from "../assets/card1.jpeg"

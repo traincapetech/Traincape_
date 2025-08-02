@@ -40,6 +40,7 @@ const Navbar = () => {
   const mobilePayNowButtonRef = useRef(null);
   const coursesDropdownRef = useRef(null);
   const coursesButtonRef = useRef(null);
+  const coursesContainerRef = useRef(null);
 
   const courses = [
     {
@@ -146,14 +147,6 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (coursesButtonRef.current && coursesButtonRef.current.contains(event.target)) {
-        return;
-      }
-      
-      if (coursesDropdownRef.current && !coursesDropdownRef.current.contains(event.target)) {
-        setShowCoursesDropdown(false);
-      }
-
       if (payNowButtonRef.current && payNowButtonRef.current.contains(event.target)) {
         return;
       }
@@ -175,6 +168,15 @@ const Navbar = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // Add hover handlers for courses dropdown
+  const handleCoursesMouseEnter = () => {
+    setShowCoursesDropdown(true);
+  };
+
+  const handleCoursesMouseLeave = () => {
+    setShowCoursesDropdown(false);
+  };
 
   const handleLogin = () => {
     navigate("/login");
@@ -354,27 +356,20 @@ const Navbar = () => {
               >
                 Reviews
               </Link>
-              <div className="relative">
+              <div className="relative pb-4" 
+                ref={coursesContainerRef}
+                onMouseEnter={handleCoursesMouseEnter}
+                onMouseLeave={handleCoursesMouseLeave}
+              >
                 <Link
                   to="/Courses-details"
                   className={`${isActive("/Courses-details")} text-xl flex items-center gap-2 text-white relative`}
                   aria-label="Courses Details"
                   ref={coursesButtonRef}
-                  onClick={(e) => {
-                    if (e.target.tagName === 'svg' || e.target.tagName === 'path') {
-                      e.preventDefault();
-                      setShowCoursesDropdown(!showCoursesDropdown);
-                    }
-                  }}
                 >
                   Courses
                   <FaChevronDown 
-                    className="text-sm ml-1 inline cursor-pointer transition-transform duration-200 hover:scale-110 hover:text-teal-300" 
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setShowCoursesDropdown(!showCoursesDropdown);
-                    }}
+                    className="text-sm ml-1 inline transition-transform duration-200 hover:scale-110 hover:text-teal-300" 
                   />
                   {showCoursesDropdown && renderCoursesDropdown()}
                 </Link>
@@ -479,26 +474,18 @@ const Navbar = () => {
             >
               Reviews
             </Link>
-            <div className="relative">
+            <div className="relative pb-4"
+              onMouseEnter={handleCoursesMouseEnter}
+              onMouseLeave={handleCoursesMouseLeave}
+            >
               <Link
                 to="/Courses-details"
                 className={`${isActive("/Courses-details")} text-lg flex items-center gap-1 relative`}
                 aria-label="Courses Details"
                 ref={coursesButtonRef}
-                onClick={(e) => {
-                  if (e.target.tagName === 'svg' || e.target.tagName === 'path') {
-                    e.preventDefault();
-                    setShowCoursesDropdown(!showCoursesDropdown);
-                  }
-                }}
               >
                 Courses <FaChevronDown 
-                  className="text-sm mt-1 cursor-pointer transition-transform duration-200 hover:scale-110 hover:text-teal-300" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setShowCoursesDropdown(!showCoursesDropdown);
-                  }}
+                  className="text-sm mt-1 transition-transform duration-200 hover:scale-110 hover:text-teal-300" 
                 />
                 {showCoursesDropdown && renderCoursesDropdown()}
               </Link>
@@ -591,27 +578,20 @@ const Navbar = () => {
             >
               Reviews
             </Link>
-            <div className="relative">
+            <div className="relative pb-4" 
+              ref={coursesContainerRef}
+              onMouseEnter={handleCoursesMouseEnter}
+              onMouseLeave={handleCoursesMouseLeave}
+            >
               <Link
                 to="/Courses-details"
                 className={`${isActive("/Courses-details")} text-xl flex items-center gap-2 text-white relative`}
                 aria-label="Courses Details"
                 ref={coursesButtonRef}
-                onClick={(e) => {
-                  if (e.target.tagName === 'svg' || e.target.tagName === 'path') {
-                    e.preventDefault();
-                    setShowCoursesDropdown(!showCoursesDropdown);
-                  }
-                }}
               >
                 Courses
                 <FaChevronDown 
-                  className="text-sm ml-1 inline cursor-pointer transition-transform duration-200 hover:scale-110 hover:text-teal-300" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setShowCoursesDropdown(!showCoursesDropdown);
-                  }}
+                  className="text-sm ml-1 inline transition-transform duration-200 hover:scale-110 hover:text-teal-300" 
                 />
                 {showCoursesDropdown && renderCoursesDropdown()}
               </Link>

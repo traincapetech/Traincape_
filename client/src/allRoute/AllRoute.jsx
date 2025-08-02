@@ -1,5 +1,5 @@
 // Updated by Saurav
-import React, { Suspense, lazy } from "react";
+import React, { lazy } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import ForgotPassword from "../pages/ForgotPassword";
 import NotFound from "../pages/NotFound";
@@ -14,20 +14,6 @@ import AdobeAfterEffects from "../pages/PopularCertificationCoureses/AdobeCourse
 import ArtistCourseware from "../pages/UnityCourse/Artist Courseware";
 import DeveloperCourseware from "../pages/UnityCourse/Developer Courseware";
 import UnityProgrammer from "../pages/UnityCourse/UnityProgrammer";
-
-// Loading component
-const LoadingComponent = () => (
-  <div style={{ 
-    display: 'flex', 
-    justifyContent: 'center', 
-    alignItems: 'center', 
-    height: '70vh',
-    fontSize: '18px',
-    color: '#333'
-  }}>
-    <p>Loading content...</p>
-  </div>
-);
 
 // Lazy load high-level pages for better performance
 const Home = lazy(() => import("../pages/Home"));
@@ -253,7 +239,6 @@ const AllRoute = () => {
   const location = useLocation();
 
   return (
-    <Suspense fallback={<LoadingComponent />}>
     <Routes>
       <Route path="/review-page" element={<ReviewPage />} />
       <Route path="/" element={<Home />} />
@@ -364,16 +349,16 @@ const AllRoute = () => {
         <Route path="/microsoftcyberanalyst" element={<MicrosoftCyberAnalyst />} />
         <Route path="/microsoftMS-900" element={<MicrosoftMS900 />} />
         <Route path="/microsoftpl-300" element={<MicrosoftPl300 />} />
-        <Route path="/MicrosoftSecurityFundamentals" element={<Suspense fallback={<LoadingComponent />}><MicrosoftSecurityFundamentals /></Suspense>} />
-        <Route path="/MicrosoftCourse/MicrosoftExcelExpert" element={<Suspense fallback={<LoadingComponent />}><MicrosoftExcelExpert /></Suspense>} />
-        <Route path="/MicrosoftCourse/MicrosoftWordAssociate" element={<Suspense fallback={<LoadingComponent />}><MicrosoftWordAssociate /></Suspense>} />
-        <Route path="/MicrosoftCourse/MicrosoftWordExpert" element={<Suspense fallback={<LoadingComponent />}><MicrosoftWordExpert /></Suspense>} />
-        <Route path="/MicrosoftCourse/MicrosoftPowerPointAssociate" element={<Suspense fallback={<LoadingComponent />}><MicrosoftPowerPointAssociate /></Suspense>} />
-        <Route path="/MicrosoftCourse/MicrosoftExcelAssociate" element={<Suspense fallback={<LoadingComponent />}><MicrosoftExcelAssociate /></Suspense>} />
-        <Route path="/MicrosoftDynamics365ERP" element={<Suspense fallback={<LoadingComponent />}><MicrosoftDynamics365ERP /></Suspense>} />
-        <Route path="/MicrosoftAzureDataFundamentals" element={<Suspense fallback={<LoadingComponent />}><MicrosoftAzureDataFundamentals /></Suspense>} />
-        <Route path="/MicrosoftDynamics365CRMFundamentals" element={<Suspense fallback={<LoadingComponent />}><MicrosoftDynamicsCRMFundamentals /></Suspense>} />
-        <Route path="/MicrosoftPowerPlatformFundamentals" element={<Suspense fallback={<LoadingComponent />}><MicrosoftPowerPlatformFundamentals /></Suspense>} />
+        <Route path="/MicrosoftSecurityFundamentals" element={<MicrosoftSecurityFundamentals />} />
+        <Route path="/MicrosoftCourse/MicrosoftExcelExpert" element={<MicrosoftExcelExpert />} />
+        <Route path="/MicrosoftCourse/MicrosoftWordAssociate" element={<MicrosoftWordAssociate />} />
+        <Route path="/MicrosoftCourse/MicrosoftWordExpert" element={<MicrosoftWordExpert />} />
+        <Route path="/MicrosoftCourse/MicrosoftPowerPointAssociate" element={<MicrosoftPowerPointAssociate />} />
+        <Route path="/MicrosoftCourse/MicrosoftExcelAssociate" element={<MicrosoftExcelAssociate />} />
+        <Route path="/MicrosoftDynamics365ERP" element={<MicrosoftDynamics365ERP />} />
+        <Route path="/MicrosoftAzureDataFundamentals" element={<MicrosoftAzureDataFundamentals />} />
+        <Route path="/MicrosoftDynamics365CRMFundamentals" element={<MicrosoftDynamicsCRMFundamentals />} />
+        <Route path="/MicrosoftPowerPlatformFundamentals" element={<MicrosoftPowerPlatformFundamentals />} />
         
         {/* Cisco Subcourse Routes */}
         <Route path="/CCSTsupportTech" element={<CCSTsupportTech />} />
@@ -498,11 +483,11 @@ const AllRoute = () => {
       <Route path="/TallyPrime" element={<TallyPrime />} />
 
       {/* Autodesk Subcourse Routes */}
-      <Route path="/AutodeskCourse/AutodeskAutoCAD" element={<Suspense fallback={<LoadingComponent />}><AutodeskAutoCAD /></Suspense>} />
-      <Route path="/AutodeskCourse/AutodeskRevit" element={<Suspense fallback={<LoadingComponent />}><AutodeskRevit /></Suspense>} />
-      <Route path="/AutodeskCourse/Autodesk3dsMax" element={<Suspense fallback={<LoadingComponent />}><Autodesk3dsMax /></Suspense>} />
-      <Route path="/AutodeskCourse/AutodeskFusion360" element={<Suspense fallback={<LoadingComponent />}><AutodeskFusion360 /></Suspense>} />
-      <Route path="/AutodeskCourse/AutodeskMaya" element={<Suspense fallback={<LoadingComponent />}><AutodeskMaya /></Suspense>} />
+      <Route path="/AutodeskCourse/AutodeskAutoCAD" element={<AutodeskAutoCAD />} />
+      <Route path="/AutodeskCourse/AutodeskRevit" element={<AutodeskRevit />} />
+      <Route path="/AutodeskCourse/Autodesk3dsMax" element={<Autodesk3dsMax />} />
+      <Route path="/AutodeskCourse/AutodeskFusion360" element={<AutodeskFusion360 />} />
+      <Route path="/AutodeskCourse/AutodeskMaya" element={<AutodeskMaya />} />
 
       {/* Adobe Courses */}
       <Route path="/AdobeCourses/AdobePhotoshop" element={<AdobePhotoshop />} />
@@ -517,7 +502,6 @@ const AllRoute = () => {
       <Route path="/UnityCourse/DeveloperCourseware" element={<DeveloperCourseware />} />
       <Route path="/UnityCourse/UnityProgrammer" element={<UnityProgrammer />} />
     </Routes>
-    </Suspense>
   );
 };
 

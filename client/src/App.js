@@ -32,8 +32,22 @@ const AllRoute = lazy(() => import("./allRoute/AllRoute"));
 const WebsiteCounter = lazy(() => import("./components/WebsiteCounter"));
 const AddToCartButton = lazy(() => import("./components/AddToCartButton"));
 
-// Loading component to show while lazy loaded components are loading
-const LoadingFallback = () => (
+// Loading component for main content only
+const ContentLoadingFallback = () => (
+  <div style={{ 
+    display: 'flex', 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    height: '70vh',
+    fontSize: '18px',
+    color: '#333'
+  }}>
+    <p>Loading content...</p>
+  </div>
+);
+
+// Loading component for initial app load
+const InitialLoadingFallback = () => (
   <div style={{ 
     display: 'flex', 
     justifyContent: 'center', 
@@ -63,18 +77,24 @@ function App() {
 
   return (
     <CartProvider> {/* Wrap the entire app with CartProvider */}
-      <div>
-        <Suspense fallback={<LoadingFallback />}>
-          {/* Conditionally render Navbar and Footer based on the current route */}
+      <Suspense fallback={<InitialLoadingFallback />}>
+        <div>
+          {/* Navbar and Footer load together initially */}
           {location.pathname !== '/test' && <Navbar />}
-          <AllRoute />
+          
+          {/* Separate Suspense for main content to avoid full-page reload on navigation */}
+          <Suspense fallback={<ContentLoadingFallback />}>
+            <AllRoute />
+          </Suspense>
+          
+          {/* Footer and other components */}
           {location.pathname !== '/test' && <Footer />}
           <WebsiteCounter />
           
           {/* Conditionally render AddToCartButton based on the current route */}
           {!hideOnPages.includes(location.pathname) && <AddToCartButton />}
-        </Suspense>
-      </div>
+        </div>
+      </Suspense>
     </CartProvider>
   );
 }
