@@ -1,0 +1,12 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Allow all web crawlers to access all content
+Sitemap: https://traincapetech.in/sitemap.xml
+
+# Block specific paths that shouldn't be indexed
+Disallow: /admin-panel
+Disallow: /login
+Disallow: /signup
+Disallow: /*?*
