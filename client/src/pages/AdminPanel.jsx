@@ -2,16 +2,10 @@ import React, { useState } from "react";
 import CreateAssignment from "../components/CreateAssignment";
 import ViewAssignments from "../components/ViewAssignments";
 import Sidebar from "../components/Sidebar";
-import {
-  Shield,
-  GraduationCap,
-  ChevronRight,
-  ArrowLeft,
-  KeyRound,
-  ShieldCheck,
-  ChevronLeft
-} from "lucide-react";
+import { Shield, GraduationCap, ChevronRight, ArrowLeft, KeyRound, ShieldCheck, ChevronLeft } from 'lucide-react';
 import CourseAnalytics from "../components/CourseAnalytics";
+import VoucherManager from "./VoucherManager";
+import VouchersDashboard from "./VouchersDashboard";
 
 const AdminPanel = () => {
   const [selectedOption, setSelectedOption] = useState("roleSelection");
@@ -71,6 +65,10 @@ const AdminPanel = () => {
         return <ViewAssignments role={role} selectedCourse={selectedCourse} />; // Pass selected course to ViewAssignments
       case "courseAnalytics":
         return <CourseAnalytics role={role} selectedCourse={selectedCourse} />; // Pass selected course to courseAnalytics
+      case "serviceCatalog":
+        return <VoucherManager />;
+      case "vouchersDashboard":
+        return <VouchersDashboard />;
       default:
         return <div>Select an option</div>;
     }
@@ -235,32 +233,6 @@ const AdminPanel = () => {
   // Course Selection for Instructor
   if (selectedOption === "courseSelection") {
     return (
-      // <div className="flex items-center justify-center min-h-screen px-3 bg-gray-200">
-      //   <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md text-center">
-      //     <h1 className="text-2xl font-bold mb-4">Select a Course</h1>
-      //     <div className="space-y-4">
-      //       <select
-      //         value={selectedCourse}
-      //         onChange={handleCourseSelection}
-      //         className="w-full py-2 px-4 border border-gray-300 rounded-md"
-      //       >
-      //         <option value="">Select a course...</option>
-      //         {courses.map((course, index) => (
-      //           <option key={index} value={course}>
-      //             {course}
-      //           </option>
-      //         ))}
-      //       </select>
-      //       <button
-      //         onClick={() => setSelectedOption("keyEntry")} // Move to key entry after course selection
-      //         disabled={!selectedCourse}
-      //         className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-      //       >
-      //         Next
-      //       </button>
-      //     </div>
-      //   </div>
-      // </div>
       <div className="flex items-center justify-center min-h-screen p-4 bg-green-50">
       <div className="w-full max-w-md bg-white shadow-xl rounded-xl overflow-hidden border border-green-100">
         <div className="p-6 text-center bg-green-500 text-white">

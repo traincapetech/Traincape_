@@ -29,7 +29,7 @@ const PMI = () => {
     // {
     //   image: foundationc,
     //   title: "CERTIFICATION COURSE",
-    //   description: "IBM Software Foundation Course C++ Certification Course",
+    //   description: "",
     //   price: "₹3000",
     //   url: "/IBMcourses",
     // },

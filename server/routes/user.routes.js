@@ -71,15 +71,6 @@ userRouter.post("/login", async (req, res) => {
           .status(401)
           .send({ success: false, message: "Wrong Credentials" });
       }
-      
-      // Check if SECRET_KEY is available
-      if (!process.env.SECRET_KEY) {
-        console.error("SECRET_KEY environment variable is not set!");
-        return res
-          .status(500)
-          .send({ success: false, message: "Server configuration error" });
-      }
-      
       const token = jwt.sign(
         { userId: user._id, username: user.username },
         process.env.SECRET_KEY,
@@ -96,7 +87,6 @@ userRouter.post("/login", async (req, res) => {
       });
     });
   } catch (error) {
-    console.error("Login error:", error);
     res.status(500).send({ success: false, message: error.message });
   }
 });
@@ -192,8 +182,6 @@ userRouter.post("/reset_password", async (req, res) => {
       return res.status(400).send({ msg: "Wrong Credentials" });
     }
     const hashedPassword = await bcrypt.hash(newPassword, 10);
-    console.log("Hashed Password is",hashedPassword);
-    console.log("User Password is",user.password);
     user.password = hashedPassword;
     user.resetOtp = "";
     user.resetOtpExpireAt = 0;
@@ -208,18 +196,20 @@ userRouter.post("/reset_password", async (req, res) => {
     return res.json({ success: false, message: error.message });
   }
 });
-userRouter.get("/details", async (req, res) => {
-  const useremail="ishaanj2612@gmail.com"
+userRouter.get("/:email", async (req, res) => {
+  const { email } = req.params;
   try {
-    const user = await UserModel.findOne({ email:useremail });
+    const user = await UserModel.findOne({ email });
     if (!user) {
-      return res.status(400).send({ msg: "Wrong Credentials" });
+      return res.status(404).send({ msg: "User not found" });
     }
-  
-    res.status(200).send(user);
+    // user.transactions = [];
+    // user.courses = [];
+    await user.save();
+    res.status(200).send({ success: true, user });
   } catch (error) {
     console.error(error);
-    return res.json({ success: false, message: error.message });
+    res.status(500).send({ success: false, message: error.message });
   }
 });
 export { userRouter };
