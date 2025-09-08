@@ -1,46 +1,28 @@
-// const jwt = require("jsonwebtoken");
-// require("dotenv").config();
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 
-// const auth = (req, res, next) => {
-//   const token = req.headers.authorization;
-//   if (token) {
-//     jwt.verify(token, process.env.secretKey, (err, decoded) => {
-//       // console.log(decoded)
-//       if (decoded) {
-//         req.body.userId = decoded.userId;
-//         req.body.username = decoded.username;
-//         next();
-//       } else {
-//         res.send({ error: err });
-//       }
-//     });
-//   } else {
-//     res.send({ msg: "Please Login" });
-//   }
-// };
-// module.exports = {
-//   auth,
-// };
-// updated by saurav 
-const jwt = require("jsonwebtoken");
-require("dotenv").config();
+dotenv.config();
 
 const auth = (req, res, next) => {
-  const token = req.headers.authorization;
+  const authHeader = req.headers.authorization || "";
+  const token = authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : authHeader;
+
   if (!token) {
-    return res.status(401).send({ msg: "Please login" });
+    return res.status(401).send({ error: "Please login" });
   }
 
-  jwt.verify(token, process.env.secretKey, (err, decoded) => {
+  const secret = process.env.SECRET_KEY; // Align with token signing secret
+  if (!secret) {
+    return res.status(500).send({ error: "Server misconfiguration: SECRET_KEY is not set" });
+  }
+
+  jwt.verify(token, secret, (err, decoded) => {
     if (err) {
       return res.status(403).send({ error: "Token is invalid or expired" });
     }
-    req.body.userId = decoded.userId;
-    req.body.username = decoded.username;
+    req.user = { userId: decoded.userId, username: decoded.username, role: decoded.role };
     next();
   });
 };
 
-module.exports = {
-  auth,
-};
+export default auth;

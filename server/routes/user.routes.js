@@ -57,7 +57,19 @@ userRouter.post("/register", async (req, res) => {
 });
 
 userRouter.post("/login", async (req, res) => {
-  const { email, password } = req.body;
+  // Support both Basic Auth header and JSON body
+  let { email, password } = req.body || {};
+  const authHeader = req.headers.authorization || "";
+  if (authHeader.startsWith("Basic ")) {
+    try {
+      const decoded = Buffer.from(authHeader.split(" ")[1], "base64").toString("utf8");
+      const [username, pass] = decoded.split(":");
+      if (username && pass) {
+        email = username;
+        password = pass;
+      }
+    } catch (_) {}
+  }
   try {
     const user = await UserModel.findOne({ email });
     if (!user) {
@@ -71,8 +83,17 @@ userRouter.post("/login", async (req, res) => {
           .status(401)
           .send({ success: false, message: "Wrong Credentials" });
       }
+      
+      // Check if SECRET_KEY is available
+      if (!process.env.SECRET_KEY) {
+        console.error("SECRET_KEY environment variable is not set!");
+        return res
+          .status(500)
+          .send({ success: false, message: "Server configuration error" });
+      }
+      
       const token = jwt.sign(
-        { userId: user._id, username: user.username },
+        { userId: user._id, username: user.username, role: user.role },
         process.env.SECRET_KEY,
         { expiresIn: "1h" }
       );
@@ -83,10 +104,12 @@ userRouter.post("/login", async (req, res) => {
         user: {
           username: user.username,
           email: user.email,
+          role: user.role,
         },
       });
     });
   } catch (error) {
+    console.error("Login error:", error);
     res.status(500).send({ success: false, message: error.message });
   }
 });
@@ -182,6 +205,8 @@ userRouter.post("/reset_password", async (req, res) => {
       return res.status(400).send({ msg: "Wrong Credentials" });
     }
     const hashedPassword = await bcrypt.hash(newPassword, 10);
+    console.log("Hashed Password is",hashedPassword);
+    console.log("User Password is",user.password);
     user.password = hashedPassword;
     user.resetOtp = "";
     user.resetOtpExpireAt = 0;
@@ -196,20 +221,29 @@ userRouter.post("/reset_password", async (req, res) => {
     return res.json({ success: false, message: error.message });
   }
 });
-userRouter.get("/:email", async (req, res) => {
-  const { email } = req.params;
+// Get all users (for admin dashboard)
+userRouter.get("/", async (req, res) => {
   try {
-    const user = await UserModel.findOne({ email });
+    const users = await UserModel.find({}, { password: 0, verifyOtp: 0, verifyOtpExpireAt: 0 });
+    res.status(200).json(users);
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).json({ error: "Failed to fetch users" });
+  }
+});
+
+userRouter.get("/details", async (req, res) => {
+  const useremail="ishaanj2612@gmail.com"
+  try {
+    const user = await UserModel.findOne({ email:useremail });
     if (!user) {
-      return res.status(404).send({ msg: "User not found" });
+      return res.status(400).send({ msg: "Wrong Credentials" });
     }
-    // user.transactions = [];
-    // user.courses = [];
-    await user.save();
-    res.status(200).send({ success: true, user });
+  
+    res.status(200).send(user);
   } catch (error) {
     console.error(error);
-    res.status(500).send({ success: false, message: error.message });
+    return res.json({ success: false, message: error.message });
   }
 });
 export { userRouter };
