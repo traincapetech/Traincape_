@@ -68,7 +68,15 @@ const Tally = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between p-5">
           <div className="lg:w-2/3 w-full ">
             <h1 className="text-3xl  md:text-4xl lg:text-4xl font-bold font-serif ">
-              Tally Certifications
+              <a 
+                href="https://tallysolutions.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-blue-600 transition-colors cursor-pointer"
+                title="Visit Tally Solutions Official Website"
+              >
+                Tally
+              </a> Certifications
             </h1>
             <h5 className="text-sm md:text-lg lg:text-base xl:text-xl mt-4">
               An education initiative of Tally Solutions, the makers of the popular Tally software. 

@@ -1,6 +1,6 @@
 import React from "react";
 
-const FormatPrice = ({ price }) => {
+const FormatPrice = ({ price, currency = 'INR' }) => {
   // Ensure price is a number and handle decimals correctly
   const numericPrice = typeof price === 'number' ? price : parseFloat(price.toString().replace(/[^0-9.]/g, ""));
 
@@ -9,9 +9,12 @@ const FormatPrice = ({ price }) => {
     return <span>Invalid Price</span>;  // Handle invalid price
   }
 
+  // Normalize currency code
+  const currencyCode = (currency || 'INR').toUpperCase();
+
   return Intl.NumberFormat("en-IN", {
     style: "currency",
-    currency: "INR",
+    currency: currencyCode,
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   }).format(numericPrice);

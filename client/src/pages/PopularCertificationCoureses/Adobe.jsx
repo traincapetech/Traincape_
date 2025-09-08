@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import banner from "../../assets/ibmbanner.jpg";
 import banner2 from "../../assets/adobebanner.png";
 import Card1 from "../../assets/adobe1.webp";
@@ -9,8 +9,28 @@ import Card5 from "../../assets/adobe5.webp";
 import Card6 from "../../assets/adobe6.webp";
 import AdobeCourses from "../../components/AdobeCourses";
 import { useNavigate } from "react-router-dom";
+import AddToCartButton from "../../components/AddToCartButton";
+import { useCartContext } from "../../components/CartContext";
 
 const Adobe = () => {
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const { addToCart } = useCartContext();
+
+  const handleAddToCart = () => {
+    const product = {
+      id: "adobe-photoshop-certified-professional",
+      title: "Adobe Photoshop Certified Professional",
+      price: 2499,
+      image: "https://www.adobe.com/content/dam/shared/images/product-icons/svg/photoshop.svg",
+      quantity: 1,
+    };
+    addToCart(product);
+    setShowConfirmation(true);
+
+    setTimeout(() => {
+      setShowConfirmation(false);
+    }, 2000);
+  };
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -20,43 +40,44 @@ const Adobe = () => {
       image: Card1,
       description: "Adobe Certified Professional – Photoshop Certification",
       price: "₹1149",
-      url: "/AdobeCourses",
+      url: "/AdobeCourse/AdobePhotoshop",
     },
     {
       image: Card2,
       description: "Adobe Certified Professional – InDesign Certification",
       price: "₹1149",
-      url: "/AdobeCourses",
+      url: "/AdobeCourse/AdobeInDesign",
     },
     {
       image: Card3,
       description: "Adobe Certified Professional – Illustrator Certification",
       price: "₹1149",
-      url: "/AdobeCourses",
+      url: "/AdobeCourse/AdobeIllustrator",
     },
     {
       image: Card4,
       description: "Adobe Certified Professional – Premiere Pro Certification",
       price: "₹1149",
-      url: "/AdobeCourses",
+      url: "/AdobeCourse/AdobePremiere",
     },
     {
       image: Card5,
-      description: "Adobe Certified Professional – Animate Certification",
+      description: "Adobe Certified Professional – Lightroom Certification",
       price: "₹1149",
-      url: "/AdobeCourses",
+      url: "/AdobeCourse/AdobeLightroom",
     },
     {
       image: Card6,
       description: "Adobe Certified Professional – After Effects Certification",
       price: "₹1149",
-      url: "/AdobeCourses",
+      url: "/AdobeCourse/AdobeAfterEffects",
     },
   ];
 
   const navigate=useNavigate()
   return (
     <>
+      <AddToCartButton />
       <div
         className="bg-gray-100 w-full relative contrast-75 h-[65vh] content-center text-justify"
         style={{
@@ -68,7 +89,15 @@ const Adobe = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between p-5">
           <div className="lg:w-2/3 w-full ">
             <h1 className="text-2xl  md:text-3xl lg:text-4xl font-bold font-serif ">
-              Adobe Certified Professional (ACP)
+              <a 
+                href="https://www.adobe.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-blue-600 transition-colors cursor-pointer"
+                title="Visit Adobe Official Website"
+              >
+                Adobe
+              </a> Certified Professional (ACP)
             </h1>
             <h5 className="text-sm md:text-lg lg:text-base xl:text-xl mt-4">
               Adobe Certified Professional is the industry-recognized

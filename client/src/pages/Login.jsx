@@ -165,6 +165,10 @@ const Login = () => {
             animationData={signup}
             loop={true}
             className="w-full h-[300px] md:h-[400px]"
+            onError={(error) => {
+              console.warn('Lottie animation error:', error);
+              // Fallback to a simple div if animation fails
+            }}
           />
         </div>
 

@@ -203,7 +203,15 @@ const META = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between p-5">
           <div className="lg:w-2/3 w-full">
             <h1 className="text-2xl md:text-4xl lg:text-4xl font-bold font-serif">
-              Meta Digital Marketing Certification
+              <a 
+                href="https://www.meta.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-blue-600 transition-colors cursor-pointer"
+                title="Visit Meta Official Website"
+              >
+                Meta
+              </a> Digital Marketing Certification
             </h1>
             <h5 className="text-xs md:text-lg lg:text-xl mt-4">
               The Meta Certified Digital Marketing Associate Certification Exam

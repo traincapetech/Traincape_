@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom"; // Use useNavigate here
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { API_ENDPOINTS } from "../../config/api";
 import { IoMenu, IoClose } from "react-icons/io5";
 import Popup from "./Popup.jsx";
 import QuestionCard from "./QuestionCard.jsx";
 import DashboardHeader from "../DashboardHeader.jsx";
+import ExamProctor from "../../components/ExamProctor.jsx";
 
 const Test = () => {
   const location = useLocation();
@@ -25,6 +27,8 @@ const Test = () => {
   const [error, setError] = useState(null);
   const [certificateId, setCertificateId] = useState("");
   // const [certificateUrl, setCertificateUrl] = useState("");
+  const [examStarted, setExamStarted] = useState(false);
+  const [violations, setViolations] = useState([]);
 
   const { user } = useSelector((state) => state.user);
 
@@ -37,7 +41,7 @@ const Test = () => {
       try {
         const encodedSubTopic = encodeURIComponent(subTopic);
         const response = await axios.get(
-          `https://traincape-backend-1.onrender.com/questions/getQuestions?course=${course}&subTopic=${encodedSubTopic}&level=${level}`
+          `${API_ENDPOINTS.GET_QUESTIONS}?course=${course}&subTopic=${encodedSubTopic}&level=${level}&_=${Date.now()}`
         );
         setQuestions(response.data);
       } catch (error) {
@@ -107,7 +111,7 @@ const Test = () => {
     const score = calculateScore();
 
     // Calculate if the user is certified based on the score
-    const passingScore = questions.length * 0.7; // 70% passing score
+    const passingScore = questions.length * 0.8; // 80% passing score
     const isCertified = score >= passingScore;
 
     setCertified(isCertified); // Set the certified status based on score
@@ -121,6 +125,7 @@ const Test = () => {
       level,
       totalQuestions: questions.length,
       certificate: isCertified, // Send certificate status to backend
+      violations: violations, // Include violation data
     };
 
     try {
@@ -186,6 +191,28 @@ const Test = () => {
       }
     });
   };
+
+  // Handle security violations
+  const handleViolation = (type, count) => {
+    const newViolation = {
+      type,
+      count,
+      timestamp: new Date().toISOString(),
+      course,
+      subTopic,
+      level
+    };
+    setViolations(prev => [...prev, newViolation]);
+    console.log(`Security violation: ${type} (${count})`);
+  };
+
+  // Handle exam termination
+  const handleExamTermination = (violationData) => {
+    console.log('Exam terminated due to violations:', violationData);
+    // You can send this data to your backend for logging
+    setQuizSubmitted(true);
+    setCertified(false);
+  };
   
 
   if (loading) {
@@ -197,81 +224,88 @@ const Test = () => {
   }
 
   return (
-    <div className="flex flex-col sm:flex-row min-h-screen bg-gray-100">
-      <div className="flex justify-between items-center bg-gray-900 p-4 sm:hidden">
-        <button onClick={toggleSidebar}>
-          {isSidebarOpen ? <IoClose size={24} color="white" /> : <IoMenu size={24} color="white" />}
-        </button>
-      </div>
-
-      <div className={`w-full sm:w-1/4 bg-gray-900 p-6 sm:block ${isSidebarOpen ? "block" : "hidden sm:block"}`}>
-        <h2 className="text-2xl font-semibold text-white mb-4">Questions</h2>
-        <div className="grid grid-cols-5 md:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-2">
-          {questions.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => handleSidebarClick(index)}
-              className={`w-10 lg:w-12 lg:h-12 h-10 text-center text-lg font-semibold rounded-md ${
-                currentQuestion === index
-                  ? "bg-blue-500 text-white"
-                  : userAnswers[index] !== undefined
-                  ? "bg-green-500 text-white"
-                  : "bg-white"
-              }`}
-              disabled={timeLeft === 0 || quizSubmitted}
-            >
-              {index + 1}
-            </button>
-          ))}
+    <ExamProctor
+      onViolation={handleViolation}
+      onExamTermination={handleExamTermination}
+      maxViolations={3}
+      debug={process.env.NODE_ENV === 'development'}
+    >
+      <div className="flex flex-col sm:flex-row min-h-screen bg-gray-100">
+        <div className="flex justify-between items-center bg-gray-900 p-4 sm:hidden">
+          <button onClick={toggleSidebar}>
+            {isSidebarOpen ? <IoClose size={24} color="white" /> : <IoMenu size={24} color="white" />}
+          </button>
         </div>
-      </div>
 
-      <div className="flex-grow p-6">
-        <div className="flex justify-between items-center mb-6">
-          <div className="md:text-lg text-base flex flex-col mt-2">
-            <span className="font-semibold text-3xl">Course: <span className="text-red-500">{course}</span></span>
-            <span> Sub-Topic: {subTopic}</span>
-            <span> Level: {level}</span>
-          </div>
-          <div className="mt-2 md:text-lg text-sm font-bold">
-            <DashboardHeader />
-            Time Left: {quizSubmitted ? "00:00" : formatTime(timeLeft)}
+        <div className={`w-full sm:w-1/4 bg-gray-900 p-6 sm:block ${isSidebarOpen ? "block" : "hidden sm:block"}`}>
+          <h2 className="text-2xl font-semibold text-white mb-4">Questions</h2>
+          <div className="grid grid-cols-5 md:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-2">
+            {questions.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => handleSidebarClick(index)}
+                className={`w-10 lg:w-12 lg:h-12 h-10 text-center text-lg font-semibold rounded-md ${
+                  currentQuestion === index
+                    ? "bg-blue-500 text-white"
+                    : userAnswers[index] !== undefined
+                    ? "bg-green-500 text-white"
+                    : "bg-white"
+                }`}
+                disabled={timeLeft === 0 || quizSubmitted}
+              >
+                {index + 1}
+              </button>
+            ))}
           </div>
         </div>
 
-        <div className="rounded-lg shadow-md">
-          {timeLeft > 0 && questions.length > 0 && !quizSubmitted && (
-            <QuestionCard
-              questionText={questions[currentQuestion]?.questionText}
-              options={questions[currentQuestion]?.options || []}
-              currentQuestion={currentQuestion}
-              setCurrentQuestion={setCurrentQuestion}
-              handleSubmit={handleSubmit}
-              selectedOption={userAnswers[currentQuestion]}
-              handleOptionChange={handleOptionChange}
-              totalQuestions={questions.length}
-            />
+        <div className="flex-grow p-6">
+          <div className="flex justify-between items-center mb-6">
+            <div className="md:text-lg text-base flex flex-col mt-2">
+              <span className="font-semibold text-3xl">Course: <span className="text-red-500">{course}</span></span>
+              <span> Sub-Topic: {subTopic}</span>
+              <span> Level: {level}</span>
+            </div>
+            <div className="mt-2 md:text-lg text-sm font-bold">
+              <DashboardHeader />
+              Time Left: {quizSubmitted ? "00:00" : formatTime(timeLeft)}
+            </div>
+          </div>
+
+          <div className="rounded-lg shadow-md">
+            {timeLeft > 0 && questions.length > 0 && !quizSubmitted && (
+              <QuestionCard
+                questionText={questions[currentQuestion]?.questionText}
+                options={questions[currentQuestion]?.options || []}
+                currentQuestion={currentQuestion}
+                setCurrentQuestion={setCurrentQuestion}
+                handleSubmit={handleSubmit}
+                selectedOption={userAnswers[currentQuestion]}
+                handleOptionChange={handleOptionChange}
+                totalQuestions={questions.length}
+              />
+            )}
+          </div>
+
+          {timeLeft === 0 && !quizSubmitted && (
+            <div className="mt-4 text-center text-4xl text-red-500 font-bold">Time's Up!</div>
           )}
         </div>
 
-        {timeLeft === 0 && !quizSubmitted && (
-          <div className="mt-4 text-center text-4xl text-red-500 font-bold">Time's Up!</div>
+        {showPopup && (
+          <Popup
+            onClose={closePopup}
+            score={calculateScore()}
+            totalQuestions={questions.length}
+            certified={certified}
+            user={user}
+            onGetCertificate={handleGetCertificate} // Pass the redirection function here
+            certificateId={certificateId} // Pass certificateId to popup
+            // certificateUrl={certificateUrl} // Pass certificateUrl to popup
+          />
         )}
       </div>
-
-      {showPopup && (
-        <Popup
-          onClose={closePopup}
-          score={calculateScore()}
-          totalQuestions={questions.length}
-          certified={certified}
-          user={user}
-          onGetCertificate={handleGetCertificate} // Pass the redirection function here
-          certificateId={certificateId} // Pass certificateId to popup
-          // certificateUrl={certificateUrl} // Pass certificateUrl to popup
-        />
-      )}
-    </div>
+    </ExamProctor>
   );
 };
 

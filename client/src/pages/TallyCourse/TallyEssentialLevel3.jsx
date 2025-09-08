@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { FaCheckCircle, FaArrowRight } from 'react-icons/fa';
+import { FaArrowRight } from 'react-icons/fa';
+import { FaCircleCheck } from 'react-icons/fa6';
 import { useCartContext } from '../../components/CartContext';
 import AddToCartButton from '../../components/AddToCartButton';
 import tallyLogo from '../../assets/tally2.png';
@@ -232,35 +233,35 @@ const TallyEssentialLevel3 = () => {
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">What You'll Learn</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   <div className="flex items-start">
-                    <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+                    <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
                     <p className="text-gray-700">Advanced financial statement customization</p>
                   </div>
                   <div className="flex items-start">
-                    <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+                    <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
                     <p className="text-gray-700">Multi-currency accounting and forex management</p>
                   </div>
                   <div className="flex items-start">
-                    <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+                    <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
                     <p className="text-gray-700">Branch accounting and consolidated reporting</p>
                   </div>
                   <div className="flex items-start">
-                    <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+                    <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
                     <p className="text-gray-700">Advanced tax configurations and compliance</p>
                   </div>
                   <div className="flex items-start">
-                    <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+                    <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
                     <p className="text-gray-700">Automated bank reconciliation</p>
                   </div>
                   <div className="flex items-start">
-                    <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+                    <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
                     <p className="text-gray-700">Budget variance analysis and reporting</p>
                   </div>
                   <div className="flex items-start">
-                    <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+                    <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
                     <p className="text-gray-700">Manufacturing and job costing</p>
                   </div>
                   <div className="flex items-start">
-                    <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+                    <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
                     <p className="text-gray-700">Tally Developer tools and customization</p>
                   </div>
                 </div>
@@ -299,23 +300,23 @@ const TallyEssentialLevel3 = () => {
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">Why Choose This Course?</h2>
                 <ul className="space-y-2">
                   <li className="flex items-start">
-                    <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+                    <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
                     <span>Industry-recognized Tally certification</span>
                   </li>
                   <li className="flex items-start">
-                    <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+                    <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
                     <span>Hands-on practice with real-world business scenarios</span>
                   </li>
                   <li className="flex items-start">
-                    <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+                    <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
                     <span>Learn advanced features not covered in standard Tally training</span>
                   </li>
                   <li className="flex items-start">
-                    <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+                    <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
                     <span>Master complex financial reporting and analysis</span>
                   </li>
                   <li className="flex items-start">
-                    <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+                    <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
                     <span>Develop skills to implement enterprise-level financial systems</span>
                   </li>
                 </ul>

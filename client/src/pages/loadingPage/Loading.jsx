@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import Lottie from "lottie-react";
 import loader from "../../assets/loader.json";
 
@@ -65,6 +65,9 @@ const ReviewCardSkeleton = memo(() => (
 
 // Optimized loading component with memoization for better performance
 const Loading = memo(({ type = "default" }) => {
+  // Move useState to the top - before any conditional returns
+  const [lottieError, setLottieError] = useState(false);
+
   // If it's specifically for the review page, show skeleton loaders
   if (type === "reviews") {
     return (
@@ -91,7 +94,18 @@ const Loading = memo(({ type = "default" }) => {
     );
   }
 
-  // Lightweight default loader
+  // Lightweight default loader with error handling
+  if (lottieError) {
+    return (
+      <div className='flex justify-center items-center min-h-[40vh]'>
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <div className="text-gray-500">Loading content...</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className='flex justify-center items-center min-h-[40vh]'>
       <div className="relative w-64 md:w-80 mx-auto">
@@ -101,6 +115,7 @@ const Loading = memo(({ type = "default" }) => {
           className='w-full h-full' 
           style={{ maxHeight: '200px' }}
           {...lottieOptions}
+          onError={() => setLottieError(true)}
         />
       </div>
       <div className="absolute mt-48 text-gray-500">Loading content...</div>

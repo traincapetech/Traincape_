@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { API_ENDPOINTS } from "../config/api.js";
 
 // Define initial state
 const initialState = {
@@ -17,7 +18,7 @@ export const loginUser = createAsyncThunk(
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "https://traincape-backend-1.onrender.com/users/login",
+        API_ENDPOINTS.LOGIN,
         { email, password }
       );
       return response.data;
@@ -33,7 +34,7 @@ export const sendOTPToEmail = createAsyncThunk(
   async ({ email }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "https://traincape-backend-1.onrender.com/users/sendOTPToEmail",
+        API_ENDPOINTS.SEND_OTP,
         { email }
       );
       return response.data;
@@ -49,7 +50,7 @@ export const verifyOtp = createAsyncThunk(
   async ({ otp, email }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "https://traincape-backend-1.onrender.com/users/verifyOtp",
+        API_ENDPOINTS.VERIFY_OTP,
         { otp, email }
       );
       return response.data;
@@ -65,7 +66,7 @@ export const reset_password = createAsyncThunk(
   async ({ email, newPassword }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "https://traincape-backend-1.onrender.com/users/reset_password",
+        API_ENDPOINTS.RESET_PASSWORD,
         { email, newPassword }
       );
       return response.data;
@@ -94,7 +95,7 @@ export const signupUser = createAsyncThunk(
   ) => {
     try {
       const response = await axios.post(
-        "https://traincape-backend-1.onrender.com/users/register",
+        API_ENDPOINTS.REGISTER,
         {
           email,
           password,

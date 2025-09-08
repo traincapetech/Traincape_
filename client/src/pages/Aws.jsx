@@ -17,70 +17,82 @@ const Aws = () => {
 
  const courseData = [
     {
-      image :security,
+      image: security,
       title: "AWS Certified Security",
-      
-     
-      url : "/awsSecurity"
+      url: "/awsSecurity",
+      course: "AWS",
+      subCourse: "AwsCertifiedSecurity"
     },
-   
     {
       image: sysops,
       title: "AWS Certified SysOps Administrator",
-      url : "/awsSysops"
-      
+      url: "/awsSysops",
+      course: "AWS",
+      subCourse: "AwsCertifiedSysOps"
     },
     {
-      image:developer ,
-        title: "AWS Certified Developer",
-       url : "/awsDeveloper"
-        
-      },
-      {
+      image: developer,
+      title: "AWS Certified Developer",
+      url: "/awsDeveloper",
+      course: "AWS",
+      subCourse: "AwsCertifiedDeveloper"
+    },
+    {
       image: deveops,
-        title: "AWS Certified DevOps Engineer",
-         url : "/awsDevops"
-        
-      },
-      {
+      title: "AWS Certified DevOps Engineer",
+      url: "/awsDevops",
+      course: "AWS",
+      subCourse: "AwsCertifiedDevOps"
+    },
+    {
       image: machine,
-        title: "AWS Certified Machine Learning",
-       url : "/awsMachine"
-        
-      },
-      {
+      title: "AWS Certified Machine Learning",
+      url: "/awsMachine",
+      course: "AWS",
+      subCourse: "AwsCertifiedMachineLearning"
+    },
+    {
       image: data,
-        title: "AWS Certified Data Analytics",
-        description: "Master the art of cloud-based technology and services.",
-         url : "/awsData"
-      },
-      {
-       image: cloud,
-        title: "AWS Certified cloud practitioner",
-       url : "/awsCloud"
-        
-      },
-      {
+      title: "AWS Certified Data Analytics",
+      description: "Master the art of cloud-based technology and services.",
+      url: "/awsData",
+      course: "AWS",
+      subCourse: "AwsCertifiedData"
+    },
+    {
+      image: cloud,
+      title: "AWS Certified cloud practitioner",
+      url: "/awsCloud",
+      course: "AWS",
+      subCourse: "AwsCertifiedCloud"
+    },
+    {
       image: solution,
-        title: "AWS Certified Solutions Architect",
-        url : "/awsSolution"
-      },
-      {
-        image: Advance,
-        title: "AWS Certified Advanced Networking",
-       url : "/awsNetworking"
-        
-      },
-     
-
-
+      title: "AWS Certified Solutions Architect",
+      url: "/awsSolution",
+      course: "AWS",
+      subCourse: "AwsCertifiedSolutionsArchitect"
+    },
+    {
+      image: Advance,
+      title: "AWS Certified Advanced Networking",
+      url: "/awsNetworking",
+      course: "AWS",
+      subCourse: "AwsCertifiedAdvancedNetworking"
+    },
   ];
 
+  const navigate=useNavigate()
+
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const timeout = setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 0);
+  
+    return () => clearTimeout(timeout);
   }, []);
 
-  const navigate=useNavigate()
+
     return (
         <>
                           <AddToCartButton />
@@ -88,9 +100,25 @@ const Aws = () => {
             {/* Hero Section */}
       <div className="course-detail text-center bg-blue-100 py-10">
         <div className="info flex flex-col md:flex-row gap-6 items-center px-5">
-          <Lottie animationData={comptia} className="w-full md:w-1/2" />
+          <Lottie 
+            animationData={comptia} 
+            className="w-full md:w-1/2" 
+            onError={(error) => {
+              console.warn('Lottie animation error:', error);
+            }}
+          />
           <div className="text w-full md:w-1/2">
-            <h2 className="text-3xl md:text-5xl font-bold mb-7 text-cyan-900">AWS</h2>
+            <h2 className="text-3xl md:text-5xl font-bold mb-7 text-cyan-900">
+              <a 
+                href="https://aws.amazon.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-blue-600 transition-colors cursor-pointer"
+                title="Visit AWS Official Website"
+              >
+                AWS
+              </a>
+            </h2>
             <p className="text-base md:text-lg text-gray-700">
               AWS (Amazon Web Services) is a pioneering cloud computing platform that empowers businesses to innovate, scale, and transform globally. Offering a vast array of services, including storage, AI, machine learning, and analytics, AWS delivers unmatched flexibility, security, and reliability. With its pay-as-you-go model and global reach, AWS is the trusted choice for startups, enterprises, and government organizations alike.
             </p>
@@ -128,6 +156,8 @@ const Aws = () => {
             image={course.image}
             title={course.title}
             url={course.url}
+            course={course.course}
+            subCourse={course.subCourse}
           />
         ))}
       </div>

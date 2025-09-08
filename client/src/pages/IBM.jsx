@@ -215,7 +215,15 @@ const IBM = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between p-5">
           <div className="lg:w-2/3 w-full ">
             <h1 className="text-2xl  md:text-4xl lg:text-4xl font-bold font-serif ">
-              IBM Certification Courses
+              <a 
+                href="https://www.ibm.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-blue-600 transition-colors cursor-pointer"
+                title="Visit IBM Official Website"
+              >
+                IBM
+              </a> Certification Courses
             </h1>
             <h5 className="text-xs md:text-xl lg:text-base xl:text-xl mt-4">
               IBM Certification Courses helps learners gain skills in the latest

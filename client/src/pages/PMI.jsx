@@ -170,7 +170,15 @@ const PMI = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between p-5">
           <div className="lg:w-2/3 w-full">
             <h1 className="text-2xl md:text-4xl lg:text-4xl font-bold font-serif">
-            PMI Project Management
+              <a 
+                href="https://www.pmi.org/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-blue-600 transition-colors cursor-pointer"
+                title="Visit PMI Official Website"
+              >
+                PMI
+              </a> Project Management
             </h1>
             <h5 className="text-sm md:text-lg lg:text-xl mt-4">
             The PMI Project Management Ready® certification is designed to test and validate foundational concepts and knowledge in project management.

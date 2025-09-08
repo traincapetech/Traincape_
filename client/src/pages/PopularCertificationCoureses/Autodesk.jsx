@@ -60,7 +60,15 @@ const Autodesk = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between p-5">
           <div className="lg:w-2/3 w-full ">
             <h1 className="text-2xl  md:text-3xl lg:text-4xl font-bold font-serif ">
-              Autodesk Certified User (ACU)
+              <a 
+                href="https://www.autodesk.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-blue-600 transition-colors cursor-pointer"
+                title="Visit Autodesk Official Website"
+              >
+                Autodesk
+              </a> Certified User (ACU)
             </h1>
             <h5 className="text-sm md:text-lg lg:text-base xl:text-xl mt-4">
               Career and technical education programs across India equip

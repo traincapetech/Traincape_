@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import VoucherButton from './VoucherButton';
 
-const CiscoCourse = ({ title, url, image }) => {
+const CiscoCourse = ({ title, url, image, course, subCourse }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -14,8 +15,19 @@ const CiscoCourse = ({ title, url, image }) => {
       {/* Title */}
       <h3 className="text-lg md:text-xl font-bold text-blue-800 mb-4 text-center">{title}</h3>
 
+      {/* Voucher Button */}
+      {course && subCourse && (
+        <div className="w-full mb-3">
+          <VoucherButton 
+            course={course} 
+            subCourse={subCourse}
+            className="w-full justify-center"
+          />
+        </div>
+      )}
+
       {/* Course Details Button */}
-      <Link to={url} className="mt-auto">
+      <Link to={url} className="mt-auto w-full">
         <button className="w-full text-white bg-blue-600 hover:bg-blue-700 text-sm md:text-base font-medium py-2 px-5 rounded-lg transition-colors">
           Course Details
         </button>

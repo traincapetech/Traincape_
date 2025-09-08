@@ -691,6 +691,10 @@ const Signup = () => {
                 renderSettings={{
                   preserveAspectRatio: "xMidYMid slice",
                 }}
+                onError={(error) => {
+                  console.warn('Lottie animation error:', error);
+                  // Fallback to a simple div if animation fails
+                }}
               />
             </div>
           </div>

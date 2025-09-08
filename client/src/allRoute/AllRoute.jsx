@@ -1,9 +1,13 @@
 // Updated by Saurav
-import React, { Suspense, lazy } from "react";
+import React, { Suspense } from "react";
+import { lazyWithRetry } from "../utils/lazyWithRetry";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import ForgotPassword from "../pages/ForgotPassword";
 import NotFound from "../pages/NotFound";
 import Gallery from "../pages/Gallery";
+import CertificateLookup from "../pages/CertificateLookup";
+// Preload BS icons to avoid chunk loading errors
+import * as BsIcons from "react-icons/bs";
 // Loading component
 const LoadingComponent = () => (
   <div style={{ 
@@ -19,220 +23,239 @@ const LoadingComponent = () => (
 );
 
 // Lazy load high-level pages for better performance
-const Home = lazy(() => import("../pages/Home"));
+const Home = lazyWithRetry(() => import("../pages/Home"));
 // const UserPage = lazy(() => import("../pages/userPage/UserPage"));
-const Login = lazy(() => import("../pages/Login"));
-const AboutUS = lazy(() => import("../pages/AboutUS"));
-const ContactUs = lazy(() => import("../pages/ContactUs"));
-const Signup = lazy(() => import("../pages/Signup"));
-const FAQ = lazy(() => import("../pages/FAQ"));
-const Services = lazy(() => import("../pages/Services"));
-const TermsAndCondition = lazy(() => import("../pages/TermsAndCondition"));
-const Courses = lazy(() => import("../pages/Courses"));
-const Career = lazy(() => import("../pages/Career/Career"));
-const Policy = lazy(() => import("../pages/Policy"));
-const PageNotFound = lazy(() => import("../pages/404/PageNotFound"));
-const Blogs = lazy(() => import("../pages/Blogs/Blogs"));
-const CompTIAsinglePage = lazy(() => import("../pages/SinglePage/CompTIA/CompTIAsinglePage"));
-const ReviewPage = lazy(() => import("../pages/review/ReviewPage"));
-const LandingPage = lazy(() => import("../pages/landingPage/LandingPage"));
-const Employee = lazy(() => import("../pages/Employee"));
-const Internship = lazy(() => import("../pages/Internship"));
-const Test = lazy(() => import("../pages/Test/Test"));
-const Training = lazy(() => import("../pages/Training"));
-const Comptia = lazy(() => import("../pages/Comptia"));
-const Aws = lazy(() => import("../pages/Aws"));
-const BookPage = lazy(() => import("../pages/ebook/BookPage"));
+const Login = lazyWithRetry(() => import("../pages/Login"));
+const AboutUS = lazyWithRetry(() => import("../pages/AboutUS"));
+const ContactUs = lazyWithRetry(() => import("../pages/ContactUs"));
+const Signup = lazyWithRetry(() => import("../pages/Signup"));
+const FAQ = lazyWithRetry(() => import("../pages/FAQ"));
+const Services = lazyWithRetry(() => import("../pages/Services"));
+const TermsAndCondition = lazyWithRetry(() => import("../pages/TermsAndCondition"));
+const Courses = lazyWithRetry(() => import("../pages/Courses"));
+const Career = lazyWithRetry(() => import("../pages/Career/Career"));
+const Policy = lazyWithRetry(() => import("../pages/Policy"));
+const PageNotFound = lazyWithRetry(() => import("../pages/404/PageNotFound"));
+const Blogs = lazyWithRetry(() => import("../pages/Blogs/Blogs"));
+const CompTIAsinglePage = lazyWithRetry(() => import("../pages/SinglePage/CompTIA/CompTIAsinglePage"));
+const ReviewPage = lazyWithRetry(() => import("../pages/review/ReviewPage"));
+const LandingPage = lazyWithRetry(() => import("../pages/landingPage/LandingPage"));
+const Employee = lazyWithRetry(() => import("../pages/Employee"));
+const Internship = lazyWithRetry(() => import("../pages/Internship"));
+const Test = lazyWithRetry(() => import("../pages/Test/Test"));
+const Training = lazyWithRetry(() => import("../pages/Training"));
+const InternalExams = lazyWithRetry(() => import("../pages/InternalExams"));
+const VoucherSuccess = lazyWithRetry(() => import("../pages/VoucherSuccess"));
+const VoucherCancel = lazyWithRetry(() => import("../pages/VoucherCancel"));
+const Comptia = lazyWithRetry(() => import("../pages/Comptia"));
+const Aws = lazyWithRetry(() => import("../pages/Aws"));
+const BookPage = lazyWithRetry(() => import("../pages/ebook/BookPage"));
 
 // Certification pages - AWS
-const Overview = lazy(() => import("../pages/AWS/Overview"));
-const AwsCertifiedNetworking = lazy(() => import("../pages/AWS/AwsCertifiedNetworking"));
-const AwsCertifiedSolution = lazy(() => import("../pages/AWS/AwsCertifiedSolution"));
-const AwsCertifiedCloud = lazy(() => import("../pages/AWS/AwsCertifiedCloud"));
-const AwsCertifiedData = lazy(() => import("../pages/AWS/AwsCertifiedData"));
-const AwsCertifiedMachine = lazy(() => import("../pages/AWS/AwsCertifiedMachine"));
-const AwsCertifiedDevops = lazy(() => import("../pages/AWS/AwsCertifiedDevops"));
-const AwsCertifiedDeveloper = lazy(() => import("../pages/AWS/AwsCertifiedDeveloper"));
-const AwsCertifiedSysops = lazy(() => import("../pages/AWS/AwsCertifiedSysops"));
-const AwsCertifiedSecurity = lazy(() => import("../pages/AWS/AwsCertifiedSecurity"));
+const Overview = lazyWithRetry(() => import("../pages/AWS/Overview"));
+const AwsCertifiedNetworking = lazyWithRetry(() => import("../pages/AWS/AwsCertifiedNetworking"));
+const AwsCertifiedSolution = lazyWithRetry(() => import("../pages/AWS/AwsCertifiedSolution"));
+const AwsCertifiedCloud = lazyWithRetry(() => import("../pages/AWS/AwsCertifiedCloud"));
+const AwsCertifiedData = lazyWithRetry(() => import("../pages/AWS/AwsCertifiedData"));
+const AwsCertifiedMachine = lazyWithRetry(() => import("../pages/AWS/AwsCertifiedMachine"));
+const AwsCertifiedDevops = lazyWithRetry(() => import("../pages/AWS/AwsCertifiedDevops"));
+const AwsCertifiedDeveloper = lazyWithRetry(() => import("../pages/AWS/AwsCertifiedDeveloper"));
+const AwsCertifiedSysops = lazyWithRetry(() => import("../pages/AWS/AwsCertifiedSysops"));
+const AwsCertifiedSecurity = lazyWithRetry(() => import("../pages/AWS/AwsCertifiedSecurity"));
 
 // Admin imports
-const AdminPanel = lazy(() => import("../pages/AdminPanel"));
-const VerifyCertificate = lazy(() => import("../pages/Test/VerifyCertificate"));
-const CertificateTemplate = lazy(() => import("../pages/Test/CertificateTemplate"));
+const AdminPanel = lazyWithRetry(() => import("../pages/AdminPanel/AdminPanel"));
+const VerifyCertificate = lazyWithRetry(() => import("../pages/Test/VerifyCertificate"));
+const CertificateTemplate = lazyWithRetry(() => import("../pages/Test/CertificateTemplate"));
 
 // Microsoft
-const Microsoft = lazy(() => import("../pages/Microsoft"));
+const Microsoft = lazyWithRetry(() => import("../pages/Microsoft"));
+
+// Adobe
+const AdobePhotoshop = lazyWithRetry(() => import("../pages/AdobeCourse/AdobePhotoshop"));
+const PhotoshopCertified = lazyWithRetry(() => import("../pages/AdobeCourse/PhotoshopCertified"));
+const AdobeIllustrator = lazyWithRetry(() => import("../pages/AdobeCourse/AdobeIllustrator"));
+const AdobePremiere = lazyWithRetry(() => import("../pages/AdobeCourse/AdobePremiere"));
+const AdobeAfterEffects = lazyWithRetry(() => import("../pages/AdobeCourse/AdobeAfterEffects"));
+const AdobeLightroom = lazyWithRetry(() => import("../pages/AdobeCourse/AdobeLightroom"));
+const AdobeInDesign = lazyWithRetry(() => import("../pages/AdobeCourse/AdobeInDesign"));
+const AdobeXD = lazyWithRetry(() => import("../pages/AdobeCourse/AdobeXD"));
 
 // PECB
-const PECB = lazy(() => import("../pages/PECB"));
-const Computerforensics = lazy(() => import("../pages/Pecb/Computer-forensics"));
-const CybersecurityAuditTrainings = lazy(() => import("../pages/Pecb/Cybersecurity-Audit-Trainings"));
-const ISO9001LeadImplementer = lazy(() => import("../pages/Pecb/ISO-9001-Lead-Implementer"));
-const ISO9001 = lazy(() => import("../pages/Pecb/ISO-9001"));
-const ISO22301 = lazy(() => import("../pages/Pecb/ISO-22301"));
-const ISO31000RiskManager = lazy(() => import("../pages/Pecb/ISO-31000-Risk-Manager"));
-const ISO37001 = lazy(() => import("../pages/Pecb/ISO-37001"));
-const ISO45001 = lazy(() => import("../pages/Pecb/ISO-45001"));
-const Isoiec27001LeadImplementer = lazy(() => import("../pages/Pecb/Iso-iec-27001-Lead-Implementer"));
-const Isoiec27001 = lazy(() => import("../pages/Pecb/Iso-iec-27001"));
-const Isoiec27005RiskManager = lazy(() => import("../pages/Pecb/Iso-iec-27005-Risk-Manager"));
-const Isoiec27032CyberSecurity = lazy(() => import("../pages/Pecb/Iso-iec-27032-Cyber-Security"));
-const PecbCertifiedIso27001Foundation = lazy(() => import("../pages/Pecb/Pecb-Certified-Iso-27001-Foundation"));
-const SCADASecurityManager = lazy(() => import("../pages/Pecb/SCADA-Security-Manager"));
+const PECB = lazyWithRetry(() => import("../pages/PECB"));
+const Computerforensics = lazyWithRetry(() => import("../pages/Pecb/Computer-forensics"));
+const CybersecurityAuditTrainings = lazyWithRetry(() => import("../pages/Pecb/Cybersecurity-Audit-Trainings"));
+const ISO9001LeadImplementer = lazyWithRetry(() => import("../pages/Pecb/ISO-9001-Lead-Implementer"));
+const ISO9001 = lazyWithRetry(() => import("../pages/Pecb/ISO-9001"));
+const ISO22301 = lazyWithRetry(() => import("../pages/Pecb/ISO-22301"));
+const ISO31000RiskManager = lazyWithRetry(() => import("../pages/Pecb/ISO-31000-Risk-Manager"));
+const ISO37001 = lazyWithRetry(() => import("../pages/Pecb/ISO-37001"));
+const ISO45001 = lazyWithRetry(() => import("../pages/Pecb/ISO-45001"));
+const Isoiec27001LeadImplementer = lazyWithRetry(() => import("../pages/Pecb/Iso-iec-27001-Lead-Implementer"));
+const Isoiec27001 = lazyWithRetry(() => import("../pages/Pecb/Iso-iec-27001"));
+const Isoiec27005RiskManager = lazyWithRetry(() => import("../pages/Pecb/Iso-iec-27005-Risk-Manager"));
+const Isoiec27032CyberSecurity = lazyWithRetry(() => import("../pages/Pecb/Iso-iec-27032-Cyber-Security"));
+const PecbCertifiedIso27001Foundation = lazyWithRetry(() => import("../pages/Pecb/Pecb-Certified-Iso-27001-Foundation"));
+const SCADASecurityManager = lazyWithRetry(() => import("../pages/Pecb/SCADA-Security-Manager"));
 
 // Cisco
-const Cisco = lazy(() => import("../pages/Cisco"));
+const Cisco = lazyWithRetry(() => import("../pages/Cisco"));
 
 // CompTIA subcourses
-const ComptiaSecurity = lazy(() => import("../pages/CompTIACourse/ComptiaSecurity"));
-const ComptiaLinux = lazy(() => import("../pages/CompTIACourse/ComptiaLinux"));
-const ComptiaProject = lazy(() => import("../pages/CompTIACourse/ComptiaProject"));
-const ComptiaProject004 = lazy(() => import("../pages/CompTIACourse/ComptiaProject004"));
-const ComptiaPentest = lazy(() => import("../pages/CompTIACourse/ComptiaPentest"));
-const ComptiaA = lazy(() => import("../pages/CompTIACourse/ComptiaA"));
-const ComptiaNetwork = lazy(() => import("../pages/CompTIACourse/ComptiaNetwork"));
-const ComptiaCloud = lazy(() => import("../pages/CompTIACourse/ComptiaCloud"));
-const ComptiaServer = lazy(() => import("../pages/CompTIACourse/ComptiaServer"));
-const ComptiaData = lazy(() => import("../pages/CompTIACourse/ComptiaData"));
-const ComptiaCloudCLO = lazy(() => import("../pages/CompTIACourse/ComptiaCloudCLO"));
-const ComptiaSecurity601 = lazy(() => import("../pages/CompTIACourse/ComptiaSecurity601"));
-const ComptiaCybersecurity = lazy(() => import("../pages/CompTIACourse/ComptiaCyberscurity"));
-const ComptiaAdvance = lazy(() => import("../pages/CompTIACourse/ComptiaAdvance"));
-const ComptiaNetwork007 = lazy(() => import("../pages/CompTIACourse/ComptiaNetwork007"));
+const ComptiaSecurity = lazyWithRetry(() => import("../pages/CompTIACourse/ComptiaSecurity"));
+const ComptiaLinux = lazyWithRetry(() => import("../pages/CompTIACourse/ComptiaLinux"));
+const ComptiaProject = lazyWithRetry(() => import("../pages/CompTIACourse/ComptiaProject"));
+const ComptiaProject004 = lazyWithRetry(() => import("../pages/CompTIACourse/ComptiaProject004"));
+const ComptiaPentest = lazyWithRetry(() => import("../pages/CompTIACourse/ComptiaPentest"));
+const ComptiaA = lazyWithRetry(() => import("../pages/CompTIACourse/ComptiaA"));
+const ComptiaNetwork = lazyWithRetry(() => import("../pages/CompTIACourse/ComptiaNetwork"));
+const ComptiaCloud = lazyWithRetry(() => import("../pages/CompTIACourse/ComptiaCloud"));
+const ComptiaServer = lazyWithRetry(() => import("../pages/CompTIACourse/ComptiaServer"));
+const ComptiaData = lazyWithRetry(() => import("../pages/CompTIACourse/ComptiaData"));
+const ComptiaCloudCLO = lazyWithRetry(() => import("../pages/CompTIACourse/ComptiaCloudCLO"));
+const ComptiaSecurity601 = lazyWithRetry(() => import("../pages/CompTIACourse/ComptiaSecurity601"));
+const ComptiaCybersecurity = lazyWithRetry(() => import("../pages/CompTIACourse/ComptiaCyberscurity"));
+const ComptiaAdvance = lazyWithRetry(() => import("../pages/CompTIACourse/ComptiaAdvance"));
+const ComptiaNetwork007 = lazyWithRetry(() => import("../pages/CompTIACourse/ComptiaNetwork007"));
 
 // Microsoft subcourses
-const MicrosoftAzureAdmin = lazy(() => import("../pages/MicrosoftCourse/MicrosoftAzureAdministrator"));
-const MicrosoftAi = lazy(() => import("../pages/MicrosoftCourse/MicrosoftAi"));
-const MicrosoftDeveloper = lazy(() => import("../pages/MicrosoftCourse/MicrosoftDeveloper"));
-const MicrosoftFundamentals = lazy(() => import("../pages/MicrosoftCourse/MicrosoftFundamentals"));
-const MicrosoftDynamic365 = lazy(() => import("../pages/MicrosoftCourse/MicrosoftDynamic365"));
-const MicrosoftAzure = lazy(() => import("../pages/MicrosoftCourse/MicrosoftAzure"));
-const Microsoft365 = lazy(() => import("../pages/MicrosoftCourse/Microsoft365"));
-const Microsoft365Fundamentals = lazy(() => import("../pages/MicrosoftCourse/Microsoft365Fundamentals"));
-const MicrosoftSCI = lazy(() => import("../pages/MicrosoftCourse/MicrosoftSecurity"));
-const MicrosoftPowerPlatform = lazy(() => import("../pages/MicrosoftCourse/MicrosoftPowerbi"));
-const MicrosoftAzureData = lazy(() => import("../pages/MicrosoftCourse/MicrosoftAzureData"));
-const Microsoft365Associate = lazy(() => import("../pages/MicrosoftCourse/Microsoft365Associate"));
-const MicrosoftPowerBI = lazy(() => import("../pages/MicrosoftCourse/MicrosoftPowerbi"));
-const MicrosoftAzureCosmos = lazy(() => import("../pages/MicrosoftCourse/MicrosoftAzureCosmos"));
-const MicrosoftAzureSAP = lazy(() => import("../pages/MicrosoftCourse/MicrosoftAzureSAP"));
-const MicrosoftAzureSolutions = lazy(() => import("../pages/MicrosoftCourse/MicrosoftAzureSolutions"));
-const MicrosoftAzureVirtual = lazy(() => import("../pages/MicrosoftCourse/MicrosoftAzureVirtual"));
-const MicrosoftDynamicFunction = lazy(() => import("../pages/MicrosoftCourse/MicrosoftDynamicFunctional"));
-const Microsoft365Certification = lazy(() => import("../pages/MicrosoftCourse/Microsoft365Certification"));
-const MicrosoftCyberAnalyst = lazy(() => import("../pages/MicrosoftCourse/MicrosoftCyberAnalyst"));
-const MicrosoftMS900 = lazy(() => import("../pages/MicrosoftCourse/MicrosoftMs900"));
-const MicrosoftPl300 = lazy(() => import("../pages/MicrosoftCourse/MicrosoftPl300"));
-const MicrosoftExcelExpert = lazy(() => import("../pages/MicrosoftCourse/MicrosoftExcelExpert"));
-const MicrosoftWordAssociate = lazy(() => import("../pages/MicrosoftCourse/MicrosoftWordAssociate"));
-const MicrosoftWordExpert = lazy(() => import("../pages/MicrosoftCourse/MicrosoftWordExpert"));
-const MicrosoftPowerPointAssociate = lazy(() => import("../pages/MicrosoftCourse/MicrosoftPowerPointAssociate"));
-const MicrosoftExcelAssociate = lazy(() => import("../pages/MicrosoftCourse/MicrosoftExcelAssociate"));
-const MicrosoftDynamics365ERP = lazy(() => import("../pages/MicrosoftCourse/MicrosoftDynamics365ERP"));
-const MicrosoftAzureDataFundamentals = lazy(() => import("../pages/MicrosoftCourse/MicrosoftAzureDataFundamentals"));
-const MicrosoftDynamicsCRMFundamentals = lazy(() => import("../pages/MicrosoftCourse/MicrosoftDynamicsCRMFundamentals"));
-const MicrosoftPowerPlatformFundamentals = lazy(() => import("../pages/MicrosoftCourse/MicrosoftPowerPlatformFundamentals"));
-const MicrosoftSecurityFundamentals = lazy(() => import("../pages/MicrosoftCourse/MicrosoftSecurityFundamentals"));
+const MicrosoftAzureAdmin = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftAzureAdministrator"));
+const MicrosoftAi = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftAi"));
+const MicrosoftDeveloper = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftDeveloper"));
+const MicrosoftFundamentals = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftFundamentals"));
+const MicrosoftDynamic365 = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftDynamic365"));
+const MicrosoftAzure = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftAzure"));
+const Microsoft365 = lazyWithRetry(() => import("../pages/MicrosoftCourse/Microsoft365"));
+const Microsoft365Fundamentals = lazyWithRetry(() => import("../pages/MicrosoftCourse/Microsoft365Fundamentals"));
+const MicrosoftSCI = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftSecurity"));
+const MicrosoftPowerPlatform = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftPowerbi"));
+const MicrosoftAzureData = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftAzureData"));
+const Microsoft365Associate = lazyWithRetry(() => import("../pages/MicrosoftCourse/Microsoft365Associate"));
+const MicrosoftPowerBI = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftPowerbi"));
+const MicrosoftAzureCosmos = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftAzureCosmos"));
+const MicrosoftAzureSAP = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftAzureSAP"));
+const MicrosoftAzureSolutions = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftAzureSolutions"));
+const MicrosoftAzureVirtual = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftAzureVirtual"));
+const MicrosoftDynamicFunction = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftDynamicFunctional"));
+const Microsoft365Certification = lazyWithRetry(() => import("../pages/MicrosoftCourse/Microsoft365Certification"));
+const MicrosoftCyberAnalyst = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftCyberAnalyst"));
+const MicrosoftMS900 = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftMs900"));
+const MicrosoftPl300 = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftPl300"));
+const MicrosoftExcelExpert = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftExcelExpert"));
+const MicrosoftWordAssociate = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftWordAssociate"));
+const MicrosoftWordExpert = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftWordExpert"));
+const MicrosoftPowerPointAssociate = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftPowerPointAssociate"));
+const MicrosoftExcelAssociate = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftExcelAssociate"));
+const MicrosoftDynamics365ERP = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftDynamics365ERP"));
+const MicrosoftAzureDataFundamentals = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftAzureDataFundamentals"));
+const MicrosoftAzureFundamentals = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftAzureFundamentals"));
+const MicrosoftDynamicsCRMFundamentals = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftDynamicsCRMFundamentals"));
+const MicrosoftPowerPlatformFundamentals = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftPowerPlatformFundamentals"));
+const MicrosoftSecurityFundamentals = lazyWithRetry(() => import("../pages/MicrosoftCourse/MicrosoftSecurityFundamentals"));
 
 // Cisco subcourses
-const CCSTsupportTech = lazy(() => import("../pages/CiscoCourse/CcstSupportTechnician"));
-const CCSTcybersecurity = lazy(() => import("../pages/CiscoCourse/CCSTCybersecurity"));
-const CCSTNetworking = lazy(() => import("../pages/CiscoCourse/CCSTNetworking"));
-const CCTtechnician = lazy(() => import("../pages/CiscoCourse/CcstSupportTechnician"));
-const CCTroutingSwitching = lazy(() => import("../pages/CiscoCourse/CCTroutingSwitching"));
-const CCTdatacenter = lazy(() => import("../pages/CiscoCourse/CCTdatacenter"));
-const CCNA = lazy(() => import("../pages/CiscoCourse/CCNA"));
-const CCCA = lazy(() => import("../pages/CiscoCourse/CCCA"));
-const CCNPenterprises = lazy(() => import("../pages/CiscoCourse/CCNPenterprises"));
-const CCNPsecurity = lazy(() => import("../pages/CiscoCourse/CCNPsecurity"));
-const CCNPdatacenter = lazy(() => import("../pages/CiscoCourse/CCNPdatacenter"));
-const CCNPserviceprovider = lazy(() => import("../pages/CiscoCourse/CCNPserviceprovider"));
-const CCNPcollaboration = lazy(() => import("../pages/CiscoCourse/CCNPcollaboration"));
-const CCNPdevnet = lazy(() => import("../pages/CiscoCourse/CCNPdevnet"));
-const CCIEinfastructure = lazy(() => import("../pages/CiscoCourse/CCIEinfasturcture"));
-const CCIEwireless = lazy(() => import("../pages/CiscoCourse/CCIEwireless"));
-const CCIEsecurity = lazy(() => import("../pages/CiscoCourse/CCIEsecurity"));
-const CCIEdatacenter = lazy(() => import("../pages/CiscoCourse/CCIEdatacenter"));
-const CCIEserviceprovider = lazy(() => import("../pages/CiscoCourse/CCIEserviceprovider"));
-const CCIEcollab = lazy(() => import("../pages/CiscoCourse/CCIEcollaboration"));
+const CCSTsupportTech = lazyWithRetry(() => import("../pages/CiscoCourse/CcstSupportTechnician"));
+const CCSTcybersecurity = lazyWithRetry(() => import("../pages/CiscoCourse/CCSTCybersecurity"));
+const CCSTNetworking = lazyWithRetry(() => import("../pages/CiscoCourse/CCSTNetworking"));
+const CCTtechnician = lazyWithRetry(() => import("../pages/CiscoCourse/CcstSupportTechnician"));
+const CCTroutingSwitching = lazyWithRetry(() => import("../pages/CiscoCourse/CCTroutingSwitching"));
+const CCTdatacenter = lazyWithRetry(() => import("../pages/CiscoCourse/CCTdatacenter"));
+const CCNA = lazyWithRetry(() => import("../pages/CiscoCourse/CCNA"));
+const CCCA = lazyWithRetry(() => import("../pages/CiscoCourse/CCCA"));
+const CCNPenterprises = lazyWithRetry(() => import("../pages/CiscoCourse/CCNPenterprises"));
+const CCNPsecurity = lazyWithRetry(() => import("../pages/CiscoCourse/CCNPsecurity"));
+const CCNPdatacenter = lazyWithRetry(() => import("../pages/CiscoCourse/CCNPdatacenter"));
+const CCNPserviceprovider = lazyWithRetry(() => import("../pages/CiscoCourse/CCNPserviceprovider"));
+const CCNPcollaboration = lazyWithRetry(() => import("../pages/CiscoCourse/CCNPcollaboration"));
+const CCNPdevnet = lazyWithRetry(() => import("../pages/CiscoCourse/CCNPdevnet"));
+const CCIEinfastructure = lazyWithRetry(() => import("../pages/CiscoCourse/CCIEinfasturcture"));
+const CCIEwireless = lazyWithRetry(() => import("../pages/CiscoCourse/CCIEwireless"));
+const CCIEsecurity = lazyWithRetry(() => import("../pages/CiscoCourse/CCIEsecurity"));
+const CCIEdatacenter = lazyWithRetry(() => import("../pages/CiscoCourse/CCIEdatacenter"));
+const CCIEserviceprovider = lazyWithRetry(() => import("../pages/CiscoCourse/CCIEserviceprovider"));
+const CCIEcollab = lazyWithRetry(() => import("../pages/CiscoCourse/CCIEcollaboration"));
 
 // IBM subcourses
-const IBMAgileMethodologies = lazy(() => import("../components/IMBSubCourses/IBMAgileMethodologies"));
-const WebdevelopementHTML = lazy(() => import("../components/IMBSubCourses/Webdevelopementhtml"));
-const WebdevelopementC = lazy(() => import("../components/IMBSubCourses/WebdevelopementC"));
-const IBMSQL = lazy(() => import("../components/IMBSubCourses/IBMSQL"));
-const IBMSoftwareFoundation = lazy(() => import("../components/IMBSubCourses/IBMSoftwareFoundation"));
-const IBMScala = lazy(() => import("../components/IMBSubCourses/IBMScala"));
-const IBMRestAPI = lazy(() => import("../components/IMBSubCourses/IBMRestAPI"));
-const IBMRDBMS = lazy(() => import("../components/IMBSubCourses/IBMRDBMS"));
-const IBMPython = lazy(() => import("../components/IMBSubCourses/IBMPython"));
-const IBMNodeJs = lazy(() => import("../components/IMBSubCourses/IBMNodeJs"));
-const IBMNoSQL = lazy(() => import("../components/IMBSubCourses/IBMNoSQL"));
-const IBMMethodology = lazy(() => import("../components/IMBSubCourses/IBMMethodology"));
-const IBMMachineLearning = lazy(() => import("../components/IMBSubCourses/IBMMachineLearning"));
-const IBMKubernetes = lazy(() => import("../components/IMBSubCourses/IBMKubernetes"));
-const IBMJavaScript = lazy(() => import("../components/IMBSubCourses/IBMJavaScript"));
-const IBMDevopsFundamentals = lazy(() => import("../components/IMBSubCourses/IBMDevopsFundamentals"));
-const IBMDeepLearning = lazy(() => import("../components/IMBSubCourses/IBMDeepLearning"));
-const IBMDataAnalysis = lazy(() => import("../components/IMBSubCourses/IBMDataAnalysis"));
-const IBMCloudFundamental = lazy(() => import("../components/IMBSubCourses/IBMCloudFundamental"));
-const IBMBigData = lazy(() => import("../components/IMBSubCourses/IBMBigData"));
+const IBMAgileMethodologies = lazyWithRetry(() => import("../components/IMBSubCourses/IBMAgileMethodologies"));
+const WebdevelopementHTML = lazyWithRetry(() => import("../components/IMBSubCourses/Webdevelopementhtml"));
+const WebdevelopementC = lazyWithRetry(() => import("../components/IMBSubCourses/WebdevelopementC"));
+const IBMSQL = lazyWithRetry(() => import("../components/IMBSubCourses/IBMSQL"));
+const IBMSoftwareFoundation = lazyWithRetry(() => import("../components/IMBSubCourses/IBMSoftwareFoundation"));
+const IBMScala = lazyWithRetry(() => import("../components/IMBSubCourses/IBMScala"));
+const IBMRestAPI = lazyWithRetry(() => import("../components/IMBSubCourses/IBMRestAPI"));
+const IBMRDBMS = lazyWithRetry(() => import("../components/IMBSubCourses/IBMRDBMS"));
+const IBMPython = lazyWithRetry(() => import("../components/IMBSubCourses/IBMPython"));
+const IBMNodeJs = lazyWithRetry(() => import("../components/IMBSubCourses/IBMNodeJs"));
+const IBMNoSQL = lazyWithRetry(() => import("../components/IMBSubCourses/IBMNoSQL"));
+const IBMMethodology = lazyWithRetry(() => import("../components/IMBSubCourses/IBMMethodology"));
+const IBMMachineLearning = lazyWithRetry(() => import("../components/IMBSubCourses/IBMMachineLearning"));
+const IBMKubernetes = lazyWithRetry(() => import("../components/IMBSubCourses/IBMKubernetes"));
+const IBMJavaScript = lazyWithRetry(() => import("../components/IMBSubCourses/IBMJavaScript"));
+const IBMDevopsFundamentals = lazyWithRetry(() => import("../components/IMBSubCourses/IBMDevopsFundamentals"));
+const IBMDeepLearning = lazyWithRetry(() => import("../components/IMBSubCourses/IBMDeepLearning"));
+const IBMDataAnalysis = lazyWithRetry(() => import("../components/IMBSubCourses/IBMDataAnalysis"));
+const IBMCloudFundamental = lazyWithRetry(() => import("../components/IMBSubCourses/IBMCloudFundamental"));
+const IBMBigData = lazyWithRetry(() => import("../components/IMBSubCourses/IBMBigData"));
 
 // META subcourses
-const MetaDigitalMarketing = lazy(() => import("../pages/MetaCourse/MetaDigitalMarketing"));
-const MetaFrontEndDeveloper = lazy(() => import("../pages/MetaCourse/MetaFrontEndDeveloper"));
-const MetaBackEndDeveloper = lazy(() => import("../pages/MetaCourse/MetaBackEndDeveloper"));
-const MetaAndroidDeveloper = lazy(() => import("../pages/MetaCourse/MetaAndroidDeveloper"));
-const MetaIosDeveloper = lazy(() => import("../pages/MetaCourse/MetaIosDeveloper"));
+const MetaDigitalMarketing = lazyWithRetry(() => import("../pages/MetaCourse/MetaDigitalMarketing"));
+const MetaFrontEndDeveloper = lazyWithRetry(() => import("../pages/MetaCourse/MetaFrontEndDeveloper"));
+const MetaBackEndDeveloper = lazyWithRetry(() => import("../pages/MetaCourse/MetaBackEndDeveloper"));
+const MetaAndroidDeveloper = lazyWithRetry(() => import("../pages/MetaCourse/MetaAndroidDeveloper"));
+const MetaIosDeveloper = lazyWithRetry(() => import("../pages/MetaCourse/MetaIosDeveloper"));
 
 // Other pages
-const ServiceDetail = lazy(() => import("../pages/ServiceDetail"));
-const IBM = lazy(() => import("../pages/IBM"));
-const META = lazy(() => import("../pages/META"));
-const PartnerPage = lazy(() => import("../pages/PartnerPage"));
-const PMI = lazy(() => import("../pages/PMI"));
-const ITSpeacialist = lazy(() => import("../pages/ITSpecialist"));
-const SwiftDevelopment = lazy(() => import("../pages/SwiftDevelopment"));
-const Cart = lazy(() => import("../pages/Cart/Cart"));
-const SuccessCartPayment = lazy(() => import("../pages/Cart/SuccessCartPayment"));
-const CancelCartPayment = lazy(() => import("../pages/Cart/CancelCartPayment"));
+const ServiceDetail = lazyWithRetry(() => import("../pages/ServiceDetail"));
+const IBM = lazyWithRetry(() => import("../pages/IBM"));
+const META = lazyWithRetry(() => import("../pages/META"));
+const PartnerPage = lazyWithRetry(() => import("../pages/PartnerPage"));
+const PMI = lazyWithRetry(() => import("../pages/PMI"));
+const ITSpeacialist = lazyWithRetry(() => import("../pages/ITSpecialist"));
+const SwiftDevelopment = lazyWithRetry(() => import("../pages/SwiftDevelopment"));
+const Cart = lazyWithRetry(() => import("../pages/Cart/Cart"));
+const SuccessCartPayment = lazyWithRetry(() => import("../pages/Cart/SuccessCartPayment"));
+const CancelCartPayment = lazyWithRetry(() => import("../pages/Cart/CancelCartPayment"));
 
-const Tally = lazy(() => import("../pages/PopularCertificationCoureses/Tally"));
-const MicrosoftOffice = lazy(() => import("../pages/PopularCertificationCoureses/MicrosoftOffice"));
-const Autodesk = lazy(() => import("../pages/PopularCertificationCoureses/Autodesk"));
-const MicrosoftCertified = lazy(() => import("../pages/PopularCertificationCoureses/MicrosoftCertified"));
-const Adobe = lazy(() => import("../pages/PopularCertificationCoureses/Adobe"));
-const Unity = lazy(() => import("../pages/PopularCertificationCoureses/Unity"));
-const CiscoCard = lazy(() => import("../pages/PopularCertificationCoureses/CiscoCard"));
+const Tally = lazyWithRetry(() => import("../pages/PopularCertificationCoureses/Tally"));
+const MicrosoftOffice = lazyWithRetry(() => import("../pages/PopularCertificationCoureses/MicrosoftOffice"));
+const Autodesk = lazyWithRetry(() => import("../pages/PopularCertificationCoureses/Autodesk"));
+const MicrosoftCertified = lazyWithRetry(() => import("../pages/PopularCertificationCoureses/MicrosoftCertified"));
+const Adobe = lazyWithRetry(() => import("../pages/PopularCertificationCoureses/Adobe"));
+const Unity = lazyWithRetry(() => import("../pages/PopularCertificationCoureses/Unity"));
+const CiscoCard = lazyWithRetry(() => import("../pages/PopularCertificationCoureses/CiscoCard"));
 
 // PMI subcourses
-const PMIProjectManagement = lazy(() => import("../pages/PMICourse/PMIProjectManagement"));
+const PMIProjectManagement = lazyWithRetry(() => import("../pages/PMICourse/PMIProjectManagement"));
 
 // IT Specialist subcourses
-const ITSpecialistPython = lazy(() => import("../pages/ITSpecialistCourse/ITSpecialistPython"));
-const ITSpecialistJavaScript = lazy(() => import("../pages/ITSpecialistCourse/ITSpecialistJavaScript"));
-const ITSpecialistHTML = lazy(() => import("../pages/ITSpecialistCourse/ITSpecialistHTML"));
-const ITSpecialistNetworking = lazy(() => import("../pages/ITSpecialistCourse/ITSpecialistNetworking"));
+const ITSpecialistPython = lazyWithRetry(() => import("../pages/ITSpecialistCourse/ITSpecialistPython"));
+const ITSpecialistJavaScript = lazyWithRetry(() => import("../pages/ITSpecialistCourse/ITSpecialistJavaScript"));
+const ITSpecialistHTML = lazyWithRetry(() => import("../pages/ITSpecialistCourse/ITSpecialistHTML"));
+const ITSpecialistNetworking = lazyWithRetry(() => import("../pages/ITSpecialistCourse/ITSpecialistNetworking"));
 
 // Swift Development subcourses
-const SwiftDevelopmentBasics = lazy(() => import("../pages/SwiftCourse/SwiftDevelopmentBasics"));
-const SwiftDevelopmentAdvanced = lazy(() => import("../pages/SwiftCourse/SwiftDevelopmentAdvanced"));
+const SwiftDevelopmentBasics = lazyWithRetry(() => import("../pages/SwiftCourse/SwiftDevelopmentBasics"));
+const SwiftDevelopmentAdvanced = lazyWithRetry(() => import("../pages/SwiftCourse/SwiftDevelopmentAdvanced"));
 
 // Tally subcourses (Courses section) 
-const TallyEssentialLevel1 = lazy(() => import("../pages/TallyCourse/TallyEssentialLevel1"));
-const TallyEssentialLevel2 = lazy(() => import("../pages/TallyCourse/TallyEssentialLevel2"));
-const TallyEssentialLevel3 = lazy(() => import("../pages/TallyCourse/TallyEssentialLevel3"));
-const TallyProfessional = lazy(() => import("../pages/TallyCourse/TallyProfessional"));
-const TallyEssentialComprehensive = lazy(() => import("../pages/TallyCourse/TallyEssentialComprehensive"));
-const TallyPrime = lazy(() => import("../pages/TallyCourse/TallyPrime"));
+const TallyEssentialLevel1 = lazyWithRetry(() => import("../pages/TallyCourse/TallyEssentialLevel1"));
+const TallyEssentialLevel2 = lazyWithRetry(() => import("../pages/TallyCourse/TallyEssentialLevel2"));
+const TallyEssentialLevel3 = lazyWithRetry(() => import("../pages/TallyCourse/TallyEssentialLevel3"));
+const TallyProfessional = lazyWithRetry(() => import("../pages/TallyCourse/TallyProfessional"));
+const TallyEssentialComprehensive = lazyWithRetry(() => import("../pages/TallyCourse/TallyEssentialComprehensive"));
+const TallyPrime = lazyWithRetry(() => import("../pages/TallyCourse/TallyPrime"));
 
 // Autodesk subcourses
-const AutodeskAutoCAD = lazy(() => import("../pages/AutodeskCourse/AutodeskAutoCAD"));
-const AutodeskRevit = lazy(() => import("../pages/AutodeskCourse/AutodeskRevit"));
-const Autodesk3dsMax = lazy(() => import("../pages/AutodeskCourse/Autodesk3dsMax"));
-const AutodeskFusion360 = lazy(() => import("../pages/AutodeskCourse/AutodeskFusion360"));
-const AutodeskMaya = lazy(() => import("../pages/AutodeskCourse/AutodeskMaya"));
+const AutodeskAutoCAD = lazyWithRetry(() => import("../pages/AutodeskCourse/AutodeskAutoCAD"));
+const AutodeskRevit = lazyWithRetry(() => import("../pages/AutodeskCourse/AutodeskRevit"));
+const Autodesk3dsMax = lazyWithRetry(() => import("../pages/AutodeskCourse/Autodesk3dsMax"));
+const AutodeskFusion360 = lazyWithRetry(() => import("../pages/AutodeskCourse/AutodeskFusion360"));
+const AutodeskMaya = lazyWithRetry(() => import("../pages/AutodeskCourse/AutodeskMaya"));
+
+// Unity subcourses
+const UnityArtistCourseware = lazyWithRetry(() => import("../pages/UnityCourse/ArtistCourseware"));
+const UnityProgrammer = lazyWithRetry(() => import("../pages/UnityCourse/UnityProgrammer"));
+const UnityDeveloperCourseware = lazyWithRetry(() => import("../pages/UnityCourse/DevelloperCourseware"));
 
 const AllRoute = () => {
   const token = localStorage.getItem("token");
@@ -257,7 +280,8 @@ const AllRoute = () => {
       <Route path="/frequently-asked-questions" element={<FAQ />} />
       <Route path="/our-services" element={<Services />} />
       <Route path="/Terms-and-Conditions" element={<TermsAndCondition />} />
-
+      <Route path="/CertificateLookup" element={<CertificateLookup />} />
+        <Route path="/verifyCertificate" element={<VerifyCertificate />} />
         <Route 
           path="/Courses-details" 
           element={<Courses />} 
@@ -266,7 +290,6 @@ const AllRoute = () => {
       <Route path="/Career-details" element={<Career />} />
       <Route path="/Our-Policies" element={<Policy />} />
       <Route path="/Our-Blogs" element={<Blogs />} />
-        <Route path="*" element={<NotFound />} />
 
       <Route path="/CompTIA-single-page" element={<CompTIAsinglePage />} />
 
@@ -293,6 +316,9 @@ const AllRoute = () => {
           } 
         />
       <Route path="/training" element={<Training />} />
+        <Route path="/internal-exams" element={<InternalExams />} />
+        <Route path="/voucher-success" element={<VoucherSuccess />} />
+        <Route path="/voucher-cancel" element={<VoucherCancel />} />
         
         {/* Certification Routes */}
         <Route path="/comptia" element={<Comptia />} />
@@ -326,38 +352,39 @@ const AllRoute = () => {
       <Route path="/comptiaNetwork007" element={<ComptiaNetwork007 />} />
         
         {/* Microsoft Subcourse Routes */}
-        <Route path="/microsoftazureadmin" element={<MicrosoftAzureAdmin />} />
-        <Route path="/microsoftAi" element={<MicrosoftAi />} />
-        <Route path="/microsoftDeveloper" element={<MicrosoftDeveloper />} />
-        <Route path="/microsoftFundamentals" element={<MicrosoftFundamentals />} />
-        <Route path="/microsoftDynamic365" element={<MicrosoftDynamic365 />} />
-        <Route path="/microsoftAzure" element={<MicrosoftAzure />} />
-        <Route path="/microsoft365" element={<Microsoft365 />} />
-        <Route path="/microsoft365fundamentals" element={<Microsoft365Fundamentals />} />
-        <Route path="/microsoft S C I" element={<MicrosoftSCI />} />
-        <Route path="/microsoftpowerplatform" element={<MicrosoftPowerPlatform />} />
-        <Route path="/microsoftazuredata" element={<MicrosoftAzureData />} />
-        <Route path="/microsoft365associate" element={<Microsoft365Associate />} />
-        <Route path="/microsoftpowerbi" element={<MicrosoftPowerBI />} />
-        <Route path="/microsoftAzurecosmos" element={<MicrosoftAzureCosmos />} />
-        <Route path="/microsoftazureSAP" element={<MicrosoftAzureSAP />} />
-        <Route path="/microsoftAzuresolutions" element={<MicrosoftAzureSolutions />} />
-        <Route path="/microsoftAzurevirtual" element={<MicrosoftAzureVirtual />} />
-        <Route path="/microsoftdynamicfunction" element={<MicrosoftDynamicFunction />} />
-        <Route path="/microsoft365certification" element={<Microsoft365Certification />} />
-        <Route path="/microsoftcyberanalyst" element={<MicrosoftCyberAnalyst />} />
-        <Route path="/microsoftMS-900" element={<MicrosoftMS900 />} />
-        <Route path="/microsoftpl-300" element={<MicrosoftPl300 />} />
-        <Route path="/MicrosoftSecurityFundamentals" element={<Suspense fallback={<LoadingComponent />}><MicrosoftSecurityFundamentals /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftAzureAdmin" element={<Suspense fallback={<LoadingComponent />}><MicrosoftAzureAdmin /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftAi" element={<Suspense fallback={<LoadingComponent />}><MicrosoftAi /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftDeveloper" element={<Suspense fallback={<LoadingComponent />}><MicrosoftDeveloper /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftFundamentals" element={<Suspense fallback={<LoadingComponent />}><MicrosoftFundamentals /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftDynamic365" element={<Suspense fallback={<LoadingComponent />}><MicrosoftDynamic365 /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftAzure" element={<Suspense fallback={<LoadingComponent />}><MicrosoftAzure /></Suspense>} />
+        <Route path="/MicrosoftCourse/Microsoft365" element={<Suspense fallback={<LoadingComponent />}><Microsoft365 /></Suspense>} />
+        <Route path="/MicrosoftCourse/Microsoft365Fundamentals" element={<Suspense fallback={<LoadingComponent />}><Microsoft365Fundamentals /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftSCI" element={<Suspense fallback={<LoadingComponent />}><MicrosoftSCI /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftPowerPlatform" element={<Suspense fallback={<LoadingComponent />}><MicrosoftPowerPlatform /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftAzureData" element={<Suspense fallback={<LoadingComponent />}><MicrosoftAzureData /></Suspense>} />
+        <Route path="/MicrosoftCourse/Microsoft365Associate" element={<Suspense fallback={<LoadingComponent />}><Microsoft365Associate /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftPowerBI" element={<Suspense fallback={<LoadingComponent />}><MicrosoftPowerBI /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftAzureCosmos" element={<Suspense fallback={<LoadingComponent />}><MicrosoftAzureCosmos /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftAzureSAP" element={<Suspense fallback={<LoadingComponent />}><MicrosoftAzureSAP /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftAzureSolutions" element={<Suspense fallback={<LoadingComponent />}><MicrosoftAzureSolutions /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftAzureVirtual" element={<Suspense fallback={<LoadingComponent />}><MicrosoftAzureVirtual /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftDynamicFunction" element={<Suspense fallback={<LoadingComponent />}><MicrosoftDynamicFunction /></Suspense>} />
+        <Route path="/MicrosoftCourse/Microsoft365Certification" element={<Suspense fallback={<LoadingComponent />}><Microsoft365Certification /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftCyberAnalyst" element={<Suspense fallback={<LoadingComponent />}><MicrosoftCyberAnalyst /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftMS900" element={<Suspense fallback={<LoadingComponent />}><MicrosoftMS900 /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftPl300" element={<Suspense fallback={<LoadingComponent />}><MicrosoftPl300 /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftSecurityFundamentals" element={<Suspense fallback={<LoadingComponent />}><MicrosoftSecurityFundamentals /></Suspense>} />
         <Route path="/MicrosoftCourse/MicrosoftExcelExpert" element={<Suspense fallback={<LoadingComponent />}><MicrosoftExcelExpert /></Suspense>} />
         <Route path="/MicrosoftCourse/MicrosoftWordAssociate" element={<Suspense fallback={<LoadingComponent />}><MicrosoftWordAssociate /></Suspense>} />
         <Route path="/MicrosoftCourse/MicrosoftWordExpert" element={<Suspense fallback={<LoadingComponent />}><MicrosoftWordExpert /></Suspense>} />
         <Route path="/MicrosoftCourse/MicrosoftPowerPointAssociate" element={<Suspense fallback={<LoadingComponent />}><MicrosoftPowerPointAssociate /></Suspense>} />
         <Route path="/MicrosoftCourse/MicrosoftExcelAssociate" element={<Suspense fallback={<LoadingComponent />}><MicrosoftExcelAssociate /></Suspense>} />
-        <Route path="/MicrosoftDynamics365ERP" element={<Suspense fallback={<LoadingComponent />}><MicrosoftDynamics365ERP /></Suspense>} />
-        <Route path="/MicrosoftAzureDataFundamentals" element={<Suspense fallback={<LoadingComponent />}><MicrosoftAzureDataFundamentals /></Suspense>} />
-        <Route path="/MicrosoftDynamics365CRMFundamentals" element={<Suspense fallback={<LoadingComponent />}><MicrosoftDynamicsCRMFundamentals /></Suspense>} />
-        <Route path="/MicrosoftPowerPlatformFundamentals" element={<Suspense fallback={<LoadingComponent />}><MicrosoftPowerPlatformFundamentals /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftDynamics365ERP" element={<Suspense fallback={<LoadingComponent />}><MicrosoftDynamics365ERP /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftAzureDataFundamentals" element={<Suspense fallback={<LoadingComponent />}><MicrosoftAzureDataFundamentals /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftAzureFundamentals" element={<Suspense fallback={<LoadingComponent />}><MicrosoftAzureFundamentals /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftDynamics365CRMFundamentals" element={<Suspense fallback={<LoadingComponent />}><MicrosoftDynamicsCRMFundamentals /></Suspense>} />
+        <Route path="/MicrosoftCourse/MicrosoftPowerPlatformFundamentals" element={<Suspense fallback={<LoadingComponent />}><MicrosoftPowerPlatformFundamentals /></Suspense>} />
         
         {/* Cisco Subcourse Routes */}
         <Route path="/CCSTsupportTech" element={<CCSTsupportTech />} />
@@ -436,7 +463,9 @@ const AllRoute = () => {
       <Route path="/SCADASecurityManager" element={<SCADASecurityManager />} />
 
         {/* Cisco */}
-        <Route path="/CISCO" element={<Cisco />} />
+        <Route path="/CISCO" element={<Navigate to="/ciscocard" replace />} />
+        <Route path="/Cisco" element={<Navigate to="/ciscocard" replace />} />
+        <Route path="/cisco" element={<Navigate to="/ciscocard" replace />} />
 
         {/* Other Routes */}
       <Route path="/service-detail" element={<ServiceDetail />} />
@@ -446,7 +475,8 @@ const AllRoute = () => {
         <Route path="/PMI" element={<PMI />} />
         <Route path="/ITSpeacialist" element={<ITSpeacialist />} />
         <Route path="/SwiftDevelopment" element={<SwiftDevelopment />} />
-        <Route path="/Cart" element={<Cart />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/Cart" element={<Navigate to="/cart" replace />} />
         <Route path="/success" element={<SuccessCartPayment />} />
         <Route path="/cancel-stripe-payment" element={<CancelCartPayment />} />
         <Route path="/Tally" element={<Tally />} />
@@ -485,6 +515,24 @@ const AllRoute = () => {
       <Route path="/AutodeskCourse/Autodesk3dsMax" element={<Suspense fallback={<LoadingComponent />}><Autodesk3dsMax /></Suspense>} />
       <Route path="/AutodeskCourse/AutodeskFusion360" element={<Suspense fallback={<LoadingComponent />}><AutodeskFusion360 /></Suspense>} />
       <Route path="/AutodeskCourse/AutodeskMaya" element={<Suspense fallback={<LoadingComponent />}><AutodeskMaya /></Suspense>} />
+
+      {/* Unity Subcourse Routes */}
+      <Route path="/UnityCourse/ArtistCourseware" element={<Suspense fallback={<LoadingComponent />}><UnityArtistCourseware /></Suspense>} />
+      <Route path="/UnityCourse/UnityProgrammer" element={<Suspense fallback={<LoadingComponent />}><UnityProgrammer /></Suspense>} />
+      <Route path="/UnityCourse/DeveloperCourseware" element={<Suspense fallback={<LoadingComponent />}><UnityDeveloperCourseware /></Suspense>} />
+
+      {/* Adobe Subcourse Routes */}
+      <Route path="/AdobeCourse/AdobePhotoshop" element={<Suspense fallback={<LoadingComponent />}><AdobePhotoshop /></Suspense>} />
+      <Route path="/AdobeCourse/PhotoshopCertified" element={<Suspense fallback={<LoadingComponent />}><PhotoshopCertified /></Suspense>} />
+      <Route path="/AdobeCourse/AdobeIllustrator" element={<Suspense fallback={<LoadingComponent />}><AdobeIllustrator /></Suspense>} />
+      <Route path="/AdobeCourse/AdobePremiere" element={<Suspense fallback={<LoadingComponent />}><AdobePremiere /></Suspense>} />
+      <Route path="/AdobeCourse/AdobeAfterEffects" element={<Suspense fallback={<LoadingComponent />}><AdobeAfterEffects /></Suspense>} />
+      <Route path="/AdobeCourse/AdobeLightroom" element={<Suspense fallback={<LoadingComponent />}><AdobeLightroom /></Suspense>} />
+      <Route path="/AdobeCourse/AdobeInDesign" element={<Suspense fallback={<LoadingComponent />}><AdobeInDesign /></Suspense>} />
+      <Route path="/AdobeCourse/AdobeXD" element={<Suspense fallback={<LoadingComponent />}><AdobeXD /></Suspense>} />
+      
+      {/* Catch-all route for 404 */}
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
   );

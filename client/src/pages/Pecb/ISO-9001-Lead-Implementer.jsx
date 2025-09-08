@@ -1,26 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Overview from './Overview';
 import Certify from './Certify';
 import Learn from './Learn';
 import MyPathway from './MyPathway';
-// import Resources from './Resources'
-import { FaHome, FaCertificate, FaBook } from 'react-icons/fa'; // Import specific icons from react-icons
+import { FaHome, FaCertificate, FaBook } from 'react-icons/fa';
 import ContactUs from '../ContactUs';
 import { FaPhoneVolume } from "react-icons/fa6";
 import { GrResources } from "react-icons/gr";
 import Practice from './Practice';
 import { BsFillPenFill } from "react-icons/bs";
 import { GiPathDistance } from "react-icons/gi";
+import PecbBrochureSection from '../../components/PecbBrochureSection';
 
 
 const NavTab = ({ label, active, onClick, icon }) => {
     return (
       <button
         onClick={onClick}
-        className={`text-lg flex gap-4 items-center w-full hover:bg-gray-700 px-4 py-2 rounded transition ${active ? 'bg-gray-700' : ''} md:text-base lg:text-lg`}
+        className={`text-lg flex w-full gap-4 items-center hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 px-6 py-4 rounded-xl transition-all duration-300 ${active ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg transform scale-105' : 'text-gray-300 hover:text-white'}`}
       >
-        {icon && <span className="my-auto">{icon}</span>} {/* Display icon if available */}
-        {label}
+        {icon && <span className="my-auto text-xl">{icon}</span>}
+        <span className="font-semibold">{label}</span>
       </button>
     );
   };
@@ -85,18 +85,91 @@ const TabContainer = ({ tabs }) => {
 
 
 const ISO9001LeadImplementer = () => {
-    const tabs = {
-        Overview: <Overview title={"PECB ISO-9001 Lead Implementer"} />,
-        Certify: <Certify title={"PECB ISO-9001 Lead Implementer"} />,
-        Learn: <Learn title={"PECB ISO-9001 Lead Implementer"}/>,
-        Practice : <Practice course={"PECB"} subTopic={"PECBISO9001LeadImplementer"}/>,
-        'My Pathway': <MyPathway title={"PECB ISO-9001 Lead Implementer"} />,
-        // Resources:< Resources/>,
-        Contact: <ContactUs />,
-      };
-    
-      return <TabContainer tabs={tabs} />;
-  
-}
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const courseName = "PECB Certified ISO 9001 Lead Implementer";
+
+  // Create a combined Overview component that includes Learn, My Pathway, and Brochure
+  const CombinedOverview = () => (
+    <div className="space-y-8">
+      {/* Original Overview Content */}
+      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-100">
+        <Overview title={courseName} />
+      </div>
+      
+      {/* Brochure Section */}
+      <PecbBrochureSection courseName={courseName} />
+      
+      {/* Learn Section */}
+      <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-xl border border-green-100">
+        <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+          <FaBook className="mr-3 text-green-600" />
+          Learning Resources
+        </h3>
+        <Learn title={courseName} />
+      </div>
+      
+      {/* My Pathway Section */}
+      <div className="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-xl border border-purple-100">
+        <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+          <GiPathDistance className="mr-3 text-purple-600" />
+          Career Pathway
+        </h3>
+        <MyPathway title={courseName} />
+      </div>
+    </div>
+  );
+
+  // Create a combined Certify component that includes Practice
+  const CombinedCertify = () => (
+    <div className="space-y-8">
+      {/* Original Certify Content */}
+      <div className="bg-gradient-to-r from-orange-50 to-red-50 p-6 rounded-xl border border-orange-100">
+        <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+          <FaCertificate className="mr-3 text-orange-600" />
+          Certification Details
+        </h3>
+        <Certify title={courseName} />
+      </div>
+      
+      {/* Practice Section */}
+      <div className="bg-gradient-to-r from-yellow-50 to-amber-50 p-6 rounded-xl border border-yellow-100">
+        <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+          <BsFillPenFill className="mr-3 text-yellow-600" />
+          Practice & Assessment
+        </h3>
+        <Practice course={"PECB"} subTopic={"PECBISO9001LeadImplementer"}/>
+      </div>
+    </div>
+  );
+
+  const tabs = {
+    Overview: <CombinedOverview />,
+    Certify: <CombinedCertify />,
+  };
+
+  return (
+    <>
+      {/* Modern Breadcrumb Navigation */}
+      <div className="bg-white shadow-lg border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center space-x-2 text-sm">
+            <span className="text-gray-500 hover:text-blue-600 cursor-pointer transition-colors">Home</span>
+            <span className="text-gray-400">›</span>
+            <span className="text-gray-500 hover:text-blue-600 cursor-pointer transition-colors">Training</span>
+            <span className="text-gray-400">›</span>
+            <span className="text-gray-500 hover:text-blue-600 cursor-pointer transition-colors">PECB</span>
+            <span className="text-gray-400">›</span>
+            <span className="text-blue-600 font-semibold">ISO 9001 Lead Implementer</span>
+          </div>
+        </div>
+      </div>
+
+      <TabContainer tabs={tabs} />
+    </>
+  );
+};
 
 export default ISO9001LeadImplementer;

@@ -122,7 +122,13 @@ const Comptia = () => {
         <>
             <div className="course-detail text-center bg-blue-100 py-10">
         <div className="info flex flex-col md:flex-row gap-6 items-center px-5">
-          <Lottie animationData={comptia} className="w-full md:w-1/2" />
+          <Lottie 
+            animationData={comptia} 
+            className="w-full md:w-1/2" 
+            onError={(error) => {
+              console.warn('Lottie animation error:', error);
+            }}
+          />
           <div className="text w-full md:w-1/2">
             <h2 className="text-3xl md:text-5xl font-bold mb-7 text-cyan-900">CompTIA</h2>
             <p className="text-base md:text-lg text-gray-700">

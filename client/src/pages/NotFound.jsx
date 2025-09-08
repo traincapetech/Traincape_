@@ -17,6 +17,9 @@ const NotFound = () => {
           animationData={notFoundAnimation} 
           loop={true}
           className="w-full h-64 md:h-80"
+          onError={(error) => {
+            console.warn('Lottie animation error:', error);
+          }}
         />
       </div>
       

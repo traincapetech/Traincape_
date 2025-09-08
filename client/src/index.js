@@ -9,12 +9,18 @@ import { Provider } from "react-redux";
 import { CartProvider } from "./components/CartContext";
 import { HelmetProvider } from 'react-helmet-async';
 import axios from 'axios';
+import { setUserFromLocalStorage } from "./slices/userSlice";
 
 // Create a web worker for performance monitoring
 const isProduction = process.env.NODE_ENV === 'production';
 
 // Function to load the app with performance optimization
 const renderApp = () => {
+  // Hydrate redux user state from localStorage on boot
+  try {
+    store.dispatch(setUserFromLocalStorage());
+  } catch (_) {}
+
   const root = ReactDOM.createRoot(document.getElementById("root"));
   root.render(
     <Provider store={store}>
@@ -89,4 +95,18 @@ axios.interceptors.response.use(
     return Promise.reject(error.response?.data || fallbackValue);
   }
 );
+
+// Attach Authorization header automatically for authenticated requests
+axios.interceptors.request.use((config) => {
+  try {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers = {
+        ...(config.headers || {}),
+        Authorization: `Bearer ${token}`
+      };
+    }
+  } catch (_) {}
+  return config;
+});
 

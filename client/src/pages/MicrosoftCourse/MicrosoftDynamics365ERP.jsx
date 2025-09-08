@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { FaAngleDown, FaAngleUp, FaCheckCircle, FaArrowRight } from "react-icons/fa";
+import { FaAngleDown, FaAngleUp, FaArrowRight } from "react-icons/fa";
+import { FaCircleCheck } from "react-icons/fa6";
 import { useCartContext } from "../../components/CartContext";
 import AddToCartButton from "../../components/AddToCartButton";
 import Practice from "./Practice";
@@ -79,19 +80,19 @@ const MicrosoftDynamics365ERP = () => {
             <div className="outcome-column">
               <ul className="space-y-2">
                 <li className="flex items-start">
-                  <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+                  <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
                   <span>Understand core finance and operations concepts in Dynamics 365</span>
                 </li>
                 <li className="flex items-start">
-                  <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+                  <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
                   <span>Master the fundamentals of supply chain management modules</span>
                 </li>
                 <li className="flex items-start">
-                  <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+                  <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
                   <span>Explore financial management capabilities</span>
                 </li>
                 <li className="flex items-start">
-                  <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+                  <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
                   <span>Learn manufacturing processes and production management</span>
                 </li>
               </ul>
@@ -99,19 +100,19 @@ const MicrosoftDynamics365ERP = () => {
             <div className="outcome-column">
               <ul className="space-y-2">
                 <li className="flex items-start">
-                  <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+                  <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
                   <span>Understand project management and accounting functionality</span>
                 </li>
                 <li className="flex items-start">
-                  <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+                  <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
                   <span>Perform basic configurations and end-user personalization</span>
                 </li>
                 <li className="flex items-start">
-                  <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+                  <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
                   <span>Integrate with other Microsoft products and services</span>
                 </li>
                 <li className="flex items-start">
-                  <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+                  <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
                   <span>Prepare for the MB-920 certification exam</span>
                 </li>
               </ul>
@@ -155,23 +156,23 @@ const MicrosoftDynamics365ERP = () => {
           <h2 className="text-2xl font-bold mb-4">Why Choose This Course?</h2>
           <ul className="space-y-2">
             <li className="flex items-start">
-              <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+              <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
               <span>Comprehensive curriculum covering all MB-920 exam objectives</span>
             </li>
             <li className="flex items-start">
-              <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+              <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
               <span>Hands-on labs with real-world business scenarios</span>
             </li>
             <li className="flex items-start">
-              <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+              <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
               <span>Expert instructors with industry experience</span>
             </li>
             <li className="flex items-start">
-              <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+              <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
               <span>Practice tests and exam preparation materials</span>
             </li>
             <li className="flex items-start">
-              <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+              <FaCircleCheck className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
               <span>Learn at your own pace with lifetime access</span>
             </li>
           </ul>

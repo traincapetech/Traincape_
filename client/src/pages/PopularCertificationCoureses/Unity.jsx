@@ -17,20 +17,20 @@ const Unity = () => {
       image: Card1,
       description: "Unity Certified User – Artist Courseware",
       price: "₹4800",
-      url: "/IBMcourses",
+      url: "/UnityCourse/ArtistCourseware",
     },
     {
       image: Card2,
       description: "Unity Certified User – Programmer Courseware",
       price: "₹4800",
-      url: "/IBMcourses",
+      url: "/UnityCourse/UnityProgrammer",
     },
     {
       image: Card3,
       description:
         "Unity Certified User – VR Developer Courseware",
       price: "₹4800",
-      url: "/IBMcourses",
+      url: "/UnityCourse/DeveloperCourseware",
     },
     
   ];
@@ -49,7 +49,15 @@ const Unity = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between p-5">
           <div className="lg:w-2/3 w-full ">
             <h1 className="text-2xl  md:text-3xl lg:text-4xl font-bold font-serif ">
-              UNITY
+              <a 
+                href="https://unity.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-blue-600 transition-colors cursor-pointer"
+                title="Visit Unity Official Website"
+              >
+                UNITY
+              </a>
             </h1>
             <h5 className="text-sm md:text-lg lg:text-base xl:text-xl mt-4">
               The Unity Certified User (UCU) certification is an entry-level

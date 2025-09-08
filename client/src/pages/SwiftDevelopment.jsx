@@ -41,7 +41,15 @@ const SwiftDevelopment = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between p-5">
           <div className="lg:w-2/3 w-full">
             <h1 className="text-3xl md:text-4xl lg:text-4xl font-bold font-serif">
-              Apple Certifications
+              <a 
+                href="https://www.apple.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-blue-600 transition-colors cursor-pointer"
+                title="Visit Apple Official Website"
+              >
+                Apple
+              </a> Certifications
             </h1>
             <h5 className="text-sm md:text-lg lg:text-xl mt-4">
             Swift is a robust and intuitive programming language created by Apple. It's easy to learn, simple to use, and super powerful — which makes it a great language for first time coders and full time developers.        

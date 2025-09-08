@@ -11,6 +11,8 @@ const SuccessCartPayment = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [courseDetails, setCourseDetails] = useState([]);
+  const [paidAmount, setPaidAmount] = useState(null);
+  const [paidCurrency, setPaidCurrency] = useState('USD');
   const handleClearCart = () => {
     clearCart();
   };
@@ -53,6 +55,10 @@ const SuccessCartPayment = () => {
 
           if (response.data.transaction) {
             setCourseDetails(response.data.transaction);
+            const amt = response.data.amount ?? response.data.transaction.amount ?? null;
+            const cur = response.data.currency ?? 'USD';
+            setPaidAmount(typeof amt === 'number' ? amt : (amt ? Number(amt) : null));
+            setPaidCurrency(cur);
           } else {
             console.warn("No Course details in response");
           }
@@ -195,8 +201,9 @@ const SuccessCartPayment = () => {
                     {courseDetails.transactionId}
                   </p>
                   <p>
-                    <span className="font-medium">Amount Paid:</span> ₹
-                    {courseDetails.amount}
+                    <span className="font-medium">Amount Paid:</span>{" "}
+                    {(paidCurrency || 'USD') === 'USD' ? '$' : '₹'}
+                    {paidAmount != null ? paidAmount.toFixed(2) : '--'}
                   </p>
                   <p>
                     <span className="font-medium">Purchased On:</span>{" "}
@@ -225,12 +232,29 @@ const SuccessCartPayment = () => {
               </div>
             )}
 
-            <button
-              onClick={() => navigate("/UserProfile#MyCourses")}
-              className="w-full py-2 mt-4 font-medium text-white transition-colors bg-green-600 rounded-md hover:bg-green-700"
-            >
-              View My Courses
-            </button>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+              <button
+                onClick={() => navigate("/Courses-details")}
+                className="w-full py-2 font-medium text-white transition-colors bg-green-600 rounded-md hover:bg-green-700"
+              >
+                Continue Shopping
+              </button>
+              <a
+                href="mailto:sales@traincapetech.in?subject=Voucher%20Delivery%20Assistance"
+                className="w-full py-2 text-center font-medium text-gray-700 transition-colors bg-gray-200 rounded-md hover:bg-gray-300"
+              >
+                Didn’t get voucher? Contact support
+              </a>
+            </div>
+
+            <div className="mt-4 text-xs text-gray-600 bg-blue-50 border border-blue-100 p-3 rounded-md text-left">
+              <p>If you did not receive your voucher email within a few minutes, check your spam folder. Still missing or incorrect? Reach us:</p>
+              <ul className="list-disc ml-5 mt-1">
+                <li>Email: sales@traincapetech.in</li>
+                <li>Phone: +44 1253 928501</li>
+                <li>WhatsApp: +44 1253 928501</li>
+              </ul>
+            </div>
           </div>
         )}
       </div>

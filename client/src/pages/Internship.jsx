@@ -17,6 +17,11 @@ import one from '../assets/1.png';
 import two from '../assets/2.png';
 import three from '../assets/3.png';
 import four from '../assets/4.png';
+import vikas from "../assets/vikas.jpg";
+import kartikey from "../assets/kartikey.jpg";
+// import shubh from "../assets/shubh.jpg";
+import harshda from "../assets/harshda.jpg";
+import ashu from "../assets/ashu.jpg";
 
 export default function Internship() {
   const [payoload, setPayoload] = useState({
@@ -31,6 +36,7 @@ export default function Internship() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const images = [
+    vikas, kartikey,harshda, ashu,
     vanshika, Tripti, love, Akansha, Akshay, Ritik, one, two, three, four
   ];
 

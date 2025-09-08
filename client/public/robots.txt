@@ -2,11 +2,36 @@
 User-agent: *
 Allow: /
 
-# Allow all web crawlers to access all content
-Sitemap: https://traincapetech.in/sitemap.xml
+# Disallow non-www URLs to prevent duplicate content
+Disallow: https://traincapetech.in/
+Disallow: http://traincapetech.in/
 
-# Block specific paths that shouldn't be indexed
-Disallow: /admin-panel
-Disallow: /login
-Disallow: /signup
-Disallow: /*?*
+# Allow www version
+Allow: https://www.traincapetech.in/
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /admin-panel/
+Disallow: /private/
+Disallow: /api/
+Disallow: /_headers
+Disallow: /_redirects
+
+# Disallow temporary and development files
+Disallow: /temp/
+Disallow: /dev/
+Disallow: /test/
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /sitemap.xml
+
+# Allow important files
+Allow: /sitemap.xml
+Allow: /robots.txt
+Allow: /manifest.json
+
+# Crawl delay (optional)
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://www.traincapetech.in/sitemap.xml

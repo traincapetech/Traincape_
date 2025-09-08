@@ -20,7 +20,7 @@ const VerifyCertificate = () => {
       setError(null);
 
       const response = await axios.get(
-        `/results/verifyCertificate?certificateId=${certificateId}`
+        `https://traincape-backend-1.onrender.com/results/verifyCertificate?certificateId=${certificateId}`
       );
 
       if (response.data.success) {

@@ -192,6 +192,9 @@ const ForgotPassword = () => {
                 animationData={signup}
                 loop={true}
                 className=" w-full h-full my-auto"
+                onError={(error) => {
+                  console.warn('Lottie animation error:', error);
+                }}
               />
             </div>
             {/* left forgot page */}

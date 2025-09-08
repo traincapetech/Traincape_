@@ -14,15 +14,21 @@ const CiscoCard = () => {
   const ciscocourses = [
     {
       image: Card1,
+      title: "CCST Networking",
       description: "Cisco Certified Support Technician – Networking LearnKey",
       price: "₹1149",
-      url: "/IBMcourses",
+      url: "/CCSTNetworking",
+      course: "Cisco",
+      subCourse: "CCSTNetworking",
     },
     {
       image: Card2,
+      title: "CCST Cybersecurity",
       description: "Cisco Certified Support Technician – Cybersecurity LearnKey",
       price: "₹1149",
-      url: "/IBMcourses",
+      url: "/CCSTcybersecurity",
+      course: "Cisco",
+      subCourse: "CCSTcybersecurity",
     },
   
   ];
@@ -96,9 +102,12 @@ const CiscoCard = () => {
             <Ciscocoursescard
               key={index}
               image={course.image}
+              title={course.title}
               price={course.price}
               description={course.description}
               url={course.url}
+              course={course.course}
+              subCourse={course.subCourse}
             />
           ))}
         </div>

@@ -57,7 +57,7 @@ const Cards = [
     image: Logo5,
     title: "Microsoft Office Specialist",
     description: "We offer specialized cybersecurity services that ensure the protection of IT infrastructures and solutions.",
-    url:"/Microsoftoffice"
+    url:"/MicrosoftOffice"
   },
   {
     image: Logo13,
