@@ -10,6 +10,7 @@ import { GrResources } from "react-icons/gr";
 import Practice from './Practice';
 import { BsFillPenFill } from "react-icons/bs";
 import { GiPathDistance } from "react-icons/gi";
+import { useNavigate } from 'react-router-dom';
 
 const NavTab = ({ label, active, onClick, icon }) => {
     return (
@@ -34,18 +35,21 @@ const TabContainer = ({ tabs }) => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-100">
-      <div className="grid sm:grid-flow-row grid-cols-1 lg:flex">
+      <div className="grid sm:grid-flow-row grid-cols-1">
         {/* Modern Sidebar */}
         <nav
-          className={`bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white lg:w-80 w-full p-6 flex flex-col space-y-4 lg:block ${isSidebarOpen ? 'block' : ''} shadow-2xl`}
+          className={`bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white w-full p-4 flex flex-col lg:flex-row items-start lg:items-center gap-4  space-y-4 ${isSidebarOpen ? 'block' : ''} shadow-2xl`}
         >
-          <div className="mb-8">
-            <h2 className="text-2xl font-bold text-center bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+          <div className="flex-grow lg:ml-4 text-center lg:text-left">
+            <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               AWS DevOps
             </h2>
-            <p className="text-gray-400 text-center text-sm mt-2">AWS Certified DevOps Engineer</p>
+            <p className="text-gray-400 text-sm mt-2">AWS Certified DevOps Engineer</p>
           </div>
           
+
+           {/* RIGHT: Navigation tabs */}
+           <div className="flex flex-row sm:flex-row lg:flex-row gap-3 lg:w-auto justify-center"> 
           {Object.keys(tabs).map((key) => (
             <NavTab
               key={key}
@@ -67,8 +71,10 @@ const TabContainer = ({ tabs }) => {
                   ? <BsFillPenFill className='w-6 h-6' />
                   : <GiPathDistance className='w-6 h-6' />
               }
+               className="w-full sm:w-28 h-12 flex items-center justify-center rounded-lg bg-gray-800 hover:bg-gray-700 transition"
             />
           ))}
+          </div>
         </nav>
 
         {/* Main Content with Modern Design */}
@@ -109,8 +115,31 @@ const AwsCertifiedDevops = () => {
         <Overview title={"AWS Certified DevOps Engineer"} />
       </div>
       
+
+      <div className="w-full">
+       {/* --- Top Navigation Buttons --- */}
+       <div className="flex justify-center gap-6 mb-12 pt-10">
+          <a
+            href="#learning"
+            className="px-6 py-3 text-lg font-semibold text-green-700 border-2 border-green-200 rounded-xl bg-green-50 hover:bg-green-200 hover:border-green-300 transition"
+          >
+            Learning Resources
+          </a>
+
+          <a
+            href="#pathway"
+            className="px-6 py-3 text-lg font-semibold text-purple-700 border-2 border-purple-200 rounded-xl bg-purple-50 hover:bg-purple-200 hover:border-purple-300 transition"
+          >
+            Career Pathway
+          </a>
+        </div>
+
+
+
       {/* Learn Section */}
-      <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-xl border border-green-100">
+      <div 
+       id="learning"
+      className="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-xl border border-green-100 scroll-mt-24">
         <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
           <FaBook className="mr-3 text-green-600" />
           Learning Resources
@@ -119,13 +148,16 @@ const AwsCertifiedDevops = () => {
       </div>
       
       {/* My Pathway Section */}
-      <div className="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-xl border border-purple-100">
+      <div 
+       id="pathway"
+      className="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-xl border border-purple-100 mt-16 scroll-mt-24">
         <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
           <GiPathDistance className="mr-3 text-purple-600" />
           Career Pathway
         </h3>
         <MyPathway title={"AWS Certified DevOps Engineer"} />
       </div>
+    </div>
     </div>
   );
 
@@ -157,22 +189,53 @@ const AwsCertifiedDevops = () => {
     Certify: <CombinedCertify />,
   };
 
+
+  const navigate = useNavigate();
+
   return (
     <>
       {/* Modern Breadcrumb Navigation */}
       <div className="bg-white shadow-lg border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center space-x-2 text-sm">
-            <span className="text-gray-500 hover:text-blue-600 cursor-pointer transition-colors">Home</span>
-            <span className="text-gray-400">›</span>
-            <span className="text-gray-500 hover:text-blue-600 cursor-pointer transition-colors">Training</span>
-            <span className="text-gray-400">›</span>
-            <span className="text-gray-500 hover:text-blue-600 cursor-pointer transition-colors">AWS</span>
-            <span className="text-gray-400">›</span>
-            <span className="text-blue-600 font-semibold">DevOps Engineer</span>
-          </div>
+      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-start">
+        <div className="flex items-center space-x-4 text-sm">
+
+          {/* Home */}
+          <button
+            onClick={() => navigate("/")}
+            className="text-gray-500 hover:text-blue-600 cursor-pointer transition-colors"
+          >
+            Home
+          </button>
+
+          <span className="text-gray-400">›</span>
+
+          {/* Training */}
+          <button
+            onClick={() => navigate("/training")}
+            className="text-gray-500 hover:text-blue-600 cursor-pointer transition-colors"
+          >
+            Training
+          </button>
+
+          <span className="text-gray-400">›</span>
+
+          {/* AWS */}
+          <button
+            onClick={() => navigate("/aws")}
+            className="text-gray-500 hover:text-blue-600 cursor-pointer transition-colors"
+          >
+            AWS
+          </button>
+
+          <span className="text-gray-400">›</span>
+
+          {/* DevOps Engineer - current page */}
+          <span className="text-blue-600 font-semibold">
+            DevOps Engineer
+          </span>
         </div>
       </div>
+    </div>
 
       <TabContainer tabs={tabs} />
     </>

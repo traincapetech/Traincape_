@@ -34,18 +34,20 @@ const TabContainer = ({ tabs }) => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-100">
-      <div className="grid sm:grid-flow-row grid-cols-1 lg:flex">
+      <div className="grid sm:grid-flow-row grid-cols-1">
         {/* Modern Sidebar */}
         <nav
-          className={`bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white lg:w-80 w-full p-6 flex flex-col space-y-4 lg:block ${isSidebarOpen ? 'block' : ''} shadow-2xl`}
+          className={`bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white w-full p-4 flex flex-col lg:flex-row items-start lg:items-center gap-4  space-y-4 ${isSidebarOpen ? 'block' : ''} shadow-2xl`}
         >
-          <div className="mb-8">
-            <h2 className="text-2xl font-bold text-center bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+          <div className="flex-grow lg:ml-4 text-center lg:text-left">
+            <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               CompTIA Security+
             </h2>
-            <p className="text-gray-400 text-center text-sm mt-2">CompTIA Security+ Certification</p>
+            <p className="text-gray-400 text-sm mt-2">CompTIA Security+ Certification</p>
           </div>
           
+          {/* RIGHT: Navigation tabs */}
+          <div className="flex flex-row sm:flex-row lg:flex-row gap-3 lg:w-auto justify-center"> 
           {Object.keys(tabs).map((key) => (
             <NavTab
               key={key}
@@ -67,8 +69,10 @@ const TabContainer = ({ tabs }) => {
                   ? <BsFillPenFill className='w-6 h-6' />
                   : <GiPathDistance className='w-6 h-6' />
               }
+               className="w-full sm:w-28 h-12 flex items-center justify-center rounded-lg bg-gray-800 hover:bg-gray-700 transition"
             />
           ))}
+          </div>
         </nav>
 
         {/* Main Content with Modern Design */}

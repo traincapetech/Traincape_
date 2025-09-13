@@ -9,18 +9,21 @@ const Certify = ({ title, url, image }) => {
   return (
     <>
       {/* Background Image Section */}
-      <div
-        className="relative h-[43vh] bg-cover bg-center"
-        style={{ backgroundImage: `url(${AWSCertify})` }}
-      >
-        <h1 className="absolute text-center text-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-bold text-3xl sm:text-4xl lg:text-5xl">
-          {title} – Specialty Certification
-        </h1>
-      </div>
+      <div className="flex justify-center mb-8">
+  <div
+    className="relative w-[90%] h-[43vh] bg-cover bg-center rounded-xl overflow-hidden"
+    style={{ backgroundImage: `url(${AWSCertify})` }}   
+  >
+    <h1 className="absolute text-center text-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-bold text-3xl sm:text-4xl lg:text-5xl px-4">
+      {title} – Specialty Certification
+    </h1>
+  </div>
+</div>
+
 
       {/* Certification Description */}
-      <div className="px-4 sm:px-8 md:px-12 py-6">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl text-blue-900 font-bold mb-4">
+      <div className="px-4 sm:px-8 md:px-12 py-6 ">
+        <h2 className="text-2xl sm:text-2xl lg:text-3xl text-blue-900 font-bold mb-4">
           Certify with {title} – Specialty
         </h2>
         <h4 className="text-base sm:text-lg md:text-xl text-gray-700 mb-9">
@@ -28,7 +31,7 @@ const Certify = ({ title, url, image }) => {
         </h4>
 
         {/* Domains List */}
-        <div className="bg-sky-100 rounded-2xl py-4 px-6 sm:px-8">
+        <div className="bg-purple-50 rounded-2xl py-4 px-6 sm:px-8 mt-14">
           <h2 className="text-xl sm:text-2xl font-bold mb-4">{title} – Specialty Domains:</h2>
           <ul className="list-disc pl-5 space-y-4">
             <li>

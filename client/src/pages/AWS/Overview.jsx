@@ -13,7 +13,7 @@ const Overview = ({ title }) => {
     return (
       <div className="m-0">
         <h1 className="font-bold text-4xl md:text-5xl text-blue-900 text-center mb-6">{title} Certificate</h1>
-        <img src={Banner} alt="" className="w-full h-auto mb-6" />
+        <img src={Banner} alt="" className="w-full h-auto mb-16 mt-14 sm:w-full sm:h-auto md:w-[80%] mx-auto rounded-xl" />
         <h3 className="text-2xl md:text-3xl font-bold my-2 text-slate-700">
           Kick-start your career with a {title} certification!
         </h3>
