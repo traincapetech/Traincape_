@@ -1,39 +1,64 @@
-import React, { useEffect, useState } from 'react';
-import { Route, Navigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+
+import Home from "../Home";
+import Courses from "../Courses";
+import CourseDetails from "../CourseDetails";
+import SubCourseDetails from "../SubCourseDetails"; // ✅ NEW
+import Checkout from "../Checkout";
+import Login from "../Login";
+import NotFound from "../NotFound";
+
+const DebugWrapper = ({ name, children }) => {
+  console.log(`🔎 Rendering route: ${name}`);
+  return children;
+};
 
 const AllRoute = () => {
-  const location = useLocation();
-  const [token, setToken] = useState(null);
-
-  useEffect(() => {
-    // Implement your token retrieval logic here
-    // For example, you can use localStorage or a state management library
-    setToken(true); // Replace with actual token retrieval logic
-  }, []);
+  const token = localStorage.getItem("authToken");
 
   return (
-    <>
-      {/* Test Route */}
-      <Route 
-        path="/test" 
+    <Routes>
+      {/* HOME */}
+      <Route path="/" element={<DebugWrapper name="Home"><Home /></DebugWrapper>} />
+
+      {/* COURSES LIST PAGE */}
+      <Route
+        path="/courses"
+        element={<DebugWrapper name="Courses"><Courses /></DebugWrapper>}
+      />
+
+      {/* COURSE DETAILS (SUBCOURSES LIST) */}
+      <Route
+        path="/courses/:courseName"
+        element={<DebugWrapper name="CourseDetails"><CourseDetails /></DebugWrapper>}
+      />
+
+      {/* SUBCOURSE DETAILS PAGE ✅ */}
+      <Route
+        path="/courses/:courseName/:subCourseName"
+        element={<DebugWrapper name="SubCourseDetails"><SubCourseDetails /></DebugWrapper>}
+      />
+
+      {/* CHECKOUT */}
+      <Route
+        path="/checkout/:subCourseName"
         element={
           token ? (
-            <Test />
+            <DebugWrapper name="Checkout"><Checkout /></DebugWrapper>
           ) : (
-            <Navigate 
-              to="/login" 
-              state={{ 
-                from: "/test",
-                testParams: location.state 
-              }} 
-              replace 
-            />
+            <Navigate to="/login" state={{ from: window.location.pathname }} replace />
           )
-        } 
+        }
       />
-    </>
+
+      {/* LOGIN */}
+      <Route path="/login" element={<DebugWrapper name="Login"><Login /></DebugWrapper>} />
+
+      {/* 404 */}
+      <Route path="*" element={<DebugWrapper name="NotFound"><NotFound /></DebugWrapper>} />
+    </Routes>
   );
 };
 
-export default AllRoute; 
+export default AllRoute;

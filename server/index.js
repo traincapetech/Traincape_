@@ -14,6 +14,7 @@ import { employeeRouter } from "./routes/employee.routes.js";
 import certificateRouter from "./routes/certificate.routes.js";
 import voucherRouter from "./routes/voucher.routes.js";
 import { securityRouter } from "./routes/security.routes.js";
+import courseRoutes from "./routes/courseRoutes.js";
 
 dotenv.config();
 
@@ -77,6 +78,7 @@ app.use("/payments", paymentRouter);
 app.use("/certificates", certificateRouter);
 app.use("/vouchers", voucherRouter);
 app.use("/security", securityRouter);
+app.use("/courses", courseRoutes);
 
 // ✅ Home Endpoint
 app.get("/", (req, res) => {
