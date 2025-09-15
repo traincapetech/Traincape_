@@ -14,6 +14,8 @@ import { employeeRouter } from "./routes/employee.routes.js";
 import certificateRouter from "./routes/certificate.routes.js";
 import voucherRouter from "./routes/voucher.routes.js";
 import { securityRouter } from "./routes/security.routes.js";
+import courseRoutes from "./routes/courseRoutes.js";
+import subcourseRoutes from "./routes/subcourseRoutes.js";
 
 dotenv.config();
 
@@ -67,6 +69,8 @@ app.set('etag', false);
 app.use("/uploads", express.static("uploads"));
 
 // ✅ Routes
+app.use("/api/courses", courseRoutes);
+app.use("/api/subcourses", subcourseRoutes);
 app.use("/questions", questionRouter);  
 app.use("/employees", employeeRouter);
 app.use("/results", resultRouter);

@@ -6,6 +6,11 @@ import ForgotPassword from "../pages/ForgotPassword";
 import NotFound from "../pages/NotFound";
 import Gallery from "../pages/Gallery";
 import CertificateLookup from "../pages/CertificateLookup";
+import Courses from "../pages/Courses";
+import CourseDetails from "../pages/CourseDetails";
+import Core1 from "../pages/subcourses/Core1";
+import Core2 from "../pages/subcourses/Core2";
+import Placeholder from "../pages/subcourses/Placeholder";
 // Preload BS icons to avoid chunk loading errors
 import * as BsIcons from "react-icons/bs";
 // Loading component
@@ -32,7 +37,6 @@ const Signup = lazyWithRetry(() => import("../pages/Signup"));
 const FAQ = lazyWithRetry(() => import("../pages/FAQ"));
 const Services = lazyWithRetry(() => import("../pages/Services"));
 const TermsAndCondition = lazyWithRetry(() => import("../pages/TermsAndCondition"));
-const Courses = lazyWithRetry(() => import("../pages/Courses"));
 const Career = lazyWithRetry(() => import("../pages/Career/Career"));
 const Policy = lazyWithRetry(() => import("../pages/Policy"));
 const PageNotFound = lazyWithRetry(() => import("../pages/404/PageNotFound"));
@@ -292,6 +296,13 @@ const AllRoute = () => {
       <Route path="/Our-Blogs" element={<Blogs />} />
 
       <Route path="/CompTIA-single-page" element={<CompTIAsinglePage />} />
+       <Route path="/" element={<Navigate to="/courses" />} />
+      <Route path="/courses" element={<Courses />} />
+      <Route path="/course/:id" element={<CourseDetails />} />
+      <Route path="/course/:courseId/subcourse/1a" element={<Core1 />} />
+      <Route path="/course/:courseId/subcourse/1b" element={<Core2 />} />
+      {/* fallback for other subcourses */}
+      <Route path="/course/:courseId/subcourse/:subcourseId" element={<Placeholder />} />
 
       <Route path="/home" element={<LandingPage />} />
         
