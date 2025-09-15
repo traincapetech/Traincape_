@@ -8,9 +8,8 @@ import Gallery from "../pages/Gallery";
 import CertificateLookup from "../pages/CertificateLookup";
 import Courses from "../pages/Courses";
 import CourseDetails from "../pages/CourseDetails";
-import Core1 from "../pages/subcourses/Core1";
-import Core2 from "../pages/subcourses/Core2";
-import Placeholder from "../pages/subcourses/Placeholder";
+import SubCourseDetails from "../pages/SubCourseDetails";
+
 // Preload BS icons to avoid chunk loading errors
 import * as BsIcons from "react-icons/bs";
 // Loading component
@@ -37,6 +36,7 @@ const Signup = lazyWithRetry(() => import("../pages/Signup"));
 const FAQ = lazyWithRetry(() => import("../pages/FAQ"));
 const Services = lazyWithRetry(() => import("../pages/Services"));
 const TermsAndCondition = lazyWithRetry(() => import("../pages/TermsAndCondition"));
+// const Courses = lazyWithRetry(() => import("../pages/Courses"));
 const Career = lazyWithRetry(() => import("../pages/Career/Career"));
 const Policy = lazyWithRetry(() => import("../pages/Policy"));
 const PageNotFound = lazyWithRetry(() => import("../pages/404/PageNotFound"));
@@ -275,6 +275,17 @@ const AllRoute = () => {
           element={token ? <BookPage /> : <Navigate to="/login" state={{ from: "/ebook-page" }} replace />} 
         /> 
 
+           <Route path="/Courses-details" element={<Courses />} />
+
+      {/* Show one course + its subcourses */}
+      <Route path="/Courses-details/:courseId" element={<CourseDetails />} />
+
+      {/* Show a single subcourse */}
+      <Route
+        path="/Courses-details/subcourse/:subcourseName"
+        element={<SubCourseDetails />}
+      />
+
         <Route path="/login" element={!token ? <Login /> : <Navigate to="/" replace />} />
         <Route path="/signup" element={!token ? <Signup /> : <Navigate to="/" replace />} />
         <Route path="/forgot-password" element={!token ? <ForgotPassword /> : <Navigate to="/" replace />} />
@@ -296,13 +307,6 @@ const AllRoute = () => {
       <Route path="/Our-Blogs" element={<Blogs />} />
 
       <Route path="/CompTIA-single-page" element={<CompTIAsinglePage />} />
-       <Route path="/" element={<Navigate to="/courses" />} />
-      <Route path="/courses" element={<Courses />} />
-      <Route path="/course/:id" element={<CourseDetails />} />
-      <Route path="/course/:courseId/subcourse/1a" element={<Core1 />} />
-      <Route path="/course/:courseId/subcourse/1b" element={<Core2 />} />
-      {/* fallback for other subcourses */}
-      <Route path="/course/:courseId/subcourse/:subcourseId" element={<Placeholder />} />
 
       <Route path="/home" element={<LandingPage />} />
         
