@@ -11,18 +11,22 @@ const subcourseSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
+      index: true, // Faster lookups by slug
     },
     description: {
       type: String,
       required: [true, "Description is required"],
+      trim: true,
     },
     price: {
       type: Number,
       required: [true, "Price is required"],
+      min: [0, "Price must be a positive number"],
     },
     image: {
       type: String,
       default: "",
+      trim: true,
     },
     courseId: {
       type: mongoose.Schema.Types.ObjectId,

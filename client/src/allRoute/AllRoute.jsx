@@ -276,15 +276,14 @@ const AllRoute = () => {
         /> 
 
            <Route path="/Courses-details" element={<Courses />} />
+           <Route path="/Courses-details/:courseId/:subcourseSlug" element={<SubCourseDetails />} />
+
 
       {/* Show one course + its subcourses */}
       <Route path="/Courses-details/:courseId" element={<CourseDetails />} />
 
-      {/* Show a single subcourse */}
-      <Route
-        path="/Courses-details/subcourse/:subcourseName"
-        element={<SubCourseDetails />}
-      />
+     <Route path="/Courses-details/:courseId/:subcourseSlug" element={<SubCourseDetails />} />
+
 
         <Route path="/login" element={!token ? <Login /> : <Navigate to="/" replace />} />
         <Route path="/signup" element={!token ? <Signup /> : <Navigate to="/" replace />} />
