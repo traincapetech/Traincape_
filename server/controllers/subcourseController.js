@@ -14,8 +14,11 @@ export const getSubcoursesByCourse = async (req, res) => {
 
 // ✅ Create a new subcourse
 export const createSubcourse = async (req, res) => {
-  try {
-    const { title, description, price, image, courseId } = req.body;
+   try {
+    console.log("📩 Incoming subcourse data:", req.body); // ✅ Debug log
+
+    const { title, description, price, image, courseId, uiComponent } = req.body;
+    console.log("🎯 uiComponent received:", uiComponent); // ✅ Debug log
 
     // Validate request fields
     if (!title || !description || !price || !courseId) {
@@ -43,6 +46,7 @@ export const createSubcourse = async (req, res) => {
       image: image || "",
       courseId,
       slug,
+      uiComponent,
     });
 
     res.status(201).json(newSubcourse);

@@ -33,6 +33,11 @@ const subcourseSchema = new mongoose.Schema(
       ref: "Course",
       required: [true, "courseId is required"],
     },
+    uiComponent: {
+      type: String,
+      trim: true,
+      default: "", // ✅ Prevents undefined issue if not set
+    },
   },
   { timestamps: true }
 );
