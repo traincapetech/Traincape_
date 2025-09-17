@@ -1,16 +1,44 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const APlusTemplate = ({ subcourse, examDetails = [], objectives = [], defaultTitle, defaultDescription }) => {
+const APlusTemplate = ({
+  subcourse,
+  examDetails = [],
+  objectives = [],
+  defaultTitle,
+  defaultDescription,
+}) => {
   const title = subcourse?.title || defaultTitle;
   const description = subcourse?.description || defaultDescription;
   const [activeTab, setActiveTab] = useState("Overview");
+  const navigate = useNavigate();
+
+  const [loadingCheckout, setLoadingCheckout] = useState(false);
+
+const handleBuyNow = () => {
+  if (loadingCheckout) return;
+  setLoadingCheckout(true);
+
+  navigate("/checkout", {
+    state: {
+      course: {
+        id: subcourse?._id,  // ✅ Use _id, not id
+        title: subcourse?.title,
+        price: subcourse?.price,
+      }
+    },
+  });
+};
+
 
   return (
     <div className="bg-gray-50 min-h-screen text-gray-800">
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Breadcrumb */}
         <div className="text-sm text-gray-500 mb-4">
-          <a href="/" className="hover:underline">Discover Our Certifications</a>
+          <a href="/" className="hover:underline">
+            Discover Our Certifications
+          </a>
           <span className="mx-2">/</span>
           <span className="text-gray-700">A+</span>
           <span className="mx-2">/</span>
@@ -20,23 +48,31 @@ const APlusTemplate = ({ subcourse, examDetails = [], objectives = [], defaultTi
         {/* Hero */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
           <div className="lg:col-span-2">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-red-600 mb-4">{title}</h1>
-            <p className="text-lg text-gray-700 leading-relaxed max-w-3xl">{description}</p>
+            <h1 className="text-4xl md:text-5xl font-extrabold text-red-600 mb-4">
+              {title}
+            </h1>
+            <p className="text-lg text-gray-700 leading-relaxed max-w-3xl">
+              {description}
+            </p>
 
             {/* Tabs */}
             <div className="mt-8 bg-black rounded-lg shadow overflow-hidden">
               <div className="flex text-white text-sm">
-                {["Overview", "Buy Now", "Career Path", "Resources"].map((tab) => (
-                  <button
-                    key={tab}
-                    className={`flex-1 py-4 px-6 text-center font-semibold transition ${
-                      activeTab === tab ? "bg-black border-b-2 border-red-600" : "bg-black/80 hover:bg-black/70"
-                    }`}
-                    onClick={() => setActiveTab(tab)}
-                  >
-                    {tab}
-                  </button>
-                ))}
+                {["Overview", "Buy Now", "Career Path", "Resources"].map(
+                  (tab) => (
+                    <button
+                      key={tab}
+                      className={`flex-1 py-4 px-6 text-center font-semibold transition ${
+                        activeTab === tab
+                          ? "bg-black border-b-2 border-red-600"
+                          : "bg-black/80 hover:bg-black/70"
+                      }`}
+                      onClick={() => setActiveTab(tab)}
+                    >
+                      {tab}
+                    </button>
+                  )
+                )}
               </div>
             </div>
           </div>
@@ -51,7 +87,9 @@ const APlusTemplate = ({ subcourse, examDetails = [], objectives = [], defaultTi
               />
               <div className="text-center">
                 <div className="text-sm text-gray-600 mb-1">Plus</div>
-                <div className="text-xl font-bold text-gray-800">A+ Certification</div>
+                <div className="text-xl font-bold text-gray-800">
+                  A+ Certification
+                </div>
               </div>
             </div>
           </div>
@@ -63,11 +101,15 @@ const APlusTemplate = ({ subcourse, examDetails = [], objectives = [], defaultTi
             {/* Main content */}
             <div className="lg:col-span-2 space-y-8">
               <div className="bg-white rounded-xl shadow p-8 space-y-8">
-                <h2 className="text-3xl font-bold">{title} exam objectives summary</h2>
+                <h2 className="text-3xl font-bold">
+                  {title} exam objectives summary
+                </h2>
 
                 {objectives.map((sec) => (
                   <div key={sec.heading} className="space-y-2">
-                    <h3 className="text-xl font-bold">{sec.heading} ({sec.percent}%)</h3>
+                    <h3 className="text-xl font-bold">
+                      {sec.heading} ({sec.percent}%)
+                    </h3>
                     <ul className="list-disc ml-6 space-y-1">
                       {sec.bullets.map((b, i) => (
                         <li key={i}>
@@ -80,16 +122,20 @@ const APlusTemplate = ({ subcourse, examDetails = [], objectives = [], defaultTi
 
                 {/* CTA text */}
                 <p className="text-center text-red-600 font-semibold">
-                  Advance your career — Buy A+ certification exam or training today.
+                  Advance your career — Buy A+ certification exam or training
+                  today.
                 </p>
               </div>
 
               {/* Email capture */}
               <div className="bg-white rounded-xl shadow p-8 flex flex-col lg:flex-row gap-6 items-start">
                 <div className="flex-1">
-                  <h4 className="text-xl font-bold mb-2">Get A+ Exam Objectives and Practice Questions</h4>
+                  <h4 className="text-xl font-bold mb-2">
+                    Get A+ Exam Objectives and Practice Questions
+                  </h4>
                   <p className="text-gray-600 mb-4">
-                    Enter your email to get updates, practice questions, and training bundles.
+                    Enter your email to get updates, practice questions, and
+                    training bundles.
                   </p>
                   <form className="flex gap-3 items-center">
                     <input
@@ -115,7 +161,8 @@ const APlusTemplate = ({ subcourse, examDetails = [], objectives = [], defaultTi
                   <ul className="space-y-2">
                     {examDetails.map(([k, v]) => (
                       <li key={k}>
-                        <span className="font-medium">{k}:</span> <span className="ml-1">{v}</span>
+                        <span className="font-medium">{k}:</span>{" "}
+                        <span className="ml-1">{v}</span>
                       </li>
                     ))}
                   </ul>
@@ -126,11 +173,21 @@ const APlusTemplate = ({ subcourse, examDetails = [], objectives = [], defaultTi
               <div className="bg-white rounded-xl shadow p-8">
                 <h4 className="text-xl font-bold mb-3">Skills learned</h4>
                 <ul className="list-disc ml-6 space-y-1">
-                  <li>Install, configure, and maintain hardware components and mobile devices.</li>
-                  <li>Troubleshoot hardware, network, and connectivity issues.</li>
-                  <li>Understand networking basics and configure SOHO networks.</li>
+                  <li>
+                    Install, configure, and maintain hardware components and
+                    mobile devices.
+                  </li>
+                  <li>
+                    Troubleshoot hardware, network, and connectivity issues.
+                  </li>
+                  <li>
+                    Understand networking basics and configure SOHO networks.
+                  </li>
                   <li>Explain virtualization and cloud computing concepts.</li>
-                  <li>Use troubleshooting tools to diagnose and resolve technical problems.</li>
+                  <li>
+                    Use troubleshooting tools to diagnose and resolve technical
+                    problems.
+                  </li>
                 </ul>
               </div>
 
@@ -138,7 +195,8 @@ const APlusTemplate = ({ subcourse, examDetails = [], objectives = [], defaultTi
               <div className="bg-white rounded-xl shadow p-8 text-center">
                 <h4 className="text-xl font-bold mb-2">Advance with confidence</h4>
                 <p className="text-gray-600 mb-4">
-                  Get updates, insights, and exclusive offers to support your learning journey and career growth.
+                  Get updates, insights, and exclusive offers to support your
+                  learning journey and career growth.
                 </p>
                 <button className="bg-gray-800 text-white px-6 py-3 rounded-md hover:bg-gray-900">
                   Sign up now
@@ -153,10 +211,21 @@ const APlusTemplate = ({ subcourse, examDetails = [], objectives = [], defaultTi
                 <div className="text-2xl font-bold text-gray-900 mb-4">
                   ₹{subcourse?.price ?? 1499}
                 </div>
-                <button className="w-full bg-red-600 text-white py-3 rounded-md font-semibold hover:bg-red-700 mb-3">
-                  Buy Now
+
+                {/* ✅ Fixed Buy Now button */}
+                <button
+                  onClick={handleBuyNow}
+                  disabled={loadingCheckout}
+                  className={`px-6 py-3 w-full rounded-lg transition text-white ${
+                    loadingCheckout
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-green-600 hover:bg-green-700"
+                  }`}
+                >
+                  {loadingCheckout ? "Redirecting..." : "Buy Now"}
                 </button>
-                <button className="w-full border border-gray-300 py-2 rounded-md font-medium">
+
+                <button className="w-full border border-gray-300 py-2 rounded-md font-medium mt-3">
                   Add to cart
                 </button>
               </div>

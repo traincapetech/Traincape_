@@ -1,27 +1,65 @@
 import React from "react";
 import APlusTemplate from "./APlusTemplate";
 
-const APlusCore1And2V15 = ({ subcourse }) => {
+const APlusCore2V15 = ({ subcourse }) => {
   const examDetails = [
-    ["Exam version", "V15"],
-    ["Exam series code", "220-1201 (Core 1) & 220-1202 (Core 2)"],
-    ["Launch date", "March 25, 2025"],
-    ["Number of questions", "Up to 180 (90 per exam)"],
-    ["Length", "90 minutes each exam"],
-    ["Passing score", "675 / 900 (Core 1), 700 / 900 (Core 2)"],
-    ["Recommended experience", "12 months of hands-on IT support experience"],
-    ["Retirement (est.)", "2028 (approx.)"],
+    ["Exam version", "V14 (Retiring)"],
+    ["Exam series code", "220-1102 (Core 2)"],
+    ["Launch date", "April 2022"],
+    ["Number of questions", "Up to 90"],
+    ["Length", "90 minutes"],
+    ["Passing score", "700 / 900"],
+    ["Retirement", "October 2025 (approx.)"],
+  ];
+
+  const objectives = [
+    {
+      heading: "Operating Systems",
+      percent: 31,
+      bullets: [
+        "Install and configure Windows OS, macOS, Linux, and mobile OS.",
+        "Use command-line tools to manage operating systems.",
+        "Apply basic scripting techniques for automation."
+      ],
+    },
+    {
+      heading: "Security",
+      percent: 25,
+      bullets: [
+        "Identify common security threats and vulnerabilities.",
+        "Secure mobile devices and workstations.",
+        "Apply security best practices for networks and users."
+      ],
+    },
+    {
+      heading: "Software Troubleshooting",
+      percent: 22,
+      bullets: [
+        "Troubleshoot common OS problems.",
+        "Resolve application and service issues.",
+        "Diagnose malware and security incidents."
+      ],
+    },
+    {
+      heading: "Operational Procedures",
+      percent: 22,
+      bullets: [
+        "Follow change management processes.",
+        "Document and label hardware/software configurations.",
+        "Follow environmental and safety guidelines."
+      ],
+    },
   ];
 
   return (
     <APlusTemplate
       subcourse={subcourse}
-      defaultTitle="A+ Core 1 & 2 V15 (New Version)"
-      defaultDescription="CompTIA A+ Core 1 & 2 together form the complete A+ certification. Core 1 focuses on hardware, networking, and troubleshooting, while Core 2 covers OS, security, and operational procedures."
+      defaultTitle="A+ Core 2 V14 (Retiring Version)"
+      defaultDescription="CompTIA A+ Core 2 (V14) focuses on operating systems, software troubleshooting, and security. This version is retiring soon — check the official CompTIA schedule."
       examDetails={examDetails}
-      objectives={[]}
+      objectives={objectives}
     />
   );
 };
 
-export default APlusCore1And2V15;
+export default APlusCore2V15;

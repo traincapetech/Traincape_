@@ -9,6 +9,7 @@ import CertificateLookup from "../pages/CertificateLookup";
 import Courses from "../pages/Courses";
 import CourseDetails from "../pages/CourseDetails";
 import SubCourseDetails from "../pages/SubCourseDetails";
+import Checkout from "../pages/Checkout"; 
 
 // Preload BS icons to avoid chunk loading errors
 import * as BsIcons from "react-icons/bs";
@@ -283,6 +284,10 @@ const AllRoute = () => {
       <Route path="/Courses-details/:courseId" element={<CourseDetails />} />
 
      <Route path="/Courses-details/:courseId/:subcourseSlug" element={<SubCourseDetails />} />
+     <Route 
+  path="/checkout" 
+  element={token ? <Checkout /> : <Navigate to="/login" state={{ from: "/checkout" }} replace />} 
+/>
 
 
         <Route path="/login" element={!token ? <Login /> : <Navigate to="/" replace />} />

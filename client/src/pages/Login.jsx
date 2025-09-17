@@ -95,6 +95,7 @@ const Login = () => {
       if (loginUser.fulfilled.match(result)) {
         // Login successful
         // If there are test parameters, navigate to test page with those parameters
+        localStorage.setItem("userEmail", payload.email);
         if (testParams) {
           navigate('/test', { 
             state: testParams 
