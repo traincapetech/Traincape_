@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK); // ✅ FIXED
 
 const Checkout = () => {
   const location = useLocation();
@@ -8,8 +11,6 @@ const Checkout = () => {
   const { course } = location.state || {};
 
   console.log("🔍 Checkout received course:", course);
-console.log("🔍 location.state:", location.state);
-
 
   useEffect(() => {
     const createSession = async () => {
@@ -22,9 +23,8 @@ console.log("🔍 location.state:", location.state);
 
         // ✅ Get logged-in user email
         let userEmail = null;
-
-        // 1️⃣ First, try to decode from token
         const token = localStorage.getItem("token");
+
         if (token) {
           try {
             const payload = JSON.parse(atob(token.split(".")[1]));
@@ -34,23 +34,16 @@ console.log("🔍 location.state:", location.state);
           }
         }
 
-        // 2️⃣ Fallback to saved email (from Login.jsx)
-        if (!userEmail) {
-          userEmail = localStorage.getItem("userEmail");
-        }
+        if (!userEmail) userEmail = localStorage.getItem("userEmail");
 
         if (!userEmail) {
           console.warn("⚠️ No user email found. Redirecting to login.");
           navigate("/login", {
-            state: {
-              from: "/checkout",
-              message: "Please login to continue your purchase.",
-            },
+            state: { from: "/checkout", message: "Please login to continue your purchase." },
           });
           return;
         }
 
-        // ✅ Build Stripe payload
         const payload = {
           email: userEmail,
           productIds: [course.id],
@@ -70,16 +63,23 @@ console.log("🔍 location.state:", location.state);
 
         console.log("📤 Sending to backend:", payload);
 
-        const response = await axios.post(
-      "https://traincape-backend-1.onrender.com/payments/stripe",
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/payments/stripe`, payload);
 
-          payload
-        );
+        console.log("📥 Backend response:", response.data);
 
-        if (response.data?.url) {
-          window.location.href = response.data.url;
+        if (response.data?.sessionId) {
+          console.log("✅ Stripe session created:", response.data.sessionId);
+
+          // 🔑 Option 1: Stripe.js redirect (if key works)
+          const stripe = await stripePromise;
+          if (stripe) {
+            await stripe.redirectToCheckout({ sessionId: response.data.sessionId });
+          } else {
+            console.warn("⚠️ Stripe.js not initialized, using direct redirect.");
+            window.location.href = response.data.url; // 🔑 Option 2: Direct URL
+          }
         } else {
-          console.error("❌ Backend did not return a URL.");
+          console.error("❌ No sessionId from backend.");
           navigate("/cart");
         }
       } catch (error) {
