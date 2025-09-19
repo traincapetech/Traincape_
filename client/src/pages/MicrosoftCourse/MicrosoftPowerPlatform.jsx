@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import Overview from './MicrosoftOverview';
 import Certify from './Certify';
 import Learn from './Learn';
@@ -162,7 +163,7 @@ const MicrosoftPowerPlatform = () => {
 
   return (
     <>
-      {/* Modern Breadcrumb Navigation */}
+        {/* Breadcrumb */}
       <div className="bg-white shadow-lg border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center space-x-2 text-sm">

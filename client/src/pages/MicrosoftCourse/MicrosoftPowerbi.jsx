@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import Overview from './MicrosoftOverview';
 import Certify from './Certify';
 import Learn from './Learn';
@@ -142,20 +143,7 @@ const MicrosoftPowerBI = () => {
 
   return (
     <>
-      {/* Breadcrumb */}
-      <div className="bg-white shadow-md border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center space-x-2 text-sm">
-            <span className="text-gray-500 hover:text-blue-600 cursor-pointer">Home</span>
-            <span className="text-gray-400">›</span>
-            <span className="text-gray-500 hover:text-blue-600 cursor-pointer">Training</span>
-            <span className="text-gray-400">›</span>
-            <span className="text-gray-500 hover:text-blue-600 cursor-pointer">Microsoft</span>
-            <span className="text-gray-400">›</span>
-            <span className="text-blue-600 font-semibold">Power BI</span>
-          </div>
-        </div>
-      </div>
+    
 
        {/* Breadcrumb */}
       <div className="bg-white shadow-md border-b border-gray-200">

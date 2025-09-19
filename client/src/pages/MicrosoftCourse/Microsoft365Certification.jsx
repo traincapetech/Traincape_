@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import MicrosoftOverview from './MicrosoftOverview';
 import Certify from './Certify';
 import Learn from './Learn';
@@ -175,6 +176,7 @@ const Microsoft365Certification = () => {
   };
 
   return (
+  <>
      {/* Breadcrumb */}
       <div className="bg-white shadow-md border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-4">
@@ -210,6 +212,7 @@ const Microsoft365Certification = () => {
       title="Microsoft 365"
       subtitle="Microsoft 365 Certifications"
     />
+    </>
   );
 };
 

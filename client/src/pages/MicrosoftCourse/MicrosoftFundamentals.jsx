@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import Certify from './Certify';
 import Learn from './Learn';
 import MyPathway from './MyPathway';
@@ -84,6 +85,7 @@ const TabContainer = ({ tabs }) => {
 
 
 const MicrosoftFundamentals = () => {
+    const navigate = useNavigate();
     const tabs = {
         Overview: <MicrosoftOverview title={"Microsoft Azure Fundamentals"} />,
         Certify: <Certify title={"Microsoft Azure Fundamentals" } />,
@@ -94,7 +96,7 @@ const MicrosoftFundamentals = () => {
         Contact: <ContactUs />,
       };
     
-      return  {/* Breadcrumb */}
+      return <> {/* Breadcrumb */}
       <div className="bg-white shadow-md border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center space-x-2 text-sm">
@@ -125,6 +127,7 @@ const MicrosoftFundamentals = () => {
       </div>
 
       <TabContainer tabs={tabs} />;
+      </>
   
 }
 

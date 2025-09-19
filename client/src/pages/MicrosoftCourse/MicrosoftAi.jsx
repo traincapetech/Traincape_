@@ -175,35 +175,7 @@ const MicrosoftAI = () => {
 
   return (
     <>
-      {/* Breadcrumb */}
-      <div className="bg-white shadow-lg border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-start">
-          <div className="flex items-center space-x-4 text-sm">
-            <button
-              onClick={() => navigate('/')}
-              className="text-gray-500 hover:text-blue-600 cursor-pointer transition-colors"
-            >
-              Home
-            </button>
-            <span className="text-gray-400">›</span>
-            <button
-              onClick={() => navigate('/training')}
-              className="text-gray-500 hover:text-blue-600 cursor-pointer transition-colors"
-            >
-              Training
-            </button>
-            <span className="text-gray-400">›</span>
-            <button
-              onClick={() => navigate('/microsoft')}
-              className="text-gray-500 hover:text-blue-600 cursor-pointer transition-colors"
-            >
-              Microsoft
-            </button>
-            <span className="text-gray-400">›</span>
-            <span className="text-blue-600 font-semibold">AI</span>
-          </div>
-        </div>
-      </div>
+  
 
        {/* Breadcrumb */}
       <div className="bg-white shadow-md border-b border-gray-200">

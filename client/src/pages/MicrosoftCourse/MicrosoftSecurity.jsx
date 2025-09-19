@@ -10,6 +10,7 @@ import { GrResources } from "react-icons/gr";
 import Practice from './Practice';
 import { BsFillPenFill } from "react-icons/bs";
 import { GiPathDistance } from "react-icons/gi";
+import { useNavigate } from 'react-router-dom';
 
 const NavTab = ({ label, active, onClick, icon }) => {
     return (
@@ -162,21 +163,7 @@ const MicrosoftSecurity = () => {
 
   return (
     <>
-      {/* Modern Breadcrumb Navigation */}
-      <div className="bg-white shadow-lg border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center space-x-2 text-sm">
-            <span className="text-gray-500 hover:text-blue-600 cursor-pointer transition-colors">Home</span>
-            <span className="text-gray-400">›</span>
-            <span className="text-gray-500 hover:text-blue-600 cursor-pointer transition-colors">Training</span>
-            <span className="text-gray-400">›</span>
-            <span className="text-gray-500 hover:text-blue-600 cursor-pointer transition-colors">Microsoft</span>
-            <span className="text-gray-400">›</span>
-            <span className="text-blue-600 font-semibold">Security</span>
-          </div>
-        </div>
-      </div>
-
+ 
        {/* Breadcrumb */}
       <div className="bg-white shadow-md border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-4">

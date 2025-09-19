@@ -95,37 +95,7 @@ const MicrosoftPl300 = () => {
         Contact: <ContactUs />,
       };
     
-      return  {/* Breadcrumb */}
-      <div className="bg-white shadow-md border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center space-x-2 text-sm">
-            <span
-              className="text-gray-500 hover:text-blue-600 cursor-pointer"
-              onClick={() => navigate('/')}
-            >
-              Home
-            </span>
-            <span className="text-gray-400">›</span>
-            <span
-              className="text-gray-500 hover:text-blue-600 cursor-pointer"
-              onClick={() => navigate('/training')}
-            >
-              Training
-            </span>
-            <span className="text-gray-400">›</span>
-            <span
-              className="text-gray-500 hover:text-blue-600 cursor-pointer"
-              onClick={() => navigate('/microsoft')}
-            >
-              Microsoft
-            </span>
-            <span className="text-gray-400">›</span>
-            <span className="text-blue-600 font-semibold">Azure Administrator</span>
-          </div>
-        </div>
-      </div>
-
-      <TabContainer tabs={tabs} />;
+      return <TabContainer tabs={tabs} />;
   
 }
 

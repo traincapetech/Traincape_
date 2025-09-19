@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import MicrosoftOverview from './MicrosoftOverview';
 import Certify from './Certify';
 import Learn from './Learn';
@@ -186,6 +187,7 @@ const MicrosoftMs900 = () => {
   };
 
   return (
+    <>
      {/* Breadcrumb */}
       <div className="bg-white shadow-md border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-4">
@@ -221,6 +223,7 @@ const MicrosoftMs900 = () => {
       title="Microsoft 365"
       subtitle="Microsoft Ms-900: Microsoft 365 Fundamentals"
     />
+    </>
   );
 };
 
