@@ -10,6 +10,7 @@ import Courses from "../pages/Courses";
 import CourseDetails from "../pages/CourseDetails";
 import SubCourseDetails from "../pages/SubCourseDetails";
 import Checkout from "../pages/Checkout"; 
+import SuccessCartPayment from "../pages/SuccessCartPayment"
 
 // Preload BS icons to avoid chunk loading errors
 import * as BsIcons from "react-icons/bs";
@@ -218,7 +219,7 @@ const PMI = lazyWithRetry(() => import("../pages/PMI"));
 const ITSpeacialist = lazyWithRetry(() => import("../pages/ITSpecialist"));
 const SwiftDevelopment = lazyWithRetry(() => import("../pages/SwiftDevelopment"));
 const Cart = lazyWithRetry(() => import("../pages/Cart/Cart"));
-const SuccessCartPayment = lazyWithRetry(() => import("../pages/Cart/SuccessCartPayment"));
+
 const CancelCartPayment = lazyWithRetry(() => import("../pages/Cart/CancelCartPayment"));
 
 const Tally = lazyWithRetry(() => import("../pages/PopularCertificationCoureses/Tally"));
@@ -287,7 +288,10 @@ const AllRoute = () => {
      <Route 
   path="/checkout" 
   element={token ? <Checkout /> : <Navigate to="/login" state={{ from: "/checkout" }} replace />} 
+  
 />
+<Route path="/success-cart-payment" element={<SuccessCartPayment />} />
+
 
 
         <Route path="/login" element={!token ? <Login /> : <Navigate to="/" replace />} />
@@ -457,7 +461,8 @@ const AllRoute = () => {
         <Route path="/MetaIosDeveloper" element={<MetaIosDeveloper />} />
         
         {/* Admin Panel */}
-        <Route path="/admin-panel" element={token ? <AdminPanel /> : <Navigate to="/login" state={{ from: "/admin-panel" }} replace />} />
+       <Route path="/admin-panel" element={<AdminPanel />} />
+
         <Route path="/verify-certificate" element={<VerifyCertificate />} />
       <Route path="/cer" element={<CertificateTemplate />} />
 
