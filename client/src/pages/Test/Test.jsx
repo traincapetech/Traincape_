@@ -78,39 +78,7 @@ const Test = () => {
     }
   };
 
-  // const handleSubmit = async () => {
-  //   setQuizSubmitted(true);
-  //   const score = calculateScore();
-
-  //   // Calculate if the user is certified based on the score
-  //   const passingScore = questions.length * 0.7; // 70% passing score
-  //   const isCertified = score >= passingScore;
-
-  //   setCertified(isCertified); // Set the certified status based on score
-
-  //   const resultData = {
-  //     name: user?.username,
-  //     email: user?.email,
-  //     course,
-  //     subTopic,
-  //     score,
-  //     level,
-  //     totalQuestions: questions.length,
-  //     certificate: isCertified, // Send certificate status to backend
-  //   };
-
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:8080/results/addResult",
-  //       resultData
-  //     );
-  //     console.log("Result saved successfully:", response.data);
-  //     setShowPopup(true);
-  //   } catch (error) {
-  //     console.error("Error saving result:", error.response?.data || error.message);
-  //     alert("There was an error saving your result. Please try again.");
-  //   }
-  // };
+ 
 
   const handleSubmit = async () => {
     setQuizSubmitted(true);

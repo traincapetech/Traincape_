@@ -105,6 +105,9 @@ const IsoIec27032CyberSecurity = () => {
   const courseName = "PECB Certified ISO/IEC 27032 Cyber Security";
 
   // Create a combined Overview component that includes Learn, My Pathway, and Brochure
+   const navigate = useNavigate();
+
+  // Combined Overview (Overview + Learn + MyPathway)
   const CombinedOverview = () => (
     <div className="space-y-8">
       {/* Original Overview Content */}

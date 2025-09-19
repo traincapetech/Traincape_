@@ -105,6 +105,9 @@ const ISO31000RiskManager = () => {
   const courseName = "PECB Certified ISO 31000 Risk Manager";
 
   // Create a combined Overview component that includes Learn, My Pathway, and Brochure
+   const navigate = useNavigate();
+
+  // Combined Overview (Overview + Learn + MyPathway)
   const CombinedOverview = () => (
     <div className="space-y-8">
       {/* Original Overview Content */}

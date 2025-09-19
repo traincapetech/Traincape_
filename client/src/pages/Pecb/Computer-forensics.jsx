@@ -105,6 +105,9 @@ const ComputerForensics = () => {
   const courseName = "PECB Certified Computer Forensics Foundation";
 
   // Create a combined Overview component that includes Learn, My Pathway, and Brochure
+   const navigate = useNavigate();
+
+  // Combined Overview (Overview + Learn + MyPathway)
   const CombinedOverview = () => (
     <div className="space-y-8">
       {/* Original Overview Content */}

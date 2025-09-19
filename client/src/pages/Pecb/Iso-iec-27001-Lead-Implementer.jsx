@@ -105,6 +105,9 @@ const Isoiec27001LeadImplementer = () => {
   const courseName = "PECB Certified ISO/IEC 27001 Lead Implementer";
 
   // Create a combined Overview component that includes Learn, My Pathway, and Brochure
+   const navigate = useNavigate();
+
+  // Combined Overview (Overview + Learn + MyPathway)
   const CombinedOverview = () => (
     <div className="space-y-8">
       {/* Original Overview Content */}

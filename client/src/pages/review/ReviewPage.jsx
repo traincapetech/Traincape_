@@ -19,14 +19,14 @@ const reviewsAPI = axios.create({
 const processReviews = (reviews) => {
   return Array.isArray(reviews)
     ? reviews.map((review) => ({
-        ...review,
-        image: review.image?.startsWith("http")
-          ? review.image
-          : `/${review.image?.replace(/^\/+/, "")}`,
-        name: review.name || "Anonymous",
-        star: review.star || 0,
-        review: review.review || "No review provided.",
-      }))
+      ...review,
+      image: review.image?.startsWith("http")
+        ? review.image
+        : `/${review.image?.replace(/^\/+/, "")}`,
+      name: review.name || "Anonymous",
+      star: review.star || 0,
+      review: review.review || "No review provided.",
+    }))
     : [];
 };
 
@@ -96,6 +96,16 @@ const ReviewPage = () => {
               &gt; Our Reviews
             </span>
           </div>
+
+
+          {/* ✅ Total Reviews Box */}
+          <div className="mt-4 mb-6 px-6 py-4 bg-blue-50 border border-blue-200 rounded-lg shadow-sm">
+            <p className="text-lg font-semibold text-blue-800">
+              Total Reviews: {totalPages * REVIEWS_PER_PAGE}
+            </p>
+          </div>
+
+
 
           {error ? (
             // --- Bonus UX: Show retry button if error occurs ---
