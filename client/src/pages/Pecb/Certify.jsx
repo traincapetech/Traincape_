@@ -4,6 +4,7 @@ import { FaBook, FaPencil, FaCertificate, FaCircleCheck, FaClock, FaUsers, FaGlo
 import { PiCertificateFill, PiTarget, PiTrendUp } from "react-icons/pi";
 import { useEffect } from 'react';
 
+
 const Certify = ({ title }) => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });

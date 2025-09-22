@@ -11,6 +11,7 @@ import Practice from './Practice';
 import { BsFillPenFill } from "react-icons/bs";
 import { GiPathDistance } from "react-icons/gi";
 import PecbBrochureSection from '../../components/PecbBrochureSection';
+import { useNavigate } from 'react-router-dom';
 
 
 const NavTab = ({ label, active, onClick, icon }) => {

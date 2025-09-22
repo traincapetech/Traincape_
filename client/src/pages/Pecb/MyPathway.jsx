@@ -4,6 +4,7 @@ import { FaRoad, FaBullseye, FaCircleCheck, FaClock, FaTrophy, FaUsers, FaGlobe,
 import { PiCertificateFill, PiTrendUp, PiLightbulb } from "react-icons/pi";
 import { useEffect } from 'react';
 
+
 const MyPathway = ({ title, image }) => {
   const [activeStep, setActiveStep] = useState(0);
   

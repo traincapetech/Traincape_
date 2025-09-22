@@ -4,6 +4,7 @@ import { FaBook, FaGraduationCap, FaUsers, FaClock, FaCircleCheck, FaPlay, FaDow
 import { PiTarget, PiTrendUp, PiGlobe } from "react-icons/pi";
 import { useEffect } from 'react';
 
+
 const Learn = ({ title, url, image }) => {
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behavior: "instant" });
