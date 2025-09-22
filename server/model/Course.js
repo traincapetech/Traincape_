@@ -5,10 +5,9 @@ const courseSchema = new mongoose.Schema(
     title: { type: String, required: true },
     description: String,
     image: String,
-    price: String,
+    price: { type: Number, required: true }, // ✅ better as Number
   },
   { timestamps: true }
 );
 
-const Course = mongoose.model("Course", courseSchema);
-export default Course;
+export default mongoose.model("Course", courseSchema);

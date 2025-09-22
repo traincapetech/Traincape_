@@ -164,7 +164,7 @@ const Sidebar = ({ role, selectedOption, onSelectOption }) => {
           className="w-full py-2 px-4 rounded-md hover:bg-gray-700 flex items-center space-x-2 transition-colors"
         >
           <LogOut size={20} className="w-4 h-4 sm:w-5 sm:h-5" />
-          <span className="text-[10px] md:text-[15px]">Logout</span>
+          <span className="text-[10px] md:text-[15px]">Logouttt</span>
         </button>
       </div>
     </div>

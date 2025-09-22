@@ -3,7 +3,9 @@ import nodemailer from "nodemailer";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import { UserModel } from "../model/user.model.js";
+import UserModel from "../model/user.model.js";
+
+
 
 dotenv.config();
 

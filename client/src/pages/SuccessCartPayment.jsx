@@ -25,6 +25,7 @@ const SuccessCartPayment = () => {
         const res = await axios.get(
           `${process.env.REACT_APP_API_URL}/payments/stripe/session/${sessionId}`
         );
+        
 
         console.log("✅ Session details fetched:", res.data);
         setSessionData(res.data);

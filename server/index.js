@@ -1,3 +1,4 @@
+// server.js
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -7,7 +8,7 @@ import { connectDB } from "./db.js";
 import { userRouter } from "./routes/user.routes.js";
 import { reviewRouter } from "./routes/review.routes.js";
 import { bookRouter } from "./routes/book.routes.js";
-import { questionRouter } from "./routes/question.routes.js"; 
+import { questionRouter } from "./routes/question.routes.js";
 import { resultRouter } from "./routes/result.routes.js";
 import { paymentRouter } from "./routes/payment.routes.js";
 import { employeeRouter } from "./routes/employee.routes.js";
@@ -17,15 +18,14 @@ import { securityRouter } from "./routes/security.routes.js";
 import courseRoutes from "./routes/courseRoutes.js";
 import subcourseRoutes from "./routes/subcourseRoutes.js";
 
-dotenv.config();
+// Stripe webhook controller
+import { StripeWebhook } from "./controllers/payments/stripe/stripe.controller.js";
 
-if (!process.env.SECRET_KEY) {
-  console.error("❌ CRITICAL ERROR: SECRET_KEY environment variable is not set!");
-  process.exit(1);
-}
+dotenv.config();
 
 const app = express();
 
+// ✅ CORS Setup
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin) return callback(null, true);
@@ -35,12 +35,12 @@ const corsOptions = {
       "http://localhost:3000",
       "http://localhost:5173",
       "http://localhost:3001",
-      "http://127.0.0.1:3000"
+      "http://127.0.0.1:3000",
     ];
     if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      console.log("Blocked by CORS:", origin);
+      console.log("❌ Blocked by CORS:", origin);
       callback(new Error("Not allowed by CORS"));
     }
   },
@@ -53,9 +53,18 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
 
-app.post("/payments/stripe/webhook", express.raw({ type: "application/json" }));
-app.use(express.json());
+/**
+ * ⚠️ IMPORTANT: Stripe webhook must come BEFORE express.json()
+ * because it needs the raw body for signature validation.
+ */
+app.post(
+  "/payments/stripe/webhook",
+  express.raw({ type: "application/json" }),
+  StripeWebhook
+);
 
+// ✅ Enable JSON parsing for all other routes
+app.use(express.json());
 app.set("etag", false);
 app.use("/uploads", express.static("uploads"));
 
@@ -68,22 +77,28 @@ app.use("/results", resultRouter);
 app.use("/users", userRouter);
 app.use("/review", reviewRouter);
 app.use("/books", bookRouter);
-app.use("/payments", paymentRouter);
+app.use("/payments", paymentRouter); // <-- main payment routes
 app.use("/certificates", certificateRouter);
 app.use("/vouchers", voucherRouter);
 app.use("/security", securityRouter);
 
+// Root route
 app.get("/", (req, res) => {
   res.status(200).send({ message: "Welcome to Traincape Technology API" });
 });
 
-const PORT = process.env.PORT || 3001;
+// ✅ Start server
+const PORT = process.env.PORT || 8080;
 const startServer = async () => {
   try {
     await connectDB();
     app.listen(PORT, () => {
       console.log(`🚀 Server is running on port ${PORT}`);
-      console.log(`Using FRONTEND_URL for payment redirects: ${process.env.FRONTEND_URL || "Not set"}`);
+      console.log(
+        `Using FRONTEND_URL for payment redirects: ${
+          process.env.FRONTEND_URL || "Not set"
+        }`
+      );
     });
   } catch (error) {
     console.error("❌ Failed to start server:", error);

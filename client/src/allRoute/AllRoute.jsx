@@ -11,6 +11,7 @@ import CourseDetails from "../pages/CourseDetails";
 import SubCourseDetails from "../pages/SubCourseDetails";
 import Checkout from "../pages/Checkout"; 
 import SuccessCartPayment from "../pages/SuccessCartPayment"
+import MyCourses from "../pages/MyCourses";
 
 // Preload BS icons to avoid chunk loading errors
 import * as BsIcons from "react-icons/bs";
@@ -291,6 +292,7 @@ const AllRoute = () => {
   
 />
 <Route path="/success-cart-payment" element={<SuccessCartPayment />} />
+ <Route path="/my-courses" element={<MyCourses />} />
 
 
 

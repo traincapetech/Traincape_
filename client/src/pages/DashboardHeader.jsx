@@ -8,31 +8,29 @@ const DashboardHeader = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Access user information from Redux state
   const { user } = useSelector((state) => state.user);
-
-  // Reference for the dropdown menu
   const dropdownRef = useRef(null);
 
   const handleLogout = () => {
-    dispatch(logoutUser()); // Clear state
+    dispatch(logoutUser());
     localStorage.removeItem("token");
-    window.location.href = "/login"; // Redirect to login page
+    window.location.href = "/login";
     navigate("/login");
   };
 
-  // Function to toggle the dropdown visibility
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
+  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
-  // Navigate to Admin Panel
   const navigateToAdmin = () => {
     navigate("/admin-panel");
     setIsDropdownOpen(false);
   };
 
-  // Close dropdown if clicked outside
+  // ✅ Navigate to My Courses
+  const navigateToMyCourses = () => {
+    navigate("/my-courses");
+    setIsDropdownOpen(false);
+  };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -41,37 +39,38 @@ const DashboardHeader = () => {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
     <div className="flex justify-end items-center">
-      {/* User profile icon and dropdown */}
       <div className="relative" ref={dropdownRef}>
         <button
           onClick={toggleDropdown}
           className="flex items-center space-x-2 p-2 rounded-full bg-gray-100 hover:bg-gray-200 focus:outline-none"
         >
           <img
-            src="https://www.w3schools.com/w3images/avatar2.png" // Example user image
+            src="https://www.w3schools.com/w3images/avatar2.png"
             alt="User Avatar"
             className="w-10 h-10 rounded-full"
           />
         </button>
 
-        {/* Dropdown menu */}
         {isDropdownOpen && (
           <div className="absolute right-0 mt-2 bg-white border rounded-md shadow-lg z-50 w-48">
             <div className="p-4 text-left">
-              {/* Display username and email */}
               <p className="text-gray-600 font-bold text-lg">{user?.username}</p>
               <p className="text-sm text-gray-500">{user?.email}</p>
             </div>
             <div className="border-t border-gray-200">
-              {/* Admin panel link */}
+              {/* ✅ My Courses Button */}
+              <button
+                className="w-full px-4 py-2 text-left text-sm text-green-600 hover:bg-gray-100 focus:outline-none"
+                onClick={navigateToMyCourses}
+              >
+                My Courses
+              </button>
+
               {user?.role === "admin" && (
                 <button
                   className="w-full px-4 py-2 text-left text-sm text-blue-600 hover:bg-gray-100 focus:outline-none"
@@ -80,6 +79,7 @@ const DashboardHeader = () => {
                   Admin Panel
                 </button>
               )}
+
               <button
                 className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-gray-100 focus:outline-none"
                 onClick={handleLogout}
