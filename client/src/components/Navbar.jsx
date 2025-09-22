@@ -23,7 +23,7 @@ import {
 } from "react-icons/si";
 // import scannerImg from "../assets/123.jpg";
 
-const Navbar = () => {
+const   Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();

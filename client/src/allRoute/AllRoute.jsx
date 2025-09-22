@@ -263,7 +263,29 @@ const AllRoute = () => {
 
   return (
     <Suspense fallback={<LoadingComponent />}>
-    <Routes>
+       <Routes>
+        {/* Pages WITHOUT Navbar/Footer */}
+        <Route
+          path="/test"
+          element={token ? <Test /> : <Navigate to="/login" replace />}
+        />
+        <Route
+          path="/login"
+          element={!token ? <Login /> : <Navigate to="/" replace />}
+        />
+        <Route
+          path="/signup"
+          element={!token ? <Signup /> : <Navigate to="/" replace />}
+        />
+        <Route
+          path="/forgot-password"
+          element={!token ? <ForgotPassword /> : <Navigate to="/" replace />}
+        />
+
+
+
+
+
       <Route path="/review-page" element={<ReviewPage />} />
       <Route path="/" element={<Home />} />
         <Route 
@@ -271,9 +293,9 @@ const AllRoute = () => {
           element={token ? <BookPage /> : <Navigate to="/login" state={{ from: "/ebook-page" }} replace />} 
         /> 
 
-        <Route path="/login" element={!token ? <Login /> : <Navigate to="/" replace />} />
-        <Route path="/signup" element={!token ? <Signup /> : <Navigate to="/" replace />} />
-        <Route path="/forgot-password" element={!token ? <ForgotPassword /> : <Navigate to="/" replace />} />
+        {/* <Route path="/login" element={!token ? <Login /> : <Navigate to="/" replace />} /> */}
+        {/* <Route path="/signup" element={!token ? <Signup /> : <Navigate to="/" replace />} /> */}
+        {/* <Route path="/forgot-password" element={!token ? <ForgotPassword /> : <Navigate to="/" replace />} /> */}
 
       <Route path="/about-us" element={<AboutUS />} />
       <Route path="/contact-us" element={<ContactUs />} />
@@ -298,23 +320,12 @@ const AllRoute = () => {
         {/* Employee and Training Routes */}
       <Route path="/employee" element={<Employee />} />
       <Route path="/internship" element={<Internship />} />
-        <Route 
-          path="/test" 
-          element={
-            token ? (
-              <Test />
-            ) : (
-              <Navigate 
-                to="/login" 
-                state={{ 
-                  from: "/test",
-                  testParams: location.state 
-                }} 
-                replace 
-              />
-            )
-          } 
+      <Route
+          path="/test"
+          element={token ? <Test /> : <Navigate to="/login" replace />}
         />
+
+        
       <Route path="/training" element={<Training />} />
         <Route path="/internal-exams" element={<InternalExams />} />
         <Route path="/voucher-success" element={<VoucherSuccess />} />
