@@ -4,6 +4,7 @@ import ReviewCard from "./ReviewCard";
 import Loading from "../loadingPage/Loading";
 import { useNavigate } from "react-router-dom";
 import Pagination from "./Pagination";
+import { Helmet } from "react-helmet";
 
 const CACHE_EXPIRY = 15 * 60 * 1000; // 15 minutes
 const REVIEWS_PER_PAGE = 12;
@@ -80,87 +81,102 @@ const ReviewPage = () => {
   }, [currentPage, fetchReviews]);
 
   return (
-    <div className="mx-auto lg:px-16 px-2 py-8">
-      {loading ? (
-        <Loading type="reviews" />
-      ) : (
-        <div className="fade-in">
-          <div className="flex items-center w-full py-4 px-6 bg-white rounded shadow-md border border-gray-200">
-            <button
-              onClick={() => navigate("/")}
-              className="text-gray-600 font-bold py-2 rounded hover:text-gray-800"
-            >
-              Home
-            </button>
-            <span className="ml-4 text-gray-500 font-bold">
-              &gt; Our Reviews
-            </span>
-          </div>
 
 
-          {/* ✅ Total Reviews Box */}
-          <div className="mt-4 mb-6 px-6 py-4 bg-blue-50 border border-blue-200 rounded-lg shadow-sm">
-            <p className="text-lg font-semibold text-blue-800">
-              Total Reviews: {totalPages * REVIEWS_PER_PAGE}
-            </p>
-          </div>
+    <>
+      {/*  SEO  */}
+      < Helmet >
+        <title>Trusted by Clients Worldwide | Traincape Technology</title>
+        <meta
+          name="description"
+          content="Discover what our clients say about us. Read how we help our clients achieve their goals with our expert IT Certifications."
+        />
+        <link rel="canonical" href="https://traincapetech.in/review-page" />
+      </Helmet >
 
 
-
-          {error ? (
-            // --- Bonus UX: Show retry button if error occurs ---
-            <div className="text-center my-8">
-              <p className="text-red-600 text-lg font-semibold mb-4">
-                {error}
-              </p>
+      <div className="mx-auto lg:px-16 px-2 py-8">
+        {loading ? (
+          <Loading type="reviews" />
+        ) : (
+          <div className="fade-in">
+            <div className="flex items-center w-full py-4 px-6 bg-white rounded shadow-md border border-gray-200">
               <button
-                onClick={() => fetchReviews(currentPage)}
-                className="inline-block px-6 py-3 bg-blue-600 text-white text-lg font-semibold rounded-xl shadow-md hover:bg-blue-700 transition duration-300"
+                onClick={() => navigate("/")}
+                className="text-gray-600 font-bold py-2 rounded hover:text-gray-800"
               >
-                Retry
+                Home
               </button>
+              <span className="ml-4 text-gray-500 font-bold">
+                &gt; Our Reviews
+              </span>
             </div>
-          ) : data.length > 0 ? (
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {data.map((item, i) => (
-                <ReviewCard key={item._id || i} {...item} />
-              ))}
+
+
+            {/* ✅ Total Reviews Box */}
+            <div className="mt-4 mb-6 px-6 py-4 bg-blue-50 border border-blue-200 rounded-lg shadow-sm">
+              <p className="text-lg font-semibold text-blue-800">
+                Total Reviews: {totalPages * REVIEWS_PER_PAGE}
+              </p>
             </div>
-          ) : (
-            <p className="text-center text-lg text-gray-500 col-span-full">
-              No reviews available.
-            </p>
-          )}
 
-          {totalPages > 1 && (
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              setCurrentPage={setCurrentPage}
-            />
-          )}
 
-          <div className="flex justify-center mt-8">
-            <a
-              href="https://search.google.com/local/writereview?placeid=ChIJwSll3OwFDTkRaLVyrLz7GXQ"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-yellow-500 text-white text-lg font-semibold rounded-2xl shadow-lg hover:bg-yellow-600 hover:scale-105 transition-transform duration-300"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                className="w-6 h-6 text-white"
+
+            {error ? (
+              // --- Bonus UX: Show retry button if error occurs ---
+              <div className="text-center my-8">
+                <p className="text-red-600 text-lg font-semibold mb-4">
+                  {error}
+                </p>
+                <button
+                  onClick={() => fetchReviews(currentPage)}
+                  className="inline-block px-6 py-3 bg-blue-600 text-white text-lg font-semibold rounded-xl shadow-md hover:bg-blue-700 transition duration-300"
+                >
+                  Retry
+                </button>
+              </div>
+            ) : data.length > 0 ? (
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {data.map((item, i) => (
+                  <ReviewCard key={item._id || i} {...item} />
+                ))}
+              </div>
+            ) : (
+              <p className="text-center text-lg text-gray-500 col-span-full">
+                No reviews available.
+              </p>
+            )}
+
+            {totalPages > 1 && (
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                setCurrentPage={setCurrentPage}
+              />
+            )}
+
+            <div className="flex justify-center mt-8">
+              <a
+                href="https://search.google.com/local/writereview?placeid=ChIJwSll3OwFDTkRaLVyrLz7GXQ"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-yellow-500 text-white text-lg font-semibold rounded-2xl shadow-lg hover:bg-yellow-600 hover:scale-105 transition-transform duration-300"
               >
-                <path d="M12 .587l3.668 7.568L24 9.748l-6 5.858L19.335 24 12 20.018 4.665 24 6 15.606 0 9.748l8.332-1.593z" />
-              </svg>
-              Write a Google Review
-            </a>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  className="w-6 h-6 text-white"
+                >
+                  <path d="M12 .587l3.668 7.568L24 9.748l-6 5.858L19.335 24 12 20.018 4.665 24 6 15.606 0 9.748l8.332-1.593z" />
+                </svg>
+                Write a Google Review
+              </a>
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 };
 

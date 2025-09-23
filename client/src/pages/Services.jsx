@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import servicepage from "../css/Services.module.css";
 import banner from "../assets/servicesBanner.webp";
 import cloud from "../assets/Cloud-services.svg";
 import UI from "../assets/UI-development.svg";
@@ -84,7 +83,7 @@ const Services = () => {
         {/* Canonical URL */}
         <link rel="canonical" href="https://traincapetech.in/our-services" />
       </Helmet>
-      
+
 
       <div className="bg-gray-50">
         {/* Hero Banner Section */}
