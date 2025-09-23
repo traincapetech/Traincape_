@@ -24,6 +24,7 @@ import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
+
 const timelineData = [
   {
     title: " A Vision Takes Root",
