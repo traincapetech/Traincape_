@@ -61,7 +61,11 @@ const SuccessCartPayment = () => {
     );
   }
 
-  const { course, amount_total, customer_email, payment_status } = sessionData;
+  
+
+
+
+  const { course, amount_total,subcourseId, userId, customer_email, payment_status } = sessionData;
 
   return (
     <div className="bg-gray-50 min-h-screen flex justify-center items-center">
@@ -73,6 +77,8 @@ const SuccessCartPayment = () => {
           <p><span className="font-semibold">Price:</span> ${(amount_total / 100).toFixed(2)}</p>
           <p><span className="font-semibold">Payment Status:</span> {payment_status}</p>
           <p><span className="font-semibold">Email:</span> {customer_email}</p>
+          <p><span className="font-semibold">Subcourse ID:</span> {subcourseId}</p>
+<p><span className="font-semibold">User ID:</span> {userId}</p>
         </div>
 
         <button

@@ -13,36 +13,60 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const paymentRouter = express.Router();
 
 //
-// ✅ Create Stripe Checkout Session
+// ✅ Create Stripe Checkout Session (protected by auth)
 //
-paymentRouter.post("/stripe", StripePayment);
+paymentRouter.post("/stripe", authMiddleware, StripePayment);
 
 //
 // ✅ Fetch Session Details (for frontend success page)
 //
-paymentRouter.get("/stripe/session/:id", async (req, res) => {
-  console.log("📡 Received request for session:", req.params.id);
+// paymentRouter.get("/stripe/session/:id", async (req, res) => {
+//   console.log("📡 Received request for session:", req.params.id);
 
+//   try {
+//     const session = await stripe.checkout.sessions.retrieve(req.params.id, {
+//       expand: ["line_items.data.price.product"],
+//     });
+
+//     if (!session) {
+//       console.log("❌ Session not found:", req.params.id);
+//       return res.status(404).json({ error: "Session not found" });
+//     }
+
+//     console.log("✅ Session retrieved:", session.id);
+
+//     res.json({
+//       course: {
+//         title:
+//           session.line_items?.data[0]?.price?.product?.name || "Unknown Course",
+//       },
+//       amount_total: session.amount_total,
+//       customer_email: session.customer_details?.email,
+//       payment_status: session.payment_status,
+//     });
+//   } catch (err) {
+//     console.error("❌ Error fetching Stripe session:", err.message);
+//     res.status(400).json({ error: "Failed to fetch session" });
+//   }
+// });
+
+paymentRouter.get("/stripe/session/:id", async (req, res) => {
   try {
     const session = await stripe.checkout.sessions.retrieve(req.params.id, {
       expand: ["line_items.data.price.product"],
     });
 
-    if (!session) {
-      console.log("❌ Session not found:", req.params.id);
-      return res.status(404).json({ error: "Session not found" });
-    }
-
-    console.log("✅ Session retrieved:", session.id);
+    if (!session) return res.status(404).json({ error: "Session not found" });
 
     res.json({
       course: {
-        title:
-          session.line_items?.data[0]?.price?.product?.name || "Unknown Course",
+        title: session.line_items?.data[0]?.price?.product?.name || "Unknown Course",
       },
       amount_total: session.amount_total,
       customer_email: session.customer_details?.email,
       payment_status: session.payment_status,
+      subcourseId: session.metadata?.subcourseId || null, // ✅ add this
+      userId: session.metadata?.userId || null,           // ✅ add this
     });
   } catch (err) {
     console.error("❌ Error fetching Stripe session:", err.message);
@@ -50,32 +74,41 @@ paymentRouter.get("/stripe/session/:id", async (req, res) => {
   }
 });
 
+
 //
 // ✅ Success route (optional, backend-only check)
 //
 paymentRouter.get("/stripe/success", StripePaymentSuccess);
 
 //
-// ✅ Purchase History (protected route)
+// ✅ Stripe Webhook (⚠️ must NOT use authMiddleware)
+//
+paymentRouter.post("/stripe/webhook", StripeWebhook);
+
+//
+// ✅ Purchase History (protected)
 //
 paymentRouter.get("/history", authMiddleware, async (req, res) => {
   try {
     const userEmail = req.user?.email;
-    if (!userEmail) {
+    const userId = req.user?.userId; // ✅ use userId from JWT
+
+    if (!userEmail && !userId) {
       return res.status(401).json({ error: "Unauthorized" });
     }
 
-    const purchases = await PurchaseModel.find({ email: userEmail }).populate(
-      "courseId"
-    );
+    // Prefer userId, fallback to email if needed
+    const query = userId ? { userId } : { email: userEmail };
 
-    console.log(`📦 Found ${purchases.length} purchases for ${userEmail}`);
+    const purchases = await PurchaseModel.find(query).populate("subcourseId");
+
+    console.log(`📦 Found ${purchases.length} purchases for`, query);
 
     res.json(
       purchases.map((p) => ({
-        id: p.courseId?._id,
-        title: p.courseId?.title,
-        price: p.courseId?.price,
+        id: p.subcourseId?._id,
+        title: p.subcourseId?.title,
+        price: p.subcourseId?.price,
         payment_status: p.status,
         purchased_at: p.completedAt,
       }))

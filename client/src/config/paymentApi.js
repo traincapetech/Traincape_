@@ -6,8 +6,8 @@ const API = axios.create({
 });
 
 // Create Stripe Checkout Session
-export const createStripeSession = (courseId) =>
-  API.post("/payments/stripe", { courseId });
+export const createStripeSession = (subcourseId, email) =>
+  API.post("/payments/stripe", { subcourseId, email });
 
 // Fetch Stripe session details (after success)
 export const getStripeSession = (sessionId) =>

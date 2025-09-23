@@ -9,12 +9,12 @@ const purchaseSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: true, // always store email
+      required: true,
     },
-    courseId: {
+    subcourseId: {  // ✅ changed from courseId
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Course",
-      required: false, // allow purchases that may not be tied yet
+      ref: "Subcourse",
+      required: true,
     },
     amount: {
       type: Number,
@@ -28,7 +28,7 @@ const purchaseSchema = new mongoose.Schema(
     stripeSessionId: {
       type: String,
       required: true,
-      unique: true, // prevent duplicate entries
+      unique: true,
     },
     stripePaymentIntent: {
       type: String,

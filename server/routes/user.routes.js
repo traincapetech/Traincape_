@@ -94,11 +94,17 @@ userRouter.post("/login", async (req, res) => {
           .send({ success: false, message: "Server configuration error" });
       }
       
-      const token = jwt.sign(
-        { userId: user._id, username: user.username, role: user.role },
-        process.env.SECRET_KEY,
-        { expiresIn: "1h" }
-      );
+     const token = jwt.sign(
+  {
+    userId: user._id,
+    username: user.username,
+    role: user.role,
+    email: user.email, // ✅ add email
+  },
+  process.env.SECRET_KEY,
+  { expiresIn: "30d" }
+);
+
       res.status(200).send({
         success: true,
         message: "Login successful!",
