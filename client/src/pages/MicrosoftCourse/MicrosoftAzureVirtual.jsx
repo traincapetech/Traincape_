@@ -19,12 +19,16 @@ const NavTab = ({ label, active, onClick, icon }) => {
 
   return (
     <button
-      onClick={onClick}
-      className={`text-lg flex w-full gap-4 items-center hover:bg-gray-700 px-4 py-2 rounded transition ${active ? 'bg-gray-700' : ''} md:text-base lg:text-lg`}
-    >
-      {icon && <span className="my-auto">{icon}</span>}
-      {label}
-    </button>
+    onClick={onClick}
+    className={`text-lg flex w-full gap-4 items-center hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 px-6 py-4 rounded-xl transition-all duration-300 ${
+      active
+        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg transform scale-105'
+        : 'text-gray-300 hover:text-white'
+    }`}
+  >
+    {icon && <span className="my-auto text-xl">{icon}</span>}
+    <span className="font-semibold">{label}</span>
+  </button>
   );
 };
 
@@ -186,7 +190,7 @@ const MicrosoftAzureVirtual = () => {
               Microsoft
             </span>
             <span className="text-gray-400">›</span>
-            <span className="text-blue-600 font-semibold">Azure Administrator</span>
+            <span className="text-blue-600 font-semibold">Microsoft Azure Virtual</span>
           </div>
         </div>
       </div>

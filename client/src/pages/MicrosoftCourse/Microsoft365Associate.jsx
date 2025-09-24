@@ -180,7 +180,7 @@ const Microsoft365Associate = () => {
               Microsoft
             </span>
             <span className="text-gray-400">›</span>
-            <span className="text-blue-600 font-semibold">Azure Administrator</span>
+            <span className="text-blue-600 font-semibold">Certified Teams Administrator Associate</span>
           </div>
         </div>
       </div>

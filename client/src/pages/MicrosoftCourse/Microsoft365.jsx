@@ -155,36 +155,6 @@ const Microsoft365 = () => {
 
   return (
     <>
-      <div className="bg-white shadow-md border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center space-x-2 text-sm">
-            <span
-              className="text-gray-500 hover:text-blue-600 cursor-pointer"
-              onClick={() => navigate('/')}
-            >
-              Home
-            </span>
-            <span className="text-gray-400">›</span>
-            <span
-              className="text-gray-500 hover:text-blue-600 cursor-pointer"
-              onClick={() => navigate('/training')}
-            >
-              Training
-            </span>
-            <span className="text-gray-400">›</span>
-            <span
-              className="text-gray-500 hover:text-blue-600 cursor-pointer"
-              onClick={() => navigate('/microsoft')}
-            >
-              Microsoft
-            </span>
-            <span className="text-gray-400">›</span>
-            <span className="text-blue-600 font-semibold">Azure Administrator</span>
-          </div>
-        </div>
-      </div>
-
-
        {/* Breadcrumb */}
       <div className="bg-white shadow-md border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-4">
@@ -210,7 +180,7 @@ const Microsoft365 = () => {
               Microsoft
             </span>
             <span className="text-gray-400">›</span>
-            <span className="text-blue-600 font-semibold">Azure Administrator</span>
+            <span className="text-blue-600 font-semibold">Microsoft 365 Certification</span>
           </div>
         </div>
       </div>

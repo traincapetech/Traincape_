@@ -195,7 +195,7 @@ const MicrosoftDynamic365 = () => {
               Microsoft
             </span>
             <span className="text-gray-400">›</span>
-            <span className="text-blue-600 font-semibold">Azure Administrator</span>
+            <span className="text-blue-600 font-semibold">Microsoft Dynamic 365</span>
           </div>
         </div>
       </div>
