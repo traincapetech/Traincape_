@@ -25,9 +25,9 @@ export const StripePayment = async (req, res) => {
     }
 
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
       mode: "payment",
       customer_email: email,
+      payment_method_types: ["card"],
       line_items: [
         {
           price_data: {
@@ -46,6 +46,8 @@ export const StripePayment = async (req, res) => {
       },
     });
 
+    console.log("🛒 Stripe checkout session created:", session.id);
+
     res.json({ id: session.id });
   } catch (error) {
     console.error("❌ StripePayment error:", error.message);
@@ -53,9 +55,8 @@ export const StripePayment = async (req, res) => {
   }
 };
 
-
 // =============================
-// Success Endpoint
+// Success Route
 // =============================
 export const StripePaymentSuccess = async (req, res) => {
   try {
@@ -88,42 +89,72 @@ export const StripePaymentSuccess = async (req, res) => {
 // Webhook
 // =============================
 export const StripeWebhook = async (req, res) => {
-  console.log("⚡ Stripe Webhook hit!");
+  console.log("⚡ Stripe Webhook handler called!");
+
   const sig = req.headers["stripe-signature"];
   let event;
 
   try {
+    // ✅ IMPORTANT: use raw body middleware for stripe
     event = stripe.webhooks.constructEvent(
       req.body,
       sig,
       process.env.STRIPE_WEBHOOK_SECRET
     );
-    console.log("✅ Webhook signature verified:", event.type);
+    console.log("📦 Event received:", event.type);
   } catch (err) {
     console.error("❌ Webhook signature verification failed:", err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  const session = event.data?.object;
+  switch (event.type) {
+    case "checkout.session.completed": {
+      const session = event.data.object;
 
-  if (event.type === "checkout.session.completed") {
-    console.log("⚡ checkout.session.completed fired!");
-    try {
-      const purchase = await PurchaseModel.create({
-        email: session.customer_email,
-        subcourseId: session.metadata?.subcourseId || null,
-        userId: session.metadata?.userId || null,
-        amount: session.amount_total / 100,
-        status: session.payment_status === "paid" ? "completed" : "pending",
-        completedAt: new Date(),
-        stripeSessionId: session.id,
-        stripePaymentIntent: session.payment_intent,
-      });
+      console.log("✅ Checkout session completed:", session.id);
+      console.log("👤 Customer:", session.customer_email);
+      console.log("🎯 Metadata:", session.metadata);
+      console.log("💳 Payment Status from Stripe:", session.payment_status);
 
-      console.log("✅ Purchase saved in MongoDB:", purchase);
-    } catch (err) {
-      console.error("❌ Failed to save purchase:", err.message);
+      try {
+        const mappedStatus =
+          session.payment_status === "paid" ? "completed" : session.payment_status;
+
+        const purchaseData = {
+          userId: session.metadata.userId,
+          subcourseId: session.metadata.subcourseId,
+          email: session.customer_email,
+          amount: session.amount_total / 100,
+          status: mappedStatus,
+          stripeSessionId: session.id,
+          stripePaymentIntent: session.payment_intent,
+          completedAt: mappedStatus === "completed" ? new Date() : null,
+        };
+
+        console.log("📝 Purchase data being saved:", purchaseData);
+
+        // ✅ Idempotent save (insert once, update if retried)
+        const purchase = await PurchaseModel.findOneAndUpdate(
+          { stripeSessionId: session.id }, // match unique session
+          { $set: purchaseData },
+          { new: true, upsert: true }
+        );
+
+        console.log("💾 Purchase saved/updated successfully:", purchase._id);
+      } catch (dbErr) {
+        console.error("❌ Failed to save purchase:", dbErr);
+      }
+      break;
     }
+
+    case "payment_intent.succeeded": {
+      const pi = event.data.object;
+      console.log("💰 PaymentIntent succeeded:", pi.id);
+      break;
+    }
+
+    default:
+      console.log(`ℹ️ Unhandled event type: ${event.type}`);
   }
 
   res.json({ received: true });

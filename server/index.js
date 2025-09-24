@@ -25,6 +25,12 @@ dotenv.config();
 
 const app = express();
 
+app.use((req, res, next) => {
+  console.log("📡 Incoming:", req.method, req.url);
+  next();
+});
+
+
 // ✅ CORS Setup
 const corsOptions = {
   origin: function (origin, callback) {

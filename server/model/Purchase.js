@@ -11,7 +11,7 @@ const purchaseSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    subcourseId: {  // ✅ changed from courseId
+    subcourseId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Subcourse",
       required: true,
@@ -22,7 +22,7 @@ const purchaseSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["pending", "completed", "failed"],
+      enum: ["pending", "completed", "failed"], // we map "paid" -> "completed"
       default: "pending",
     },
     stripeSessionId: {

@@ -17,7 +17,6 @@ const paymentRouter = express.Router();
 //
 paymentRouter.post("/stripe", authMiddleware, StripePayment);
 
-//
 // ✅ Fetch Session Details (for frontend success page)
 //
 // paymentRouter.get("/stripe/session/:id", async (req, res) => {
@@ -49,6 +48,38 @@ paymentRouter.post("/stripe", authMiddleware, StripePayment);
 //     res.status(400).json({ error: "Failed to fetch session" });
 //   }
 // });
+
+paymentRouter.get("/history", async (req, res) => {
+  try {
+    const userId = req.user?.userId; // comes from auth middleware
+
+    if (!userId) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    // Fetch purchases with subcourse populated
+    const purchases = await PurchaseModel.find({ userId })
+      .populate("subcourseId", "title description price") // only needed fields
+      .sort({ createdAt: -1 });
+
+    // Map DB -> frontend format
+    const formatted = purchases.map((p) => ({
+      id: p._id,
+      title: p.subcourseId?.title || "Unknown Course",
+      description: p.subcourseId?.description || "",
+      price: p.subcourseId?.price || p.amount,
+      payment_status: p.status, // mapped from schema
+      transaction_id: p.stripePaymentIntent || p.stripeSessionId,
+      email: p.email,
+      purchased_at: p.completedAt || p.createdAt,
+    }));
+
+    res.json(formatted);
+  } catch (err) {
+    console.error("🔥 Error fetching purchase history:", err);
+    res.status(500).json({ error: "Failed to fetch purchase history" });
+  }
+});
 
 paymentRouter.get("/stripe/session/:id", async (req, res) => {
   try {
@@ -83,40 +114,6 @@ paymentRouter.get("/stripe/success", StripePaymentSuccess);
 //
 // ✅ Stripe Webhook (⚠️ must NOT use authMiddleware)
 //
-paymentRouter.post("/stripe/webhook", StripeWebhook);
 
-//
-// ✅ Purchase History (protected)
-//
-paymentRouter.get("/history", authMiddleware, async (req, res) => {
-  try {
-    const userEmail = req.user?.email;
-    const userId = req.user?.userId; // ✅ use userId from JWT
-
-    if (!userEmail && !userId) {
-      return res.status(401).json({ error: "Unauthorized" });
-    }
-
-    // Prefer userId, fallback to email if needed
-    const query = userId ? { userId } : { email: userEmail };
-
-    const purchases = await PurchaseModel.find(query).populate("subcourseId");
-
-    console.log(`📦 Found ${purchases.length} purchases for`, query);
-
-    res.json(
-      purchases.map((p) => ({
-        id: p.subcourseId?._id,
-        title: p.subcourseId?.title,
-        price: p.subcourseId?.price,
-        payment_status: p.status,
-        purchased_at: p.completedAt,
-      }))
-    );
-  } catch (error) {
-    console.error("❌ Error fetching purchase history:", error);
-    res.status(500).json({ error: "Failed to fetch purchase history" });
-  }
-});
 
 export { paymentRouter };
