@@ -49,11 +49,13 @@ paymentRouter.post("/stripe", authMiddleware, StripePayment);
 //   }
 // });
 
-paymentRouter.get("/history", async (req, res) => {
+paymentRouter.get("/history", authMiddleware, async (req, res) => {
   try {
     const userId = req.user?.userId; // comes from auth middleware
+    console.log("👤 Authenticated userId:", userId);
 
     if (!userId) {
+      console.warn("⚠️ Unauthorized request, no userId found");
       return res.status(401).json({ error: "Unauthorized" });
     }
 
@@ -62,13 +64,15 @@ paymentRouter.get("/history", async (req, res) => {
       .populate("subcourseId", "title description price") // only needed fields
       .sort({ createdAt: -1 });
 
+    console.log(`📦 Found ${purchases.length} purchases for user ${userId}`);
+
     // Map DB -> frontend format
     const formatted = purchases.map((p) => ({
       id: p._id,
       title: p.subcourseId?.title || "Unknown Course",
       description: p.subcourseId?.description || "",
       price: p.subcourseId?.price || p.amount,
-      payment_status: p.status, // mapped from schema
+      payment_status: p.status, // "completed", "pending", "failed"
       transaction_id: p.stripePaymentIntent || p.stripeSessionId,
       email: p.email,
       purchased_at: p.completedAt || p.createdAt,

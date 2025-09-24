@@ -9,21 +9,28 @@ const MyCourses = () => {
     const fetchHistory = async () => {
       try {
         const token = localStorage.getItem("token");
+        console.log("🪪 Token from localStorage:", token);
+
         if (!token) {
-          console.warn("⚠️ User not logged in");
+          console.warn("⚠️ User not logged in, no token found");
+          setLoading(false);
           return;
         }
 
-        const res = await axios.get(
-          `${process.env.REACT_APP_API_URL}/payments/history`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const apiUrl = `${process.env.REACT_APP_API_URL}/payments/history`;
+        console.log("🌍 Hitting API:", apiUrl);
 
+        const res = await axios.get(apiUrl, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        console.log("✅ Purchase history response:", res.data);
         setPurchases(res.data);
       } catch (err) {
-        console.error("🔥 Error fetching purchase history:", err);
+        console.error(
+          "🔥 Error fetching purchase history:",
+          err.response?.data || err.message
+        );
       } finally {
         setLoading(false);
       }
@@ -73,7 +80,7 @@ const MyCourses = () => {
                 <strong>Payment Status:</strong>{" "}
                 <span
                   className={
-                    course.payment_status === "paid"
+                    course.payment_status === "completed"
                       ? "text-green-600"
                       : "text-red-600"
                   }
