@@ -4,6 +4,8 @@ import { useCartContext } from "../CartContext";
 import ibmlogo from "../../assets/ibmnewlogo.webp";
 import rdbms from "../../assets/rdbmslogo.jpeg";
 import AddToCartButton from "../AddToCartButton";
+import { Helmet } from "react-helmet";
+
 
 const IBMRDBMS = () => {
   const [selectedQuestion, setSelectedQuestion] = useState(null);
@@ -37,7 +39,22 @@ const IBMRDBMS = () => {
   };
   return (
     <>
-                          <AddToCartButton />
+    
+        {/* SEO Content for this Page  */}
+              <Helmet>
+                <title>IBM RDBMS Training & Certification | SQL Training</title>
+                <meta
+                  name="description"
+                  content="Master IBM RDBMS with our IBM Certified Course with Certification. Learn DB2, SQL, performance tuning & more. Upgrade your skills with us and become IBM Certified now."
+                />
+                <link
+                  rel="canonical"
+                  href="https://traincapetech.in/IBMRDBMS"
+                />
+              </Helmet>
+
+    
+    <AddToCartButton />
 
       <div className="relative bg-gradient-to-b from-blue-100 to-white w-full h-auto md:h-[20rem] pt-10 px-4 md:px-10 text-left">
         <img

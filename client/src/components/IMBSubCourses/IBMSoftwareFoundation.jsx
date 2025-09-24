@@ -4,6 +4,7 @@ import { useCartContext } from "../CartContext"; // Adjust the import path as ne
 import ibmlogo from "../../assets/ibmnewlogo.webp";
 import cfound from "../../assets/c++logo.png";
 import AddToCartButton from "../AddToCartButton";
+import { Helmet } from "react-helmet";
 
 const IBMSoftwareFoundation = () => {
   const [selectedQuestion, setSelectedQuestion] = useState(null);
@@ -38,7 +39,23 @@ const IBMSoftwareFoundation = () => {
 
   return (
     <>
-                          <AddToCartButton />
+
+    {/* SEO Content for this Page  */}
+      <Helmet>
+        <title>IBM C++ Web Development Certification</title>
+        <meta
+          name="description"
+          content="Advance your web development skills with IBM's C++ Web Development Certification. Build powerful web applications with the help of our C++ Certification."
+        />
+        <link
+          rel="canonical"
+          href="https://traincapetech.in/IBMSoftwareFoundation"
+        />
+      </Helmet>
+
+
+
+      <AddToCartButton />
 
       <div className="relative bg-gradient-to-b from-blue-100 to-white w-full h-auto md:h-[20rem] pt-10 px-4 md:px-10 text-left">
         <img
@@ -47,7 +64,7 @@ const IBMSoftwareFoundation = () => {
           className="h-40 w-32 mx-auto md:mx-0 xl:pl-20 xl:w-auto"
         />
         <h1 className="text-2xl md:text-xl lg:text-4xl font-bold text-blue-900 text-center md:text-left xl:pl-20">
-          IBM Web Development using C++ <br />
+          IBM Web Development using C++<br />
           Certification Course
         </h1>
         <div className="mt-6 md:absolute md:top-10 md:right-10 w-full md:w-80 h-auto md:h-72 flex flex-col items-center md:items-start bg-white shadow-lg p-6 rounded-lg border hover:shadow-xl transition-shadow">
@@ -60,7 +77,7 @@ const IBMSoftwareFoundation = () => {
           <img
             className="w-36 h-20 object-contain ml-10"
             src={cfound}
-            alt="C++ Logo"
+            alt="IBM C++ Certification"
           />
 
           {/* Description */}
