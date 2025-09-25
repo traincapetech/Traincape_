@@ -22,8 +22,14 @@ const purchaseSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["pending", "completed", "failed"], // we map "paid" -> "completed"
+      enum: ["pending", "completed", "failed"],
       default: "pending",
+      set: (val) => {
+        // 🔄 Map Stripe "paid" → "completed"
+        if (val === "paid") return "completed";
+        if (val === "unpaid") return "failed"; // optional safeguard
+        return val || "pending";
+      },
     },
     stripeSessionId: {
       type: String,
@@ -35,6 +41,9 @@ const purchaseSchema = new mongoose.Schema(
     },
     completedAt: {
       type: Date,
+    },
+    voucherCode: {
+      type: String, // assigned voucher code
     },
   },
   { timestamps: true }

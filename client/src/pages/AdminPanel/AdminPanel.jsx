@@ -4,9 +4,9 @@ import CreateAssignment from "./CreateAssignment/CreateAssignment";
 import ViewAssignments from "./ViewAssignment/ViewAssignments";
 import Sidebar from "./AdminSidebar";
 import CertificateForm from "./ClientProfiles/CertificateForm";
-import VoucherManagement from "./VoucherManagement/VoucherManagement";
 import Dashboard from "./Dashboard";
 import PECBBrochures from "../../components/PECBBrochures";
+import VoucherManager from "./VoucherManager";
 
 import {
   Shield,
@@ -94,7 +94,7 @@ const AdminPanel = () => {
       case "clientProfiles":
         return <CertificateForm />;
       case "voucherManagement":
-        return <VoucherManagement />;
+        return <VoucherManager />;
       case "pecbBrochures":
         return <PECBBrochures />;
       case "results":

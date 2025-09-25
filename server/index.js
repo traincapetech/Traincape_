@@ -18,6 +18,10 @@ import { securityRouter } from "./routes/security.routes.js";
 import courseRoutes from "./routes/courseRoutes.js";
 import subcourseRoutes from "./routes/subcourseRoutes.js";
 
+
+
+
+
 // Stripe webhook controller
 import { StripeWebhook } from "./controllers/payments/stripe/stripe.controller.js";
 
@@ -75,6 +79,9 @@ app.set("etag", false);
 app.use("/uploads", express.static("uploads"));
 
 // ✅ Routes
+app.use("/api", voucherRouter);
+app.use("/api/admin/vouchers", voucherRouter);
+app.use("/api/payments", paymentRouter);
 app.use("/api/courses", courseRoutes);
 app.use("/api/subcourses", subcourseRoutes);
 app.use("/questions", questionRouter);

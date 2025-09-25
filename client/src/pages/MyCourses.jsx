@@ -75,30 +75,41 @@ const MyCourses = () => {
             </p>
 
             {/* Transaction Info */}
-            <div className="mt-4 border-t pt-3 text-sm text-gray-700">
-              <p>
-                <strong>Payment Status:</strong>{" "}
-                <span
-                  className={
-                    course.payment_status === "completed"
-                      ? "text-green-600"
-                      : "text-red-600"
-                  }
-                >
-                  {course.payment_status}
-                </span>
-              </p>
-              <p>
-                <strong>Transaction ID:</strong> {course.transaction_id}
-              </p>
-              <p>
-                <strong>Email:</strong> {course.email}
-              </p>
-              <p>
-                <strong>Purchased At:</strong>{" "}
-                {new Date(course.purchased_at).toLocaleString()}
-              </p>
-            </div>
+          <div className="mt-4 border-t pt-3 text-sm text-gray-700">
+  <p>
+    <strong>Payment Status:</strong>{" "}
+    <span
+      className={
+        course.payment_status === "completed"
+          ? "text-green-600"
+          : "text-red-600"
+      }
+    >
+      {course.payment_status}
+    </span>
+  </p>
+  <p>
+    <strong>Transaction ID:</strong> {course.transaction_id}
+  </p>
+  <p>
+    <strong>Email:</strong> {course.email}
+  </p>
+  <p>
+    <strong>Purchased At:</strong>{" "}
+    {new Date(course.purchased_at).toLocaleString()}
+  </p>
+
+  {/* ✅ Show Voucher */}
+  <p>
+    <strong>Voucher:</strong>{" "}
+    {course.voucher ? (
+      <span className="text-blue-600">{course.voucher}</span>
+    ) : (
+      <span className="text-gray-400">Not assigned</span>
+    )}
+  </p>
+</div>
+
 
             {/* Button */}
             <button className="mt-4 px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">

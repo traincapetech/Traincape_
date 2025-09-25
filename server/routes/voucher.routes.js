@@ -1,19 +1,49 @@
-import express from 'express';
-import voucherController from '../controllers/voucher.controller.js';
-import authMiddleware from '../middleware/auth.middleware.js';
-import adminOnly from '../middleware/admin.middleware.js';
+import express from "express";
+import {
+  addVoucher,
+  getVouchers,
+  deleteVoucher,
+} from "../controllers/voucher.controller.js";
+import VoucherModel from "../model/Voucher.js";
 
 const router = express.Router();
 
-// Admin routes (protected)
-router.post('/batches', authMiddleware, adminOnly, voucherController.createVoucherBatch);
-router.get('/batches', authMiddleware, adminOnly, voucherController.getVoucherBatches);
-router.put('/batches/price', authMiddleware, adminOnly, voucherController.updateVoucherBatchPrice);
-router.get('/analytics', authMiddleware, adminOnly, voucherController.getVoucherAnalytics);
+// ==========================
+// Admin adds voucher
+// ==========================
+router.post("/admin/vouchers", addVoucher);
 
-// Public routes
-router.get('/available', voucherController.getAvailableVouchers);
-router.post('/purchase', voucherController.purchaseVoucher);
-router.post('/complete-purchase', voucherController.completeVoucherPurchase);
+// ==========================
+// Get vouchers by subcourse
+// ==========================
+router.get("/admin/vouchers", getVouchers);
+
+// ==========================
+// Check vouchers for a subcourse (Debug route)
+// ==========================
+router.get("/check-vouchers/:subcourseId", async (req, res) => {
+  try {
+    const { subcourseId } = req.params;
+
+    const vouchers = await VoucherModel.find({ subcourseId });
+    if (!vouchers.length) {
+      return res.json({ message: "❌ No vouchers linked to this subcourse" });
+    }
+
+    res.json({
+      message: "✅ Vouchers found",
+      count: vouchers.length,
+      vouchers,
+    });
+  } catch (err) {
+    console.error("Error checking vouchers:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// ==========================
+// Delete voucher
+// ==========================
+router.delete("/admin/vouchers/:id", deleteVoucher);
 
 export default router;

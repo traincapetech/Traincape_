@@ -1,6 +1,9 @@
 import Stripe from "stripe";
 import PurchaseModel from "../../../model/Purchase.js";
 import SubcourseModel from "../../../model/Subcourse.js";
+import VoucherModel from "../../../model/Voucher.js";
+
+
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2025-04-30.basil",
@@ -58,6 +61,7 @@ export const StripePayment = async (req, res) => {
 // =============================
 // Success Route
 // =============================
+
 export const StripePaymentSuccess = async (req, res) => {
   try {
     const { session_id } = req.query;
@@ -67,17 +71,35 @@ export const StripePaymentSuccess = async (req, res) => {
       return res.status(400).json({ error: "Missing session_id" });
     }
 
+    // First, try to fetch purchase from DB
+    let purchase = await PurchaseModel.findOne({ stripeSessionId: session_id })
+      .populate("subcourseId", "title"); // get course title
+
+    if (purchase) {
+      return res.json({
+        success: true,
+        course: { title: purchase.subcourseId?.title || "N/A" },
+        amount_total: purchase.amount * 100,
+        customer_email: purchase.email,
+        payment_status: purchase.status,
+        subcourseId: purchase.subcourseId?._id || purchase.subcourseId,
+        userId: purchase.userId,
+        voucher: purchase.voucherCode || null,
+      });
+    }
+
+    // If not in DB yet, fallback to Stripe
     const session = await stripe.checkout.sessions.retrieve(session_id);
 
-    res.json({
+    return res.json({
       success: true,
-      sessionId: session.id,
+      course: { title: session.metadata?.courseTitle || "N/A" },
+      amount_total: session.amount_total,
       customer_email: session.customer_email,
       payment_status: session.payment_status,
-      amount_total: session.amount_total,
-      currency: session.currency,
       subcourseId: session.metadata?.subcourseId || null,
       userId: session.metadata?.userId || null,
+      voucher: null, // will stay null until webhook saves it
     });
   } catch (error) {
     console.error("❌ Error in success route:", error.message);
@@ -88,74 +110,69 @@ export const StripePaymentSuccess = async (req, res) => {
 // =============================
 // Webhook
 // =============================
-export const StripeWebhook = async (req, res) => {
-  console.log("⚡ Stripe Webhook handler called!");
 
+
+export const StripeWebhook = async (req, res) => {
   const sig = req.headers["stripe-signature"];
   let event;
 
   try {
-    // ✅ IMPORTANT: use raw body middleware for stripe
+    // ⚡ use req.body, not req.rawBody
     event = stripe.webhooks.constructEvent(
       req.body,
       sig,
       process.env.STRIPE_WEBHOOK_SECRET
     );
-    console.log("📦 Event received:", event.type);
+
+    console.log("⚡ Stripe Webhook received:", event.type);
   } catch (err) {
     console.error("❌ Webhook signature verification failed:", err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  switch (event.type) {
-    case "checkout.session.completed": {
-      const session = event.data.object;
+  if (event.type === "checkout.session.completed") {
+    const session = event.data.object;
+    console.log("🎯 Checkout session completed:", session.id);
 
-      console.log("✅ Checkout session completed:", session.id);
-      console.log("👤 Customer:", session.customer_email);
-      console.log("🎯 Metadata:", session.metadata);
-      console.log("💳 Payment Status from Stripe:", session.payment_status);
-
-      try {
-        const mappedStatus =
-          session.payment_status === "paid" ? "completed" : session.payment_status;
-
-        const purchaseData = {
-          userId: session.metadata.userId,
+    try {
+      const voucher = await VoucherModel.findOneAndUpdate(
+        {
           subcourseId: session.metadata.subcourseId,
-          email: session.customer_email,
-          amount: session.amount_total / 100,
-          status: mappedStatus,
-          stripeSessionId: session.id,
-          stripePaymentIntent: session.payment_intent,
-          completedAt: mappedStatus === "completed" ? new Date() : null,
-        };
+          sold: false,
+        },
+        {
+          $set: {
+            sold: true,
+            soldTo: session.metadata.userId,
+            soldAt: new Date(),
+          },
+        },
+        { new: true }
+      );
 
-        console.log("📝 Purchase data being saved:", purchaseData);
-
-        // ✅ Idempotent save (insert once, update if retried)
-        const purchase = await PurchaseModel.findOneAndUpdate(
-          { stripeSessionId: session.id }, // match unique session
-          { $set: purchaseData },
-          { new: true, upsert: true }
-        );
-
-        console.log("💾 Purchase saved/updated successfully:", purchase._id);
-      } catch (dbErr) {
-        console.error("❌ Failed to save purchase:", dbErr);
+      if (!voucher) {
+        console.warn("⚠️ No available voucher found for subcourse:", session.metadata.subcourseId);
+      } else {
+        console.log("🎟 Voucher assigned:", voucher.code);
       }
-      break;
-    }
 
-    case "payment_intent.succeeded": {
-      const pi = event.data.object;
-      console.log("💰 PaymentIntent succeeded:", pi.id);
-      break;
-    }
+      const purchase = await PurchaseModel.create({
+        stripeSessionId: session.id,
+        userId: session.metadata.userId,
+        subcourseId: session.metadata.subcourseId,
+        email: session.customer_email,
+        amount: session.amount_total,
+        status: session.payment_status,
+        voucherCode: voucher ? voucher.code : null,
+      });
 
-    default:
-      console.log(`ℹ️ Unhandled event type: ${event.type}`);
+      console.log("✅ Purchase stored in DB:", purchase._id);
+    } catch (error) {
+      console.error("🔥 Error processing webhook:", error.message);
+    }
   }
 
-  res.json({ received: true });
+  res.status(200).send();
 };
+
+

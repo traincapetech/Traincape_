@@ -12,6 +12,7 @@ import SubCourseDetails from "../pages/SubCourseDetails";
 import Checkout from "../pages/Checkout"; 
 import SuccessCartPayment from "../pages/SuccessCartPayment"
 import MyCourses from "../pages/MyCourses";
+import VoucherManager from "../pages/AdminPanel/VoucherManager";
 
 // Preload BS icons to avoid chunk loading errors
 import * as BsIcons from "react-icons/bs";
@@ -52,8 +53,7 @@ const Internship = lazyWithRetry(() => import("../pages/Internship"));
 const Test = lazyWithRetry(() => import("../pages/Test/Test"));
 const Training = lazyWithRetry(() => import("../pages/Training"));
 const InternalExams = lazyWithRetry(() => import("../pages/InternalExams"));
-const VoucherSuccess = lazyWithRetry(() => import("../pages/VoucherSuccess"));
-const VoucherCancel = lazyWithRetry(() => import("../pages/VoucherCancel"));
+
 const Comptia = lazyWithRetry(() => import("../pages/Comptia"));
 const Aws = lazyWithRetry(() => import("../pages/Aws"));
 const BookPage = lazyWithRetry(() => import("../pages/ebook/BookPage"));
@@ -311,6 +311,7 @@ const AllRoute = () => {
           path="/Courses-details" 
           element={<Courses />} 
         />
+        <Route path="/admin/vouchers" element={<VoucherManager />} />
 
       <Route path="/Career-details" element={<Career />} />
       <Route path="/Our-Policies" element={<Policy />} />
@@ -342,8 +343,7 @@ const AllRoute = () => {
         />
       <Route path="/training" element={<Training />} />
         <Route path="/internal-exams" element={<InternalExams />} />
-        <Route path="/voucher-success" element={<VoucherSuccess />} />
-        <Route path="/voucher-cancel" element={<VoucherCancel />} />
+        
         
         {/* Certification Routes */}
         <Route path="/comptia" element={<Comptia />} />

@@ -15,20 +15,29 @@ const SuccessCartPayment = () => {
         const sessionId = query.get("session_id");
 
         if (!sessionId) {
-          console.error("❌ No session_id found in URL");
           navigate("/courses");
           return;
         }
 
-        console.log("🔍 Fetching Stripe session details for:", sessionId);
+        let attempts = 0;
+        let purchaseData = null;
+        let res = null;
 
-        const res = await axios.get(
-          `${process.env.REACT_APP_API_URL}/payments/stripe/session/${sessionId}`
-        );
-        
+        // Retry logic to wait for voucher assignment
+        while (attempts < 5 && !purchaseData) {
+          res = await axios.get(
+            `${process.env.REACT_APP_API_URL}/payments/stripe/session/${sessionId}`
+          );
 
-        console.log("✅ Session details fetched:", res.data);
-        setSessionData(res.data);
+          if (res.data?.voucher) {
+            purchaseData = res.data;
+          } else {
+            attempts++;
+            await new Promise((resolve) => setTimeout(resolve, 2000)); // wait 2s before retry
+          }
+        }
+
+        setSessionData(purchaseData || res.data);
       } catch (err) {
         console.error("🔥 Error fetching session details:", err);
       } finally {
@@ -61,24 +70,50 @@ const SuccessCartPayment = () => {
     );
   }
 
-  
-
-
-
-  const { course, amount_total,subcourseId, userId, customer_email, payment_status } = sessionData;
+  const {
+    course,
+    amount_total,
+    subcourseId,
+    userId,
+    customer_email,
+    payment_status,
+    voucher,
+  } = sessionData;
 
   return (
     <div className="bg-gray-50 min-h-screen flex justify-center items-center">
       <div className="bg-white shadow-lg rounded-xl p-8 max-w-lg w-full text-center">
-        <h1 className="text-3xl font-bold text-green-600 mb-4">🎉 Payment Successful!</h1>
+        <h1 className="text-3xl font-bold text-green-600 mb-4">
+          🎉 Payment Successful!
+        </h1>
 
         <div className="text-left space-y-3 mb-6">
-          <p><span className="font-semibold">Course:</span> {course?.title || "N/A"}</p>
-          <p><span className="font-semibold">Price:</span> ${(amount_total / 100).toFixed(2)}</p>
-          <p><span className="font-semibold">Payment Status:</span> {payment_status}</p>
-          <p><span className="font-semibold">Email:</span> {customer_email}</p>
-          <p><span className="font-semibold">Subcourse ID:</span> {subcourseId}</p>
-<p><span className="font-semibold">User ID:</span> {userId}</p>
+          <p>
+            <span className="font-semibold">Course:</span>{" "}
+            {course?.title || "N/A"}
+          </p>
+          <p>
+            <span className="font-semibold">Price:</span> $
+            {(amount_total / 100).toFixed(2)}
+          </p>
+          <p>
+            <span className="font-semibold">Voucher:</span>{" "}
+            {voucher || "N/A"}
+          </p>
+          <p>
+            <span className="font-semibold">Payment Status:</span>{" "}
+            {payment_status}
+          </p>
+          <p>
+            <span className="font-semibold">Email:</span> {customer_email}
+          </p>
+          <p>
+            <span className="font-semibold">Subcourse ID:</span>{" "}
+            {subcourseId}
+          </p>
+          <p>
+            <span className="font-semibold">User ID:</span> {userId}
+          </p>
         </div>
 
         <button

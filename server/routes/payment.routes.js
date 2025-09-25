@@ -8,6 +8,8 @@ import {
 import PurchaseModel from "../model/Purchase.js";
 import authMiddleware from "../middleware/auth.middleware.js";
 import Stripe from "stripe";
+import VoucherModel from "../model/Voucher.js";
+
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const paymentRouter = express.Router();
@@ -17,37 +19,7 @@ const paymentRouter = express.Router();
 //
 paymentRouter.post("/stripe", authMiddleware, StripePayment);
 
-// ✅ Fetch Session Details (for frontend success page)
-//
-// paymentRouter.get("/stripe/session/:id", async (req, res) => {
-//   console.log("📡 Received request for session:", req.params.id);
 
-//   try {
-//     const session = await stripe.checkout.sessions.retrieve(req.params.id, {
-//       expand: ["line_items.data.price.product"],
-//     });
-
-//     if (!session) {
-//       console.log("❌ Session not found:", req.params.id);
-//       return res.status(404).json({ error: "Session not found" });
-//     }
-
-//     console.log("✅ Session retrieved:", session.id);
-
-//     res.json({
-//       course: {
-//         title:
-//           session.line_items?.data[0]?.price?.product?.name || "Unknown Course",
-//       },
-//       amount_total: session.amount_total,
-//       customer_email: session.customer_details?.email,
-//       payment_status: session.payment_status,
-//     });
-//   } catch (err) {
-//     console.error("❌ Error fetching Stripe session:", err.message);
-//     res.status(400).json({ error: "Failed to fetch session" });
-//   }
-// });
 
 paymentRouter.get("/history", authMiddleware, async (req, res) => {
   try {
@@ -67,16 +39,21 @@ paymentRouter.get("/history", authMiddleware, async (req, res) => {
     console.log(`📦 Found ${purchases.length} purchases for user ${userId}`);
 
     // Map DB -> frontend format
-    const formatted = purchases.map((p) => ({
-      id: p._id,
-      title: p.subcourseId?.title || "Unknown Course",
-      description: p.subcourseId?.description || "",
-      price: p.subcourseId?.price || p.amount,
-      payment_status: p.status, // "completed", "pending", "failed"
-      transaction_id: p.stripePaymentIntent || p.stripeSessionId,
-      email: p.email,
-      purchased_at: p.completedAt || p.createdAt,
-    }));
+    // Map DB -> frontend format
+const formatted = purchases.map((p) => ({
+  id: p._id,
+  title: p.subcourseId?.title || "Unknown Course",
+  description: p.subcourseId?.description || "",
+  price: p.subcourseId?.price || p.amount,
+  payment_status: p.status, // normalized via schema
+  transaction_id: p.stripePaymentIntent || p.stripeSessionId,
+  email: p.email,
+  purchased_at: p.completedAt || p.createdAt,
+  voucher: p.voucherCode || null,   // ✅ include assigned voucher
+  subcourseId: p.subcourseId?._id || p.subcourseId,
+  userId: p.userId,
+}));
+
 
     res.json(formatted);
   } catch (err) {
@@ -93,6 +70,9 @@ paymentRouter.get("/stripe/session/:id", async (req, res) => {
 
     if (!session) return res.status(404).json({ error: "Session not found" });
 
+    // 🔎 Look up purchase in DB
+    const purchase = await PurchaseModel.findOne({ stripeSessionId: session.id });
+
     res.json({
       course: {
         title: session.line_items?.data[0]?.price?.product?.name || "Unknown Course",
@@ -100,8 +80,9 @@ paymentRouter.get("/stripe/session/:id", async (req, res) => {
       amount_total: session.amount_total,
       customer_email: session.customer_details?.email,
       payment_status: session.payment_status,
-      subcourseId: session.metadata?.subcourseId || null, // ✅ add this
-      userId: session.metadata?.userId || null,           // ✅ add this
+      subcourseId: session.metadata?.subcourseId || null,
+      userId: session.metadata?.userId || null,
+      voucher: purchase?.voucherCode || null, // ✅ return code directly
     });
   } catch (err) {
     console.error("❌ Error fetching Stripe session:", err.message);
@@ -110,11 +91,17 @@ paymentRouter.get("/stripe/session/:id", async (req, res) => {
 });
 
 
+
 //
 // ✅ Success route (optional, backend-only check)
 //
 paymentRouter.get("/stripe/success", StripePaymentSuccess);
 
+paymentRouter.post(
+  "/stripe/webhook",
+  express.raw({ type: "application/json" }),
+  StripeWebhook
+);
 //
 // ✅ Stripe Webhook (⚠️ must NOT use authMiddleware)
 //
