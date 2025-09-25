@@ -4,8 +4,7 @@ const courseSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
     description: String,
-    image: String,
-    price: { type: Number, required: true }, // ✅ better as Number
+    image: String
   },
   { timestamps: true }
 );
