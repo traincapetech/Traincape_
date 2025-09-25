@@ -8,6 +8,8 @@ import { GiUpgrade } from "react-icons/gi";
 import emailjs from "@emailjs/browser";
 import hand from '../../assets/hand.jpg';
 // import careerImg from "../../assets/CareerPageIMG.svg";
+import { Helmet } from "react-helmet";
+
 
 const Career = () => {
   const [payoload, setPayoload] = useState({
@@ -64,13 +66,31 @@ const Career = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
+
+  <>
+      {/* SEO Content for this Page  */}
+        <Helmet>
+            <title>
+             Career at Traincape Technology | Work with us
+              </title>
+              <meta
+                name="description"
+                content="Join Traincape Technology and grow your career with us. Explore TrainCape’s openings in Development, Sales, and other departments. Your career starts with us."
+              />
+              <link
+                rel="canonical"
+                href="https://traincapetech.in/Career-details"
+              />
+        </Helmet> 
+
+
     <div className={career.container}>
     <div className={career.banner}>
       <div className={career.bannerIMG}>
-        <img src={banner} alt="Banner IMG" className={career.bannerimg} />
+        <img src={banner} alt="Explore career opportunities at TrainCape Technology" className={career.bannerimg} />
       </div>
       <div className={career.bannerText}>
-        {/* <h1>JOIN US</h1> */}
+        {/* <h1 className="text-center font-bold text-4xl">JOIN US</h1> */}
         {/* <p>
           Learning opportunities are essential for upgrading skills and
           advancing careers. They include training courses, self-training, and
@@ -213,10 +233,11 @@ const Career = () => {
         </button>
       </div>
       <div className={career.contactImg}>
-        <img src={hand} alt="Carrer" />
+        <img src={hand} alt="Traincape Tecnology career options" />
       </div>
     </div>
   </div>
+  </>
 );
 };
 
