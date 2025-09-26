@@ -37,7 +37,7 @@ const handleBuyNow = () => {
         {/* Breadcrumb */}
         <div className="text-sm text-gray-500 mb-4">
           <a href="/" className="hover:underline">
-            Discover Our Certifications
+            Discover Our Certifications certify
           </a>
           <span className="mx-2">/</span>
           <span className="text-gray-700">A+</span>
