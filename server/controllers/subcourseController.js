@@ -13,18 +13,20 @@ export const getSubcoursesByCourse = async (req, res) => {
 };
 
 // ✅ Create a new subcourse
+// ✅ Create a new subcourse
 export const createSubcourse = async (req, res) => {
-   try {
+  try {
     console.log("📩 Incoming subcourse data:", req.body); // ✅ Debug log
 
-    const { title, description, price, image, courseId, uiComponent } = req.body;
-    console.log("🎯 uiComponent received:", uiComponent); // ✅ Debug log
+    const { title, description, price, image, courseId, uiComponent, category } = req.body; // ✅ include category
+    console.log("🎯 uiComponent received:", uiComponent);
+    console.log("📂 category received:", category);
 
     // Validate request fields
-    if (!title || !description || !price || !courseId) {
+    if (!title || !description || !price || !courseId || !category) {
       return res.status(400).json({
         message:
-          "Missing required fields: title, description, price, and courseId are required",
+          "Missing required fields: title, description, price, courseId, and category are required",
       });
     }
 
@@ -47,6 +49,7 @@ export const createSubcourse = async (req, res) => {
       courseId,
       slug,
       uiComponent,
+      category, // ✅ save category
     });
 
     res.status(201).json(newSubcourse);
@@ -58,6 +61,7 @@ export const createSubcourse = async (req, res) => {
     });
   }
 };
+
 
 // ✅ Get single subcourse by slug
 export const getSubcourseBySlug = async (req, res) => {

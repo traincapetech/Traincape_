@@ -11,7 +11,7 @@ const subcourseSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      index: true, // Faster lookups by slug
+      index: true,
     },
     description: {
       type: String,
@@ -36,7 +36,12 @@ const subcourseSchema = new mongoose.Schema(
     uiComponent: {
       type: String,
       trim: true,
-      default: "", // ✅ Prevents undefined issue if not set
+      default: "",
+    },
+    category: {
+      type: String,
+      required: true,  // ✅ now every subcourse must have a category
+      trim: true,
     },
   },
   { timestamps: true }
