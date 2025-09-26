@@ -279,13 +279,15 @@ const AllRoute = () => {
         /> 
 
            <Route path="/Courses-details" element={<Courses />} />
-           <Route path="/Courses-details/:courseId/:subcourseSlug" element={<SubCourseDetails />} />
+       <Route path="/Courses-details/:courseId/:slug" element={<SubCourseDetails />} />
+
+
 
 
       {/* Show one course + its subcourses */}
       <Route path="/Courses-details/:courseId" element={<CourseDetails />} />
 
-     <Route path="/Courses-details/:courseId/:subcourseSlug" element={<SubCourseDetails />} />
+     
      <Route 
   path="/checkout" 
   element={token ? <Checkout /> : <Navigate to="/login" state={{ from: "/checkout" }} replace />} 
