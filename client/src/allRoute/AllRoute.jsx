@@ -8,7 +8,8 @@ import Gallery from "../pages/Gallery";
 import CertificateLookup from "../pages/CertificateLookup";
 import Courses from "../pages/Courses";
 import CourseDetails from "../pages/CourseDetails";
-import SubCourseDetails from "../pages/SubCourseDetails";
+// import SubCourseDetails from "../pages/SubCourseDetails";
+import SubCourseTemplate from "../components/SubCourseUI/SubCourseTemplate";
 import Checkout from "../pages/Checkout"; 
 import SuccessCartPayment from "../pages/SuccessCartPayment"
 import MyCourses from "../pages/MyCourses";
@@ -279,7 +280,7 @@ const AllRoute = () => {
         /> 
 
            <Route path="/Courses-details" element={<Courses />} />
-       <Route path="/Courses-details/:courseId/:slug" element={<SubCourseDetails />} />
+       <Route path="/Courses-details/:courseId/:slug" element={<SubCourseTemplate />} />
 
 
 
