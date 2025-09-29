@@ -16,13 +16,8 @@ export const getSubcoursesByCourse = async (req, res) => {
 // ✅ Create a new subcourse
 export const createSubcourse = async (req, res) => {
   try {
-    console.log("📩 Incoming subcourse data:", req.body); // ✅ Debug log
+    const { title, description, price, image, courseId, uiComponent, category, tagline } = req.body;
 
-    const { title, description, price, image, courseId, uiComponent, category } = req.body; // ✅ include category
-    console.log("🎯 uiComponent received:", uiComponent);
-    console.log("📂 category received:", category);
-
-    // Validate request fields
     if (!title || !description || !price || !courseId || !category) {
       return res.status(400).json({
         message:
@@ -30,10 +25,8 @@ export const createSubcourse = async (req, res) => {
       });
     }
 
-    // Generate slug
     const slug = slugify(title, { lower: true });
 
-    // Check for duplicate slug
     const existing = await Subcourse.findOne({ slug });
     if (existing) {
       return res.status(409).json({
@@ -49,7 +42,8 @@ export const createSubcourse = async (req, res) => {
       courseId,
       slug,
       uiComponent,
-      category, // ✅ save category
+      category,
+      tagline, // ✅ save tagline if provided
     });
 
     res.status(201).json(newSubcourse);
@@ -61,6 +55,7 @@ export const createSubcourse = async (req, res) => {
     });
   }
 };
+
 
 
 // ✅ Get single subcourse by slug

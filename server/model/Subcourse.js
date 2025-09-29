@@ -40,8 +40,13 @@ const subcourseSchema = new mongoose.Schema(
     },
     category: {
       type: String,
-      required: true,  // ✅ now every subcourse must have a category
+      required: true,
       trim: true,
+    },
+    tagline: {
+      type: String,
+      trim: true,
+      default: "", // optional field
     },
   },
   { timestamps: true }
