@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { connectDB } from "./db.js";
+import fetch from "node-fetch";
 
 // Routers
 import { userRouter } from "./routes/user.routes.js";
@@ -100,6 +101,24 @@ app.get("/", (req, res) => {
   res.status(200).send({ message: "Welcome to Traincape Technology API" });
 });
 
+app.get("/proxy/image/:id", async (req, res) => {
+  try {
+    const fileId = req.params.id;
+    const url = `https://drive.google.com/uc?export=view&id=${fileId}`;
+
+    const response = await fetch(url);
+    if (!response.ok) {
+      return res.status(response.status).send("Failed to fetch image");
+    }
+
+    // Pass content type (image/jpeg, image/png, etc.)
+    res.set("Content-Type", response.headers.get("content-type"));
+    response.body.pipe(res);
+  } catch (err) {
+    console.error("❌ Proxy error:", err);
+    res.status(500).send("Proxy server error");
+  }
+});
 // ✅ Start server
 const PORT = process.env.PORT || 8080;
 const startServer = async () => {

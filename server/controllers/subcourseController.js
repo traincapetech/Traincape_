@@ -1,5 +1,9 @@
 import Subcourse from "../model/Subcourse.js";
 import slugify from "slugify";
+import { uploadToDrive } from "../utils/googleDrive.js";
+
+// Replace with your Drive folder ID ("Course images" folder)
+const DRIVE_FOLDER_ID = "YOUR_FOLDER_ID_HERE";
 
 // ✅ Get all subcourses for a specific course
 export const getSubcoursesByCourse = async (req, res) => {
@@ -12,11 +16,10 @@ export const getSubcoursesByCourse = async (req, res) => {
   }
 };
 
-// ✅ Create a new subcourse
-// ✅ Create a new subcourse
+// ✅ Create a new subcourse (with optional image upload)
 export const createSubcourse = async (req, res) => {
   try {
-    const { title, description, price, image, courseId, uiComponent, category, tagline } = req.body;
+    const { title, description, price, courseId, uiComponent, category, tagline } = req.body;
 
     if (!title || !description || !price || !courseId || !category) {
       return res.status(400).json({
@@ -34,16 +37,27 @@ export const createSubcourse = async (req, res) => {
       });
     }
 
+    let imageUrl = "";
+    if (req.file) {
+      // Upload to Drive
+      imageUrl = await uploadToDrive(
+        req.file.path,
+        req.file.originalname,
+        DRIVE_FOLDER_ID,
+        req.file.mimetype
+      );
+    }
+
     const newSubcourse = await Subcourse.create({
       title,
       description,
       price,
-      image: image || "",
+      image: imageUrl,
       courseId,
       slug,
       uiComponent,
       category,
-      tagline, // ✅ save tagline if provided
+      tagline,
     });
 
     res.status(201).json(newSubcourse);
@@ -56,28 +70,21 @@ export const createSubcourse = async (req, res) => {
   }
 };
 
-
-
 // ✅ Get single subcourse by slug
 export const getSubcourseBySlug = async (req, res) => {
   try {
     const { slug } = req.params;
 
-    console.log("🔎 Fetching subcourse for slug:", slug);
-
     if (!slug) {
       return res.status(400).json({ message: "Slug is required" });
     }
 
-    // ✅ Use correct model name here
     const subcourse = await Subcourse.findOne({ slug });
 
     if (!subcourse) {
-      console.log("❌ Subcourse not found in DB for slug:", slug);
       return res.status(404).json({ message: "Subcourse not found" });
     }
 
-    console.log("✅ Subcourse found:", subcourse.title);
     res.status(200).json(subcourse);
   } catch (error) {
     console.error("🚨 Error fetching subcourse by slug:", error.message);

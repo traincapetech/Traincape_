@@ -9,6 +9,7 @@ const Courses = () => {
     fetch("http://localhost:8080/api/courses")
       .then((res) => res.json())
       .then((data) => {
+        console.log("Fetched courses:", data); // ✅ Debug API response
         setCourses(data);
         setLoading(false);
       })
@@ -53,39 +54,52 @@ const Courses = () => {
         {/* Course Grid */}
         {!loading && courses.length > 0 && (
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {courses.map((course) => (
-              <Link
-                key={course._id}
-                to={`/Courses-details/${course._id}`}
-                className="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:-translate-y-1"
-              >
-                {/* Image */}
-                <div className="h-48 flex items-center justify-center bg-gray-50 relative">
-                  <img
-                    src={course.image || "https://placehold.co/200x200"}
-                    alt={course.title}
-                    className="h-full object-contain p-6 group-hover:scale-105 transition-transform duration-300"
-                  />
-                  {/* Category Badge (if available) */}
-                  {course.category && (
-                    <span className="absolute top-3 right-3 bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full">
-                      {course.category}
-                    </span>
-                  )}
-                </div>
+            {courses.map((course) => {
+              console.log("Rendering course:", course); // ✅ Debug log
 
-                {/* Content */}
-                <div className="p-6 text-center">
-                  <h2 className="text-xl font-semibold text-gray-800 group-hover:text-purple-700 transition-colors duration-300 line-clamp-2">
-                    {course.title}
-                  </h2>
+              return (
+                <Link
+                  key={course._id}
+                  to={`/Courses-details/${course._id}`}
+                  className="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:-translate-y-1"
+                >
+                  {/* Image */}
+                  <div className="h-48 flex items-center justify-center bg-gray-50 relative">
+                   <img
+  src={
+    course.image
+      ? `http://localhost:8080/proxy/image/${course.image}`
+      : "https://placehold.co/200x200"
+  }
+  alt={course.title}
+  className="h-full object-contain p-6 group-hover:scale-105 transition-transform duration-300"
+  onError={(e) => {
+    console.error("Image failed to load:", course.image);
+    e.target.src = "https://placehold.co/200x200";
+  }}
+/>
 
-                  <button className="mt-5 w-full inline-block px-5 py-3 text-sm font-semibold text-white bg-purple-700 rounded-lg shadow-md hover:bg-purple-800 transition-colors duration-300">
-                    Learn More
-                  </button>
-                </div>
-              </Link>
-            ))}
+                    {/* Category Badge (if available) */}
+                    {course.category && (
+                      <span className="absolute top-3 right-3 bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full">
+                        {course.category}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-6 text-center">
+                    <h2 className="text-xl font-semibold text-gray-800 group-hover:text-purple-700 transition-colors duration-300 line-clamp-2">
+                      {course.title}
+                    </h2>
+
+                    <button className="mt-5 w-full inline-block px-5 py-3 text-sm font-semibold text-white bg-purple-700 rounded-lg shadow-md hover:bg-purple-800 transition-colors duration-300">
+                      Learn More
+                    </button>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         )}
 

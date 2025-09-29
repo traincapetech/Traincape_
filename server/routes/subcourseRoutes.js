@@ -1,4 +1,5 @@
 import express from "express";
+import multer from "multer";
 import {
   getSubcoursesByCourse,
   createSubcourse,
@@ -6,14 +7,11 @@ import {
 } from "../controllers/subcourseController.js";
 
 const router = express.Router();
+const upload = multer({ dest: "uploads/" }); // temporary upload folder
 
-// Order matters — keep /slug first so it doesn't clash with :courseId
-router.get("/slug/:slug", getSubcourseBySlug);
+// ✅ Order matters
 router.get("/slug/:slug", getSubcourseBySlug);
 router.get("/:courseId", getSubcoursesByCourse);
-router.post("/", createSubcourse);
-router.get("/:courseId", getSubcoursesByCourse);
-router.post("/", createSubcourse);
-router.get("/:courseId/:slug", getSubcourseBySlug);
+router.post("/", upload.single("image"), createSubcourse);
 
 export default router;

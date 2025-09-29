@@ -12,6 +12,15 @@ const colors = [
   "bg-indigo-50 border-indigo-200",
 ];
 
+const badgeColors = [
+  "bg-blue-100 text-blue-700",
+  "bg-green-100 text-green-700",
+  "bg-purple-100 text-purple-700",
+  "bg-pink-100 text-pink-700",
+  "bg-yellow-100 text-yellow-700",
+  "bg-indigo-100 text-indigo-700",
+];
+
 const buttonColors = [
   "bg-blue-600 hover:bg-blue-700",
   "bg-green-600 hover:bg-green-700",
@@ -145,14 +154,41 @@ const CourseDetails = () => {
                   key={subcourse._id}
                   className={`group rounded-xl border shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col w-72 h-[280px] mx-auto ${colors[colorIndex]}`}
                 >
-                  {/* Image */}
-                  <div className="h-28 flex items-center justify-center bg-white/70 rounded-t-xl border-b">
-                    <img
-                      src={subcourse.image || "https://placehold.co/200x200"}
-                      alt={subcourse.title}
-                      className="h-full object-contain p-4 transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </div>
+                  {/* Image / Badge */}
+<div className="h-28 flex items-center justify-center bg-white rounded-t-xl border-b">
+  {subcourse.image ? (
+    <img
+      src={`http://localhost:8080/proxy/image/${subcourse.image}`}
+      alt={subcourse.title}
+      className="h-full object-contain p-4 transition-transform duration-300 group-hover:scale-105"
+      onError={(e) => {
+        console.error("Subcourse image failed to load:", subcourse.image);
+        e.target.style.display = "none";
+        e.target.parentElement.innerHTML = `
+          <div class="flex justify-center items-center w-full h-full">
+            <div class="w-20 h-20 rounded-full border-2 border-purple-700 flex flex-col items-center justify-center text-center shadow">
+              <div class="text-purple-700 font-bold text-xs">${subcourse.title.split(" ")[0]}</div>
+              <div class="text-gray-800 font-semibold text-sm">${subcourse.title.split(" ")[1] || ""}</div>
+              <div class="text-gray-500 text-[10px]">Certification</div>
+            </div>
+          </div>`;
+      }}
+    />
+  ) : (
+    <div className="flex justify-center items-center w-full h-full">
+      <div className="w-20 h-20 rounded-full border-2 border-purple-700 flex flex-col items-center justify-center text-center shadow">
+        <div className="text-purple-700 font-bold text-xs">
+          {subcourse.title.split(" ")[0]}
+        </div>
+        <div className="text-gray-800 font-semibold text-sm">
+          {subcourse.title.split(" ")[1] || ""}
+        </div>
+        <div className="text-gray-500 text-[10px]">Certification</div>
+      </div>
+    </div>
+  )}
+</div>
+
 
                   {/* Content */}
                   <div className="p-4 flex flex-col flex-grow text-center">
