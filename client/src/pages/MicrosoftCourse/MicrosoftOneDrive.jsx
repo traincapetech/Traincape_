@@ -102,6 +102,9 @@ const MicrosoftOneDrive = () => {
   }, []);
 
   // Create a combined Overview component that includes Learn and My Pathway
+   const navigate = useNavigate();
+
+  // Combined Overview (Overview + Learn + MyPathway)
   const CombinedOverview = () => (
     <div className="space-y-8">
       {/* Original Overview Content */}
@@ -132,15 +135,6 @@ const MicrosoftOneDrive = () => {
   // Create a combined Certify component that includes Practice
   const CombinedCertify = () => (
     <div className="space-y-8">
-      {/* Original Certify Content */}
-      <div className="bg-gradient-to-r from-orange-50 to-red-50 p-6 rounded-xl border border-orange-100">
-        <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
-          <FaCertificate className="mr-3 text-orange-600" />
-          Certification Details
-        </h3>
-        <Certify title={"Microsoft OneDrive"} />
-      </div>
-      
       {/* Practice Section */}
       <div className="bg-gradient-to-r from-yellow-50 to-amber-50 p-6 rounded-xl border border-yellow-100">
         <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
@@ -149,6 +143,16 @@ const MicrosoftOneDrive = () => {
         </h3>
         <Practice course={"Microsoft"} subTopic={"MicrosoftOneDrive"}/>
       </div>
+        {/* Original Certify Content */}
+      <div className="bg-gradient-to-r from-orange-50 to-red-50 p-6 rounded-xl border border-orange-100">
+        <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+          <FaCertificate className="mr-3 text-orange-600" />
+          Certification Details
+        </h3>
+        <Certify title={"Microsoft OneDrive"} />
+      </div>
+      
+      
     </div>
   );
 
@@ -159,7 +163,7 @@ const MicrosoftOneDrive = () => {
 
   return (
     <>
-      {/* Modern Breadcrumb Navigation */}
+        {/* Breadcrumb */}
       <div className="bg-white shadow-lg border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center space-x-2 text-sm">
@@ -170,6 +174,36 @@ const MicrosoftOneDrive = () => {
             <span className="text-gray-500 hover:text-blue-600 cursor-pointer transition-colors">Microsoft</span>
             <span className="text-gray-400">›</span>
             <span className="text-blue-600 font-semibold">OneDrive</span>
+          </div>
+        </div>
+      </div>
+
+       {/* Breadcrumb */}
+      <div className="bg-white shadow-md border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center space-x-2 text-sm">
+            <span
+              className="text-gray-500 hover:text-blue-600 cursor-pointer"
+              onClick={() => navigate('/')}
+            >
+              Home
+            </span>
+            <span className="text-gray-400">›</span>
+            <span
+              className="text-gray-500 hover:text-blue-600 cursor-pointer"
+              onClick={() => navigate('/training')}
+            >
+              Training
+            </span>
+            <span className="text-gray-400">›</span>
+            <span
+              className="text-gray-500 hover:text-blue-600 cursor-pointer"
+              onClick={() => navigate('/microsoft')}
+            >
+              Microsoft
+            </span>
+            <span className="text-gray-400">›</span>
+            <span className="text-blue-600 font-semibold">Azure Administrator</span>
           </div>
         </div>
       </div>

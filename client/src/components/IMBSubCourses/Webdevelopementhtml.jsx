@@ -3,6 +3,7 @@ import { useCartContext } from "../CartContext"; // Adjust the import path as ne
 import ibmlogo from "../../assets/ibmnewlogo.webp";
 import htmllogo from "../../assets/html.png";
 import AddToCartButton from "../AddToCartButton";
+import { Helmet } from "react-helmet";
 
 const Webdevelopementhtml = () => {
   const [selectedQuestion, setSelectedQuestion] = useState(null);
@@ -38,12 +39,23 @@ const Webdevelopementhtml = () => {
 
   return (
     <>
-          <AddToCartButton />
+
+      <Helmet>
+        <title>IBM HTML Website Development Certification</title>
+        <meta
+          name="description"
+          content="Get certified by IBM with our HTML Web Development Certification and develop your web design and development skills using HTML. Start your career with us now."
+        />
+        <link rel="canonical" href="https://traincapetech.in/htmlcourse" />
+      </Helmet>
+
+
+      <AddToCartButton />
 
       <div className="relative bg-gradient-to-b from-blue-100 to-white w-full h-auto md:h-[20rem] pt-10 px-4 md:px-10 text-left">
         <img
           src={ibmlogo}
-          alt="IBM Logo"
+          alt="IBM HTML Certification"
           className="h-40 w-32 mx-auto md:mx-0 xl:pl-20 xl:w-auto"
         />
         <h1 className="text-2xl md:text-xl lg:text-4xl font-bold text-blue-900 text-center md:text-left xl:pl-20">
@@ -89,14 +101,14 @@ const Webdevelopementhtml = () => {
           {/* <button className="bg-blue-900 h-10 text-white px-4 py-2 rounded-lg">
             Buy Now
           </button> */}
-         
+
         </div>
-         {/* Confirmation Message */}
-         {showConfirmation && (
-            <div className=" mt-5 bg-green-500 text-white px-8  rounded-lg shadow-lg z-50">
-              Item Added to Cart!
-            </div>
-          )}
+        {/* Confirmation Message */}
+        {showConfirmation && (
+          <div className=" mt-5 bg-green-500 text-white px-8  rounded-lg shadow-lg z-50">
+            Item Added to Cart!
+          </div>
+        )}
       </div>
 
       <div className="h-full px-4 md:px-[6rem] lg:px-[20rem] lg:pl-[5rem] xl:px-[40rem] xl:pl-[10rem]">

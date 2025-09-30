@@ -32,14 +32,14 @@ const Microsoft = () => {
       course: "Microsoft",
       subCourse: "MicrosoftAzureDeveloperAssociate"
     },
-    {
-      image: mircro,
-      title: "Microsoft Azure Fundamentals",
-      description: "Master the art of cloud-based technology and services.",
-      url: "/MicrosoftCourse/MicrosoftAzureFundamentals",
-      course: "Microsoft",
-      subCourse: "MicrosoftAzureFundamentals"
-    },
+    // {
+    //   image: mircro,
+    //   title: "Microsoft Azure Fundamentals",
+    //   description: "Master the art of cloud-based technology and services.",
+    //   url: "/MicrosoftCourse/MicrosoftAzureFundamentals",
+    //   course: "Microsoft",
+    //   subCourse: "MicrosoftAzureFundamentals"
+    // },
     {
       image: mircro,
       title: "Microsoft Dynamics 365",
@@ -64,22 +64,22 @@ const Microsoft = () => {
       course: "Microsoft",
       subCourse: "Microsoft365"
     },
-    {
-      image: mircro,
-      title: "Microsoft 365 Fundamentals",
-      description: "Master the art of cloud-based technology and services.",
-      url: "/MicrosoftCourse/Microsoft365Fundamentals",
-      course: "Microsoft",
-      subCourse: "Microsoft365Fundamentals"
-    },
-    {
-      image: mircro,
-      title: "Microsoft security, compliance and Identity",
-      description: "Master the art of cloud-based technology and services.",
-      url: "/MicrosoftCourse/MicrosoftSecurityFundamentals",
-      course: "Microsoft",
-      subCourse: "MicrosoftSecurityFundamentals"
-    },
+    // {
+    //   image: mircro,
+    //   title: "Microsoft 365 Fundamentals",
+    //   description: "Master the art of cloud-based technology and services.",
+    //   url: "/MicrosoftCourse/Microsoft365Fundamentals",
+    //   course: "Microsoft",
+    //   subCourse: "Microsoft365Fundamentals"
+    // },
+    // {
+    //   image: mircro,
+    //   title: "Microsoft security, compliance and Identity",
+    //   description: "Master the art of cloud-based technology and services.",
+    //   url: "/MicrosoftCourse/MicrosoftSecurityFundamentals",
+    //   course: "Microsoft",
+    //   subCourse: "MicrosoftSecurityFundamentals"
+    // },
     {
       image: mircro,
       title: "Microsoft Power Platform",
@@ -184,25 +184,25 @@ const Microsoft = () => {
       course: "Microsoft",
       subCourse: "MicrosoftPl300"
     },
-    {
-      image: mircro,
-      title: "Microsoft PowerPoint Associate",
-      description:
-        "Master the art of creating professional presentations. View in Courses section.",
-      url: "/MicrosoftCourse/MicrosoftPowerPointAssociate",
-      course: "Microsoft",
-      subCourse: "MicrosoftPowerPointAssociate"
-    },
-    {
-      image: mircro,
-      title:
-        "Microsoft Security, Compliance, and Identity Fundamentals (SC-900)",
-      description:
-        "Learn the fundamental concepts of security, compliance, and identity across cloud-based and related Microsoft services.",
-      url: "/MicrosoftCourse/MicrosoftSecurityFundamentals",
-      course: "Microsoft",
-      subCourse: "MicrosoftSecurityFundamentals"
-    },
+    // {
+    //   image: mircro,
+    //   title: "Microsoft PowerPoint Associate",
+    //   description:
+    //     "Master the art of creating professional presentations. View in Courses section.",
+    //   url: "/MicrosoftCourse/MicrosoftPowerPointAssociate",
+    //   course: "Microsoft",
+    //   subCourse: "MicrosoftPowerPointAssociate"
+    // },
+    // {
+    //   image: mircro,
+    //   title:
+    //     "Microsoft Security, Compliance, and Identity Fundamentals (SC-900)",
+    //   description:
+    //     "Learn the fundamental concepts of security, compliance, and identity across cloud-based and related Microsoft services.",
+    //   url: "/MicrosoftCourse/MicrosoftSecurityFundamentals",
+    //   course: "Microsoft",
+    //   subCourse: "MicrosoftSecurityFundamentals"
+    // },
   ];
 
   const navigate = useNavigate();

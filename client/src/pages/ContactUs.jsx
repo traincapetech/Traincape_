@@ -87,7 +87,7 @@ const ContactUs = () => {
                       <h4 className="md:text-2xl text-lg font-bold text-cyan-200">Phone & Email</h4>
                       <p className="text-sm md:text-base flex items-center gap-2 text-cyan-100">
                         <FaWhatsapp />
-                        <Link to="https://wa.me/+441253928501" target="_blank">+44 1253 928501</Link>
+                        <Link to="https://wa.me/+916280281505" target="_blank">+91 6280281505</Link>
                       </p>
                       <p className="text-sm md:text-base flex items-center gap-2 text-cyan-100">
                         <IoMailOutline />
