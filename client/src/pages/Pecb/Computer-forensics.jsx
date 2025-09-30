@@ -11,6 +11,7 @@ import Practice from './Practice';
 import { BsFillPenFill } from "react-icons/bs";
 import { GiPathDistance } from "react-icons/gi";
 import PecbBrochureSection from '../../components/PecbBrochureSection';
+import { useNavigate } from 'react-router-dom';
 
 const NavTab = ({ label, active, onClick, icon }) => {
     return (
@@ -105,6 +106,9 @@ const ComputerForensics = () => {
   const courseName = "PECB Certified Computer Forensics Foundation";
 
   // Create a combined Overview component that includes Learn, My Pathway, and Brochure
+   const navigate = useNavigate();
+
+  // Combined Overview (Overview + Learn + MyPathway)
   const CombinedOverview = () => (
     <div className="space-y-8">
       {/* Original Overview Content */}

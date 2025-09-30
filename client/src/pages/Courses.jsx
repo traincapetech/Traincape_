@@ -12,6 +12,8 @@ import review3 from "../assets/review4.jpeg";
 import review4 from "../assets/review6.png";
 import gif from "../assets/student-mgmt.gif";
 import mircro from "../assets/Microsoft-Emblem.jpg";
+import { Helmet } from "react-helmet";
+
 
 // Import Logos
 import Logo1 from "../assets/ciscologo-courses.webp";
@@ -88,6 +90,17 @@ const Courses = () => {
 
   return (
     <>
+
+      <Helmet>
+        <title>Explore our IT Courses & Certification</title>
+        <meta
+          name="description"
+          content="Explore our IT Certifications and get in touch with us for Certifications like CompTIA, AWS, PMI, Microsoft, Cisco and many more us. | Grow with us"
+        />
+       <link rel="canonical" href="https://traincapetech.in/Courses-details" />
+      </Helmet>
+
+
       <AddToCartButton />
 
       <div className="bg-gray-50">
@@ -98,24 +111,24 @@ const Courses = () => {
           </div>
         </div>
         <div className="flex items-center w-full py-4 px-6 bg-white rounded shadow-md border border-gray-200">
-            <button
-              onClick={() => {
-                navigate("/");
-              }}
-              className="text-gray-600 font-bold py-2 px-4 rounded"
-            >
-              <span className="hover:text-gray-800">Home</span>
-            </button>
-            <div className="flex items-center text-gray-500 font-bold">
-              <span>{" > "}</span>
-              <span className="ml-4">Course Details</span>
-            </div>
+          <button
+            onClick={() => {
+              navigate("/");
+            }}
+            className="text-gray-600 font-bold py-2 px-4 rounded"
+          >
+            <span className="hover:text-gray-800">Home</span>
+          </button>
+          <div className="flex items-center text-gray-500 font-bold">
+            <span>{" > "}</span>
+            <span className="ml-4">Course Details</span>
           </div>
+        </div>
         {/* Logos Section */}
         <div className="bg-gray-200 p-5 m-5">
-          <p className="text-center font-bold uppercase text-4xl p-4">
-            Get Certified by World's Leading IT Companies
-          </p>
+          <h1 className="text-center font-bold uppercase text-4xl p-4">
+          Get Certified by World's Leading IT Companies' Certifications
+          </h1>
           <Slider {...settings} className="w-full">
             {[
               Logo1,
@@ -154,7 +167,7 @@ const Courses = () => {
           <img
             src={banner}
             className="rounded bg-gray-50 w-full md:w-[32rem] md:h-[20rem] object-cover"
-            alt="Banner"
+            alt="IT Certifications- AWS, CompTIA, PMI, Microsoft Azure, Cisco, etc"
           />
           <div className="flex flex-col text-center text-2xl mx-8  mt-4 md:mt-0">
             <h2 className="mt-7 text-3xl md:text-4xl font-bold text-cyan-500">

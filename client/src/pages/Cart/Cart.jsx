@@ -215,7 +215,7 @@ Email: ${accountDetails.email}
             <div className="w-10 h-10 rounded-full bg-green-50 text-green-600 flex items-center justify-center"><FaHeadset /></div>
             <div>
               <div className="text-sm font-semibold text-gray-900">Dedicated support</div>
-              <div className="text-xs text-gray-600">We typically reply within 24h</div>
+              <div className="text-xs text-gray-600">We typically reply within 12 hours</div>
             </div>
           </div>
         </div>
