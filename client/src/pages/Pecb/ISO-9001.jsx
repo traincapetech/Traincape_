@@ -138,6 +138,14 @@ const ISO9001 = () => {
   // Create a combined Certify component that includes Practice
   const CombinedCertify = () => (
     <div className="space-y-8">
+      {/* Practice Section */}
+      <div className="bg-gradient-to-r from-yellow-50 to-amber-50 p-6 rounded-xl border border-yellow-100">
+        <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+          <BsFillPenFill className="mr-3 text-yellow-600" />
+          Practice & Assessment
+        </h3>
+        <Practice course={"PECB"} subTopic={"PECBISO9001"}/>
+      </div>
       {/* Original Certify Content */}
       <div className="bg-gradient-to-r from-orange-50 to-red-50 p-6 rounded-xl border border-orange-100">
         <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
@@ -147,14 +155,7 @@ const ISO9001 = () => {
         <Certify title={courseName} />
       </div>
       
-      {/* Practice Section */}
-      <div className="bg-gradient-to-r from-yellow-50 to-amber-50 p-6 rounded-xl border border-yellow-100">
-        <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
-          <BsFillPenFill className="mr-3 text-yellow-600" />
-          Practice & Assessment
-        </h3>
-        <Practice course={"PECB"} subTopic={"PECBISO9001"}/>
-      </div>
+      
     </div>
   );
 

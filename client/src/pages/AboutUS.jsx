@@ -211,6 +211,7 @@ import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
+
 const timelineData = [
   {
     title: " A Vision Takes Root",
@@ -302,8 +303,8 @@ const AboutUS = () => {
   return (
     <>
       <Helmet>
-        <title>Traincape Technology - IT Training and Services</title>
-        <meta name="description" content="Learn about Traincape Technology's mission, values, and services." />
+        <title>About Us- IT Industry Training and Certifications</title>
+        <meta name="description" content="Traincape Technology offers IT certifications for Cyber Security, Cloud Computing, Project Management, Networking, etc"/>
       </Helmet>
 
       <section className="relative w-full h-[400px] md:h-[500px] overflow-hidden mb-20">
@@ -322,12 +323,14 @@ const AboutUS = () => {
           muted
           loop
           playsInline
+          /* give title - as video doesn't support alt */
+          title="IT Training and Certifications"
           className="absolute top-0 left-0 w-full h-full object-cover"
         />
         <div className="absolute top-0 left-0 w-full h-full bg-black/40 flex items-end justify-start p-8">
           <div>
-            <h1 className="text-white text-4xl md:text-5xl font-[300] tracking-wider font-sans mb-2">About Us</h1>
-            <div className="w-24 h-[2px] bg-orange-400" />
+            <h1 className="text-white text-4xl md:text-5xl font-[300] tracking-wider font-sans mb-2">Grow your Career with our IT Certifications</h1>
+            {/* <div className="w-24 h-[2px] bg-orange-400" /> */}
           </div>
         </div>
       </section>

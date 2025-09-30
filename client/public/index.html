@@ -121,25 +121,51 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 
-    <!-- WhatsApp button -->
-    <div
-      id="whatsapp-icon"
-      onclick="window.open('https://wa.me/6280281505', '_blank')"
-    >
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-        alt="WhatsApp"
-        width="40"
-        height="40"
-        loading="lazy"
-      />
-    </div>
+    <!-- WhatsApp button is now handled by React component -->
   </body>
   <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
   <script>
     // Initialize AOS after page load for better performance
     window.addEventListener('load', function() {
       AOS.init({ offset: 200, duration: 800, once: true });
+    });
+
+    // Register service worker for chunk loading error handling
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js')
+          .then(function(registration) {
+            console.log('Service Worker registered successfully:', registration.scope);
+          })
+          .catch(function(error) {
+            console.log('Service Worker registration failed:', error);
+          });
+      });
+    }
+
+    // Global error handler for chunk loading errors
+    window.addEventListener('error', function(event) {
+      if (event.filename && event.filename.includes('chunk')) {
+        console.error('Chunk loading error detected:', event);
+        // Clear cache and reload
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            names.forEach(name => caches.delete(name));
+          });
+        }
+        setTimeout(() => window.location.reload(), 1000);
+      }
+    });
+
+    // Handle unhandled promise rejections (chunk loading failures)
+    window.addEventListener('unhandledrejection', function(event) {
+      if (event.reason && event.reason.message && 
+          (event.reason.message.includes('Loading chunk') || 
+           event.reason.message.includes('Unexpected token'))) {
+        console.error('Chunk loading promise rejection:', event.reason);
+        event.preventDefault();
+        window.location.reload();
+      }
     });
   </script>
 </html>

@@ -96,8 +96,6 @@ const Home = () => {
 
   // State declarations
   const [videoLoaded, setVideoLoaded] = useState(false)
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const [fade, setFade] = useState(true)
 
   // Hooks
   const navigate = useNavigate()
@@ -106,25 +104,9 @@ const Home = () => {
   // Constants
   const bgColors = ["bg-[#E0E7FF]", "bg-[#E0F2FE]", "bg-[#FEF3C7]", "bg-[#FDE68A]", "bg-[#FCE7F3]", "bg-[#DCFCE7]"]
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setFade(false)
-      setTimeout(() => {
-        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length)
-        setFade(true)
-      }, 300)
-    }, 2000)
-    return () => clearInterval(interval)
-  }, [])
+  // Removed unused image rotation effect
 
-  const bannerText = {
-    title: "Want a Suggestion?",
-    type1: "Cloud Computing",
-    type2: "Cyber Security",
-    type3: "Project Management",
-    ctaText: "Get a Suggestion",
-    ctaLink: "/contact-us",
-  }
+  // Removed unused bannerText object
 
   const partners = [
     { logo: Logo1, name: "SBS", url: "https://sbs-mea.com/" },
@@ -137,9 +119,9 @@ const Home = () => {
 
   return (
     <div className="bg-white">
-      <SEOHead 
-        title="Traincape Technology | IT Training & Certification"
-        description="Expert-led online courses for AWS, CompTIA, Microsoft, Cisco and other IT certifications. Advance your IT career with Traincape Technology."
+      <SEOHead
+        title="Traincape Technology | IT Training & Certifications"
+        description="Traincape Technology offers training for the best IT certifications to boost your career with CompTIA, PMI, Cisco, Salesforce, & many more certifications."
         canonical="https://www.traincapetech.in/"
         structuredData={{
           "@context": "https://schema.org",
@@ -156,8 +138,8 @@ const Home = () => {
           }
         }}
       />
-      
-            {/* Video Hero Section */}
+
+      {/* Video Hero Section */}
       <div className="relative w-full h-[400px] md:h-[500px] overflow-hidden">
         <video
           autoPlay
@@ -171,6 +153,10 @@ const Home = () => {
         </video>
         <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center p-4 text-center z-10">
           <div className="max-w-6xl mx-auto w-full">
+             {/* h1 for SEO  */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl  mb-8 font-bold text-white leading-tight drop-shadow-lg">
+              Elevate Your Career with Expert IT Training
+            </h1>
             <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-lg">
               <Typewriter
                 options={{
@@ -179,7 +165,6 @@ const Home = () => {
                     "Cloud Computing",
                     "Cyber Security",
                     "Project Management",
-                   
                   ],
                   autoStart: true,
                   loop: true,
@@ -203,7 +188,6 @@ const Home = () => {
                     .typeString('<span class="bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-600 bg-clip-text text-transparent animate-gradient-delayed">Project Management</span>')
                     .pauseFor(2000)
                     .deleteAll()
-                   
                     .start();
                 }}
               />
@@ -399,7 +383,7 @@ const Home = () => {
               ABOUT US
             </span>
             <h2 className="text-3xl font-bold text-[#1E293B] sm:text-4xl mb-4">
-              Empowering Your Business with Seamless IT Solutions
+            Empowering Your Business with Expert IT Certificate Programs
             </h2>
             <div className="h-1 w-20 bg-[#152B54] mx-auto"></div>
           </div>
@@ -407,8 +391,9 @@ const Home = () => {
             <div className="md:w-1/2 relative">
               <div className="absolute inset-0 bg-[#152B54] rounded-xl opacity-20 transform rotate-3 blur-sm"></div>
               <img
-                src={team || "/placeholder.svg"}
-                alt="Team"
+                src={team || "/placeholder.svg"}  
+                // alt for SEO 
+                alt="Team of Traincape Technology providing IT Training and Certifications"
                 className="relative z-10 rounded-xl shadow-2xl w-full object-cover h-[400px]"
               />
             </div>
@@ -518,14 +503,23 @@ const Home = () => {
               <p className="text-blue-100 mb-8 text-lg leading-relaxed">
                 Transform your business with our comprehensive IT solutions and expert guidance.
               </p>
-              <div className="bg-white/10 rounded-xl p-4 backdrop-blur-sm flex items-center mb-8 border border-white/20">
-                <Link to="https://wa.me/+441253928501" target="_blank" className="mr-3">
-                  <FaSquareWhatsapp className="text-green-400 text-4xl hover:scale-110 transition-transform" />
-                </Link>
+              <div 
+                className="bg-white/10 rounded-xl p-4 backdrop-blur-sm flex items-center mb-8 border border-white/20 cursor-pointer hover:bg-white/20 transition-all duration-300"
+                onClick={() => {
+                  // Trigger the WhatsApp popup by simulating a click on the floating WhatsApp icon
+                  const whatsappIcon = document.querySelector('.whatsapp-icon');
+                  if (whatsappIcon) {
+                    whatsappIcon.click();
+                  }
+                }}
+              >
+                <div className="mr-3">
+                  <FaSquareWhatsapp className="text-green-400 text-4xl" />
+                </div>
                 <div>
                   <p className="text-blue-200 text-sm">24 HOURS SERVICE AVAILABLE</p>
-                  <h4 className="text-white font-bold cursor-pointer hover:text-blue-200 transition-colors">
-                    Chat With Us: +44 1253 928501
+                  <h4 className="text-white font-bold">
+                    Chat With Us: Select Your Region
                   </h4>
                 </div>
               </div>
@@ -572,6 +566,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+
 
       {/* Partners Section */}
       <section className="py-16 bg-gradient-to-br from-cyan-100 via-sky-200 to-blue-300 font-sans">
@@ -680,9 +675,8 @@ const Home = () => {
             ].map((item, index) => (
               <div
                 key={index}
-                className={`text-center p-6 rounded-xl shadow-lg transition duration-300 ease-out transform hover:scale-105 hover:shadow-2xl cursor-pointer ${
-                  inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-                } ${item.bg}`}
+                className={`text-center p-6 rounded-xl shadow-lg transition duration-300 ease-out transform hover:scale-105 hover:shadow-2xl cursor-pointer ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                  } ${item.bg}`}
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
                 <span className={`text-4xl font-bold block mb-2 ${item.text}`}>
@@ -714,6 +708,7 @@ const Home = () => {
           </button>
         </div>
       </section>
+
     </div>
   )
 }

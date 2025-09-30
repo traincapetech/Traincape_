@@ -12,7 +12,7 @@ const MicrosoftOverview = ({ title, url, image }) => {
   return (
        <div className="m-0">
          <h1 className="font-bold text-3xl md:text-5xl text-blue-900 text-center mb-6">{title} Certificate</h1>
-           <img src={Banner} alt="" className="w-full h-[30rem]  mb-6" /> 
+           <img src={Banner} alt="" className="w-[80%] mx-auto rounded-2xl mb-6 mt-10" /> 
          <h3 className="text-2xl md:text-3xl font-bold my-2 text-slate-700">
            Kick-start your career with a {title} certification!
          </h3>

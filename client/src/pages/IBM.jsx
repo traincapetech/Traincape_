@@ -25,9 +25,10 @@ import Machine from "../assets/machinelogo.png";
 import js from "../assets/jslogo.png";
 import AddToCartButton from "../components/AddToCartButton";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const IBM = () => {
-  
+
   const navigate = useNavigate();
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -202,7 +203,19 @@ const IBM = () => {
 
   return (
     <>
-              <AddToCartButton />
+
+      <Helmet>
+        <title>IBM Certification Course | IT Training & Certification</title>
+        <meta
+          name="description"
+          content="Get industry recognized IBM Certification and advance in your career. Our IBM Certification will offer you Cloud Computing, AI and Data Science,Cyber Security Certifications."
+        />
+        <link rel="canonical" href="https://traincapetech.in/IBM" />
+      </Helmet>
+
+
+
+      <AddToCartButton />
 
       <div
         className="bg-gray-100 w-full relative contrast-75 h-[55vh] content-center text-justify"
@@ -215,9 +228,9 @@ const IBM = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between p-5">
           <div className="lg:w-2/3 w-full ">
             <h1 className="text-2xl  md:text-4xl lg:text-4xl font-bold font-serif ">
-              <a 
-                href="https://www.ibm.com/" 
-                target="_blank" 
+              <a
+                href="https://www.ibm.com/"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-blue-600 transition-colors cursor-pointer"
                 title="Visit IBM Official Website"
@@ -237,7 +250,7 @@ const IBM = () => {
             <img
               className="w-[28rem] h-auto transition-transform duration-300 ease-in-out hover:scale-110"
               src={banner2}
-              alt="IBM Banner"
+              alt="IBM Certification"
             />
           </div>
         </div>
@@ -249,19 +262,19 @@ const IBM = () => {
           }}
           className="text-gray-600 font-bold py-2 px-4 rounded"
         >
-         <span className="hover:text-gray-800">Home</span> 
+          <span className="hover:text-gray-800">Home</span>
         </button>
         <div className="flex items-center text-gray-500 font-bold">
           <span>{" > "}</span>
           <button
-          onClick={() => {
-            navigate("/Courses-details");
-          }}
-          className="text-gray-600 font-bold py-2 px-4 rounded"
-        >
-         <span className="hover:text-gray-800">Course Details</span> 
-        </button>
-        <span>{" > "}</span>
+            onClick={() => {
+              navigate("/Courses-details");
+            }}
+            className="text-gray-600 font-bold py-2 px-4 rounded"
+          >
+            <span className="hover:text-gray-800">Course Details</span>
+          </button>
+          <span>{" > "}</span>
           <span className="ml-4">IBM</span>
         </div>
       </div>

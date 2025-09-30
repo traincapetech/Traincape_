@@ -670,12 +670,12 @@ export default function Footer() {
                 <div className="flex flex-col md:flex-row md:items-center md:gap-3 group/item">
                   <Phone className="h-4 w-4 text-blue-400" />
                   <a
-                    href="https://wa.me/+441253928501"
+                    href="https://wa.me/+916280281505"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-[10px] sm:text-xs md:text-sm group-hover/item:text-blue-300 transition-colors duration-300"
                   >
-                    +44 1253 928501
+                    +91 6280281505
                   </a>
                 </div>
               </div>

@@ -110,28 +110,36 @@ const ComptiaProject004 = () => {
       </div>
       
       {/* Learn Section */}
-      <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-xl border border-green-100">
+      {/* <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-xl border border-green-100">
         <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
           <FaBook className="mr-3 text-green-600" />
           Learning Resources
         </h3>
         <Learn title={"CompTIA Project+"} />
-      </div>
+      </div> */}
       
       {/* My Pathway Section */}
-      <div className="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-xl border border-purple-100">
+      {/* <div className="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-xl border border-purple-100">
         <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
           <GiPathDistance className="mr-3 text-purple-600" />
           Career Pathway
         </h3>
         <MyPathway title={"CompTIA Project+"} />
-      </div>
+      </div> */}
     </div>
   );
 
   // Create a combined Certify component that includes Practice
   const CombinedCertify = () => (
     <div className="space-y-8">
+      {/* Practice Section */}
+      <div className="bg-gradient-to-r from-yellow-50 to-amber-50 p-6 rounded-xl border border-yellow-100">
+        <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+          <BsFillPenFill className="mr-3 text-yellow-600" />
+          Practice & Assessment
+        </h3>
+        <Practice course={"CompTIA"} subTopic={"CompTIAProject"}/>
+      </div>
       {/* Original Certify Content */}
       <div className="bg-gradient-to-r from-orange-50 to-red-50 p-6 rounded-xl border border-orange-100">
         <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
@@ -141,14 +149,7 @@ const ComptiaProject004 = () => {
         <Certify title={"CompTIA Project+"} />
       </div>
       
-      {/* Practice Section */}
-      <div className="bg-gradient-to-r from-yellow-50 to-amber-50 p-6 rounded-xl border border-yellow-100">
-        <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
-          <BsFillPenFill className="mr-3 text-yellow-600" />
-          Practice & Assessment
-        </h3>
-        <Practice course={"CompTIA"} subTopic={"CompTIAProject"}/>
-      </div>
+      
     </div>
   );
 

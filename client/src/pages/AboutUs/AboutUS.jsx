@@ -211,6 +211,7 @@ import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
+
 const timelineData = [
   {
     title: " A Vision Takes Root",
@@ -302,8 +303,8 @@ const AboutUS = () => {
   return (
     <>
       <Helmet>
-        <title>Traincape Technology - IT Training and Services</title>
-        <meta name="description" content="Learn about Traincape Technology's mission, values, and services." />
+        <title>About Us- IT Industry Training and Certifications</title>
+        <meta name="description" content="Traincape Technology offers IT certifications for Cyber Security, Cloud Computing, Project Management, Networking, etc"/>
       </Helmet>
 
       <section className="relative w-full h-[400px] md:h-[500px] overflow-hidden mb-20">
@@ -322,12 +323,14 @@ const AboutUS = () => {
           muted
           loop
           playsInline
+          /* give title - as video doesn't support alt */
+          title="IT Training and Certifications"
           className="absolute top-0 left-0 w-full h-full object-cover"
         />
         <div className="absolute top-0 left-0 w-full h-full bg-black/40 flex items-end justify-start p-8">
           <div>
-            <h1 className="text-white text-4xl md:text-5xl font-[300] tracking-wider font-sans mb-2">About Us</h1>
-            <div className="w-24 h-[2px] bg-orange-400" />
+            <h1 className="text-white text-4xl md:text-5xl font-[300] tracking-wider font-sans mb-2">Grow your Career with our IT Certifications</h1>
+            {/* <div className="w-24 h-[2px] bg-orange-400" /> */}
           </div>
         </div>
       </section>
@@ -368,6 +371,7 @@ const AboutUS = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
+              onClick={() => navigate("/contact-us")}
             >
               
               Connect with Us
@@ -397,8 +401,8 @@ This work is about more than just technology. It's about building capability, so
 
        <motion.section className="w-full bg-[#0C121F] py-12 px-4" {...fadeInProps}>
         <div className="max-w-6xl mx-auto text-center mb-10">
-          <h2 className="text-3xl font-bold text-white font-bold">Our Journey</h2>
-          <p className="text-white mt-2 text-base max-w-xl mx-auto font-sans text-4xl font-semibold">
+          <h2 className="text-3xl font-bold text-white">Our Journey</h2>
+          <p className="text-white mt-2 max-w-xl mx-auto font-sans text-4xl font-semibold">
             From a spark of inspiration to a thriving learning ecosystem: here's how Unified Mentor came to life.
           </p>
         </div>

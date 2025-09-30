@@ -4,6 +4,7 @@ import { useCartContext } from "../CartContext"; // Adjust the import path as ne
 import ibmlogo from "../../assets/ibmnewlogo.webp";
 import Clogo from "../../assets/clogo.png";
 import AddToCartButton from "../AddToCartButton";
+import { Helmet } from "react-helmet";
 
 const WebdevelopementC = () => {
   const [selectedQuestion, setSelectedQuestion] = useState(null);
@@ -38,7 +39,18 @@ const WebdevelopementC = () => {
 
   return (
     <>
-                          <AddToCartButton />
+
+      <Helmet>
+        <title>IBM Website Development using C Programming Certification </title>
+        <meta
+          name="description"
+          content="Learn C Programming with our IBM C Programming Certification, where you can start and enhance your career skills important for web development. Explore the power of C in web Development with the focus on Backend systems."
+        />
+        <link rel="canonical" href="https://traincapetech.in/C-course" />
+      </Helmet>
+
+
+      <AddToCartButton />
 
       <div className="relative bg-gradient-to-b from-blue-100 to-white w-full h-auto md:h-[20rem] pt-10 px-4 md:px-10 text-left">
         <img
@@ -60,7 +72,7 @@ const WebdevelopementC = () => {
           <img
             className="w-36 h-20 object-contain ml-10"
             src={Clogo}
-            alt="C Logo"
+            alt="IBM C Programming Certification"
           />
 
           {/* Description */}
