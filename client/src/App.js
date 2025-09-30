@@ -1,10 +1,11 @@
 import React from "react";
-import { Provider } from "react-redux";
 import { HelmetProvider } from "react-helmet-async";
 import { Toaster } from "react-hot-toast";
 import AllRoute from "./allRoute/AllRoute";
 import AddToCartButton from "./components/AddToCartButton";
-import store from "./store/store";
+import WhatsAppPopup from "./components/WhatsAppPopup";
+import ErrorBoundary from "./components/ErrorBoundary";
+import ChunkErrorBoundary from "./components/ChunkErrorBoundary";
 import { CartProvider } from "./components/CartContext";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -13,20 +14,23 @@ import WebsiteCounter from "./components/WebsiteCounter";
 
 const App = () => {
   return (
-    <Provider store={store}>
+    <ChunkErrorBoundary>
       <HelmetProvider>
         <CartProvider>
           <LanguageProvider>
-            <Toaster position="top-center" reverseOrder={false} />
-            <Navbar />
-            <AllRoute />
-            <Footer />
-            <AddToCartButton />
-            <WebsiteCounter />
+            <ErrorBoundary>
+              <Toaster position="top-center" reverseOrder={false} />
+              <Navbar />
+              <AllRoute />
+              <Footer />
+              <AddToCartButton />
+              <WhatsAppPopup />
+              <WebsiteCounter />
+            </ErrorBoundary>
           </LanguageProvider>
         </CartProvider>
       </HelmetProvider>
-    </Provider>
+    </ChunkErrorBoundary>
   );
 };
 

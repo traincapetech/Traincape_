@@ -15,6 +15,10 @@ const Test = () => {
 
   const { course, subTopic, level } = location.state || {};
 
+  const [reviewQuestions, setReviewQuestions] = useState([]);
+  const [skippedQuestions, setSkippedQuestions] = useState([]);
+
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [timeLeft, setTimeLeft] = useState(1800);
   const [userAnswers, setUserAnswers] = useState({});
@@ -27,9 +31,11 @@ const Test = () => {
   const [error, setError] = useState(null);
   const [certificateId, setCertificateId] = useState("");
   // const [certificateUrl, setCertificateUrl] = useState("");
-  const [examStarted, setExamStarted] = useState(false);
-  const [violations, setViolations] = useState([]);
+  const [examStarted, setExamStarted] = useState(false);   // Tracks if the exam has started. (Currently not used actively in this code.)
+  const [violations, setViolations] = useState([]);   //Tracks exam security violations (e.g., leaving the tab, switching screens).
 
+
+  // Gets the current logged-in user from Redux store.
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
@@ -72,39 +78,7 @@ const Test = () => {
     }
   };
 
-  // const handleSubmit = async () => {
-  //   setQuizSubmitted(true);
-  //   const score = calculateScore();
-  
-  //   // Calculate if the user is certified based on the score
-  //   const passingScore = questions.length * 0.7; // 70% passing score
-  //   const isCertified = score >= passingScore;
-  
-  //   setCertified(isCertified); // Set the certified status based on score
-  
-  //   const resultData = {
-  //     name: user?.username,
-  //     email: user?.email,
-  //     course,
-  //     subTopic,
-  //     score,
-  //     level,
-  //     totalQuestions: questions.length,
-  //     certificate: isCertified, // Send certificate status to backend
-  //   };
-  
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:8080/results/addResult",
-  //       resultData
-  //     );
-  //     console.log("Result saved successfully:", response.data);
-  //     setShowPopup(true);
-  //   } catch (error) {
-  //     console.error("Error saving result:", error.response?.data || error.message);
-  //     alert("There was an error saving your result. Please try again.");
-  //   }
-  // };
+ 
 
   const handleSubmit = async () => {
     setQuizSubmitted(true);
@@ -181,7 +155,7 @@ const Test = () => {
 
   const handleGetCertificate = () => {
     // Pass the necessary values to the CertificateTemplate through state
-  
+
     navigate('/cer', {
       state: {
         username: user?.username,
@@ -213,7 +187,7 @@ const Test = () => {
     setQuizSubmitted(true);
     setCertified(false);
   };
-  
+
 
   if (loading) {
     return <p>Loading questions...</p>;
@@ -223,6 +197,21 @@ const Test = () => {
     return <p>{error}</p>;
   }
 
+
+
+
+  const handleOptionSelect = (selected) => {
+    // Save the answer
+    setUserAnswers((prev) => ({ ...prev, [currentQuestion]: selected }));
+
+    // If it was marked as skipped before, remove it
+    setSkippedQuestions((prev) => prev.filter((q) => q !== currentQuestion));
+  };
+
+
+
+
+
   return (
     <ExamProctor
       onViolation={handleViolation}
@@ -230,82 +219,103 @@ const Test = () => {
       maxViolations={3}
       debug={process.env.NODE_ENV === 'development'}
     >
-      <div className="flex flex-col sm:flex-row min-h-screen bg-gray-100">
-        <div className="flex justify-between items-center bg-gray-900 p-4 sm:hidden">
-          <button onClick={toggleSidebar}>
-            {isSidebarOpen ? <IoClose size={24} color="white" /> : <IoMenu size={24} color="white" />}
-          </button>
-        </div>
+    <div className="flex flex-col sm:flex-row min-h-screen bg-gray-100">
+      <div className="flex justify-between items-center bg-gray-900 p-4 sm:hidden">
+        <button onClick={toggleSidebar}>
+          {isSidebarOpen ? <IoClose size={24} color="white" /> : <IoMenu size={24} color="white" />}
+        </button>
+      </div>
 
-        <div className={`w-full sm:w-1/4 bg-gray-900 p-6 sm:block ${isSidebarOpen ? "block" : "hidden sm:block"}`}>
-          <h2 className="text-2xl font-semibold text-white mb-4">Questions</h2>
-          <div className="grid grid-cols-5 md:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-2">
-            {questions.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => handleSidebarClick(index)}
-                className={`w-10 lg:w-12 lg:h-12 h-10 text-center text-lg font-semibold rounded-md ${
-                  currentQuestion === index
-                    ? "bg-blue-500 text-white"
-                    : userAnswers[index] !== undefined
-                    ? "bg-green-500 text-white"
-                    : "bg-white"
+      <div className={`w-full sm:w-1/4 bg-gray-700 p-6 sm:block  m-3  rounded-xl ${isSidebarOpen ? "block" : "hidden sm:block"}`}>
+        <h2 className="text-2xl font-semibold text-white mb-4 text-center">Questions</h2>
+        <div className="grid grid-cols-5 md:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-2">
+          {questions.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => handleSidebarClick(index)}
+              className={`w-10 lg:w-12 lg:h-12 h-10 text-center text-lg font-semibold rounded-md 
+                ${currentQuestion === index
+                  ? "bg-blue-900 text-white border border-white"
+                  : reviewQuestions.includes(index)
+                    ? "bg-yellow-500 text-white"
+                    : skippedQuestions.includes(index)
+                      ? "bg-red-500 text-white"
+                      : userAnswers[index] !== undefined
+                        ? "bg-green-500 text-white"
+                        : "bg-white"
                 }`}
-                disabled={timeLeft === 0 || quizSubmitted}
-              >
-                {index + 1}
-              </button>
-            ))}
+
+              disabled={timeLeft === 0 || quizSubmitted}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex-grow p-6">
+        <div className="flex justify-center items-center mb-6">
+          {/* First div - 80% width and text centered */}
+          <div className="w-4/5 text-center md:text-lg text-base flex flex-col mt-2 space-y-2">
+            <span className="font-semibold text-3xl">
+              Course: <span className="text-blue-900">{course}</span>
+            </span>
+            <div className="w-36 bg-blue-900 mx-auto rounded-xl h-1" />
+            <span>
+              <span className="font-semibold">Sub-Topic:</span> {subTopic}
+            </span>
+            <span>
+              <span className="font-semibold">Level:</span> {level}
+            </span>
+
+          </div>
+
+          {/* Second div - 20% width */}
+          <div className="w-1/5 mt-2 md:text-lg text-sm font-bold text-right ">
+            <DashboardHeader />
+            Time Left: {quizSubmitted ? "00:00" : formatTime(timeLeft)}
           </div>
         </div>
 
-        <div className="flex-grow p-6">
-          <div className="flex justify-between items-center mb-6">
-            <div className="md:text-lg text-base flex flex-col mt-2">
-              <span className="font-semibold text-3xl">Course: <span className="text-red-500">{course}</span></span>
-              <span> Sub-Topic: {subTopic}</span>
-              <span> Level: {level}</span>
-            </div>
-            <div className="mt-2 md:text-lg text-sm font-bold">
-              <DashboardHeader />
-              Time Left: {quizSubmitted ? "00:00" : formatTime(timeLeft)}
-            </div>
-          </div>
-
-          <div className="rounded-lg shadow-md">
-            {timeLeft > 0 && questions.length > 0 && !quizSubmitted && (
-              <QuestionCard
-                questionText={questions[currentQuestion]?.questionText}
-                options={questions[currentQuestion]?.options || []}
-                currentQuestion={currentQuestion}
-                setCurrentQuestion={setCurrentQuestion}
-                handleSubmit={handleSubmit}
-                selectedOption={userAnswers[currentQuestion]}
-                handleOptionChange={handleOptionChange}
-                totalQuestions={questions.length}
-              />
-            )}
-          </div>
-
-          {timeLeft === 0 && !quizSubmitted && (
-            <div className="mt-4 text-center text-4xl text-red-500 font-bold">Time's Up!</div>
+        <div className="rounded-lg shadow-md">
+          {timeLeft > 0 && questions.length > 0 && !quizSubmitted && (
+            <QuestionCard
+              questionText={questions[currentQuestion]?.questionText}
+              options={questions[currentQuestion]?.options || []}
+              currentQuestion={currentQuestion}
+              setCurrentQuestion={setCurrentQuestion}
+              handleSubmit={handleSubmit}
+              selectedOption={userAnswers[currentQuestion]}
+              handleOptionChange={handleOptionChange}
+              totalQuestions={questions.length}
+              setReviewQuestions={setReviewQuestions}
+              reviewQuestions={reviewQuestions}
+              setSkippedQuestions={setSkippedQuestions}
+              onOptionSelect={handleOptionSelect}   // <-- pass it
+              userAnswers={userAnswers}
+            />
           )}
         </div>
 
-        {showPopup && (
-          <Popup
-            onClose={closePopup}
-            score={calculateScore()}
-            totalQuestions={questions.length}
-            certified={certified}
-            user={user}
-            onGetCertificate={handleGetCertificate} // Pass the redirection function here
-            certificateId={certificateId} // Pass certificateId to popup
-            // certificateUrl={certificateUrl} // Pass certificateUrl to popup
-          />
+        {timeLeft === 0 && !quizSubmitted && (
+          <div className="mt-4 text-center text-4xl text-red-500 font-bold">Time's Up!</div>
         )}
       </div>
-    </ExamProctor>
+
+      {showPopup && (
+        <Popup
+          onClose={closePopup}
+          score={calculateScore()}
+          totalQuestions={questions.length}
+          certified={certified}
+          user={user}
+          onGetCertificate={handleGetCertificate} // Pass the redirection function here
+          certificateId={certificateId} // Pass certificateId to popup
+        // certificateUrl={certificateUrl} // Pass certificateUrl to popup
+        />
+      )}
+    </div>
+     </ExamProctor>
   );
 };
 

@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 
 const BookPage = () => {
   const [books, setBooks] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -15,14 +14,14 @@ const BookPage = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await axios.get(`https://traincape-backend-1.onrender.com/books/get-books?page=${currentPage}&limit=18`);
+      const res = await axios.get(`https://traincape-backend-1.onrender.com/books/get-books?page=1&limit=18`);
       setBooks(res.data);
     } catch (err) {
       setError("Failed to load books. Please try again.");
     } finally {
       setLoading(false);
     }
-  }, [currentPage]);
+  }, []);
 
   useEffect(() => {
     fetchBooks();

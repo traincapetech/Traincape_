@@ -132,6 +132,14 @@ const MicrosoftSharePoint = () => {
   // Create a combined Certify component that includes Practice
   const CombinedCertify = () => (
     <div className="space-y-8">
+      {/* Practice Section */}
+      <div className="bg-gradient-to-r from-yellow-50 to-amber-50 p-6 rounded-xl border border-yellow-100">
+        <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+          <BsFillPenFill className="mr-3 text-yellow-600" />
+          Practice & Assessment
+        </h3>
+        <Practice course={"Microsoft"} subTopic={"MicrosoftSharePoint"}/>
+      </div>
       {/* Original Certify Content */}
       <div className="bg-gradient-to-r from-orange-50 to-red-50 p-6 rounded-xl border border-orange-100">
         <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
@@ -141,14 +149,7 @@ const MicrosoftSharePoint = () => {
         <Certify title={"Microsoft SharePoint"} />
       </div>
       
-      {/* Practice Section */}
-      <div className="bg-gradient-to-r from-yellow-50 to-amber-50 p-6 rounded-xl border border-yellow-100">
-        <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
-          <BsFillPenFill className="mr-3 text-yellow-600" />
-          Practice & Assessment
-        </h3>
-        <Practice course={"Microsoft"} subTopic={"MicrosoftSharePoint"}/>
-      </div>
+      
     </div>
   );
 
@@ -159,7 +160,7 @@ const MicrosoftSharePoint = () => {
 
   return (
     <>
-      {/* Modern Breadcrumb Navigation */}
+        {/* Breadcrumb */}
       <div className="bg-white shadow-lg border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center space-x-2 text-sm">

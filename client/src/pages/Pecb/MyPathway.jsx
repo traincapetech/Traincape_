@@ -138,7 +138,7 @@ const MyPathway = ({ title, image }) => {
         </div>
 
         {/* Pathway Steps */}
-        <div className="mb-12">
+        {/* <div className="mb-12">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
             Your Certification Journey
           </h2>
@@ -179,7 +179,7 @@ const MyPathway = ({ title, image }) => {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Career Paths */}
         <div className="mb-12">
@@ -270,14 +270,14 @@ const MyPathway = ({ title, image }) => {
         </div>
 
         {/* Call to Action */}
-        <div className="text-center">
+        {/* <div className="text-center">
           <button className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-colors mr-4">
             Start Your Pathway
           </button>
           <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-colors">
             Download Pathway Guide
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -10,6 +10,7 @@ import prachiyeImage from "../assets/ParichaySir.jpeg";
 import shivamImage from "../assets/shivam.jpeg";
 import EshitaImage from "../assets/Eshita.jpeg";
 import sauravImage from "../assets/Saurav.jpeg";
+import { Helmet } from "react-helmet";
 
 const Employee = () => {
   const [hoveredMember, setHoveredMember] = useState(null);
@@ -27,24 +28,28 @@ const Employee = () => {
       name: "Madan Mohan Tiwari",
       title: "International Sales EXECUTIVE & Team Leader",
       image: madan,
+      alt: "Madan Mohan Tiwari, International Sales Eexcutive & Team Leader at Traincape Technology",
       linkdin: "https://www.linkedin.com/in/madan-mohan-tiwari-3a8532317",
     },
     {
       name: "Rajesh",
       title: "Graphic Designer",
       image: rajeshImage,
+      alt: "Rajesh, Graphic Designer at Traincape Technology",
       linkdin: "https://www.linkedin.com/in/rajesh-bhusal-32592023a",
     },
     {
       name: "Eshita Tadiyal",
       title: "Lead Generation EXECUTIVE",
       image: EshitaImage,
+      alt: "Eshita Tadiyal, Lead Generation Executive at Traincape Technology",
       linkdin: "https://www.linkedin.com/in/eshita-tadiyal-51369a24b/",
     },
     {
       name: "Saurav Kumar",
       title: "Developer",
       image: sauravImage,
+      alt: "Saurav Kumar, Developer at Traincape Technology",
       linkdin: "https://www.linkedin.com/in/saurav-kumar-31223b260",
     },
   ];
@@ -54,12 +59,14 @@ const Employee = () => {
       name: "Parichay Singh Rana",
       title: "Founder & CEO",
       image: prachiyeImage,
+      alt: "Parichay Singh Rana, Founder & CEO of Traincape Technology",
       linkdin: "https://www.linkedin.com/in/parichay-singh-rana/",
     },
     {
       name: "Shivam",
       title: "Manager",
       image: shivamImage,
+      alt: "Shivam, Manager at Traincape Technology",
       linkdin: "https://www.linkedin.com/in/shivam-singh-1a82b1325/",
     },
   ];
@@ -108,6 +115,23 @@ const Employee = () => {
 
   return (
     <>
+
+      {/* SEO Content for this Page  */}
+            <Helmet>
+              <title>
+              Meet our Team at Traincape Technology
+              </title>
+              <meta
+                name="description"
+                content="Meet the team at Traincape Technology, their roles, and responsibilities. The people who drive innovation and are integral to the company's progress. "
+              />
+              <link
+                rel="canonical"
+                href="https://traincapetech.in/Employee"
+              />
+            </Helmet> 
+            
+
       <div className="min-h-screen p-8">
         {/* Leadership Section */}
         <section className="text-center mb-16">
@@ -133,7 +157,7 @@ const Employee = () => {
                 >
                   <img
                     src={member.image}
-                    alt={member.name}
+                    alt={member.alt}
                     className="w-52 h-52 object-cover rounded-full mx-auto mb-4 border-4 border-purple-200"
                   />
                 </a>
@@ -172,7 +196,7 @@ const Employee = () => {
                 >
                   <img
                     src={member.image}
-                    alt={member.name}
+                    alt={member.alt}
                     className="w-52 h-52 object-cover rounded-full mx-auto mb-4"
                     style={{
                       transform:

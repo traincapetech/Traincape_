@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import Overview from './MicrosoftOverview';
 import Certify from './Certify';
 import Learn from './Learn';
@@ -41,9 +42,9 @@ const TabContainer = ({ tabs }) => {
         >
           <div className="mb-8">
             <h2 className="text-2xl font-bold text-center bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Microsoft Teams
+              Microsoft Visual Basic
             </h2>
-            <p className="text-gray-400 text-center text-sm mt-2">Microsoft Teams Certification</p>
+            <p className="text-gray-400 text-center text-sm mt-2">Microsoft Visual Basic Certification</p>
           </div>
           
           {Object.keys(tabs).map((key) => (
@@ -96,17 +97,20 @@ const TabContainer = ({ tabs }) => {
   );
 };
 
-const MicrosoftTeams = () => {
+const MicrosoftVB = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   // Create a combined Overview component that includes Learn and My Pathway
+   const navigate = useNavigate();
+
+  // Combined Overview (Overview + Learn + MyPathway)
   const CombinedOverview = () => (
     <div className="space-y-8">
       {/* Original Overview Content */}
       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-100">
-        <Overview title={"Microsoft Teams"} />
+        <Overview title={"Microsoft Visual Basic"} />
       </div>
       
       {/* Learn Section */}
@@ -115,7 +119,7 @@ const MicrosoftTeams = () => {
           <FaBook className="mr-3 text-green-600" />
           Learning Resources
         </h3>
-        <Learn title={"Microsoft Teams"} />
+        <Learn title={"Microsoft Visual Basic"} />
       </div>
       
       {/* My Pathway Section */}
@@ -124,7 +128,7 @@ const MicrosoftTeams = () => {
           <GiPathDistance className="mr-3 text-purple-600" />
           Career Pathway
         </h3>
-        <MyPathway title={"Microsoft Teams"} />
+        <MyPathway title={"Microsoft Visual Basic"} />
       </div>
     </div>
   );
@@ -132,23 +136,24 @@ const MicrosoftTeams = () => {
   // Create a combined Certify component that includes Practice
   const CombinedCertify = () => (
     <div className="space-y-8">
-      {/* Original Certify Content */}
-      <div className="bg-gradient-to-r from-orange-50 to-red-50 p-6 rounded-xl border border-orange-100">
-        <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
-          <FaCertificate className="mr-3 text-orange-600" />
-          Certification Details
-        </h3>
-        <Certify title={"Microsoft Teams"} />
-      </div>
-      
       {/* Practice Section */}
       <div className="bg-gradient-to-r from-yellow-50 to-amber-50 p-6 rounded-xl border border-yellow-100">
         <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
           <BsFillPenFill className="mr-3 text-yellow-600" />
           Practice & Assessment
         </h3>
-        <Practice course={"Microsoft"} subTopic={"MicrosoftTeams"}/>
+        <Practice course={"Microsoft"} subTopic={"MicrosoftVB"}/>
       </div>
+      {/* Original Certify Content */}
+      <div className="bg-gradient-to-r from-orange-50 to-red-50 p-6 rounded-xl border border-orange-100">
+        <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+          <FaCertificate className="mr-3 text-orange-600" />
+          Certification Details
+        </h3>
+        <Certify title={"Microsoft Visual Basic"} />
+      </div>
+      
+      
     </div>
   );
 
@@ -159,17 +164,32 @@ const MicrosoftTeams = () => {
 
   return (
     <>
-      {/* Modern Breadcrumb Navigation */}
-      <div className="bg-white shadow-lg border-b border-gray-200">
+       {/* Breadcrumb */}
+      <div className="bg-white shadow-md border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center space-x-2 text-sm">
-            <span className="text-gray-500 hover:text-blue-600 cursor-pointer transition-colors">Home</span>
+            <span
+              className="text-gray-500 hover:text-blue-600 cursor-pointer"
+              onClick={() => navigate('/')}
+            >
+              Home
+            </span>
             <span className="text-gray-400">›</span>
-            <span className="text-gray-500 hover:text-blue-600 cursor-pointer transition-colors">Training</span>
+            <span
+              className="text-gray-500 hover:text-blue-600 cursor-pointer"
+              onClick={() => navigate('/training')}
+            >
+              Training
+            </span>
             <span className="text-gray-400">›</span>
-            <span className="text-gray-500 hover:text-blue-600 cursor-pointer transition-colors">Microsoft</span>
+            <span
+              className="text-gray-500 hover:text-blue-600 cursor-pointer"
+              onClick={() => navigate('/microsoft')}
+            >
+              Microsoft
+            </span>
             <span className="text-gray-400">›</span>
-            <span className="text-blue-600 font-semibold">Teams</span>
+            <span className="text-blue-600 font-semibold">Azure Administrator</span>
           </div>
         </div>
       </div>
@@ -179,4 +199,4 @@ const MicrosoftTeams = () => {
   );
 };
 
-export default MicrosoftTeams;
+export default MicrosoftVB;

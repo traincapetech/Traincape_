@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
+
 
 const FAQ = () => {
   const [expandedQuestion, setExpandedQuestion] = useState(null);
@@ -13,6 +15,23 @@ const FAQ = () => {
   }, []);
 
   return (
+
+ <>
+       {/* SEO Content for this Page  */}
+            <Helmet>
+              <title>FAQs | IT Training and Certifications | Traincape Technology</title>
+              <meta
+                name="description"
+                content="Explore Traincape Technology's frequently asked questions about IT Certifications, like CompTIA, AWS, Cisco, Microsoft, PMI, and over 150 other certifications. Your partner for IT training and certifications."
+              />
+              <link
+                rel="canonical"
+                href="https://traincapetech.in/frequently-asked-questions"
+              />
+            </Helmet>
+      
+
+
     <div className="max-w-7xl mx-auto px-4 py-8">
       <div className="text-center">
         <h1 className="text-4xl font-bold  mb-2">Frequently Asked Questions</h1>
@@ -169,6 +188,7 @@ const FAQ = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

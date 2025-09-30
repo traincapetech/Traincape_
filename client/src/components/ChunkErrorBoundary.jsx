@@ -3,7 +3,7 @@ import React from 'react';
 class ChunkErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false, error: null };
+    this.state = { hasError: false, error: null, retryCount: 0 };
   }
 
   static getDerivedStateFromError(error) {
@@ -13,15 +13,50 @@ class ChunkErrorBoundary extends React.Component {
   componentDidCatch(error, errorInfo) {
     console.error('Chunk loading error:', error, errorInfo);
     
-    // If it's a chunk loading error, try to reload the page
-    if (error.name === 'ChunkLoadError' || error.message.includes('Loading chunk')) {
+    // Handle different types of chunk loading errors
+    if (this.isChunkLoadError(error)) {
       console.log('Detected chunk loading error, attempting to reload...');
-      // Wait a bit before reloading to avoid infinite loops
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
+      this.handleChunkError();
     }
   }
+
+  isChunkLoadError = (error) => {
+    return (
+      error.name === 'ChunkLoadError' ||
+      error.message.includes('Loading chunk') ||
+      error.message.includes('Loading CSS chunk') ||
+      error.message.includes('Unexpected token') ||
+      error.message.includes('Failed to fetch')
+    );
+  };
+
+  handleChunkError = () => {
+    const { retryCount } = this.state;
+    
+    if (retryCount < 3) {
+      // Clear cache and retry
+      if ('caches' in window) {
+        caches.keys().then(names => {
+          names.forEach(name => {
+            caches.delete(name);
+          });
+        });
+      }
+      
+      // Wait before retry to avoid infinite loops
+      setTimeout(() => {
+        this.setState(prevState => ({ 
+          retryCount: prevState.retryCount + 1,
+          hasError: false,
+          error: null 
+        }));
+        window.location.reload();
+      }, 1000 * (retryCount + 1));
+    } else {
+      // After 3 retries, show manual reload option
+      console.error('Max retry attempts reached');
+    }
+  };
 
   render() {
     if (this.state.hasError) {
