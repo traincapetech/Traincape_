@@ -46,7 +46,30 @@ const subcourseSchema = new mongoose.Schema(
     tagline: {
       type: String,
       trim: true,
-      default: "", // optional field
+      default: "",
+    },
+
+    // ✅ Exam details for certification/exam-based subcourses
+    examDetails: {
+      version: { type: String, trim: true },
+      examCode: { type: String, trim: true },
+      launchDate: { type: Date },
+      questions: { type: String, trim: true },
+      timeLimit: { type: String, trim: true },
+      passingScore: { type: String, trim: true },
+      objectives: [
+        {
+          category: { type: String, trim: true },
+          items: [{ type: String, trim: true }],
+        },
+      ],
+    },
+
+    // ✅ SEO metadata
+    seo: {
+      title: { type: String, trim: true },
+      description: { type: String, trim: true },
+      keywords: [{ type: String, trim: true }],
     },
   },
   { timestamps: true }

@@ -2,7 +2,6 @@ import Subcourse from "../model/Subcourse.js";
 import slugify from "slugify";
 import { uploadToDrive } from "../utils/googleDrive.js";
 
-// Replace with your Drive folder ID ("Course images" folder)
 const DRIVE_FOLDER_ID = "YOUR_FOLDER_ID_HERE";
 
 // ✅ Get all subcourses for a specific course
@@ -16,10 +15,20 @@ export const getSubcoursesByCourse = async (req, res) => {
   }
 };
 
-// ✅ Create a new subcourse (with optional image upload)
+// ✅ Create a new subcourse (with optional image upload, examDetails & seo)
 export const createSubcourse = async (req, res) => {
   try {
-    const { title, description, price, courseId, uiComponent, category, tagline } = req.body;
+    const {
+      title,
+      description,
+      price,
+      courseId,
+      uiComponent,
+      category,
+      tagline,
+      examDetails, // ✅ added
+      seo,         // ✅ added
+    } = req.body;
 
     if (!title || !description || !price || !courseId || !category) {
       return res.status(400).json({
@@ -39,7 +48,6 @@ export const createSubcourse = async (req, res) => {
 
     let imageUrl = "";
     if (req.file) {
-      // Upload to Drive
       imageUrl = await uploadToDrive(
         req.file.path,
         req.file.originalname,
@@ -58,6 +66,8 @@ export const createSubcourse = async (req, res) => {
       uiComponent,
       category,
       tagline,
+      examDetails, // ✅ save exam details
+      seo,         // ✅ save seo
     });
 
     res.status(201).json(newSubcourse);

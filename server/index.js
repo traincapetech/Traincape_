@@ -3,7 +3,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { connectDB } from "./db.js";
-import fetch from "node-fetch";
+import { Readable } from "stream";
 
 // Routers
 import { userRouter } from "./routes/user.routes.js";
@@ -104,16 +104,24 @@ app.get("/", (req, res) => {
 app.get("/proxy/image/:id", async (req, res) => {
   try {
     const fileId = req.params.id;
-    const url = `https://drive.google.com/uc?export=view&id=${fileId}`;
+
+    // Allow both full URLs and Google Drive file IDs
+    const url = fileId.startsWith("http")
+      ? fileId
+      : `https://drive.google.com/uc?export=view&id=${fileId}`;
 
     const response = await fetch(url);
+
     if (!response.ok) {
       return res.status(response.status).send("Failed to fetch image");
     }
 
-    // Pass content type (image/jpeg, image/png, etc.)
     res.set("Content-Type", response.headers.get("content-type"));
-    response.body.pipe(res);
+
+    // ✅ Convert WebStream → Node.js stream
+    const nodeStream = Readable.fromWeb(response.body);
+    nodeStream.pipe(res);
+
   } catch (err) {
     console.error("❌ Proxy error:", err);
     res.status(500).send("Proxy server error");

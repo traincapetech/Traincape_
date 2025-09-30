@@ -1,4 +1,3 @@
-// src/components/SubCourseTemplate.jsx
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -8,7 +7,7 @@ import AIPromptingEssentials from "./AIPromptingEssentials";
 
 // 🔑 Map DB field `uiComponent` → React component
 const subcourseComponents = {
-  // AIPromptingEssentials,
+  AIPromptingEssentials,
 };
 
 const SubCourseTemplate = () => {
@@ -71,6 +70,8 @@ const SubCourseTemplate = () => {
     );
   }
 
+  const { examDetails } = subcourse;
+
   return (
     <div className="bg-gradient-to-b from-blue-50 to-purple-100 min-h-screen text-gray-800">
       <div className="max-w-7xl mx-auto px-6 py-12">
@@ -79,16 +80,20 @@ const SubCourseTemplate = () => {
           <div className="lg:flex-1">
             <h1 className="text-4xl md:text-5xl font-extrabold text-purple-700 mb-4 leading-tight">
               {subcourse.title}{" "}
-              <span className="text-sm font-medium align-top">V15</span>
+              {examDetails?.version && (
+                <span className="text-sm font-medium align-top">
+                  {examDetails.version}
+                </span>
+              )}
             </h1>
             <p className="text-gray-700 text-lg mb-6">
               {subcourse.description}
             </p>
 
-            {/* Tabs - Horizontal Navbar with Gradient Indicator */}
+            {/* Tabs */}
             <div className="bg-white rounded-lg shadow-sm border border-purple-200">
               <div className="flex justify-between">
-                {["Overview", "Buy Now", "Career Path"].map((tab) => (
+                {["Overview", "Buy Now"].map((tab) => (
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
@@ -125,13 +130,71 @@ const SubCourseTemplate = () => {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
             {activeTab === "Overview" && (
-              <div className="bg-white rounded-xl shadow p-8 space-y-6">
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                  A+ Core 1 (V15) exam objectives summary
-                </h2>
-                <p className="text-gray-700 text-lg">{subcourse.description}</p>
+              <div className="bg-white rounded-xl shadow p-8 space-y-8">
+                {/* Exam Overview */}
+                {examDetails && (
+                  <>
+                    <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                      Exam Details
+                    </h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                      <div className="p-4 border rounded-lg shadow-sm bg-purple-50">
+                        <p className="text-sm text-gray-500">Exam Code</p>
+                        <p className="font-semibold">{examDetails.examCode}</p>
+                      </div>
+                      <div className="p-4 border rounded-lg shadow-sm bg-purple-50">
+                        <p className="text-sm text-gray-500">Launch Date</p>
+                        <p className="font-semibold">
+                          {examDetails.launchDate
+                            ? new Date(examDetails.launchDate).toLocaleDateString()
+                            : "TBA"}
+                        </p>
+                      </div>
+                      <div className="p-4 border rounded-lg shadow-sm bg-purple-50">
+                        <p className="text-sm text-gray-500">Questions</p>
+                        <p className="font-semibold">{examDetails.questions}</p>
+                      </div>
+                      <div className="p-4 border rounded-lg shadow-sm bg-purple-50">
+                        <p className="text-sm text-gray-500">Time Limit</p>
+                        <p className="font-semibold">{examDetails.timeLimit}</p>
+                      </div>
+                      <div className="p-4 border rounded-lg shadow-sm bg-purple-50">
+                        <p className="text-sm text-gray-500">Passing Score</p>
+                        <p className="font-semibold">
+                          {examDetails.passingScore}
+                        </p>
+                      </div>
+                    </div>
 
-                {/* Dynamic Component */}
+                    {/* Objectives */}
+                    {examDetails.objectives?.length > 0 && (
+                      <div className="mt-8">
+                        <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                          Exam Objectives
+                        </h3>
+                        <div className="space-y-6">
+                          {examDetails.objectives.map((obj, idx) => (
+                            <div
+                              key={idx}
+                              className="bg-gray-50 border rounded-lg p-5 shadow-sm"
+                            >
+                              <h4 className="font-semibold text-purple-700 mb-2">
+                                {obj.category}
+                              </h4>
+                              <ul className="list-disc list-inside text-gray-700 space-y-1">
+                                {obj.items.map((item, i) => (
+                                  <li key={i}>{item}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </>
+                )}
+
+                {/* Dynamic UI Component */}
                 {(() => {
                   const Component = subcourseComponents[subcourse.uiComponent];
                   return Component ? <Component subcourse={subcourse} /> : null;
@@ -148,10 +211,9 @@ const SubCourseTemplate = () => {
                   Get access to this subcourse instantly.
                 </p>
                 <div className="text-2xl font-bold text-gray-900 mb-4">
-                  ₹{subcourse?.price ?? 99}
+                  ${subcourse?.price}
                 </div>
 
-                {/* Smaller Buy Now Button */}
                 <button
                   onClick={handleBuyNow}
                   disabled={loadingCheckout}
@@ -167,24 +229,7 @@ const SubCourseTemplate = () => {
             )}
           </div>
 
-          {/* Right Card (removed Buy Now) */}
-          <aside className="space-y-6">
-            <div className="bg-white rounded-xl shadow p-6 sticky top-28">
-              <img
-                src={subcourse?.image || "https://placehold.co/200x200"}
-                alt={subcourse?.title}
-                className="w-36 h-36 object-contain mb-4 mx-auto"
-              />
-              <div className="text-center mb-4">
-                <div className="text-sm text-gray-600">
-                  {subcourse?.category}
-                </div>
-                <div className="text-xl font-bold text-gray-800">
-                  {subcourse?.title}
-                </div>
-              </div>
-            </div>
-          </aside>
+          {/* Right side (optional extras, maybe SEO info or highlights) */}
         </div>
       </div>
     </div>

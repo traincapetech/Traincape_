@@ -13,5 +13,10 @@ const upload = multer({ dest: "uploads/" }); // temporary upload folder
 router.get("/slug/:slug", getSubcourseBySlug);
 router.get("/:courseId", getSubcoursesByCourse);
 router.post("/", upload.single("image"), createSubcourse);
+// Order matters — keep /slug first so it doesn't clash with :courseId
+// router.get("/slug/:slug", getSubcourseBySlug);
+router.post("/", createSubcourse);
+router.get("/:courseId", getSubcoursesByCourse);
+router.get("/:courseId/:slug", getSubcourseBySlug);
 
 export default router;
