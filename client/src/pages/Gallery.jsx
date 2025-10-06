@@ -36,27 +36,27 @@ const Gallery = () => {
   // Gallery image data with subcategories
   const galleryImages = [
     // Campus images
-    {
-      id: 1,
-      src: workingBoy,
-      alt: "Student Working",
-      category: "campus",
-      subCategory: "classrooms",
-    },
-    {
-      id: 2,
-      src: workingBoy,
-      alt: "Modern Lab Space",
-      category: "campus",
-      subCategory: "labs",
-    },
-    {
-      id: 3,
-      src: workingBoy,
-      alt: "Entrance Hall",
-      category: "campus",
-      subCategory: "facilities",
-    },
+    // {
+    //   id: 1,
+    //   src: workingBoy,
+    //   alt: "Student Working",
+    //   category: "campus",
+    //   subCategory: "classrooms",
+    // },
+    // {
+    //   id: 2,
+    //   src: workingBoy,
+    //   alt: "Modern Lab Space",
+    //   category: "campus",
+    //   subCategory: "labs",
+    // },
+    // {
+    //   id: 3,
+    //   src: workingBoy,
+    //   alt: "Entrance Hall",
+    //   category: "campus",
+    //   subCategory: "facilities",
+    // },
 
     // Team images
     {
@@ -82,8 +82,8 @@ const Gallery = () => {
     { id: 12, src: GP7, alt: "Team Collaboration", category: "team", subCategory: "Collaboration" },
     { id: 13, src: GP8, alt: "Team Collaboration", category: "team", subCategory: "Collaboration" },
     { id: 14, src: GP9, alt: "Team Collaboration", category: "team", subCategory: "Collaboration" },
-    { id: 15, src: GP10, alt: "Team Collaboration", category: "team", subCategory: "Collaboration" },
-    { id: 16, src: GP11, alt: "Team Collaboration", category: "team", subCategory: "Collaboration" },
+   
+    
 
     // Training images
     {
