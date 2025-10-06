@@ -61,10 +61,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "build:production": "node scripts/build-production.js",
-    "build:analyze": "npm run build && npm run analyze",
+    "start": "node init && craco start",
+    "build": "node init && craco build",
+    "build:production": "node init && node scripts/build-production.js",
+    "build:analyze": "node init && npm run build && npm run analyze",
     "optimize-build": "gzip-size build/static/js/*.js && gzip-size build/static/css/*.css",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "test": "craco test",
