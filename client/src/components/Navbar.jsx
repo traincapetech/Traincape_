@@ -31,90 +31,13 @@ const   Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showBankDetails, setShowBankDetails] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [showCoursesDropdown, setShowCoursesDropdown] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0, width: 0 });
   const token = localStorage.getItem("token");
   const dropdownRef = useRef(null);
   const payNowButtonRef = useRef(null);
   const mobileDropdownRef = useRef(null);
   const mobilePayNowButtonRef = useRef(null);
-  const coursesDropdownRef = useRef(null);
-  const coursesButtonRef = useRef(null);
 
-  const courses = [
-    {
-      name: "IBM Certifications",
-      description: "Professional certification programs from IBM",
-      icon: <FaBriefcase className="text-blue-600 text-xl" />,
-      path: "/IBM"
-    },
-    {
-      name: "Digital Marketing Certification",
-      description: "Comprehensive digital marketing training",
-      icon: <FaGoogle className="text-pink-500 text-xl" />,
-      path: "/META"
-    },
-    {
-      name: "PMI Project Management",
-      description: "Project Management Institute certifications",
-      icon: <FaProjectDiagram className="text-orange-500 text-xl" />,
-      path: "/PMI"
-    },
-    {
-      name: "Information Technology Specialist",
-      description: "IT professional certification programs",
-      icon: <FaLaptopCode className="text-teal-600 text-xl" />,
-      path: "/ITSpeacialist"
-    },
-    {
-      name: "App Development with Swift",
-      description: "iOS app development certification",
-      icon: <FaApple className="text-gray-800 text-xl" />,
-      path: "/SwiftDevelopment"
-    },
-    {
-      name: "Tally Certifications",
-      description: "Accounting and business software training",
-      icon: <FaCalculator className="text-green-700 text-xl" />,
-      path: "/Tally"
-    },
-    {
-      name: "Microsoft Office Specialist",
-      description: "Microsoft Office suite certification",
-      icon: <FaMicrosoft className="text-blue-800 text-xl" />,
-      path: "/Microsoftoffice"
-    },
-    {
-      name: "Autodesk Certified User",
-      description: "CAD and design software certification",
-      icon: <FaDraftingCompass className="text-green-500 text-xl" />,
-      path: "/Autodesk"
-    },
-    {
-      name: "Microsoft Certified Fundamentals",
-      description: "Entry-level Microsoft certifications",
-      icon: <FaMicrosoft className="text-blue-500 text-xl" />,
-      path: "/MicrosoftCertified"
-    },
-    {
-      name: "Adobe Certified Professional",
-      description: "Adobe creative suite certification",
-      icon: <FaPaintBrush className="text-red-600 text-xl" />,
-      path: "/Adobe"
-    },
-    {
-      name: "Unity Certified User",
-      description: "Game development certification",
-      icon: <FaGamepad className="text-purple-700 text-xl" />,
-      path: "/unity"
-    },
-    {
-      name: "Cisco Certified",
-      description: "Networking and security certifications",
-      icon: <FaNetworkWired className="text-blue-500 text-xl" />,
-      path: "/ciscocard"
-    }
-  ];
 
   const accountNumber = "732205000345";
   const bankName = "ICICI Bank";
@@ -146,13 +69,13 @@ const   Navbar = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (coursesButtonRef.current && coursesButtonRef.current.contains(event.target)) {
-        return;
-      }
-      
-      if (coursesDropdownRef.current && !coursesDropdownRef.current.contains(event.target)) {
-        setShowCoursesDropdown(false);
-      }
+      // [COURSES/TRAINING] if (coursesButtonRef.current && coursesButtonRef.current.contains(event.target)) {
+      //   return;
+      // }
+      // 
+      // [COURSES/TRAINING] if (coursesDropdownRef.current && !coursesDropdownRef.current.contains(event.target)) {
+      //   setShowCoursesDropdown(false);
+      // }
 
       if (payNowButtonRef.current && payNowButtonRef.current.contains(event.target)) {
         return;
@@ -273,47 +196,9 @@ const   Navbar = () => {
     );
   };
 
-  const renderCoursesDropdown = () => (
-    <div
-      ref={coursesDropdownRef}
-      className="absolute top-full left-0 mt-2 bg-white text-black shadow-xl rounded-md w-full max-w-[600px] md:w-[600px] md:max-w-[600px] py-4 z-50 border border-gray-200
-        max-h-[70vh] overflow-y-auto
-        sm:w-[90vw] sm:max-w-[90vw]
-        "
-      style={{ minWidth: '220px' }}
-      onClick={(e) => e.stopPropagation()}
-      role="menu"
-      aria-label="Courses Dropdown"
-    >
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-4">
-        {courses.map((course, index) => (
-          <Link
-            key={index}
-            to={course.path}
-            className="flex items-start gap-3 p-3 rounded-md hover:bg-gray-50 transition-all duration-200 group"
-            onClick={() => {
-              setShowCoursesDropdown(false);
-              navigate(course.path);
-            }}
-            role="menuitem"
-            tabIndex={0}
-          >
-            <div className="mt-1 flex-shrink-0">
-              {course.icon}
-            </div>
-            <div className="flex flex-col">
-              <div className="font-medium text-gray-900 group-hover:text-blue-600">
-                {course.name}
-              </div>
-              <div className="text-sm text-gray-500">
-                {course.description}
-              </div>
-            </div>
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
+  /* [COURSES/TRAINING]
+  const renderCoursesDropdown = () => (...);
+  */
 
   return (
     <>
@@ -354,40 +239,12 @@ const   Navbar = () => {
               >
                 Reviews
               </Link>
-              <div className="relative">
-                <Link
-                  to="/Courses-details"
-                  className={`${isActive("/Courses-details")} text-xl flex items-center gap-2 text-white relative`}
-                  aria-label="Courses Details"
-                  ref={coursesButtonRef}
-                  onClick={(e) => {
-                    if (e.target.tagName === 'svg' || e.target.tagName === 'path') {
-                      e.preventDefault();
-                      setShowCoursesDropdown(!showCoursesDropdown);
-                    }
-                  }}
-                >
-                  Courses
-                  <FaChevronDown 
-                    className="text-sm ml-1 inline cursor-pointer transition-transform duration-200 hover:scale-110 hover:text-teal-300" 
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setShowCoursesDropdown(!showCoursesDropdown);
-                    }}
-                  />
-                  {showCoursesDropdown && renderCoursesDropdown()}
-                </Link>
-              </div>
               <Link
                 to="/contact-us"
                 className={`${isActive("/contact-us")} text-xl`}
                 aria-label="Contact Us"
               >
                 Contact
-              </Link>
-              <Link to="/training" className={`${isActive("/training")} text-xl`} aria-label="Training">
-                Training
               </Link>
             </div>
 
@@ -479,44 +336,12 @@ const   Navbar = () => {
             >
               Reviews
             </Link>
-            <div className="relative">
-              <Link
-                to="/Courses-details"
-                className={`${isActive("/Courses-details")} text-lg flex items-center gap-1 relative`}
-                aria-label="Courses Details"
-                ref={coursesButtonRef}
-                onClick={(e) => {
-                  if (e.target.tagName === 'svg' || e.target.tagName === 'path') {
-                    e.preventDefault();
-                    setShowCoursesDropdown(!showCoursesDropdown);
-                  }
-                }}
-              >
-                Courses <FaChevronDown 
-                  className="text-sm mt-1 cursor-pointer transition-transform duration-200 hover:scale-110 hover:text-teal-300" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setShowCoursesDropdown(!showCoursesDropdown);
-                  }}
-                />
-                {showCoursesDropdown && renderCoursesDropdown()}
-              </Link>
-            </div>
             <Link
               to="/contact-us"
               className={`${isActive("/contact-us")} text-lg`}
               onClick={() => setMenuOpen(false)}
             >
               Contact
-            </Link>
-
-            <Link
-              to="/training"
-              className={`${isActive("/training")} text-lg`}
-              onClick={() => setMenuOpen(false)}
-            >
-              Training
             </Link>
 
             <div className="relative">
@@ -591,39 +416,11 @@ const   Navbar = () => {
             >
               Reviews
             </Link>
-            <div className="relative">
-              <Link
-                to="/Courses-details"
-                className={`${isActive("/Courses-details")} text-xl flex items-center gap-2 text-white relative`}
-                aria-label="Courses Details"
-                ref={coursesButtonRef}
-                onClick={(e) => {
-                  if (e.target.tagName === 'svg' || e.target.tagName === 'path') {
-                    e.preventDefault();
-                    setShowCoursesDropdown(!showCoursesDropdown);
-                  }
-                }}
-              >
-                Courses
-                <FaChevronDown 
-                  className="text-sm ml-1 inline cursor-pointer transition-transform duration-200 hover:scale-110 hover:text-teal-300" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setShowCoursesDropdown(!showCoursesDropdown);
-                  }}
-                />
-                {showCoursesDropdown && renderCoursesDropdown()}
-              </Link>
-            </div>
             <Link
               to="/contact-us"
               className={`${isActive("/contact-us")} text-xl`}
             >
               Contact
-            </Link>
-            <Link to="/training" className={`${isActive("/training")} text-xl`}>
-              Training
             </Link>
           </div>
 
