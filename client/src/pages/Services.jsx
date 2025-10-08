@@ -1,4 +1,3 @@
-// src/pages/Services.jsx
 import React, { useEffect, useRef, useState } from "react";
 import {
   useScroll,
@@ -6,22 +5,29 @@ import {
   motion,
   useMotionValueEvent,
 } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import { Button } from "@mui/material";
+
 import cloud from "../assets/Cloud-services.svg";
 import UI from "../assets/UI-development.svg";
 import Digital from "../assets/Digital marketing.svg";
 import Web from "../assets/Web development.svg";
 import Software from "../assets/software-services.svg";
 import softwareDevelopment from "../assets/Software-development-Learnings.svg";
+
 import CloudImg from "../assets/cloud.jpg";
 import UiUx from "../assets/uiux.jpg";
 import DigitalImg from "../assets/digital.jpg";
 import Saas from "../assets/saas.jpg";
 import SoftwareImg from "../assets/software.jpeg";
 import webImg from "../assets/web.png";
-import { useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet";
-import { Button } from "@mui/material";
 
+
+// import cloudService from "./CloudServices"; // unused - service route loads CloudServices lazily
+
+
+/* ---------------------- DATA ---------------------- */
 const servicesData = [
   {
     title: "Cloud Services",
@@ -67,9 +73,11 @@ const servicesData = [
   },
 ];
 
+/* ---------------------- COMPONENT ---------------------- */
 const Services = () => {
   const navigate = useNavigate();
   const containerRef = useRef(null);
+  const firstCardRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const { scrollYProgress } = useScroll({
@@ -77,33 +85,83 @@ const Services = () => {
     offset: ["start start", "end end"],
   });
 
-  const totalCards = servicesData.length;
-  const segment = 1 / (totalCards + 2);
+  // -------------------- INDIVIDUAL HOOKS --------------------
+  // Call useTransform for each card separately (fixed order)
+  const y0 = useTransform(
+    scrollYProgress,
+    [0 * 0.125, 0 * 0.125 + 0.175],
+    [200, -150]
+  );
+  const opacity0 = useTransform(
+    scrollYProgress,
+    [0, 0.02, 0.08, 0.175],
+    [1, 1, 1, 0.1]
+  );
+  const scale0 = useTransform(
+    scrollYProgress,
+    [0, 0.03, 0.175],
+    [0.92, 1, 0.9]
+  );
 
-  // ✅ Declare transforms individually (no map or loops)
-  const y0 = useTransform(scrollYProgress, [0 * segment, 0 * segment + segment * 1.4], [200, -150]);
-  const opacity0 = useTransform(scrollYProgress, [0, segment * 0.2, segment * 0.8, segment * 1.4], [0, 1, 1, 0.1]);
-  const scale0 = useTransform(scrollYProgress, [0, segment * 0.3, segment * 1.4], [0.92, 1, 0.9]);
+  const y1 = useTransform(scrollYProgress, [0.125, 0.125 + 0.175], [200, -150]);
+  const opacity1 = useTransform(
+    scrollYProgress,
+    [0.125, 0.145, 0.205, 0.3],
+    [0, 1, 1, 0.1]
+  );
+  const scale1 = useTransform(
+    scrollYProgress,
+    [0.125, 0.155, 0.3],
+    [0.92, 1, 0.9]
+  );
 
-  const y1 = useTransform(scrollYProgress, [1 * segment, 1 * segment + segment * 1.4], [200, -150]);
-  const opacity1 = useTransform(scrollYProgress, [1 * segment, 1 * segment + segment * 0.2, 1 * segment + segment * 0.8, 1 * segment + segment * 1.4], [0, 1, 1, 0.1]);
-  const scale1 = useTransform(scrollYProgress, [1 * segment, 1 * segment + segment * 0.3, 1 * segment + segment * 1.4], [0.92, 1, 0.9]);
+  const y2 = useTransform(scrollYProgress, [0.25, 0.25 + 0.175], [200, -150]);
+  const opacity2 = useTransform(
+    scrollYProgress,
+    [0.25, 0.27, 0.33, 0.425],
+    [0, 1, 1, 0.1]
+  );
+  const scale2 = useTransform(
+    scrollYProgress,
+    [0.25, 0.28, 0.425],
+    [0.92, 1, 0.9]
+  );
 
-  const y2 = useTransform(scrollYProgress, [2 * segment, 2 * segment + segment * 1.4], [200, -150]);
-  const opacity2 = useTransform(scrollYProgress, [2 * segment, 2 * segment + segment * 0.2, 2 * segment + segment * 0.8, 2 * segment + segment * 1.4], [0, 1, 1, 0.1]);
-  const scale2 = useTransform(scrollYProgress, [2 * segment, 2 * segment + segment * 0.3, 2 * segment + segment * 1.4], [0.92, 1, 0.9]);
+  const y3 = useTransform(scrollYProgress, [0.375, 0.375 + 0.175], [200, -150]);
+  const opacity3 = useTransform(
+    scrollYProgress,
+    [0.375, 0.395, 0.455, 0.55],
+    [0, 1, 1, 0.1]
+  );
+  const scale3 = useTransform(
+    scrollYProgress,
+    [0.375, 0.405, 0.55],
+    [0.92, 1, 0.9]
+  );
 
-  const y3 = useTransform(scrollYProgress, [3 * segment, 3 * segment + segment * 1.4], [200, -150]);
-  const opacity3 = useTransform(scrollYProgress, [3 * segment, 3 * segment + segment * 0.2, 3 * segment + segment * 0.8, 3 * segment + segment * 1.4], [0, 1, 1, 0.1]);
-  const scale3 = useTransform(scrollYProgress, [3 * segment, 3 * segment + segment * 0.3, 3 * segment + segment * 1.4], [0.92, 1, 0.9]);
+  const y4 = useTransform(scrollYProgress, [0.5, 0.5 + 0.175], [200, -150]);
+  const opacity4 = useTransform(
+    scrollYProgress,
+    [0.5, 0.52, 0.58, 0.675],
+    [0, 1, 1, 0.1]
+  );
+  const scale4 = useTransform(
+    scrollYProgress,
+    [0.5, 0.53, 0.675],
+    [0.92, 1, 0.9]
+  );
 
-  const y4 = useTransform(scrollYProgress, [4 * segment, 4 * segment + segment * 1.4], [200, -150]);
-  const opacity4 = useTransform(scrollYProgress, [4 * segment, 4 * segment + segment * 0.2, 4 * segment + segment * 0.8, 4 * segment + segment * 1.4], [0, 1, 1, 0.1]);
-  const scale4 = useTransform(scrollYProgress, [4 * segment, 4 * segment + segment * 0.3, 4 * segment + segment * 1.4], [0.92, 1, 0.9]);
-
-  const y5 = useTransform(scrollYProgress, [5 * segment, 5 * segment + segment * 1.4], [200, -150]);
-  const opacity5 = useTransform(scrollYProgress, [5 * segment, 5 * segment + segment * 0.2, 5 * segment + segment * 0.8, 5 * segment + segment * 1.4], [0, 1, 1, 0.1]);
-  const scale5 = useTransform(scrollYProgress, [5 * segment, 5 * segment + segment * 0.3, 5 * segment + segment * 1.4], [0.92, 1, 0.9]);
+  const y5 = useTransform(scrollYProgress, [0.625, 0.625 + 0.175], [200, -150]);
+  const opacity5 = useTransform(
+    scrollYProgress,
+    [0.625, 0.645, 0.705, 0.8],
+    [0, 1, 1, 0.1]
+  );
+  const scale5 = useTransform(
+    scrollYProgress,
+    [0.625, 0.655, 0.8],
+    [0.92, 1, 0.9]
+  );
 
   const cardTransforms = [
     { y: y0, opacity: opacity0, scale: scale0 },
@@ -114,9 +172,10 @@ const Services = () => {
     { y: y5, opacity: opacity5, scale: scale5 },
   ];
 
-  // Track visible card smoothly
+  // -------------------- ACTIVE CARD TRACKING --------------------
   useMotionValueEvent(scrollYProgress, "change", (v) => {
-    const newIndex = Math.min(totalCards - 1, Math.floor(v / segment));
+    const segment = 1 / (servicesData.length + 2);
+    const newIndex = Math.min(servicesData.length - 1, Math.floor(v / segment));
     if (newIndex !== activeIndex) setActiveIndex(newIndex);
   });
 
@@ -125,7 +184,16 @@ const Services = () => {
   }, []);
 
   const handleClick = (service) => {
-    navigate("/service-detail", { state: { service } });
+    const slug = service.title.toLowerCase().replace(/\s+/g, "-");
+    navigate(`/service-detail/cloudService`);
+  };
+
+
+  const handleExploreClick = () => {
+    firstCardRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
   };
 
   return (
@@ -140,11 +208,11 @@ const Services = () => {
       </Helmet>
 
       <div className="bg-gray-50">
-        {/* ✅ HERO SECTION */}
-        <div className="relative w-full">
+        {/* HERO SECTION */}
+        <div className="relative w-full h-[80vh]">
           <div className="absolute inset-0 bg-black/50 z-10"></div>
           <video
-            className="md:h-[80vh] h-[80vh] w-full object-cover"
+            className="h-full w-full object-cover"
             src="https://videos.pexels.com/video-files/9667569/9667569-hd_1920_1080_25fps.mp4"
             autoPlay
             loop
@@ -161,6 +229,7 @@ const Services = () => {
             </p>
             <div className="w-full flex items-center justify-center gap-10 mt-6">
               <Button
+                onClick={handleExploreClick}
                 variant="outlined"
                 sx={{
                   backgroundColor: "white",
@@ -200,10 +269,10 @@ const Services = () => {
           </div>
         </div>
 
-        {/* ✅ Scroll + Clickable Cards */}
+        {/* CARDS */}
         <div ref={containerRef} className="min-h-[800vh] py-16 bg-gray-50">
           <div className="sticky top-0 h-screen flex flex-col lg:flex-row justify-between px-6 md:px-20">
-            {/* LEFT SECTION */}
+            {/* LEFT */}
             <div className="lg:w-1/2 flex flex-col justify-center">
               <h2 className="text-4xl md:text-5xl font-bold text-[#152B54] mb-6">
                 End-to-End Digital Services to Design, Build, & Support Business
@@ -219,40 +288,60 @@ const Services = () => {
               </p>
             </div>
 
-            {/* RIGHT SECTION */}
+            {/* RIGHT */}
             <div className="lg:w-1/2 relative flex items-center justify-center mt-20 lg:mt-0">
-              {servicesData.map((service, index) => (
-                <motion.div
-                  key={index}
-                  style={cardTransforms[index]}
-                  transition={{ duration: 0.6, ease: "easeInOut" }}
-                  className={`absolute w-[85%] min-h-[420px] bg-white border border-gray-200 rounded-3xl shadow-2xl p-8 md:p-12 transition-all duration-300 ${
-                    activeIndex === index
-                      ? "pointer-events-auto"
-                      : "pointer-events-none"
-                  }`}
-                >
-                  <div className="flex items-center gap-4 mb-5">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-12 h-12 object-contain"
-                    />
-                    <h3 className="text-2xl font-bold text-[#152B54]">
-                      {service.title}
-                    </h3>
-                  </div>
-                  <p className="text-gray-600 mb-8 leading-relaxed">
-                    {service.description.slice(0, 220)}...
-                  </p>
-                  <button
-                    className="px-6 py-3 bg-[#152B54] text-white rounded-lg hover:bg-blue-800 transition duration-300"
-                    onClick={() => handleClick(service)}
+              {servicesData.map((service, index) => {
+                const isActive = activeIndex === index;
+                const { y, opacity, scale } = cardTransforms[index];
+
+                return (
+                  <motion.div
+                    key={index}
+                    ref={index === 0 ? firstCardRef : null}
+                    style={{ y, opacity, scale }}
+                    transition={{ duration: 0.6, ease: "easeInOut" }}
+                    className={`absolute w-[85%] min-h-[420px] rounded-3xl p-8 md:p-12 shadow-xl transition-all duration-500 ${
+                      isActive
+                        ? "bg-[#040f25] text-white scale-105 shadow-2xl"
+                        : "bg-white text-gray-700 border border-gray-200"
+                    } ${
+                      isActive ? "pointer-events-auto" : "pointer-events-none"
+                    }`}
                   >
-                    Learn More →
-                  </button>
-                </motion.div>
-              ))}
+                    <div className="flex items-center gap-4 mb-5">
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-12 h-12 object-contain"
+                      />
+                      <h3
+                        className={`text-2xl font-bold ${
+                          isActive ? "text-white" : "text-[#152B54]"
+                        }`}
+                      >
+                        {service.title}
+                      </h3>
+                    </div>
+                    <p
+                      className={`mb-8 leading-relaxed ${
+                        isActive ? "text-gray-200" : "text-gray-600"
+                      }`}
+                    >
+                      {service.description.slice(0, 220)}...
+                    </p>
+                    <button
+                      className={`px-6 py-3 rounded-lg font-semibold transition duration-300 ${
+                        isActive
+                          ? "bg-white text-[#152B54] hover:bg-gray-100"
+                          : "bg-[#152B54] text-white hover:bg-blue-900"
+                      }`}
+                      onClick={() => handleClick(service)}
+                    >
+                      Learn More →
+                    </button>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </div>

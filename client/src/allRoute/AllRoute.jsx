@@ -8,6 +8,9 @@ import Gallery from "../pages/Gallery";
 import CertificateLookup from "../pages/CertificateLookup";
 // Preload BS icons to avoid chunk loading errors
 import * as BsIcons from "react-icons/bs";
+
+
+
 // Loading component
 const LoadingComponent = () => (
   <div
@@ -25,6 +28,7 @@ const LoadingComponent = () => (
 );
 
 // Lazy load high-level pages for better performance
+const CloudService = lazyWithRetry(() => import("../pages/CloudServices"));
 const Home = lazyWithRetry(() => import("../pages/Home"));
 // const UserPage = lazy(() => import("../pages/userPage/UserPage"));
 const Login = lazyWithRetry(() => import("../pages/Login"));
@@ -134,6 +138,11 @@ const AllRoute = () => {
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/frequently-asked-questions" element={<FAQ />} />
         <Route path="/our-services" element={<Services />} />
+
+
+          <Route path="/service-detail/cloudService" element={<CloudService />} />
+
+
         <Route path="/Terms-and-Conditions" element={<TermsAndCondition />} />
         <Route path="/CertificateLookup" element={<CertificateLookup />} />
         <Route path="/verifyCertificate" element={<VerifyCertificate />} />
