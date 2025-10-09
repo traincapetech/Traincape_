@@ -10,7 +10,6 @@ import CertificateLookup from "../pages/CertificateLookup";
 import * as BsIcons from "react-icons/bs";
 
 
-
 // Loading component
 const LoadingComponent = () => (
   <div
@@ -22,6 +21,7 @@ const LoadingComponent = () => (
       fontSize: "18px",
       color: "#333",
     }}
+    
   >
     <p>Loading content...</p>
   </div>
@@ -140,7 +140,15 @@ const AllRoute = () => {
         <Route path="/our-services" element={<Services />} />
 
 
-          <Route path="/service-detail/cloudService" element={<CloudService />} />
+
+       <Route path="service-detail/:slug" element={<ServiceDetail />} />
+
+
+  {/* <Route path="/service-detail/cloud-services" element={<CloudService />} /> */}
+  {/* <Route path="/service-detail/data-analytics" element={<DataAnalytics />} />
+  <Route path="/service-detail/web-development" element={<WebDevelopment />} /> */}
+
+
 
 
         <Route path="/Terms-and-Conditions" element={<TermsAndCondition />} />

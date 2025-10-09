@@ -183,10 +183,11 @@ const Services = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const handleClick = (service) => {
-    const slug = service.title.toLowerCase().replace(/\s+/g, "-");
-    navigate(`/service-detail/cloudService`);
-  };
+const handleClick = (service) => {
+  const slug = service.title.toLowerCase().replace(/\s+/g, "-");
+  navigate(`/service-detail/${slug}`); // ✅ must be ${slug}
+};
+
 
 
   const handleExploreClick = () => {
@@ -247,7 +248,7 @@ const Services = () => {
               >
                 Explore
               </Button>
-              <Button
+              {/* <Button
                 variant="outlined"
                 sx={{
                   backgroundColor: "white",
@@ -264,7 +265,7 @@ const Services = () => {
                 }}
               >
                 Learn More
-              </Button>
+              </Button> */}
             </div>
           </div>
         </div>
