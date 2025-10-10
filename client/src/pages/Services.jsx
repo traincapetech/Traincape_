@@ -36,13 +36,7 @@ const servicesData = [
     image: cloud,
     banner: CloudImg,
   },
-  {
-    title: "UI Development",
-    description:
-      "UI development involves designing and developing visual and interactive components for websites and applications. Key skills include HTML, CSS, JavaScript, responsive design, and accessibility.",
-    image: UI,
-    banner: UiUx,
-  },
+
   {
     title: "Digital Marketing",
     description:
