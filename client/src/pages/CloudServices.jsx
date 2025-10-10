@@ -3,11 +3,16 @@ import { motion } from "framer-motion";
 import { Cloud, ShieldCheck, Rocket } from "lucide-react";
 import banner from "../assets/cloud_banner.jpeg";
 import C from "../assets/CC.jpeg";
+import { useNavigate } from "react-router-dom";
 
 const CloudServices = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+
+const navigate = useNavigate();
+
 
   return (
     <div className="w-full overflow-hidden font-sans text-gray-800">
@@ -59,6 +64,7 @@ const CloudServices = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
+             onClick={() => navigate("/contact-us")}
           >
             Get Started
           </motion.button>
@@ -117,28 +123,13 @@ const CloudServices = () => {
         </div>
       </section>
 
-      {/* CTA SECTION
-      <section className="bg-blue-800 text-white py-16 text-center px-6">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          Ready to Elevate Your Business to the Cloud?
-        </h2>
-        <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-          Partner with us for seamless migration, integration, and cloud management solutions.
-        </p>
-        <motion.button
-          className="bg-orange-500 hover:bg-orange-600 px-8 py-3 rounded-xl font-semibold transition-all duration-300 shadow-md"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Contact Us
-        </motion.button>
-      </section> */}
+  
 
       {/* IMAGE SECTION */}
       <section className="py-12 bg-blue-100/50 px-6 md:px-16 mb-10 w-full mt-10 overflow-hidden">
         <div className="max-w-6xl flex flex-col md:flex-row mx-auto gap-10">
           <div
-            className="w-[400px] h-[500px] md:h-[600px] rounded-2xl"
+            className="w-[400px] h-[300px] md:h-[600px] rounded-2xl"
             style={{
               backgroundImage: `url(${C})`,
               backgroundSize: "cover",
@@ -201,9 +192,27 @@ const CloudServices = () => {
                 ecosystem — all with our tailored cloud-ready solutions.
               </p>
             </motion.div>
-            {/* --- Additional content ends here --- */}
           </motion.div>
         </div>
+
+
+             {/* CTA SECTION */}
+      <section className="bg-blue-200 text-black py-16 text-center px-6 mt-16 rounded-3xl mx-6 md:mx-16 outline-indigo-950">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          Ready to Elevate Your Business to the Cloud?
+        </h2>
+        <p className="text-black/50 mb-8 max-w-2xl mx-auto text-xl">
+          Partner with us for seamless migration, integration, and cloud management solutions.
+        </p>
+        <motion.button
+          className="bg-blue-900 hover:bg-blue-800 px-8 py-3 rounded-xl font-semibold transition-all duration-300 shadow-md text-white  "
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => navigate("/contact-us")}
+        >
+          Contact Us
+        </motion.button>
+      </section> 
       </section>
     </div>
   );

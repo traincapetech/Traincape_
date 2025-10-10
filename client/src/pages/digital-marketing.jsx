@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { useNavigate } from "react-router-dom"; // ✅ Import useNavigate
 import banner from "../assets/digitalMarketingBanner.jpg"; 
 
 const Counter = ({ target, label }) => {
@@ -49,6 +50,7 @@ const Counter = ({ target, label }) => {
 };
 
 const DigitalMarketing = () => {
+  const navigate = useNavigate(); // ✅ Initialize navigate
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -68,23 +70,18 @@ const DigitalMarketing = () => {
 
         <motion.div
           className="absolute w-[200%] h-[200%] top-[-50%] left-[-50%] bg-gradient-radial from-[#00AEEF]/5 to-transparent blur-3xl"
-          animate={{
-            rotate: [0, 360],
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 60,
-            ease: "linear",
-          }}
+          animate={{ rotate: [0, 360] }}
+          transition={{ repeat: Infinity, duration: 60, ease: "linear" }}
         />
 
         {/* Hero Text */}
         <div className="relative z-10 max-w-2xl mb-10 md:mb-0">
           <motion.p
-            className="text-sm md:text-base font-semibold uppercase tracking-widest text-[#FFA500]"
+            className="text-sm md:text-base font-semibold uppercase tracking-widest text-[#FFA500] cursor-pointer"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            onClick={() => navigate("/contact-us")}
           >
             Digital Marketing Solutions
           </motion.p>
@@ -113,6 +110,7 @@ const DigitalMarketing = () => {
           <motion.button
             className="mt-8 bg-[#FFA500] hover:bg-[#ff7b00] text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 shadow-md"
             whileHover={{ scale: 1.05 }}
+            onClick={() => navigate("/contact-us")}
           >
             Get Your Free Strategy Call 🚀
           </motion.button>
@@ -219,9 +217,7 @@ const DigitalMarketing = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1 }}
               >
-                <h3 className="text-[#00AEEF] text-xl font-bold mb-3">
-                  {item.step}
-                </h3>
+                <h3 className="text-[#00AEEF] text-xl font-bold mb-3">{item.step}</h3>
                 <h4 className="text-lg font-semibold mb-2">{item.title}</h4>
                 <p className="text-gray-400 text-sm">{item.desc}</p>
               </motion.div>
@@ -250,6 +246,7 @@ const DigitalMarketing = () => {
         <motion.button
           className="bg-[#FFA500] hover:bg-[#ff7b00] text-white font-semibold py-3 px-10 rounded-lg transition-all duration-300 shadow-md"
           whileHover={{ scale: 1.05 }}
+          onClick={() => navigate("/contact-us")} // ✅ Navigates properly
         >
           Get Started Now 🚀
         </motion.button>

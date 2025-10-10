@@ -254,6 +254,7 @@ const SoftwareDevelopment = () => {
             initial="initial"
             animate="animate"
             transition={{ delay: 0.6 }}
+            
           >
             Start Your Project Today 🚀
           </motion.button>
@@ -549,12 +550,15 @@ const SoftwareDevelopment = () => {
         </motion.p>
         <motion.button
           className="text-white font-bold py-4 px-12 rounded-xl text-xl shadow-2xl transition-all duration-300"
+          
           style={{ backgroundColor: SECONDARY_COLOR }} // FIX
           whileHover={{
             scale: 1.05,
             boxShadow: "0 10px 30px rgba(255, 165, 0, 0.6)",
+            
           }}
           whileTap={{ scale: 0.95 }}
+          
         >
           Schedule a Free Consultation 💬
         </motion.button>
