@@ -52,19 +52,22 @@ const servicesData = [
     banner: webImg,
   },
   {
-    title: "Software Services",
+    title: "Software Services and Development",
     description:
       "Software services include custom software development, web development, mobile app development, cloud computing, quality assurance, software maintenance, and consulting.",
     image: Software,
     banner: Saas,
   },
   {
-    title: "Software Development",
-    description:
-      "Software development is the process of designing, creating, testing, and maintaining computer programs and applications. It is essential for creating custom applications that automate processes and improve efficiency.",
-    image: softwareDevelopment,
-    banner: SoftwareImg,
-  },
+  title: "Software Services and Development",
+  slug: "software-services", // <-- this must match your ServiceDetail route
+  description:
+    "Software services include custom software development, web development, mobile app development, cloud computing, quality assurance, software maintenance, and consulting.",
+  image: Software,
+  banner: Saas,
+}
+
+ 
 ];
 
 /* ---------------------- COMPONENT ---------------------- */

@@ -3,7 +3,7 @@ import CloudServices from "./CloudServices";
 // import DataAnalytics from "./DataAnalytics";
 import WebDevelopment from "./WebDevelopment";
 import DigitalMarketing from "./digital-marketing";
-import SoftwareServices from "./software-services";
+import SoftwareServices from "./software-services"; // correct file
 
 const ServiceDetail = () => {
   const { slug } = useParams();
@@ -12,9 +12,11 @@ const ServiceDetail = () => {
   // if (slug === "data-analytics") return <DataAnalytics />;
   if (slug === "web-development") return <WebDevelopment />;
   if (slug === "digital-marketing") return <DigitalMarketing />;
-if (slug === "software-services") return <SoftwareServices />;
-  
-  // return <NotFound />; // fallback
+  // if (slug === "software-services") return <SoftwareServices />; // match slug
+  if (slug === "software-services-and-development") return <SoftwareServices />;
+
+
+  return <div className="text-center mt-20 text-2xl">Service Not Found</div>;
 };
 
 export default ServiceDetail;
