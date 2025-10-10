@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Cloud, ShieldCheck, Rocket } from "lucide-react";
 import banner from "../assets/cloud_banner.jpeg";
+import C from "../assets/CC.jpeg";
 
 const CloudServices = () => {
   useEffect(() => {
@@ -21,7 +22,6 @@ const CloudServices = () => {
       >
         {/* Dark Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#001F3F]/60 via-[#002952]/50 to-[#001F3F]/60"></div>
-
 
         {/* Content */}
         <div className="relative z-10 max-w-5xl">
@@ -78,8 +78,8 @@ const CloudServices = () => {
 
           <p className="text-gray-600 max-w-3xl mx-auto md:mx-0 text-center md:text-left">
             We provide robust, secure, and scalable cloud services designed to
-            meet the needs of modern enterprises. Our team ensures seamless cloud
-            transformation to help your business grow efficiently.
+            meet the needs of modern enterprises. Our team ensures seamless
+            cloud transformation to help your business grow efficiently.
           </p>
         </div>
       </section>
@@ -133,6 +133,78 @@ const CloudServices = () => {
           Contact Us
         </motion.button>
       </section> */}
+
+      {/* IMAGE SECTION */}
+      <section className="py-12 bg-blue-100/50 px-6 md:px-16 mb-10 w-full mt-10 overflow-hidden">
+        <div className="max-w-6xl flex flex-col md:flex-row mx-auto gap-10">
+          <div
+            className="w-[400px] h-[500px] md:h-[600px] rounded-2xl"
+            style={{
+              backgroundImage: `url(${C})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          ></div>
+
+          <motion.div className="flex-1 font-bold">
+            <motion.h2
+              className="text-2xl md:text-4xl font-bold leading-snug mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+            >
+              Cloud-Ready Solutions for Every Business
+            </motion.h2>
+
+            <motion.p
+              className="text-gray-600 max-w-3xl text-center md:text-left"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.3 }}
+            >
+              We provide robust, secure, and scalable cloud services designed to
+              meet the needs of modern enterprises. Our team ensures seamless
+              cloud transformation to help your business grow efficiently.
+            </motion.p>
+
+            {/* --- Additional content starts here --- */}
+            <motion.div
+              className="mt-8 space-y-6 text-gray-600 text-center md:text-left"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.5 }}
+            >
+              <p>
+                Whether you’re migrating existing infrastructure or building new
+                cloud-native applications, our experts guide you through every
+                step. From planning and deployment to optimization and security
+                — we help you leverage the full potential of cloud technology.
+              </p>
+
+              <p>
+                Our partnerships with leading cloud providers ensure high
+                availability and performance across all your environments. With
+                built-in compliance, monitoring, and support, we empower
+                businesses to scale faster and innovate with confidence.
+              </p>
+
+              <ul className="list-disc list-inside text-gray-700">
+                <li>End-to-end cloud migration and management</li>
+                <li>Multi-cloud and hybrid cloud strategies</li>
+                <li>AI-driven performance optimization</li>
+                <li>24/7 monitoring and support</li>
+              </ul>
+
+              <p className="font-semibold text-gray-800">
+                Unlock agility, reduce costs, and future-proof your digital
+                ecosystem — all with our tailored cloud-ready solutions.
+              </p>
+            </motion.div>
+            {/* --- Additional content ends here --- */}
+          </motion.div>
+        </div>
+      </section>
     </div>
   );
 };
