@@ -137,9 +137,9 @@ const Home = () => {
 
   return (
     <div className="bg-white">
-      <SEOHead 
-        title="Traincape Technology | IT Training & Certification"
-        description="Expert-led online courses for AWS, CompTIA, Microsoft, Cisco and other IT certifications. Advance your IT career with Traincape Technology."
+      <SEOHead
+        title="Traincape Technology | IT Training & Certifications"
+        description="Traincape Technology offers training for the best IT certifications to boost your career with CompTIA, PMI, Cisco, Salesforce, & many more certifications."
         canonical="https://www.traincapetech.in/"
         structuredData={{
           "@context": "https://schema.org",
@@ -156,8 +156,8 @@ const Home = () => {
           }
         }}
       />
-      
-            {/* Video Hero Section */}
+
+      {/* Video Hero Section */}
       <div className="relative w-full h-[400px] md:h-[500px] overflow-hidden">
         <video
           autoPlay
@@ -171,6 +171,10 @@ const Home = () => {
         </video>
         <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center p-4 text-center z-10">
           <div className="max-w-6xl mx-auto w-full">
+             {/* h1 for SEO  */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl  mb-8 font-bold text-white leading-tight drop-shadow-lg">
+              Elevate Your Career with Expert IT Training
+            </h1>
             <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-lg">
               <Typewriter
                 options={{
@@ -179,7 +183,6 @@ const Home = () => {
                     "Cloud Computing",
                     "Cyber Security",
                     "Project Management",
-                   
                   ],
                   autoStart: true,
                   loop: true,
@@ -203,7 +206,6 @@ const Home = () => {
                     .typeString('<span class="bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-600 bg-clip-text text-transparent animate-gradient-delayed">Project Management</span>')
                     .pauseFor(2000)
                     .deleteAll()
-                   
                     .start();
                 }}
               />
@@ -399,7 +401,7 @@ const Home = () => {
               ABOUT US
             </span>
             <h2 className="text-3xl font-bold text-[#1E293B] sm:text-4xl mb-4">
-              Empowering Your Business with Seamless IT Solutions
+            Empowering Your Business with Expert IT Certificate Programs
             </h2>
             <div className="h-1 w-20 bg-[#152B54] mx-auto"></div>
           </div>
@@ -407,8 +409,9 @@ const Home = () => {
             <div className="md:w-1/2 relative">
               <div className="absolute inset-0 bg-[#152B54] rounded-xl opacity-20 transform rotate-3 blur-sm"></div>
               <img
-                src={team || "/placeholder.svg"}
-                alt="Team"
+                src={team || "/placeholder.svg"}  
+                // alt for SEO 
+                alt="Team of Traincape Technology providing IT Training and Certifications"
                 className="relative z-10 rounded-xl shadow-2xl w-full object-cover h-[400px]"
               />
             </div>
@@ -680,9 +683,8 @@ const Home = () => {
             ].map((item, index) => (
               <div
                 key={index}
-                className={`text-center p-6 rounded-xl shadow-lg transition duration-300 ease-out transform hover:scale-105 hover:shadow-2xl cursor-pointer ${
-                  inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-                } ${item.bg}`}
+                className={`text-center p-6 rounded-xl shadow-lg transition duration-300 ease-out transform hover:scale-105 hover:shadow-2xl cursor-pointer ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                  } ${item.bg}`}
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
                 <span className={`text-4xl font-bold block mb-2 ${item.text}`}>
