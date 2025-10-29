@@ -63,8 +63,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build && npm run optimize-build",
+    "start": "node init && react-scripts start",
+    "build": "node init && react-scripts build && npm run optimize-build",
     "optimize-build": "gzip-size build/static/js/*.js && gzip-size build/static/css/*.css",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "test": "react-scripts test",
