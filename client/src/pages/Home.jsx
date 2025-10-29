@@ -17,11 +17,11 @@ import img3 from "../assets/img-3.jpg"
 import img4 from "../assets/img4.jpg"
 
 // Service cards
-import card1 from "../assets/card1.jpeg"
+import card1 from "../assets/card1.png"
 import card2 from "../assets/card2.jpeg"
-import card3 from "../assets/card3.jpeg"
-import card4 from "../assets/card4.jpeg"
-import card5 from "../assets/card5.jpeg"
+import card3 from "../assets/card3.png"
+import card4 from "../assets/card44.jpg"
+import card5 from "../assets/card22.jpg"
 import card6 from "../assets/card6.jpeg"
 
 // Logos
@@ -463,7 +463,18 @@ const Home = () => {
               <div
                 key={index}
                 className="bg-[#E6F0FF] rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2 border  cursor-pointer"
-                onClick={() => navigate("/service-detail", { state: { service } })}
+                onClick={() => {
+  let route = "";
+
+  if (service.title === "Cloud Services") route = "service-detail/cloud-services";
+  else if (service.title === "Digital Marketing") route = "service-detail/digital-marketing";
+  else if (service.title === "Web Development") route = "service-detail/web-development";
+  else if (service.title === "Software Services and Development") route = "service-detail/software-services-and-development";
+  else route = "service-detail/software-services-and-development"; // fallback
+
+  navigate(route, { state: { service } });
+}}
+
               >
                 <div className="h-48 overflow-hidden">
                   <img

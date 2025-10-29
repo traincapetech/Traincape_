@@ -177,17 +177,18 @@ const Navbar = () => {
     if (!showDropdown || !payNowButtonRef.current || isMenuOpen) return null; 
     
     const dropdownContent = (
-      <div
-        ref={dropdownRef}
-        className="absolute bg-gray-800 text-white shadow-2xl rounded-lg w-48 py-1 border border-purple-500/50 transform origin-top-right transition-all duration-300 ease-out animate-dropdown-in"
-        style={{
-          top: `${dropdownPosition.top}px`,
-          left: `${dropdownPosition.left}px`,
-          zIndex: 9999,
-          width: '12rem' 
-        }}
-        onClick={(e) => e.stopPropagation()}
-      >
+     <div
+  ref={dropdownRef}
+  className="fixed bg-gray-800 text-white shadow-2xl rounded-lg w-48 py-1 border border-purple-500/50 transform origin-top-right transition-all duration-300 ease-out animate-dropdown-in"
+  style={{
+    top: `${dropdownPosition.top}px`,
+    left: `${dropdownPosition.left}px`,
+    zIndex: 9999,
+    width: '12rem'
+  }}
+  onClick={(e) => e.stopPropagation()}
+>
+
         <div className="py-1">
           <button
             onClick={(e) => handleExternalLink("https://paypal.me/ParichayP?country.x=IN&locale.x=en_GB", e)}
@@ -275,15 +276,16 @@ const Navbar = () => {
 
             <div className="flex items-center space-x-4">
               <div className="relative">
-                <GradientButton
-                  ref={payNowButtonRef} 
-                  onClick={handlePayNow}
-                  aria-expanded={showDropdown}
-                  aria-haspopup="true"
-                  className="!p-0.5" 
-                >
-                  Pay Now
-                </GradientButton>
+               <GradientButton
+  ref={payNowButtonRef}
+  onClick={handlePayNow}
+  aria-expanded={showDropdown}
+  aria-haspopup="true"
+  className="!p-0.5 mt-2"
+>
+  Pay Now
+</GradientButton>
+
               </div>
 
               {token ? (
